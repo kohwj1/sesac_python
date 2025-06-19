@@ -1,0 +1,20 @@
+.menu p {
+    display: inline-block;
+    width: 100px;
+    border:1px solid red;
+    text-align:center;
+}
+#cat1 {
+    float:left;
+    width: 200px;
+    margin: 20px;
+    /* padding:20px; */
+    border: 1px dashed red;
+}
+
+#cat2 {
+    float:right;
+    width:200px;
+    padding: 20px;
+    border: 1px dashed red;
+}

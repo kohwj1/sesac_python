@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div {
+            width:100px;
+            height:100px;
+            background-color: orange;
+            margin:5px;
+        }
+        .location {
+            /* relative: 원래 렌더링 위치 기준으로, absolute: 페이지 절대 위치에서 렌더링 */
+            position:relative;
+            top:20px;
+            left:50px;
+            background-color: orangered;
+        }
+        /* selector의 다양한 표현법 학습 필요. div p와 div > p의 렌더링 차이 */
+        div > p {
+            position:relative;
+            top: 20px;
+            left:50px;
+            /* rgba로 색상 지정을 할 경우, alpha가 0에 가까울 수록 투명해짐 */
+            background-color: rgba(255, 255, 255, 0.3);
+            display: inline;
+        }
+        .cat-container {
+            width:400px;
+            height:300px;
+            background-image:url(images/cat2.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
+    </style>
+</head>
+<body>
+    <div>1</div>    
+    <div class="location">2</div>    
+    <div>3</div>    
+    <div class="cat-container">
+        <p>귀여운 고양이</p>
+    </div>    
+    <p>못생긴 고양이</p>
+</body>
+</html>

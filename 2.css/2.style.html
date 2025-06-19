@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS 학습</title>
+    <style>
+        /* CSS selector는 태그, 아이디, 클래스 등으로 지정 가능 */
+        h1 {
+            color:blue;
+        }
+        h2 {
+            color:red;
+        
+        }
+        h3 {
+            color:#00ff00;
+        }
+        #color3 {
+            color:magenta;
+            border: 10px dashed black;
+            width: 50%;
+        }
+        .color1 {
+            background-color:yellow;
+            color:blue;
+            border: 1px solid red;
+        }
+        .color2 {
+            background-color:aqua;
+            color:red;
+            border:3px dotted purple;
+        }
+    </style>
+</head>
+<body>
+    <h1>헤딩1</h1>
+    <h2>헤딩2</h2>
+    <h3>헤딩3</h3>
+    <p class="color1">본문 내용으로 아무 내용이나 작성합니다 1</p>
+    <p class="color2">본문 내용으로 아무 내용이나 작성합니다 2</p>
+    <p id="color3">본문 내용으로 아무 내용이나 작성합니다 3</p>
+    <p class="color2">본문 내용으로 아무 내용이나 작성합니다 4</p>
+    <!-- 한 페이지 내에 아이디가 중복되지 않도록 제작 -->
+    <p class="color2" id="color3">본문 내용으로 아무 내용이나 작성합니다 5</p>
+</body>
+</html>

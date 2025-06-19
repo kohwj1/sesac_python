@@ -1,0 +1,27 @@
+header {
+    text-align:center;
+}
+
+img {
+    width:100%;
+}
+
+table {
+    border: 1px solid #000;
+    width: 100%;
+}
+
+th {
+    width: 14%;
+}
+
+td {
+    text-align:center;
+}
+.sun, .holiday {
+    color:red;
+}
+
+.sat {
+    color:blue;
+}

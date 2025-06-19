@@ -1,0 +1,26 @@
+/* CSS selector는 태그, 아이디, 클래스 등으로 지정 가능 */
+h1 {
+    color:blue;
+}
+h2 {
+    color:red;
+
+}
+h3 {
+    color:#00ff00;
+}
+#color3 {
+    color:magenta;
+    border: 10px dashed black;
+    width: 50%;
+}
+.color1 {
+    background-color:yellow;
+    color:blue;
+    border: 1px solid red;
+}
+.color2 {
+    background-color:aqua;
+    color:red;
+    border:3px dotted purple;
+}

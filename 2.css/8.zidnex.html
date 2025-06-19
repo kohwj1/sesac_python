@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 100px;
+            position: relative;
+        }
+        .box1 {
+            background-color: orange;
+            z-index:4; /*숫자가 클 수록 더 위로 올라옴 */
+        }
+        .box2 {
+            background-color: red;
+            bottom:50px;
+            z-index: 3;
+        }
+        .box3 {
+            background-color: blue;
+            bottom:100px;
+            z-index: 2;
+        }
+        .box4 {
+            background-color: yellow;
+            bottom:150px;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box1">orange</div>
+        <div class="box2">red</div>
+        <div class="box3">blue</div>
+        <div class="box4">yellow</div>
+    </div>
+</body>
+</html>
