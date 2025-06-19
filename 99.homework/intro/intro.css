@@ -1,0 +1,110 @@
+body {
+    background: linear-gradient(#eee, 80%, #b3e56a);
+    color:#444;
+}
+
+header {
+    background-color:#f0f8ff6e;
+    position:fixed;
+    width:100%;
+    top:0px;
+    padding-bottom: 15px;
+    z-index:100;
+}
+
+h1 {
+    letter-spacing:10px;
+    text-align:center;
+    margin:15px;
+}
+
+h2 {
+    letter-spacing:10px;
+    padding: 20px;
+    background: linear-gradient(to right, #46ad60, #b3e56a);
+    color:#eee;
+    border-radius:10px;
+}
+
+nav {
+    display:flex;
+    justify-content: space-evenly;
+}
+
+nav > a {
+    width: 96px;
+    text-align: center;
+    padding: 10px;
+    background-color: #b3e56ab5;
+    border-radius: 10px;
+}
+
+#bio-list > li {
+    list-style:none;
+    margin: 10px;
+}
+
+.section1 {
+    margin-top:130px;
+}
+
+#info > div {
+    display:flex;
+}
+
+.discord {
+    width: 200px;
+    max-height: 400px;
+    position: relative;
+    top: -70px;
+    left: 250px;
+}
+
+.discord > img {
+    border-radius:5px;
+}
+
+.relative {
+    position:relative;
+    top:-270px;
+    left:340px;
+}
+
+.hobby > div{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.hobby > div > img {
+    width: 150px;
+}
+
+.top {
+    width: 50px;
+    height: 50px;
+    background-image: url(../img/arrow-circle-up.svg);
+    background-size: cover;
+    position: fixed;
+    bottom:50px;
+    right:50px;
+}
+
+
+footer {
+    background-color:#eeeeee54;
+    border-radius:10px;
+    text-align:center;
+}
+
+footer > a > img {
+    width: 30px;
+    padding: 16px;
+    padding-bottom: 0px;
+}
+
+footer > p {
+    padding-bottom: 16px;
+    margin:0px;
+    color: #888;
+    font-size: 12px;
+}
