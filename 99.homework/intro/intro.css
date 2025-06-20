@@ -32,11 +32,18 @@ nav {
 }
 
 nav > a {
-    width: 96px;
+    width: 30%;
+    letter-spacing: 25px;
     text-align: center;
     padding: 10px;
     background-color: #b3e56ab5;
-    border-radius: 10px;
+    border-radius: 25px;
+    text-decoration-line: none;
+    color: #7d986d;
+}
+nav > a.active {
+    background-color: #50662fb5;
+    color: #b7d0a9;
 }
 
 #bio-list > li {
