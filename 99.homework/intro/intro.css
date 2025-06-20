@@ -3,6 +3,11 @@ body {
     color:#444;
 }
 
+main {
+    padding-bottom: 20px;
+    min-height: 500px;
+}
+
 header {
     background-color:#f0f8ff6e;
     position:fixed;
@@ -24,6 +29,12 @@ h2 {
     background: linear-gradient(to right, #46ad60, #b3e56a);
     color:#eee;
     border-radius:10px;
+}
+h3 {
+    padding: 20px;
+    border: 1px dotted #46ad60;
+    background-color: #46ad603c;
+    border-radius:10px; 
 }
 
 nav {
@@ -56,35 +67,41 @@ nav > a.active {
     margin-top:130px;
 }
 
-#info > div {
+#info > div, .study-container {
     display:flex;
 }
 
-.discord {
-    width: 200px;
-    max-height: 400px;
-    position: relative;
-    top: -70px;
-    left: 250px;
+.study-item {
+    width: 45%;
+    border:1px dashed #65bd63;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
 }
 
-.discord > img {
-    border-radius:5px;
+#img-container {
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.relative {
-    position:relative;
-    top:-270px;
-    left:340px;
+.devimg {
+    width: 260px;
+    border-radius: 5px;
+}
+.devimg:hover {
+    filter: drop-shadow(4px 4px 7px #777);
+    transition-property: filter;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
 }
 
-.hobby > div{
+.hobby > div, .container {
     display: flex;
     justify-content: space-evenly;
 }
 
 .hobby > div > img {
-    width: 150px;
+    width: 15%;
 }
 
 .top {
@@ -96,7 +113,6 @@ nav > a.active {
     bottom:50px;
     right:50px;
 }
-
 
 footer {
     background-color:#eeeeee54;
