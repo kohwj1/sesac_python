@@ -7,6 +7,7 @@ body {
     background-size: cover;
     background-attachment: fixed;
     color: #004279;
+    font-family: 'Noto Sans KR', 'NanumGothic', '나눔고딕';
 }
 
 .container {
@@ -33,11 +34,13 @@ body {
     background: none;
     border:none;
     border-bottom: 1px solid aliceblue;
-    color:#004279
+    color:#004279;
+    font-family: 'Noto Sans KR', 'NanumGothic', '나눔고딕';
 }
 
 .input::placeholder {
-    color:#0043797a
+    color:#0043797a;
+    font-family: 'Noto Sans KR', 'NanumGothic', '나눔고딕';
 }
 
 .input:focus {
@@ -51,10 +54,12 @@ body {
     height: 40px;
     margin-top: 20px;
     margin-bottom: 20px;
-    background: #a1d7fc;
+    background: #aef0fc;
     color:#004279;
     border:1px solid aliceblue;
     font-weight: 800;
+    border-radius: 5px;
+    font-family: 'Noto Sans KR', 'NanumGothic', '나눔고딕';
 }
 
 .btn-submit:hover {

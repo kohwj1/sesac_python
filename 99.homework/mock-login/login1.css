@@ -5,6 +5,7 @@ body {
     background-color: #000;
     color:#00ff00;
     font-family:'Michroma', 'NanumGothic', '나눔고딕';
+    letter-spacing: 1px;
 }
 
 .container {
@@ -55,7 +56,7 @@ body {
     background-color: #000;
     border: 1px solid #00ff00;
     color:#00ff00;
-    padding-left: 5px;
+    padding-left: 10px;
     font-family:'Michroma', 'NanumGothic', '나눔고딕';
 }
 
@@ -83,6 +84,7 @@ body {
     border:1px solid #00ff00;
     font-family:'Michroma', 'NanumGothic', '나눔고딕';
     font-weight: 800;
+    letter-spacing: 1px;
 }
 
 hr {
