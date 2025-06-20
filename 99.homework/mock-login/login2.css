@@ -1,0 +1,67 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+    background: url(../img/bg-signin.jpg);
+    background-size: cover;
+}
+
+.container {
+    margin-top: 150px;
+    filter: blur(100px);
+    width: 500px;
+    padding:20px;
+    border-radius: 15px;
+    filter:drop-shadow(2px 4px 6px #000000)
+}
+
+.label {
+    display:none;
+}
+
+.input {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    height: 40px;
+    box-sizing: border-box;
+    background: none;
+    border:none;
+    border-bottom: 1px solid #391c06;
+}
+
+.input::placeholder {
+    color:#391c065c
+}
+
+.input:focus {
+    outline: none;
+    caret-color: #391c06;
+}
+
+.input::content {
+    color:#391c06;
+}
+
+.btn-submit {
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #783e3e;
+    color:#e0c0a8;
+    border:1px solid #391c06;
+}
+
+hr {
+    display: none;
+}
+
+h3, .support {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #391c06;
+}

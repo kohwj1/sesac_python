@@ -4,6 +4,7 @@ body {
     align-items:flex-end;
     background-color: #000;
     color:#00ff00;
+    font-family:'Michroma', 'NanumGothic', '나눔고딕';
 }
 
 .container {
@@ -12,7 +13,33 @@ body {
     padding:20px;
     border:1px solid #00ff00;
     border-radius: 15px;
-    /* filter:drop-shadow(2px 4px 6px #000000) */
+}
+
+.header {
+    display: flex;
+}
+
+.cursor {
+    display: inline-block;
+    width:10px;
+    height: 2px;
+    background-color: #00ff00;
+    animation: fadeOut;
+    animation-duration: 0.8s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+@keyframes fadeOut {
+    0% {
+        opacity: 1.0;
+    }
+    50% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1.0;
+    }
+    
 }
 
 .label {
@@ -28,10 +55,13 @@ body {
     background-color: #000;
     border: 1px solid #00ff00;
     color:#00ff00;
+    padding-left: 5px;
+    font-family:'Michroma', 'NanumGothic', '나눔고딕';
 }
 
 .input::placeholder {
-    color:#00ff006d
+    color:#00ff006d;
+    font-family:'Michroma', 'NanumGothic', '나눔고딕';
 }
 
 .input:focus {
@@ -48,9 +78,11 @@ body {
     height: 40px;
     margin-top: 20px;
     margin-bottom: 20px;
-    background-color: #000;
+    background-color: #00ff001b;
     color:#00ff00;
     border:1px solid #00ff00;
+    font-family:'Michroma', 'NanumGothic', '나눔고딕';
+    font-weight: 800;
 }
 
 hr {
@@ -63,5 +95,5 @@ h3, .support {
 
 a {
     text-decoration: none;
-    color: #00ff00;
+    color: #00ff008a;
 }
