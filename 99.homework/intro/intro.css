@@ -33,7 +33,7 @@ nav {
 
 nav > a {
     width: 30%;
-    letter-spacing: 25px;
+    letter-spacing: 10px;
     text-align: center;
     padding: 10px;
     background-color: #b3e56ab5;
@@ -42,6 +42,7 @@ nav > a {
     color: #7d986d;
 }
 nav > a.active {
+    font-weight: 900;
     background-color: #65bd63;
     color: #ffffff;
 }
