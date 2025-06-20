@@ -3,12 +3,14 @@ header {
 }
 
 img {
-    height:220px;
+    height: 220px;
+    border: 10px solid white;
+    filter: drop-shadow(2px 4px 6px #666);
 }
 h2{
     display: inline;
 }
-section{
+.nav {
     display: flex;
     align-items:center;
     justify-content:center;
@@ -44,11 +46,11 @@ td {
     justify-content: center;
     align-items:center;
 }
-.sun, .holiday {
+td:first-child, .holiday {
     color:red;
 }
 
-.sat {
+td:last-child {
     color:blue;
 }
 
