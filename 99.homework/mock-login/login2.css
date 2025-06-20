@@ -3,16 +3,21 @@ body {
     justify-content: center;
     align-items:flex-end;
     background: url(../img/bg-signin.jpg);
+    background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
+    color: #004279;
 }
 
 .container {
     margin-top: 150px;
-    filter: blur(100px);
     width: 500px;
     padding:20px;
     border-radius: 15px;
-    filter:drop-shadow(2px 4px 6px #000000)
+    border: 1px solid rgba(240, 248, 255, 0.192);
+    background-color: #ffffff49;
+    backdrop-filter: blur(15px);
+    filter: drop-shadow(2px 4px 6px #666)
 }
 
 .label {
@@ -27,20 +32,18 @@ body {
     box-sizing: border-box;
     background: none;
     border:none;
-    border-bottom: 1px solid #391c06;
+    border-bottom: 1px solid aliceblue;
+    color:#004279
 }
 
 .input::placeholder {
-    color:#391c065c
+    color:#0043797a
 }
 
 .input:focus {
     outline: none;
-    caret-color: #391c06;
-}
-
-.input::content {
-    color:#391c06;
+    border-bottom: 1px solid aliceblue;
+    caret-color: aliceblue;
 }
 
 .btn-submit {
@@ -48,9 +51,14 @@ body {
     height: 40px;
     margin-top: 20px;
     margin-bottom: 20px;
-    background-color: #783e3e;
-    color:#e0c0a8;
-    border:1px solid #391c06;
+    background: #a1d7fc;
+    color:#004279;
+    border:1px solid aliceblue;
+    font-weight: 800;
+}
+
+.btn-submit:hover {
+    background: linear-gradient(#a1d7fc, 80%, #01b1ec);
 }
 
 hr {
@@ -63,5 +71,11 @@ h3, .support {
 
 a {
     text-decoration: none;
-    color: #391c06;
+    color: #0043797e;
+}
+a:hover {
+    color: #004379;
+    transition-property: color;
+    transition-duration: 0.5s;
+    transition-timing-function: linear;
 }
