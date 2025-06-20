@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+        ul li::after {
+            content: "x";
+            display: inline-block;
+            width: 10px;
+            font-size: 20px;
+            margin-left: 10px;
+            color:red;
+        }
+    </style>
+
+</head>
+<body>
+    <div>
+        <ul>
+            <li>아메리카노</li>
+            <li>카푸치노</li>
+            <li>에스프레소</li>
+        </ul>
+    </div>
+    
+</body>
+</html>

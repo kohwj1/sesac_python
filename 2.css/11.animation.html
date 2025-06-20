@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            background-color: red;
+            width: 100px;
+            height: 100px;
+            animation-name: moveLeft;
+            animation-duration: 4s;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            position:relative;  /* 이게 있어야 동작 */
+        }
+        @keyframes moveLeft {
+            0% {
+                left:0;
+            }
+            100% {
+                left:200px;
+            }
+        }
+        @keyframes moveLeftRight {
+            0% {
+                left:0;
+            }
+            50%{
+                left:400px;
+            }
+            100% {
+                left:0;
+            }
+        }
+        .text {
+            color:black;
+            animation: fadeOut;
+            animation-duration: 1s;
+            animation-timing-function: ease-in;
+            animation-iteration-count: infinite;
+        }
+        @keyframes fadeOut {
+            0% {
+                opacity: 1.0;
+            }
+            100% {
+                opacity: 0.0;
+            }
+            
+        }
+        .circle {
+            width:100px;
+            height: 100px;
+            background-color: blue;
+            border-radius: 25%;
+            animation: rotateAndScale;
+            animation-duration: 3s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: 2;
+            
+        }
+        @keyframes rotateAndScale {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.5);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+            
+        }
+        .image {
+            width: 200px;
+            height: 200px;
+            animation-name: shake;
+            animation-duration: 0.5s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-10px) rotate(-5deg);
+            }
+            75% {
+                transform: translateX(10px) rotate( 5deg);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <br>
+    <p class="text">페이드아웃 애니메이션 (글자 서서히 사라지기)</p>
+    <br>
+    <div class="circle"></div>
+    <br>
+    <img src="images/cat2.jpeg" class="image">
+</body>
+</html>

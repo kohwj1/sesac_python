@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>포토 캘린더</title>
+    <style>
+        h1, h2 {
+            text-align:center;
+        }
+        #calendar {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        #calendar th,
+        #calendar td {
+            width:14%;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        #calendar th {
+            background-color: #f2f2f2;
+        }
+        #calendar th:first-child,
+        #calendar td:first-child {
+            color: red;
+        }
+        #calendar th:last-child,
+        #calendar td:last-child {
+            color: blue;
+        }
+        /* #calendar td:nth-child(2),
+        #calendar td:nth-child(3) {
+            color: rgb(98, 255, 0);
+        } */
+        .month-nav{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .month-nav a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Photo calendar</h1>
+    <div class="month-nav">
+        <a href="#">&larr; 이전달</a>
+        <h2>2025년 6월</h2>
+        <a href="#">다음달 &rarr;</a>
+    </div>
+    <img src="images/banner.jpg" height="250" alt="풍경">
+    <table id="calendar">
+        <tr>
+            <th>Sun</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wen</th>
+            <th>Thr</th>
+            <th>Fri</th>
+            <th>Sat</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+            <td>14</td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>16</td>
+            <td>17</td>
+            <td>18</td>
+            <td>19</td>
+            <td>20</td>
+            <td>21</td>
+        </tr>
+        <tr>
+            <td>22</td>
+            <td>23</td>
+            <td>24</td>
+            <td>25</td>
+            <td>26</td>
+            <td>27</td>
+            <td>28</td>
+        </tr>
+        <tr>
+            <td>29</td>
+            <td>30</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    
+</body>
+</html>

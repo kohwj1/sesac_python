@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container .item {
+            float: left;
+            width: 100px;
+            text-align:center;
+            border-right: 1px solid black;
+        }
+        .container .item.last {  /* 띄어쓰기 주의: 붙어있으면 두 개 클래스를 모두 가지고 있어야 적용됨 */
+            float: right;
+            border-right: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item">menu 1</div>
+        <div class="item">menu 2</div>
+        <div class="item">menu 3</div>
+        <div class="item">menu 4</div>
+        <div class="item last">login</div>
+    </div>
+</body>
+</html>

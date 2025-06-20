@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .square {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        .square:hover {
+            width: 150px;
+            height: 150px;
+            transition-property: width, height; /*트랜지션으로 변경할 프로퍼티를 잘 지정해야 함 */
+            transition-duration: 0.5s;
+            transition-timing-function: ease;
+        }
+        .button {
+            color: black;
+        }
+        .button:hover {
+            color: red;
+            transition-property: color;
+            transition-duration: 0.5s;
+            transition-timing-function: ease;
+        }
+        .image {
+            width: 200px;
+            height: 200px;
+            transition-property: transform;
+            transition-duration: 2.0s;
+            transition-timing-function: ease-out;
+        }
+        .image:hover {
+            transform: rotate(180deg);
+
+        }
+    </style>
+</head>
+<body>
+    <div class="square"></div>
+    <br>
+    <button class="button">마우스 호버</button>
+    <br>
+    <img src="../2.css/images/cat.jpg" class="image">
+</body>
+</html>
