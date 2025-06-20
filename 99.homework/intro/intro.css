@@ -42,8 +42,8 @@ nav > a {
     color: #7d986d;
 }
 nav > a.active {
-    background-color: #50662fb5;
-    color: #b7d0a9;
+    background-color: #65bd63;
+    color: #ffffff;
 }
 
 #bio-list > li {
