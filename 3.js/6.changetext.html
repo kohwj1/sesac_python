@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <p id="myText">이 텍스트의 색상을 변경해보시오.</p>
+    <button onclick="changeTextColor()">텍스트 색상 변경</button>
+    <script>
+        function changeTextColor () {
+            const color_list = ['red', 'blue']
+            let textElement = document.getElementById('myText');
+            let current_color = textElement.style.color;
+            if (current_color == 'red') {
+                textElement.style.color = 'blue';
+            } else {
+                textElement.style.color = 'red';
+
+            }
+        }
+    </script>
+</body>
+</html>

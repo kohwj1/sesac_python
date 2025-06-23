@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <h1>구구단</h1>
+    <input type="number" placeholder="단 입력(예:2)" id="dan">
+    <button onclick="print_gugudan()">출력하기</button>
+    <div id="result"></div>
+    <script>
+        function print_gugudan() {
+            let input_dan = document.getElementById('dan').value; //DOM > value 가져오기
+            // console.log(input_dan);
+
+            
+            for (let i=1; i<=9; i++) {
+                let result_div = document.getElementById('result'); //결과 출력 영역
+                result_div.innerHTML += (`${input_dan}x${i} = ${input_dan*i}`);
+                result_div.innerHTML += (`<br>`);
+            };
+        };
+    </script>
+</body>
+</html>

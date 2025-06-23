@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Document</title>
+    <style>
+        /* 여기는 CSS 영역 */
+    </style>
+</head>
+<body>
+    <h1>헬로우 월드</h1>
+    <button style="color:red" onclick="sayHello()">헬로우</button>
+    <button style="color:blue" onclick="sayGoodby()">작별</button>
+    <script>
+        // 여기는 스크립트 영역
+        function sayHello() {
+            console.log('안녕 콘솔')
+        }
+        function sayGoodby() {
+            for (let i=0 ; i<5 ; i++) {
+                document.write(`<h${i}>굳바이 콘솔</h${i}>`);
+            };
+        }
+    </script>
+</body>
+</html>

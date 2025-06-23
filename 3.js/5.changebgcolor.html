@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="randColor()">배경색 변경하기</button>
+    <script>
+        let cnt = 0;
+        const colors = ["red", "green", "blue"];
+        function changeColor() {
+            if (document.body.style.backgroundColor == 'red') {
+                document.body.style.backgroundColor = 'white';
+            } else {
+                document.body.style.backgroundColor = 'red';
+            };
+        };
+
+        function changeColor2() {
+            document.body.style.backgroundColor = colors[cnt];
+            cnt = (cnt + 1) % colors.length;
+        };
+        
+        //숙제: 클릭할때마다 랜덤 색상 바꾸기
+        function randColor() {
+            let rand_r = Math.random()*255;
+            let rand_g = Math.random()*255;
+            let rand_b = Math.random()*255;
+            // console.log(rand_r, rand_g, rand_b)
+            document.body.style.backgroundColor = `rgb(${rand_r},${rand_g},${rand_b})`
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        td {
+            padding:10px;
+            border:1px solid #000;
+        }
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>셀 1</td>
+            <td>셀 2</td>
+            <td>셀 3</td>
+        </tr>
+        <tr>
+            <td>셀 4</td>
+            <td>셀 5</td>
+            <td>셀 6</td>
+        </tr>
+        <tr>
+            <td>셀 7</td>
+            <td>셀 8</td>
+            <td>셀 9</td>
+        </tr>
+    </table>
+    <button onclick="changeAllCellColor()">셀 색상 모두 변경하기</button>
+    <button onclick="changeEvenCellColor()">셀 색상 짝수만 변경하기</button>
+    <button onclick="changeAllCellColor()">셀 색상 홀수만 변경하기</button>
+    <script>
+        function changeAllCellColor () {
+            let cells = document.getElementsByTagName('td') //복수형(elements)인 경우 배열로 리턴됨
+
+            // 레거시한 반복문 스타일
+            // for (let i = 0; i < cells.length; i++) {
+            //     cells[i].style.backgroundColor = 'lightblue';  //리스트의 개별 인덱스에 접근해야 프로퍼티 변경 가능 (리스트인 상태로는 x)
+            // };
+
+
+            // 모던한 반복문
+            for (let cell of cells) {  //python에서 for item in list: 와 같은?
+                cell.style.backgroundColor = 'lightblue';
+            };
+
+        //숙제 홀짝 색상 변경 구현하기
+        function changeEvenCellColor () {
+            let cells = document.getElementsByTagName('td') //복수형(elements)인 경우 배열로 리턴됨
+            for (let i = 0; i < cells.length; i++) {
+                cells[i].style.backgroundColor = 'lightblue';  //리스트의 개별 인덱스에 접근해야 프로퍼티 변경 가능 (리스트인 상태로는 x)
+            };
+        };
+    };
+
+    </script>
+</body>
+</html>
