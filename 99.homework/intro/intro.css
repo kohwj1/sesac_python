@@ -79,7 +79,7 @@ nav > a.active {
     padding: 10px;
 }
 
-#img-container {
+.img-container {
     display: flex;
     justify-content: space-evenly;
 }
@@ -89,7 +89,7 @@ nav > a.active {
     border-radius: 5px;
 }
 .devimg:hover {
-    filter: drop-shadow(4px 4px 7px #777);
+    filter: drop-shadow(4px 4px 6px rgb(112, 112, 112));
     transition-property: filter;
     transition-duration: 0.3s;
     transition-timing-function: ease;
