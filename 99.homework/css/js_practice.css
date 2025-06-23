@@ -1,0 +1,41 @@
+#drink_menu, #reset_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#total {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.btn_menu {
+    margin: 20px;
+}
+
+.btn_order {
+    padding: 6px;
+    margin: 6px;
+    width: 200px;
+    border-radius: 45px;
+    border: none;
+    background:linear-gradient(to right, #fddfc5, 80%, #532a06);
+    color: #4d4d4d;
+    font-weight: 800;
+}
+
+.cnt {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.btn_reset {
+    padding: 6px;
+    margin: 6px;
+    width: 150px;
+    border-radius: 45px;
+    border: none;
+    background-color:#eee;
+    text-align: center;
+    align-items: center;
+}
