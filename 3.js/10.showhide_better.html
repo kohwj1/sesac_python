@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #myDiv {
+            width:200px;
+            height:200px;
+            background-color: lightblue;
+            margin-top:20px;
+            display: none;
+        };
+
+        .show {
+            display: block !important; /* CSS의 적용 우선순위를 강제로 올리는 구문 */
+        };
+    </style>
+</head>
+<body>
+    <button onclick="showhideDiv4()">숨겨진 영역 보여주기</button>
+    <div id="myDiv">이것이 바로 숨겨진 div입니다.</div>
+    <script>
+        function showhideDiv() {
+            const divElem = document.querySelector('#myDiv');
+            console.log(divElem.style.display);
+            if (divElem.style.display == 'none') { //최초 렌더링 상태에서는 display가 없기 때문에 첫 클릭에서 버그 발생
+                divElem.style.display = 'block';
+            } else {
+                divElem.style.display = 'none';
+            };
+        };
+
+        function showhideDiv2() {
+            //CSS의 초기값에 따라 토글이 동작하지 않는 버그가 발생할 수 있음
+            const divElem = document.querySelector('#myDiv');
+            console.log(divElem.style.display);
+            if (divElem.style.display != 'block') {
+                divElem.style.display = 'block';
+            } else {
+                divElem.style.display = 'none';
+            };
+        };
+
+        function showhideDiv3() {
+            const divElem = document.querySelector('#myDiv');
+            const divElemStyle = window.getComputedStyle(divElem).display; //렌더링 완료 후의 스타일시트 속성을 가져옴
+            console.log(divElemStyle);
+            if (divElemStyle == 'none') {
+                divElem.style.display = 'block';
+            } else {
+                divElem.style.display = 'none';
+            };
+        };
+
+        function showhideDiv4() {
+            const divElem = document.getElementById('myDiv');
+            divElem.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
