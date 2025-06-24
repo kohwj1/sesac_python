@@ -3,9 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <style>
+        #color_code {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor:pointer;
+        }
+
+        body {
+            text-align: center;
+            height:100vh; /*viewport 단위 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
-    <button onclick="randColor()">배경색 변경하기</button>
+    <button onclick="changeRandomColor3()">배경색 변경하기</button>
+    <div id="color_code">색상 코드</div>
     <script>
         let cnt = 0;
         const colors = ["red", "green", "blue"];
@@ -30,6 +56,36 @@
             // console.log(rand_r, rand_g, rand_b)
             document.body.style.backgroundColor = `rgb(${rand_r},${rand_g},${rand_b})`
         }
-    </script>
+        
+        function randColor2() {
+            // random(): 0 <= x < 1
+            const r = Math.floor(Math.random() * 256).toString(16).padStart(2,'0');
+            const g = Math.floor(Math.random() * 256).toString(16).padStart(2,'0');
+            const b = Math.floor(Math.random() * 256).toString(16).padStart(2,'0');
+            // 1차 디버깅 후, padStart가 없으면 간헐적으로 랜덤 생성된 숫자가 0~9 (한자리)일 때 배경색상 변경에 실패하는 버그 발생
+            // padStart 함수로 자릿수 맞추기 필요
+            
+            
+            const hexColor = '#'+r+g+b;
+            
+            console.log(hexColor)
+            document.body.style.backgroundColor = hexColor;
+            
+        };
+        
+        function changeRandomColor3 () {
+            //결국 0~FFFFFF 까지의 숫자 중 하나를 랜덤 생성하면 되는 것이므로 
+            const rrggbb = Math.floor(Math.random() * 16777216).toString(16).padStart(6,'0');
+            console.log(rrggbb)
+            document.body.style.backgroundColor = '#'+rrggbb;
+            displayColor(rrggbb);
+            
+        };
+
+        function displayColor(color) {
+            const colorDisplay = document.getElementById('color_code');
+            colorDisplay.textContent = `현재 배경 색상은 #${color}`
+        }
+        </script>
 </body>
 </html>
