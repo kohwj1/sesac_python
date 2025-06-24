@@ -9,8 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     latte.addEventListener('click',order_latte);
     reset.addEventListener('click',order_reset);
 });  
-      
+
 function order_americano() {
+    let msg_reset = document.getElementsByClassName('msg_reset')[0];
+    msg_reset.style.display = 'none';
     let count = document.getElementsByClassName('cnt')[0];
     let price = document.getElementsByClassName('price')[0];
     let total_price = document.getElementById('total_price');
@@ -19,6 +21,8 @@ function order_americano() {
 };
 
 function order_cappuccino() {
+    let msg_reset = document.getElementsByClassName('msg_reset')[0];
+    msg_reset.style.display = 'none';
     let count = document.getElementsByClassName('cnt')[1];
     let price = document.getElementsByClassName('price')[1];
     let total_price = document.getElementById('total_price');
@@ -27,6 +31,8 @@ function order_cappuccino() {
 };
 
 function order_latte() {
+    let msg_reset = document.getElementsByClassName('msg_reset')[0];
+    msg_reset.style.display = 'none';
     let count = document.getElementsByClassName('cnt')[2];
     let price = document.getElementsByClassName('price')[2];
     let total_price = document.getElementById('total_price');
@@ -39,7 +45,10 @@ function order_reset() {
     for (let count of counts) {
         count.textContent = 0
     };
-
+    
     let total_price = document.getElementById('total_price');
     total_price.textContent = 0;
+    
+    let msg_reset = document.getElementsByClassName('msg_reset')[0];
+    msg_reset.style.display = 'block';
 };

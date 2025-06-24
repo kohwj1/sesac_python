@@ -39,3 +39,10 @@
     text-align: center;
     align-items: center;
 }
+
+.msg_reset {
+    margin-top: 50px;
+    color:#3a3a3a;
+    text-align: center;
+    display: none;
+}
