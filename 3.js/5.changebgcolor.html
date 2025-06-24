@@ -50,7 +50,9 @@
         
         //숙제: 클릭할때마다 랜덤 색상 바꾸기
         function randColor() {
-            let rand_r = Math.random()*255;
+            //1. rand로 무작위 숫자 생성 시 0 <= x < 255 이므로, 해당 부분 수정 필요
+            //2. Math.floor()로 정수로 변형 필요 (일단 동작하는 건 확인했는데 한번 더 개선해야..)
+            let rand_r = Math.random()*255;  
             let rand_g = Math.random()*255;
             let rand_b = Math.random()*255;
             // console.log(rand_r, rand_g, rand_b)
@@ -65,11 +67,13 @@
             // 1차 디버깅 후, padStart가 없으면 간헐적으로 랜덤 생성된 숫자가 0~9 (한자리)일 때 배경색상 변경에 실패하는 버그 발생
             // padStart 함수로 자릿수 맞추기 필요
             
-            
             const hexColor = '#'+r+g+b;
             
             console.log(hexColor)
             document.body.style.backgroundColor = hexColor;
+
+            // 또는 아래와 같이 포매팅할 수 있음
+            // document.body.style.backgroundColor = `#${r}${g}${b}`;
             
         };
         

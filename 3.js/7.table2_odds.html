@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        td {
+            padding:10px;
+            border:1px solid #000;
+        }
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>셀 1</td>
+            <td>셀 2</td>
+            <td>셀 3</td>
+        </tr>
+        <tr>
+            <td>셀 4</td>
+            <td>셀 5</td>
+            <td>셀 6</td>
+        </tr>
+        <tr>
+            <td>셀 7</td>
+            <td>셀 8</td>
+            <td>셀 9</td>
+        </tr>
+    </table>
+    <hr>
+    <button onclick="changeOddCellColor4()">셀 색상 홀수만 변경하기</button>
+    <script>
+        let cells = document.getElementsByTagName('td');
+        function changeOddCellColor () {
+            for (let i = 0; i < cells.length; i++) {
+                if (i % 2 == 1) {
+                    cells[i].style.backgroundColor = 'lightgreen';
+                }  
+            };
+        };
+
+        function changeOddCellColor2 () {
+            // foreach에 인자를 2개 넣으면 첫 번째는 리스트 멤버, 두 번째는 리스트의 인덱스
+            Array.from(cells).forEach((cell, i) => {
+                if (i % 2 == 1) {
+                    cells[i].style.backgroundColor = 'lightgreen';
+                };
+            });  
+        };
+
+        function changeOddCellColor3 () {
+            //모던 for 구문을 활용
+            let index = 0;
+            for (const c of cells) {
+                if (index % 2 == 0) {
+                    console.log(c);
+                };
+                index += 1;
+            };
+        };
+
+        function changeOddCellColor4 () {
+            //쿼리 셀렉터를 이용하여 처음부터 홀/짝수 셀만 가져옴
+            //querySelectorAll
+            const oddCells = document.querySelectorAll('td:nth-child(odd)')
+            for (let i = 0; i < oddCells.length; i ++) {
+                oddCells[i].style.backgroundColor = 'lightgreen';
+            };
+        };
+
+        function changeOddCellColor5 () {
+            let i = 0; //i의 시작 부분으로 홀/짝 컨트롤 가능
+            while (i < cells.length) {
+                cells[i].style.backgroundColor = 'lightgreen';
+                i += 2;
+            }
+        };
+
+        function changeOddCellColor99 () {
+            //첫 숙제 버전. 인덱스를 2씩 뛰어넘어서 홀짝 계산 없이 수행...
+            for (let i = 0; i < cells.length; i += 2) {
+                cells[i].style.backgroundColor = 'lightgreen';
+            };
+        };
+
+    </script>
+</body>
+</html>
