@@ -1,4 +1,4 @@
-const answer = Math.floor(Math.random() * 101);
+const answer = Math.floor(Math.random() * 100) + 1;
 const submit = document.getElementById('submit');
 const history = document.getElementById('history');
 
@@ -11,7 +11,7 @@ submit.onclick = () => {
 function checkAnswer() {
     const input = document.getElementById('input').value;
 
-    if (input <=0 || input > 100) {
+    if (input <= 0 || input > 100) {
         alert('1~100 사이의 자연수를 입력해 주세요!!')
         //자연수 체크 어떻게...? 소숫점 입력받고 싶지 않음..
         return;
@@ -24,7 +24,7 @@ function checkAnswer() {
     
     const hint = document.getElementById('hint');
     if (answer == input) {
-        hint.textContent = '정답!'
+        hint.textContent = `정답! (시도 횟수: ${document.getElementsByTagName('li').length}회)`
         document.body.style.backgroundColor = 'yellow'
     } else if (answer > input) {
         hint.textContent = 'High'

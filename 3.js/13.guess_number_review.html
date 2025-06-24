@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>숫자 맞추기 게임 (1~100)</h1>
+    <input type="number" id="guessInput" placeholder="숫자를 입력하세요">
+    <button id="guessButton" onclick="checkGuess()">맞추기</button>
+    <p id="result"></p>
+    <hr>
+    <h2>입력 히스토리</h2>
+    <ol id="history"></ol>
+    <script>
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+
+        function checkGuess() {
+            const guess = document.getElementById('guessInput').value;
+            const result = document.getElementById('result');
+            const history = document.getElementById('history');
+            console.log(randomNumber, guess)
+
+            if (guess < randomNumber) {
+                result.textContent = '숫자가 작아요'
+            } else if (guess > randomNumber) {
+                result.textContent = '숫자가 커요'
+            } else {
+                result.innerHTML = '<strong>정답입니다!</strong>'
+            }
+
+            const list_item = document.createElement('li')
+            list_item.textContent = `${guess}`
+            
+            if (guess == randomNumber) {
+                list_item.textContent += ` (정답입니다!)`
+            };
+
+            history.appendChild(list_item);
+        }
+    </script>
+</body>
+</html>
