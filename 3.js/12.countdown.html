@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>카운트다운 타이머</h1>
+    <input type="number" placeholder="초를 입력하세요" id="time-input">
+    <button onclick="startTimer()">시작</button>
+    <p id="time-display"><!-- 카운트 --></p>
+    <script>
+        function startTimer() {
+            const timeInputValue = document.getElementById('time-input').value;
+            const timerDisplay = document.getElementById('time-display');
+            
+            let timer = timeInputValue;
+            let timerId = setInterval(() => {
+                if (timer == 0) {
+                    timerDisplay.textContent = `카운팅 종료!`;
+                    clearInterval(timerId); //setInterval 루프 탈출
+                } else {
+                    timerDisplay.textContent = `${timer}초 카운팅`;
+                    timer--;
+                }
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
