@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myCanvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="300"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const context = canvas.getContext('2d'); //캔바스에 접근하는 포인터
+        
+        let x = 50;
+        let direction = 1
+        let speed = 3
+
+        function draw() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = 'red';
+            context.fillRect(x, 50, 50, 50);
+            x = x + speed * direction;
+            
+            if (x == canvas.width - 50) {
+                direction = -1;
+            } else if (x == 0) {
+                direction = 1;
+            }
+            requestAnimationFrame(draw);
+        };
+
+        draw();
+    </script>
+</body>
+</html>
