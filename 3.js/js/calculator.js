@@ -1,5 +1,6 @@
 const display = document.getElementById('display');
 const equal = document.getElementById('equal');
+const clear = document.getElementById('clear');
 let is_result = false;
 
 clear.onclick = () => {

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4열 */
+            gap: 10px; /* 버튼 사이 여백 */
+            width: 300px; /* 그리드 전체 너비 */
+            margin: 50px auto; /* 가운데 정렬 */
+        }
+
+        .calculator input {
+            grid-column: span 4;
+            padding: 20px;
+            font-size: 18px;
+        }
+
+        .calculator button {
+            padding: 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="result">
+        <button onclick="appendSymbol(this.textContent)">+</button>
+        <button onclick="appendSymbol(this.textContent)">-</button>
+        <button onclick="appendSymbol(this.textContent)">*</button>
+        <button onclick="appendSymbol(this.textContent)">/</button>
+        <button onclick="appendNumber(this.textContent)">7</button>
+        <button onclick="appendNumber(this.textContent)">8</button>
+        <button onclick="appendNumber(this.textContent)">9</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="appendNumber(this.textContent)">4</button>
+        <button onclick="appendNumber(this.textContent)">5</button>
+        <button onclick="appendNumber(this.textContent)">6</button>
+        <button onclick="clearInput()">C</button>
+        <button onclick="appendNumber(this.textContent)">1</button>
+        <button onclick="appendNumber(this.textContent)">2</button>
+        <button onclick="appendNumber(this.textContent)">3</button>
+        <button onclick="appendNumber(this.textContent)">0</button>
+    </div>
+
+    <script>
+        function appendNumber(number) {
+            document.getElementById('result').value += number
+        }
+        function appendSymbol(symbol) {
+            const prevInput = document.getElementById('result').value;
+            const prevChar = prevInput.slice(-1);
+            if (isNaN(prevChar) == false) {
+                document.getElementById('result').value += symbol
+            } else {
+                document.getElementById('result').value = prevInput.slice(0, -1) + symbol;
+            }
+        }
+        function clearInput() {
+            document.getElementById('result').value = '';
+        }
+        function calculate() {
+            const prevInput = document.getElementById('result').value;
+            if (isDivisionByZero(prevInput)) {
+                document.getElementById('result').value = '0으로 나눌 수 없습니다.';
+                return;
+            };
+
+            try {
+                const result = eval(prevInput);
+                document.getElementById('result').value = result;
+            } catch(error) {
+                console.log(error)
+                document.getElementById('result').value = '처리할 수 없습니다.';
+            };
+        }
+        
+        function isDivisionByZero(exp) {
+            for (i = 0; i < exp.length; i++) {
+                if (exp[i] == '/' && exp[i+1] == '0') {
+                    return true;
+                }
+            };
+        };
+    </script>
+</body>
+</html>
