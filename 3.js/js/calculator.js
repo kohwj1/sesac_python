@@ -16,11 +16,11 @@ equal.onclick = () => {
 function cal_input(myBtn) {
     console.log(isNaN(myBtn));
     if ((display.textContent == '0') || (is_result == true && !isNaN(myBtn))) {
-        display.textContent = `${myBtn}`
-        is_result = false
+        display.textContent = `${myBtn}`;
     } else {
         display.textContent += `${myBtn}`
     }
+    is_result = false;
 }
 
 function calculate(formular) {
