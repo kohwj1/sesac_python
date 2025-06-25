@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position:fixed;
+            cursor: pointer;
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            background-color: #ffcc00;
+            color: #000;
+        }
+
+        .zone {
+            width:200px;
+            height:200px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            padding: 10px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+        <div id="dropZone1" class="zone">Drop here
+            <div id="item" draggable="true">Drag me</div>
+        </div>
+        <div id="dropZone2" class="zone">Drop here</div>
+    <script>
+        const item = document.getElementById('item');
+        const zone1 = document.getElementById('dropZone1');
+        const zone2 = document.getElementById('dropZone2');
+        item.addEventListener('dragstart', function() {
+            console.log('아이템 픽');
+        });
+
+        zone1.addEventListener('dragover', function(e) {
+            e.preventDefault();
+        })
+
+        zone2.addEventListener('dragover', function(e) {
+            e.preventDefault();
+        })
+
+        zone1.addEventListener('drop', function() {
+            console.log('아이템 내려놓음');
+            zone1.appendChild(item);
+        });
+        
+        zone2.addEventListener('drop', function() {
+            console.log('아이템 내려놓음');
+            zone2.appendChild(item);
+        });
+    </script>
+</body>
+</html>
