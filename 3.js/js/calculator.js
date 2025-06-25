@@ -14,7 +14,8 @@ equal.onclick = () => {
 };
 
 function cal_input(myBtn) {
-    if (display.textContent == '0' || is_result == true) {
+    console.log(isNaN(myBtn));
+    if ((display.textContent == '0') || (is_result == true && !isNaN(myBtn))) {
         display.textContent = `${myBtn}`
         is_result = false
     } else {
@@ -35,5 +36,5 @@ function calculate(formular) {
         display.textContent = '0';
         alert('식을 올바르게 입력해주세요.');
     };
-    is_result = true
+    is_result = true;
 };0
