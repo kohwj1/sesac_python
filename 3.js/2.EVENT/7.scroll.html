@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #content {
+            height:2000px;
+            background: linear-gradient(to bottom, blue 0%, red 100%);
+        }
+    </style>
+</head>
+<body>
+    <div id="content"></div>
+    <script>
+        window.addEventListener('scroll', function() {
+            // console.log('페이지 스크롤');/
+
+            // const scrollPosition = window.pageYOffset;
+            // const scrollPosition = document.documentElement.scrollTop; 
+
+            //실무적으로는 브라우저 호환성을 대비하기 위해 아래와 같이 둘 중 하나에서 값을 받아오도록 사용
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            console.log(`현재 스크롤 위치: ${scrollPosition}`)
+        });
+    </script> 
+</body>
+</html>

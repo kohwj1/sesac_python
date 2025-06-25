@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #myDiv {
+            width:100px;
+            height:100px;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="myDiv"></div>
+    <script>
+        const myDiv = document.getElementById('myDiv');
+        myDiv.addEventListener('mouseover', function() {
+            console.log('마우스 올라옴');
+            myDiv.style.backgroundColor = 'lightgreen';
+        });
+        //화살표 함수에서는 this로 지정이 불가..
+        myDiv.addEventListener('mouseout', () => { //화살표 함수는 2015년도에 등장한 기능
+            console.log('마우스 벗어남');
+            myDiv.style.backgroundColor = 'lightblue';
+        });
+        myDiv.addEventListener('mousemove', (ev) => {
+            console.log(`마우스 움직임: X:${ev.clientX} Y:${ev.clientY}`);
+        });
+    </script> 
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="printButton">이 페이지 프린트하기</button>
+    <script>
+        document.getElementById('printButton').addEventListener('click', () => {
+            window.print(); //브라우저 내장 인쇄 기능과 동일
+        });
+
+        window.onbeforeprint = () => {
+            console.log('인쇄 전');
+        }
+
+        window.onafterprint = () => {
+            console.log('출력 후'); //실제 출력 안 하고 창만 닫아도 onafterprint가 동작함
+        }
+    </script>
+</body>
+</html>

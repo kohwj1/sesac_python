@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myForm" action="/submit" method="POST">
+        <textarea id="myTextArea" rows="10" cols="30"></textarea>
+        <br>
+        <button type="submit">제출</button>
+    </form>
+    <script>
+        document.getElementById('myTextArea').addEventListener('keydown',function(e) {
+            if (e.ctrlKey && e.key == 'Enter') {
+                console.log('엔터 감지');
+                document.getElementById('myForm').submit();
+            }
+        })
+    </script>
+</body>
+</html>

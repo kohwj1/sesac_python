@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //html DOM이 완성된 이후에 실행하라는 명령줄
+        //DOM 로딩 완료가 CSS 및 외부 이미지 로딩 완료를 보장하지는 않음
+        document.addEventListener('DOMContentLoaded', () => {
+            const h1 = document.getElementsByTagName('h1')[0];
+            h1.style.color = 'red';
+            console.log('여기는 DOM 로딩만 끝났을 때');
+        });
+
+        window.onload = () => {
+            console.log('DOM & CSS & 리소스 & JS 로딩까지 다끝난후에')
+        }
+
+    </script>
+    <h1>안녕하세요</h1>
+</body>
+</html>

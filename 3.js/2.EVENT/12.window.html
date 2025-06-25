@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- viewport 1.0이면 제조사에서 정한 비율대로 나옴 -->
+    <title>Document</title>
+</head>
+<body>
+    <h3>창 사이즈를 변경해 보시오</h3>
+    <script>
+        window.addEventListener('resize', () => {
+            const iwidth = window.innerWidth;
+            const iheight = window.innerHeight;
+            const owidth = window.outerWidth;
+            const oheight = window.outerHeight;
+            console.log(`안쪽 크기:${iwidth} x ${iheight}, 바깥쪽 크기:${owidth} x ${oheight}`);
+            
+            //screen 으로 화면 해상도를 가져올 수 있음
+            const screenwidth = screen.width;
+            const screenheight = screen.height;
+            console.log(`스크린 크기:${screenwidth} x ${screenheight}`);
+        })
+    </script>
+</body>
+</html>

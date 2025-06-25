@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #item-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        #item1, #item2, #item3 {
+            width: 100px;
+            height: 100px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        #item1 {
+            background-color: #ffcc00;
+        }
+        #item2 {
+            background-color: #6fe3fd;
+        }
+        #item3 {
+            background-color: #e07af7;
+        }
+        #dropZone {
+            width:200px;
+            height:200px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 150px;
+            background-color: #f0f0f0;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="item-container">
+        <div id="item1" draggable="true">Drag me</div>
+        <div id="item2" draggable="true">Drag me</div>
+        <div id="item3" draggable="true">Drag me</div>
+    </div>
+    <div id="dropZone">Drop here</div>
+    <script>
+        const item1 = document.getElementById('item1');
+        const item2 = document.getElementById('item2');
+        const item3 = document.getElementById('item3');
+        const zone = document.getElementById('dropZone');
+        
+        zone.addEventListener('dragover', function(e) {
+            e.preventDefault();
+        })
+
+        item1.addEventListener('dragstart', function() {
+            const current_width = Number(zone.style.width.replace('px',''));
+            zone.addEventListener('drop', function() {
+                zone.appendChild(item1);
+                console.log(zone.style.width)
+                zone.style.width = `max(${current_width + 100}px, 200px)`;
+            });
+        });
+        
+        item2.addEventListener('dragstart', function() {
+            zone.addEventListener('drop', function() {
+                zone.appendChild(item2);
+                zone.style.width = 'min-content';
+            });
+        });
+
+        item3.addEventListener('dragstart', function() {        
+            zone.addEventListener('drop', function() {
+                zone.appendChild(item3);
+                zone.style.width = 'min-content';
+            });
+        });
+    </script>
+</body>
+</html>

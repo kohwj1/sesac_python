@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>웹캠 접속하기</h1>
+    <video id="webcam" autoplay playsinline></video>
+    <p id="error"></p>
+
+    <script>
+        const videoElement = document.getElementById('webcam');
+        const errorElement = document.getElementById('error');
+
+        navigator.mediaDevices.getUserMedia({video:true})
+            .then(stream => {
+                //웹캠을 받아와서 비디오 개체에 연결
+                videoElement.srcObject = stream;
+            })
+            .catch(error => {
+                errorElement.textContent = `웹캠 접근 실패 - ${error.message}`
+            })
+    </script>
+</body>
+</html>

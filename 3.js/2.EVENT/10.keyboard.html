@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #displayKey {
+            font-size:3em;
+            text-align: center;
+            margin:50px;
+            color:#333;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="myInput" placeholder="아무거나 입력">
+    <div id="displayKey"></div>
+    <script>
+        document.getElementById('myInput').addEventListener('keydown', function(e) {
+            // console.log(e.key)
+            
+            const displayKey = document.getElementById('displayKey');
+            displayKey.textContent = e.key
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #myDiv {
+            width:100px;
+            height:100px;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="myDiv"></div>
+    <script>
+        // document.getElementById('myDiv').addEventListener('click', () => {
+        //     console.log('div 클릭')
+        // });
+        // document.getElementById('myDiv').addEventListener('mousedown', () => {
+        //     console.log('div에 마우스 누르기')
+        // });
+        // document.getElementById('myDiv').addEventListener('mouseup', (event) => {
+        //     console.log('div에서 마우스 떼기: ', event.button)
+
+        //     switch(event.button) {
+        //         case 0:
+        //             console.log('왼클릭');
+        //             break;
+        //         case 1:
+        //             console.log('휠 클릭');
+        //             break;
+        //         case 2:
+        //             console.log('우클릭');
+        //             break;
+        //         default:
+        //             console.log('test')
+        //     }
+
+        // });
+        document.getElementById('myDiv').addEventListener('dblclick', () => {
+            console.log('더블 클릭')
+        });
+    </script> 
+</body>
+</html>

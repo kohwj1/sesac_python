@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myCanvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="300"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const context = canvas.getContext('2d'); //캔바스에 접근하는 포인터
+        
+        
+        //얼굴
+        context.beginPath();
+        context.arc(75, 75, 50, 0, 2 * Math.PI); //x, y, 각도, 시작각, 종료각
+        
+        //입
+        context.moveTo(110, 75);
+        context.arc(75, 75, 35, 0, Math.PI, false);
+        
+        //눈
+        context.moveTo(65, 65);
+        context.arc(60, 65, 5, 0, 2* Math.PI);
+        context.moveTo(95, 65);
+        context.arc(90, 65, 5, 0, 2* Math.PI);
+        
+        context.stroke();
+        context.closePath()
+        
+        
+        //팩맨
+        context.fillStyle = 'yellow';
+        context.beginPath();
+        context.moveTo(300, 100); // 팩맨 노출 위치
+
+        //팩맨 입
+        const startAngle = 0.2 * Math.PI;
+        const endAngle = 1.8 * Math.PI;
+
+        context.arc(300, 100, 50, startAngle, endAngle);
+        context.fill();
+        context.closePath()
+
+    </script>
+</body>
+</html>

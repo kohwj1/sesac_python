@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #dropZone {
+            width: 300px;
+            height: 200px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div id="dropZone">여기에 파일을 드래그하세요.</div>
+    <div>
+        <h3>드롭된 파일 목록</h3>
+        <ul id="fileNames">
+        </ul>
+    </div>
+    <button id="sendButton">업로드</button>
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileNames = document.getElementById('fileNames');
+        const sendButton = document.getElementById('sendButton');
+
+        //파일 정보를 담을 배열
+        let fileArray = [];
+
+        dropZone.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            dropZone.style.backgroundColor = '#e0e0e0';
+        })
+        
+        dropZone.addEventListener('dragleave', function() {
+            dropZone.style.backgroundColor = '#f9f9f9';
+        })
+        
+        dropZone.addEventListener('drop', function(e) {
+            e.preventDefault();
+            dropZone.style.backgroundColor = '#f9f9f9';
+
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+            //     for (i=0; i < files.length; i++) {
+            //         fileArray.push(files[i]);
+            //         const li = document.createElement('li');
+            //         li.textContent = files[i].name;
+            //         fileNames.appendChild(li);
+            // }
+            Array.from(files).forEach(file => {
+                fileArray.push(file);
+                const li = document.createElement('li');
+                li.textContent = file.name;
+                fileNames.appendChild(li);
+            });
+        }
+        });
+
+        sendButton.addEventListener('click', function(e) {
+            if (fileArray.length == 0) {
+                alert('업로드할 파일이 없습니다.');
+                return;
+            }
+            const formData = new FormData();
+            fileArray.forEach((file, index) => {
+                formData.append('files[]',file);
+
+            })
+            fetch('/upload', {
+                method:'POST',
+                body:formData
+            })
+                .then(response => response.text())
+                .then(result => {alert('업로드 성공')})
+                .catch(error => {alert('업로드 실패')})
+        });
+
+    </script>
+</body>
+</html>

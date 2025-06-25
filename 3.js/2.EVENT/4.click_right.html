@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #myDiv {
+            width:100px;
+            height:100px;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="myDiv"></div>
+    <script>
+        // document.getElementById('myDiv').addEventListener('contextmenu', (e) => {
+        //     e.preventDefault(); //브라우저 원래 우클릭 메뉴 동작하지 않도록 막는 함수
+        //     console.log('우클릭')
+        // });
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            alert('우클릭 금지');
+        });
+    </script> 
+</body>
+</html>

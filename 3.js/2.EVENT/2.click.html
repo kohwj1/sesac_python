@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="myButton">클릭하시오</button>
+    <script>
+        // const myButton = document.getElementById('myButton');
+        // myButton.addEventListener('click', mouse_click);
+
+        // function mouse_click() {
+        //     console.log('클릭')
+        // }
+        // 아래 2줄짜리와 같은 내용
+        
+        document.getElementById('myButton').addEventListener('click', () => {
+            console.log('클릭')
+        });
+        
+    </script>
+</body>
+</html>
