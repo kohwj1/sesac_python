@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myCanvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="300"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const context = canvas.getContext('2d');
+
+        let x = 100;
+        let y = 100;
+        
+        function drawPacman() {
+            context.fillStyle = 'yellow';
+            context.beginPath();
+            context.moveTo(x, y);
+            const startAngle = 0.2 * Math.PI;
+            const endAngle = 1.8 * Math.PI;
+
+            context.arc(x, y, 50, startAngle, endAngle);
+            context.fill();
+            context.closePath()
+        };
+
+        function animate() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            drawPacman()
+            requestAnimationFrame(animate);
+        };
+
+        //숙제. 이벤트 리스너를 넣어서 x, y 이동시키기
+        document.addEventListener('keydown', function(e) {
+            switch (e.key) {
+                case 'ArrowUp':
+                    y = Math.max(50, y-10);
+                    break;
+                case 'ArrowDown':
+                    y = Math.min(250, y+10);
+                    break;
+                case 'ArrowRight':
+                    x = Math.min(350, x+10);
+                    break;
+                case 'ArrowLeft':
+                    x = Math.max(50, x-10);
+                    break;
+                default:
+                    console.log('대체외않되')
+            }
+        })
+        animate();
+    </script>
+</body>
+</html>
