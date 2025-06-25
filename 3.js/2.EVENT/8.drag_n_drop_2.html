@@ -7,13 +7,13 @@
         #item-container {
             display: flex;
             align-items: center;
-            cursor: pointer;
         }
         #item1, #item2, #item3 {
+            text-align: center;
+            cursor: pointer;
             width: 100px;
             height: 100px;
-            margin-top: 10px;
-            margin-bottom: 10px;
+            margin: 10px;
         }
         #item1 {
             background-color: #ffcc00;
@@ -33,7 +33,7 @@
             justify-content: center;
             top: 150px;
             background-color: #f0f0f0;
-
+            padding: 10px;
         }
     </style>
 </head>
@@ -59,21 +59,21 @@
             zone.addEventListener('drop', function() {
                 zone.appendChild(item1);
                 console.log(zone.style.width)
-                zone.style.width = `max(${current_width + 100}px, 200px)`;
+                zone.style.width = 'max-content';
             });
         });
         
         item2.addEventListener('dragstart', function() {
             zone.addEventListener('drop', function() {
                 zone.appendChild(item2);
-                zone.style.width = 'min-content';
+                zone.style.width = 'max-content';
             });
         });
-
+        
         item3.addEventListener('dragstart', function() {        
             zone.addEventListener('drop', function() {
                 zone.appendChild(item3);
-                zone.style.width = 'min-content';
+                zone.style.width = 'max-content';
             });
         });
     </script>
