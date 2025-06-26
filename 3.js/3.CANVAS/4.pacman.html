@@ -6,7 +6,6 @@
     <title>Document</title>
     <style>
         #myCanvas {
-            border: 1px solid #000;
             background-color: #000;
         }
     </style>
@@ -16,13 +15,14 @@
     <script>
         const canvas = document.getElementById('myCanvas');
         const context = canvas.getContext('2d');
+        const pi = Math.PI;
 
-        let x = 100;
-        let y = 100;
-        let r = 50
-        let startAngle = 0.2 * Math.PI;
-        let endAngle = 1.8 * Math.PI;
-        let direction = 0
+        let x = 100; //팩맨 출현 위치 x좌표
+        let y = 100; //팩맨 출현 위치 y좌표
+        let r = 50 //반지름 (팩맨 크기 조절)
+        let startAngle = 0.2 * pi;
+        let endAngle = 1.8 * pi;
+        let direction = 0 //0: 반시계방향(기본값), 1:시계방향
         
         function drawPacman() {
             context.fillStyle = 'yellow';
@@ -45,26 +45,26 @@
             switch (e.key) {
                 case 'ArrowUp':
                     y = Math.max(r, y-10);
-                    startAngle = 1.3 * Math.PI;
-                    endAngle = 1.7 * Math.PI;
+                    startAngle = 1.3 * pi;
+                    endAngle = 1.7 * pi;
                     direction = 1;
                     break;
                 case 'ArrowDown':
                     y = Math.min(300-r, y+10);
-                    startAngle = 0.7 * Math.PI;
-                    endAngle = 0.3 * Math.PI;
+                    startAngle = 0.7 * pi;
+                    endAngle = 0.3 * pi;
                     direction = 0;
                     break;
                 case 'ArrowRight':
                     x = Math.min(400-r, x+10);
-                    startAngle = 0.2 * Math.PI;
-                    endAngle = 1.8 * Math.PI;
+                    startAngle = 0.2 * pi;
+                    endAngle = 1.8 * pi;
                     direction = 0;
                     break;
                 case 'ArrowLeft':
                     x = Math.max(r, x-10);
-                    startAngle = 0.8 * Math.PI;
-                    endAngle = 1.2 * Math.PI;
+                    startAngle = 0.8 * pi;
+                    endAngle = 1.2 * pi;
                     direction = 1;
                     break;
                 default:
