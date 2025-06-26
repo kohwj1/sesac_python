@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+            height:100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #eee;
+        }
+        #container {
+            width:500px;
+            min-height:300px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+        }
+        #timeDisplay {
+            margin:20px;
+            margin-top:35px;
+            font-size:3em;
+        }
+        #btnArea {
+            margin:20px;
+        }
+        #resultMsg {
+            font-size:3em;
+            margin:20px;
+        }
+        .btnCtrl {
+            width: 80px;
+            height: 50px;
+            border: none;
+            border-radius: 15px;
+            margin:30px;
+            background-color: #000;
+            color:#fff;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="defaultArea">
+            <h3>반응 속도 테스트</h3>
+            <div id="mission"></div>
+            <div id="timeDisplay">000</div>
+            <div id="btnArea">
+                <button class="btnCtrl" id="start">Start</button>
+            </div>
+        </div>
+        <div id="resultArea" class="hidden">
+            <div id="resultMsg"></div>
+            <div id="targetTime"></div>
+            <div id="myTime"></div>
+            <button class="btnCtrl" id="reset">다시하기</button>
+        </div>
+    </div>
+    <script>
+        const btnStart = document.getElementById('start');
+        const btnReset = document.getElementById('reset');
+        const mission = document.getElementById('mission');
+        const defaultArea = document.getElementById('defaultArea');
+        const resultArea = document.getElementById('resultArea');
+        const resultMsg = document.getElementById('resultMsg');
+        const targetTime = Math.floor(Math.random()*1000)+1
+        let currentTime = 0;
+        let gameSession = false;
+        let judge= 10;
+        let timerId;
+        let resultArror;
+
+        mission.innerHTML = `목표 시간: ${targetTime}ms <br> ${judge}ms 이내로 클릭 시 성공`
+        
+        function startGame() {
+            currentTime ++;
+            console.log(currentTime)
+            document.getElementById('timeDisplay').textContent = String(currentTime).padStart(3,'0');
+        }
+
+        function endGame(num) {
+            defaultArea.classList.add('hidden');
+            resultArea.classList.remove('hidden');
+
+            if (targetTime > num) {
+                resultArror = '-';
+            } else if (targetTime < num) {
+                resultArror = '+';
+            } else {
+                resultArror = '';
+            };
+
+            let checker = Math.abs(targetTime - currentTime)
+
+            document.getElementById('targetTime').innerText = `목표 시간: ${targetTime}ms`;
+            document.getElementById('myTime').innerText = `클릭 시간: ${num}ms (${resultArror}${checker})`;
+
+            if (checker <= judge) {
+                resultMsg.innerText = '성공!';
+                document.body.style.backgroundColor = '#a7ffa2';
+            } else {
+                resultMsg.innerText = '실패 ㅠ_ㅠ';
+                document.body.style.backgroundColor = '#f3a2a2';
+            }
+        }
+        
+        btnStart.addEventListener('click',function() {
+            if (!gameSession) {
+                gameSession = true;
+                btnStart.innerText = 'Stop'
+                timerId = setInterval(startGame, 1)
+            } else {
+                gameSession = false;
+                clearInterval(timerId);
+                let resultTime = Number(document.getElementById('timeDisplay').textContent);
+                endGame(resultTime)
+            }
+        });
+        btnReset.addEventListener('click', function() {
+            location.reload();
+        })
+    </script>
+</body>
+</html>
