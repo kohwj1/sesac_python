@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+            height:100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #aaa;
+        }
+        span {
+            min-width:61px;
+        }
+        li {
+            list-style: decimal-leading-zero; /*css에서 알아서 숫자 맞춰줌 */
+            text-align: left;
+        }
+        #container {
+            width:500px;
+            min-height:300px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            background-color: #fff;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+        }
+        #timeDisplay {
+            display: flex;
+            margin:20px;
+            margin-top:35px;
+            font-size:3em;
+        }
+        #btnArea {
+            margin:20px;
+        }
+        #start {
+            background-color: rgb(68, 154, 68);
+        }
+        #start:disabled {
+            background-color: rgb(206, 231, 206);
+        }
+        #stop {
+            background-color: rgb(222, 77, 77);
+        }
+        #stop:disabled {
+            background-color: rgb(242, 168, 168);
+        }
+        #reset {
+            background-color: rgb(117, 117, 117);
+        }
+        #record {
+            background-color: rgb(218, 160, 46);
+        }
+        #record:disabled {
+            background-color: rgb(255, 227, 172);
+        }
+        .btnCtrl {
+            width: 80px;
+            height: 50px;
+            border: none;
+            border-radius: 15px;
+            margin:10px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="timeDisplay"><span id="min">00</span>:<span id="sec">00</span>.<span id="milsec">00</span></div>
+        <div id="btnArea">
+            <button class="btnCtrl" id="start">Start</button>
+            <button class="btnCtrl" id="stop" disabled>Stop</button>
+            <button class="btnCtrl" id="reset">Reset</button>
+            <button class="btnCtrl" id="record" disabled>Record</button>
+        </div>
+        <div>
+            <ol id="recordArea"></ul>
+        </div>
+    </div>
+    <script>
+        const btnStart = document.getElementById('start');
+        const btnStop = document.getElementById('stop');
+        const btnReset = document.getElementById('reset');
+        const btnRecord = document.getElementById('record');
+        const recordArea = document.getElementById('recordArea');
+        let watchId;
+        let minute;
+        let sec;
+        let milsec;
+        let currentTime;
+        
+        function stopWatch() {
+            currentTime ++;
+            console.log(currentTime)
+            document.getElementById('min').textContent = String(Math.floor(currentTime/6000)).padStart(2,'0');
+            document.getElementById('sec').textContent = String(Math.floor((currentTime%6000)/100)).padStart(2,'0');
+            document.getElementById('milsec').textContent = String((currentTime%6000)%100).padStart(2,'0');
+        }
+        
+        btnStart.addEventListener('click',function() {
+            minute = document.getElementById('min').textContent;
+            sec = document.getElementById('sec').textContent;
+            milsec = document.getElementById('milsec').textContent;
+            currentTime = 6000*Number(minute) + 100*Number(sec) + Number(milsec);
+            btnStart.setAttribute('disabled','');
+            btnStop.removeAttribute('disabled');
+            btnRecord.removeAttribute('disabled');
+            watchId = setInterval(stopWatch, 10)
+        });
+        btnStop.addEventListener('click',function() {
+            btnStop.setAttribute('disabled','');
+            btnStart.removeAttribute('disabled'); 
+            clearInterval(watchId)
+        })
+        btnReset.addEventListener('click', function() {
+            btnStop.setAttribute('disabled','');
+            btnRecord.setAttribute('disabled','');
+            btnStart.removeAttribute('disabled');
+            clearInterval(watchId)
+            document.getElementById('timeDisplay').innerHTML = '<span id="min">00</span>:<span id="sec">00</span>.<span id="milsec">00</span>'
+            recordArea.innerHTML = ''
+        })
+        btnRecord.addEventListener('click',function(){
+            minute = document.getElementById('min').textContent;
+            sec = document.getElementById('sec').textContent;
+            milsec = document.getElementById('milsec').textContent;
+            
+            const li = document.createElement('li')
+            li.textContent = `${minute}:${sec}.${milsec}`
+            recordArea.appendChild(li);
+        })
+
+    </script>
+</body>
+</html>
