@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #000;
+        }
+        #myCanvas {
+            border:1px solid #fff;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="300"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const context = canvas.getContext('2d');
+        const pi = Math.PI;
+
+        let x = 100; //팩맨 출현 위치 x좌표
+        let y = 100; //팩맨 출현 위치 y좌표
+        let directionX = 0; //팩맨 방향
+        let directionY = 0; //팩맨 방향
+        let size = 60 //지름 (팩맨 크기)
+        let startAngle = 0.2 * pi; //입 시작각
+        let endAngle = 1.8 * pi; //입 종료각
+        let mouthDirection = 1;
+        let mouthSpeed = 0.03;
+        let moveSpeed = 2;
+        
+        function drawPacman() { //목적에 맞게 함수를 쪼개자!
+            context.fillStyle = 'yellow';
+            context.beginPath();
+            context.moveTo(x, y);
+            context.arc(x, y, size/2, startAngle, endAngle);
+            context.fill();
+            context.closePath()
+        };
+
+        function drawFood() {
+            context.fillStyle = 'white'
+            context.beginPath();
+            context.moveTo(100, 200);
+            context.arc(200, 270, 5, 0, 2*pi);
+            context.fill();
+            context.closePath()  
+        };
+        
+        function checkPacmanFoodPosition() {
+            console.log('팩멘이 food 먹는 내용'); 
+        };
+        
+        function updateMouth() {
+            if (startAngle >= 0.7) {
+                mouthDirection = -1;
+            } else if (startAngle <= 0.1) {
+                mouthDirection = 1;
+            };
+            startAngle += mouthSpeed * mouthDirection;
+            endAngle -= mouthSpeed * mouthDirection;
+        }
+
+        function movePacman() {
+            x += directionX;
+            y += directionY;
+            
+            if ((x < size / 2) || (x > canvas.width - size/2)) {
+                x -= directionX;
+                return;
+            }
+            if ((y < size / 2) || (y > canvas.height - size/2)) {
+                y -= directionY;
+                return;
+            }
+        };
+        
+        function animate() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            drawPacman();
+            drawFood();
+            updateMouth();
+            movePacman();
+            checkPacmanFoodPosition();
+            requestAnimationFrame(animate);
+        };
+
+        function handlerKeyDown(e) {
+            switch (e.key) {
+                case 'ArrowUp':
+                    y += -10;
+                    directionY = -moveSpeed;
+                    directionX = 0;
+                    break;
+                case 'ArrowDown':
+                    y += 10;
+                    directionY = moveSpeed;
+                    directionX = 0;
+                    break;
+                case 'ArrowRight':
+                    x += 10;
+                    directionX = moveSpeed;
+                    directionY = 0;
+                    break;
+                case 'ArrowLeft':
+                    x += -10;
+                    directionX = -moveSpeed;
+                    directionY= 0;
+                    break;
+                default:
+                    console.log('대체외않되');
+            }
+        };
+
+        document.addEventListener('keydown', handlerKeyDown);
+        animate();
+    </script>
+</body>
+</html>
