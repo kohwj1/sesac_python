@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #eee;
+        }
+        h1 {
+            text-align: center;
+        }
+        #userInput {
+            border-radius: 20px;
+            border:none;
+            height:20px;
+            padding:10px;
+            margin:10px;
+            width:60%;
+        }
+        ul {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 15px;
+            border: 3px dashed #ddd;
+        }
+        li {
+            list-style-type: none;
+            margin-bottom:5px;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .btnAdd {
+            border-radius: 20px;
+            background-color: rgb(94, 156, 125);
+            color:#fff;
+            border:none;
+            width:20%;
+            padding: 10px;
+            margin: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .show {
+            display: block;
+            color: red;
+            text-align: center;
+        }
+        .del {
+            border:none;
+            margin-left: 10px;
+            border-radius: 20px;
+            background-color: rgb(162, 62, 62);
+            color:#fff;
+        }
+        [type=checkbox] {
+            width:15px;
+            height:15px;
+            accent-color: rgb(94, 156, 125);
+        }
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <div class="container">
+        <input type="text" placeholder="할 일 추가하기" id="userInput">
+        <button id="addTodo" class="btnAdd">추가</button>
+    </div>
+    <p id="msgAlert" class="hidden">내용을 입력해주세요.</p>
+    <ul id="todoList"></ul>
+    <script>
+        const todoList = document.getElementById('todoList');
+        const addTodo = document.getElementById('addTodo');
+        const inputBox = document.getElementById('userInput');
+        const msgAlert = document.getElementById('msgAlert');
+        let idx = 0;
+    
+        
+        function addItem() {
+            const userInput = document.getElementById('userInput').value.trim();
+            
+            if (userInput == '') {
+                msgAlert.classList.add('show');
+                return;
+            };
+
+            const new_li = document.createElement('li');
+            new_li.innerHTML = `<input type="checkbox" id="${idx}" onclick="finItem(${idx})">
+            <label for="${idx}">${userInput}</label>
+            <button class="del" onclick="delItem(${idx})">삭제</button>`;
+            todoList.appendChild(new_li);
+            msgAlert.classList.remove('show');
+            idx += 1;
+            inputBox.value = '';
+        };
+        function delItem(target) {
+            todoList.removeChild(document.getElementById(target).parentNode);
+        };
+        function finItem(target) {
+            const label = document.getElementById(target).nextElementSibling;
+            if (label.style.textDecoration == 'line-through') {
+                label.style.textDecoration = 'none'
+            } else {
+                label.style.textDecoration = 'line-through'
+            }
+        };
+
+        addTodo.addEventListener('click', addItem);
+        inputBox.addEventListener('keydown', function(e) {
+            if (e.key == 'Enter') {
+                addItem();
+            }
+        });
+    </script>    
+</body>
+</html>
