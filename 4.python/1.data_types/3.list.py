@@ -72,4 +72,3 @@ print(numbers)
 
 numbers2 = [x for x in range(1,11) if x % 2 == 0] #리스트 정의 시 반복문 또는 조건문을 통해 리스트 아이템을 정의
 print(numbers2)
-
