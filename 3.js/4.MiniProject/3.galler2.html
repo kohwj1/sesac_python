@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            display:flex;
+            flex-direction: column;
+            align-items:center;
+            justify-items:center;
+        }
+        p {
+            text-align:center;
+        }
+        button {
+            width:65px;
+            height:40px;
+            border:none;
+            background-color: #ccc;
+            opacity: 0.7;
+        }
+        button:disabled {
+            background-color: #eee;
+        }
+        .largeImg {
+             width:550px;
+        }
+        .buttonArea {
+            position: relative;
+            top: -200px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .thumbnail {
+            width:150px;
+            margin:10px;
+        }
+        .selected {
+            width:135px;
+            border: 5px solid rgb(0, 136, 255);
+        }
+        #originImg {
+            overflow:hidden;
+            display: flex;
+            width:550px;
+            margin-top:20px;
+        }
+        #container {
+            display: flex;
+            position:relative;
+            left:0px;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <img class="thumbnail selected" src="img/cat1.jpg" onclick="enlarge(this)" id="0">
+        <img class="thumbnail" src="img/cat2.jpg" onclick="enlarge(this)" id="1">
+        <img class="thumbnail" src="img/cat3.jpg" onclick="enlarge(this)" id="2">
+    </div>
+    <div id="display">
+        <div id="originImg">
+            <div id="container"></div>
+        </div>
+        <div class="buttonArea">
+            <button id="prev" disabled>Prev</button>
+            <button id="next">Next</button>
+        </div>
+    </div>
+    <script>
+        const btnPrev = document.getElementById('prev');
+        const btnNext = document.getElementById('next');
+        const originImg = document.getElementById('originImg');
+        const imgContainer = document.getElementById('container');
+        const fileName = document.getElementById('fileName');
+        const fileList = document.querySelectorAll('.thumbnail');
+        const imgSize = 550;
+        const listLength = fileList.length;
+        let idx = 0;
+
+        for (file of fileList) {
+            let src = file.getAttribute('src');
+            let resizedImg = document.createElement('img')
+            resizedImg.setAttribute('src', src);
+            resizedImg.classList.add('largeImg')
+            imgContainer.appendChild(resizedImg);
+        }
+
+        function enlarge(target) {
+            idx = Number(target.getAttribute('id'));
+            imgContainer.style.transition = 'left 0.5s linear';
+            imgContainer.style.left = idx * -imgSize + 'px';
+            emphasize(idx);
+            checkIdx(idx);
+        };
+
+        function emphasize(num) {
+            for (file of fileList) {
+                file.classList.remove('selected');
+            };
+            fileList[num].classList.add('selected');
+        };
+
+        function checkIdx(num) {
+            if (num == 0) {
+                btnPrev.setAttribute('disabled','');
+                btnNext.removeAttribute('disabled');
+            } else if (num == listLength-1) {
+                btnPrev.removeAttribute('disabled');
+                btnNext.setAttribute('disabled','');
+            } else {
+                btnPrev.removeAttribute('disabled');
+                btnNext.removeAttribute('disabled');
+            }
+        };
+        
+        btnPrev.addEventListener('click', function() {
+            idx += -1;
+            enlarge(fileList[idx]);
+        });
+
+        btnNext.addEventListener('click', function() {
+            idx += 1;
+            enlarge(fileList[idx]);
+        });
+    </script>
+</body>
+</html>
