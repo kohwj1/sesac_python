@@ -87,12 +87,9 @@ def print_arithmetic_operation(a,b):
 
 #220
 def print_max(a,b,c):
-    if (a>b and a>c) or (a==b==c) or (a==b and b>c):
-        print(a)
-    elif (b>a and b>c) or (b==c and b>a):
-        print(b)
-    elif (c>a and c>b) or (c > a and c==b):
-        print(c)
+    temp_list = [a,b,c]
+    temp_list.sort()
+    print(temp_list[-1])
 
 #221
 def print_reverse(word):
@@ -123,7 +120,7 @@ def print_5xn(word):
     for i in range(repeat_count):
         print(word[5*i:5*(i+1)])
     
-    if repeat_count % 5 > 0:
+    if len(word) % 5 > 0:
         print(word[5*repeat_count:])
 
 #227
@@ -132,5 +129,60 @@ def print_mxn(word, count):
     for i in range(repeat_count):
         print(word[count*i:count*(i+1)])
     
-    if repeat_count % count > 0:
+    if len(word) % count > 0:
         print(word[count*repeat_count:])
+
+#228
+def calc_monthly_salary(annual_salary):
+    print(int(annual_salary/12))
+
+#229
+#"왼쪽: 100"
+#"오른쪽: 200"
+
+#230
+#"왼쪽: 200"
+#"오른쪽: 100"
+
+#231
+#4
+
+#232
+def make_url(site):
+    return f'www.{site}.com'
+
+#233
+def make_list(word):
+    return [char for char in word]
+
+#234
+def pickup_even(your_list):
+    return [i for i in your_list if i % 2 == 0]
+
+#235
+def convert_int(string_int):
+    temp_int = string_int.replace(',','')
+    return int(temp_int)
+
+#236
+#22
+#a = 함수(10) --> 14
+#b = 함수(a) --> 14+4 = 18
+#c = 함수(b) --> 18+4 = 22
+
+#237
+# 22
+# 괄호 안쪽부터 연산하면서 함수를 총 3번 거치게 되므로 10 + 4 + 4 + 4 = 22가 됨
+
+#238
+# 140 = (10+4) * 10
+
+#239
+# 16
+# c = 함수2(10) --> return 함수1(12) = 12+4 = 16 
+
+#240
+#28
+#1. 함수2(2) = 함수1(12)
+#2. 함수1(12) = 함수0(14)
+#3. 함수0(14) = 14 * 2 = 28
