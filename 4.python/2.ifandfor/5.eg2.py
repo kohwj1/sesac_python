@@ -70,4 +70,34 @@ def find_user3(name=None ,age=None):
 
 # print(find_user3(name='Bob'))
 # print(find_user3(age=40))
-print(find_user3(name='Bob',age=40))
+# print(find_user3(name='Bob',age=40))
+
+# print('----- 간단한 조건 재구현 -----')
+
+def find_user3_simple(name=None ,age=None):
+    result = []
+    for u in users:
+        if name is not None and age is not None:
+            if u['name'] == name and u['age'] == age:
+                result.append(u)
+        elif name is not None:
+            if u['name'] == name:
+                result.append(u)
+        elif age is not None:
+            if u['age'] == age:
+                result.append(u)
+        else:
+            result.append(u)
+    return result
+# print(find_user3_simple(name='Bob'))
+# print(find_user3_simple(age=40))
+# print(find_user3_simple(name='Bob',age=40))
+
+print('----- 더 간단한 조건 재구현 -----')
+
+def find_user3_simplest(name=None ,age=None):
+    return [u for u in users if (name is None or name == u['name']) and (age is None or age == u['age'])]
+
+# print(find_user3_simplest(name='Bob'))
+# # print(find_user3_simplest(age=40))
+# print(find_user3_simplest(name='Bob',age=40))
