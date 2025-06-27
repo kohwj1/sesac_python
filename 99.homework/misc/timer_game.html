@@ -80,7 +80,7 @@
         let timerId;
         let resultArror;
 
-        mission.innerHTML = `목표 시간: ${targetTime}ms <br> ${judge}ms 이내로 클릭 시 성공`
+        mission.innerHTML = `목표 카운트 ${targetTime} <br> ${judge} 단위 이내로 맞출 시 성공`
         
         function startGame() {
             currentTime ++;
@@ -102,8 +102,8 @@
 
             let checker = Math.abs(targetTime - currentTime)
 
-            document.getElementById('targetTime').innerText = `목표 시간: ${targetTime}ms`;
-            document.getElementById('myTime').innerText = `클릭 시간: ${num}ms (${resultArror}${checker})`;
+            document.getElementById('targetTime').innerText = `목표 카운트: ${targetTime}`;
+            document.getElementById('myTime').innerText = `클릭 카운트: ${num} (${resultArror}${checker})`;
 
             if (checker <= judge) {
                 resultMsg.innerText = '성공!';
