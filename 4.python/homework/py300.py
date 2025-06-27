@@ -99,4 +99,38 @@ def print_reverse(word):
     print(''.join(reversed(word)))
 
 #222
-# def print_score(score_list):
+def print_score(score_list):
+    print(sum(score_list)/len(score_list))
+
+#223
+def print_even(num_list):
+    for num in num_list:
+        if num % 2 == 0:
+            print(num)
+
+#224
+def print_keys(your_dict):
+    for key in list(your_dict.keys()):
+        print(key)
+
+#225
+def print_value_by_key(your_dict, key):
+    print(your_dict[key])
+
+#226
+def print_5xn(word):
+    repeat_count = len(word)//5
+    for i in range(repeat_count):
+        print(word[5*i:5*(i+1)])
+    
+    if repeat_count % 5 > 0:
+        print(word[5*repeat_count:])
+
+#227
+def print_mxn(word, count):
+    repeat_count = len(word)//count
+    for i in range(repeat_count):
+        print(word[count*i:count*(i+1)])
+    
+    if repeat_count % count > 0:
+        print(word[count*repeat_count:])
