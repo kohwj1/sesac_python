@@ -20,20 +20,26 @@ print(datetime.strftime(datetime.now(),'%H:%M:%S'))
 print(datetime.strptime('2020-05-04','%Y-%m-%d'))
 
 #246
-# import time
-# while True:
-#     print(datetime.now())
-#     time.sleep(1)
+from datetime import datetime
+import time
+i = 0
+while i < 10:
+    print(datetime.now())
+    time.sleep(1)
+    i += 1
 
 #247
-#추가 공부 필요
+# 전체 모듈 필요: import 모듈명
+# 특정 함수만 사용: from 모듈명 import 함수명
+# 간결한 호출 필요: import 모듈명 as 별칭
+# 특별한 이유 없이 권장 안 함: from 모듈명 import *
 
 #248
 import os
 print(os.getcwd())
 
 #249
-# os.rename('옛날경로파일명','변경할경로파일명')
+os.rename(r'C:\\Users\\user\\OneDrive\\Desktop\\파일명바꿀거.txt',r'C:\\Users\\user\\OneDrive\\Desktop\\파일명바꿀거222.txt')
 
 #250
 import numpy
