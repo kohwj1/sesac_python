@@ -3,3 +3,10 @@ __pycache__/
 *.pyc
 *.txt
 *.csv
+.idea/misc.xml
+.idea/modules.xml
+.idea/sesac_python.iml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/inspectionProfiles/Project_Default.xml
