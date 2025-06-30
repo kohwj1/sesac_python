@@ -1,8 +1,5 @@
 .DS_Store
 __pycache__/
 *.pyc
-4.python/5.modules/sesac1234/a.txt
-4.python/5.modules/sesac1234/b.txt
-4.python/6.fileio/text.txt
-4.python/real_examples/cat1.jpg
-4.python/real_examples/data.csv
+*.txt
+*.csv
