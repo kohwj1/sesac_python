@@ -4,6 +4,7 @@
         "Latte": 4000,
         "Espresso": 2500,
         "Cappuccino": 4500,
+        "Vanilla": 5500,
         "Mocha": 5000
     },
     "Juice": {
@@ -11,7 +12,9 @@
         "Apple": 2500,
         "Grape": 3000,
         "Pineapple": 3500,
-        "Watermelon": 4000
+        "Watermelon": 4000,
+        "Strawberry": 5000,
+        "Carrot": 4200
     },
     "Cake": {
         "Chocolate": 6000,

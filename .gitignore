@@ -1,7 +1,6 @@
 .DS_Store
 __pycache__/
 *.pyc
-*.txt
 *.csv
 .idea/misc.xml
 .idea/modules.xml

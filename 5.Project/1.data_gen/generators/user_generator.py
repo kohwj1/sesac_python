@@ -17,8 +17,9 @@ class UserGenerator:
         for _ in range(count):
             user_id = self.id_gen.generate_uuid()
             name = self.name_gen.generate_name()
-            birthday = self.bday_gen.generate_birth()
             gender = self.gender_gen.generate_gender()
+            age = self.bday_gen.generate_age()
+            birthday = self.bday_gen.generate_birth()
             address = self.address_gen.generate_address()
-            users.append((user_id, name, birthday, gender, address))
+            users.append((user_id, name, gender, age, birthday, address))
         return users
