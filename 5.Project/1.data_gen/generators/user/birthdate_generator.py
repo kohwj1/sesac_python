@@ -15,10 +15,8 @@ class BirthGenerator:
 
     def generate_age(self):
         today = datetime.datetime.now()
-        print(today.year, self.year)
         age = today.year - self.year
-
-        # if (today.month < self.month) or (today.month == self.month and today.day < self.day):
-        #     age -= 1
+        if (today.month < self.month) or (today.month == self.month and today.day < self.day):
+            age -= 1
 
         return age
