@@ -1,6 +1,6 @@
-from generators.storetype_generator import StoreTypeGenerator
-from generators.address_generator import AddressGenerator
-from generators.uuid_generator import UuidGenerator
+from generators.store.storetype_generator import StoreTypeGenerator
+from generators.common.address_generator import AddressGenerator
+from generators.common.uuid_generator import UuidGenerator
 import random
 
 class StoreGenerator:

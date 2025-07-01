@@ -1,8 +1,8 @@
-from generators.name_generator import NameGenerator
-from generators.birthdate_generator import BirthGenerator
-from generators.gender_generator import GenderGenerator
-from generators.address_generator import AddressGenerator
-from generators.uuid_generator import UuidGenerator
+from generators.user.name_generator import NameGenerator
+from generators.user.birthdate_generator import BirthGenerator
+from generators.user.gender_generator import GenderGenerator
+from generators.common.address_generator import AddressGenerator
+from generators.common.uuid_generator import UuidGenerator
 
 class UserGenerator:
     def __init__(self):

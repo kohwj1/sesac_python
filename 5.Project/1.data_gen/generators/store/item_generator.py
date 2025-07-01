@@ -1,5 +1,5 @@
 
-from generators.uuid_generator import UuidGenerator
+from generators.common.uuid_generator import UuidGenerator
 import json
 
 class ItemGenerator:
@@ -7,7 +7,7 @@ class ItemGenerator:
         self.id_gen = UuidGenerator()
         self.item_menu = self.item_parse(file_path)
     
-    def item_parse(self, file_path):
+    def item_parse(self, file_path) -> dict:
         with open(file_path, 'r', encoding='UTF-8') as file:
             data_str = file.read()
         data = json.loads(data_str)
@@ -23,8 +23,3 @@ class ItemGenerator:
                 item_price = price
                 items.append((item_id, item_name, item_type, item_price))
         return items
-    
-
-if __name__ == '__main__':
-    my_item = ItemGenerator('item.json')
-    print(my_item.generate_item())
