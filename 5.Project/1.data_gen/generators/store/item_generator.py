@@ -1,25 +1,24 @@
-
 from generators.common.uuid_generator import UuidGenerator
-import json
+from generators.store.price_generator import PriceGenerator
+from generators.store.itemname_generator import ItemNameGenerator
+import random
 
 class ItemGenerator:
-    def __init__(self, file_path):
+    def __init__(self):
+        self.item_menu = ItemNameGenerator('items.txt')
         self.id_gen = UuidGenerator()
-        self.item_menu = self.item_parse(file_path)
-    
-    def item_parse(self, file_path) -> dict:
-        with open(file_path, 'r', encoding='UTF-8') as file:
-            data_str = file.read()
-        data = json.loads(data_str)
-        return data
+        self.price = PriceGenerator()
         
-    def generate_item(self):
+    def generate_item(self, count):
         items = []
-        for drink_type in self.item_menu:
-            for drink, price in self.item_menu[drink_type].items():
-                item_id = self.id_gen.generate_uuid()
-                item_type = drink_type
-                item_name = f'{drink} {item_type}'
-                item_price = price
-                items.append((item_id, item_name, item_type, item_price))
+        for _ in range(count):
+            item_id = self.id_gen.generate_uuid()
+            item_name = self.item_menu.generate_itemname()
+            item_type = item_name.split()[1]
+            item_price = self.price.generate_price()
+            items.append((item_id, item_name, item_type, item_price))
         return items
+    
+if __name__ == '__main__':
+    test_instance = ItemGenerator()
+    print(test_instance.generate_item(40))

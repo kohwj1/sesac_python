@@ -18,8 +18,8 @@ class UserGenerator:
             user_id = self.id_gen.generate_uuid()
             name = self.name_gen.generate_name()
             gender = self.gender_gen.generate_gender()
-            age = self.bday_gen.generate_age()
             birthday = self.bday_gen.generate_birth()
+            age = self.bday_gen.generate_age()
             address = self.address_gen.generate_address()
             users.append((user_id, name, gender, age, birthday, address))
         return users

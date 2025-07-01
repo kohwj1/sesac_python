@@ -13,7 +13,6 @@ class UserDisplayData(UserGenerator):
             print(f'Age:{age}', end=',')
             print(f'Birthday:{birthday}', end=',')
             print(f'Address:{address}')
-    
     def export_csv(self, count):
         data = self.generate_user(count)
         with open('user.csv','w', newline='', encoding='UTF-8') as file:
@@ -38,15 +37,15 @@ class StoreDisplayData(StoreGenerator):
             csv_writer.writerows(data)
 
 class ItemDisplayData(ItemGenerator):
-    def print_data(self):
-        data = self.generate_item()
-        for store_id, store_name, store_type, store_address in data:
-            print(f'ID:{store_id}', end=',')
-            print(f'Name:{store_name}', end=',')
-            print(f'Type:{store_type}', end=',')
-            print(f'UnitPrice:{store_address}')
-    def export_csv(self):
-        data = self.generate_item()
+    def print_data(self, count):
+        data = self.generate_item(count)
+        for item_id, item_name, item_type, item_price in data:
+            print(f'ID:{item_id}', end=',')
+            print(f'Name:{item_name}', end=',')
+            print(f'Type:{item_type}', end=',')
+            print(f'UnitPrice:{item_price}')
+    def export_csv(self, count):
+        data = self.generate_item(count)
         with open('item.csv','w', newline='', encoding='UTF-8') as file:
             csv_writer = csv.writer(file)
             csv_writer.writerow(['Id','Name','Type','UnitPrice'])
@@ -55,10 +54,9 @@ class ItemDisplayData(ItemGenerator):
 #최종 실행
 if __name__ == '__main__':
     gen_arg = sys.argv
-    export_option = 'csv'
 
     if len(gen_arg) != 3:
-        print('피ㄹ수 인자 누락')
+        print('필수 인자 누락')
     else:
         if gen_arg[1] not in ['user', 'store', 'item', 'order', 'orderitem']:
             print('생성 가능한 제너레이터 유형이 아닙니다')
@@ -74,9 +72,9 @@ if __name__ == '__main__':
                     # store_data.print_data(count)
                     store_data.export_csv(count)
                 elif gen_arg[1] == 'item':
-                    item_data = ItemDisplayData('item.json')
+                    item_data = ItemDisplayData()
                     # item_data.print_data()
-                    item_data.export_csv()
+                    item_data.export_csv(count)
                 elif gen_arg[1] == 'order':
                     pass
                 elif gen_arg[1] == 'orderitem':
