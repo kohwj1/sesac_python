@@ -1,8 +1,8 @@
 import uuid
 
-class UserIdGenerator:
+class UuidGenerator:
     def __init__(self):
         pass
 
-    def generate_userid(self):
+    def generate_uuid(self):
         return uuid.uuid4()

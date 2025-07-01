@@ -9,8 +9,15 @@ class AddressGenerator:
             data = file.read().splitlines() #한줄당 이름 하나씩 들어있는 경우
         return data
 
+    def city(self):
+        return random.choice(self.cities)
+
     def generate_address(self):
-        city = random.choice(self.cities)
+        city = self.city()
         street_num = random.randint(1,100)
         post_num = random.randint(1,100)
-        return f'{city} {street_num}길 {post_num}'
+        return f'{city}구 {street_num}길 {post_num}'
+    
+# if __name__ == '__main__':
+#     my_address = AddressGenerator('cities.txt')
+#     print(my_address.generate_address())
