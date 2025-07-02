@@ -1,35 +1,42 @@
-generator
-    ㄴ common
-        ㄴ address_generator.py
-        ㄴ date_generator.py
-        ㄴ uuid_generator.py
-        ㄴ get_uuid.py
-    ㄴ order
-        ㄴ orderAt_generator.py
-    ㄴ store
-        ㄴ itemname_generator.py
-        ㄴ price_generator.py
-        ㄴ storetype_generator.py
-    ㄴ user
-        ㄴ gender_generator.py
-        ㄴ name_generator.py
-    ㄴ table
-        ㄴ user_generator.py
-        ㄴ store_generator.py
-        ㄴ item_generator.py
-        ㄴ order_generator.py
-        ㄴ orderitem_generator.py
-static
-    ㄴ cities.txt
-    ㄴ divisions.txt
-    ㄴ items.txt
-    ㄴ names.txt
-    ㄴ store_type.txt
-export_csv
-    ㄴ user.csv
-    ㄴ store.csv
-    ㄴ item.csv
-    ㄴ order.csv
-    ㄴ orderitem.csv
-display.py
-generator.py
+.
+├── display.py
+├── generator.py
+├── export
+│   ├── item.csv
+│   ├── order.csv
+│   ├── orderitem.csv
+│   ├── store.csv
+│   └── user.csv
+├── generators
+│   ├── _practice
+│   │   ├── 1.user.py
+│   │   ├── 2.userclass.py
+│   │   ├── 3.userclassdir.py
+│   │   └── 4.userinput.py
+│   ├── common
+│   │   ├── address.py
+│   │   ├── date.py
+│   │   ├── getData.py
+│   │   └── uuid.py
+│   ├── order
+│   │   └── orderAt.py
+│   ├── store
+│   │   ├── itemname.py
+│   │   ├── price.py
+│   │   └── storetype.py
+│   ├── table
+│   │   ├── item_generator.py
+│   │   ├── order_generator.py
+│   │   ├── orderitem_generator.py
+│   │   ├── store_generator.py
+│   │   └── user_generator.py
+│   └── user
+│       ├── gender.py
+│       └── name.py
+├── static
+│   ├── divisions.txt
+│   ├── family_names.txt
+│   ├── items.txt
+│   ├── names.txt
+│   └── store_type.txt
+└── tree.txt
