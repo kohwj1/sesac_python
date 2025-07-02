@@ -1,7 +1,6 @@
-#목표: store.csv의 id 컬럼을 가져와 리스트에 담는다
-import pandas
+import pandas, random
 
-class GetUuid:
+class GetData:
     def get_uuid(self, type):
         if type not in  ['user', 'store', 'item', 'order']:
             print('추출할 수 없는 타입입니다.')
@@ -14,6 +13,17 @@ class GetUuid:
                 # print('csv 파일이 없습니다. 해당 csv가 생성되어 있는지 확인해주세요.')
                 pass
     
+    def get_txt(self, file_path) -> list:
+        try:
+            with open(file_path,'r',encoding='UTF-8') as file:
+                data = file.read().splitlines()
+            return data
+        except FileNotFoundError:
+            pass
+    
+    def get_rand(self, file_path) -> str:
+        return random.choice(self.get_txt(file_path))
+    
 if __name__ == '__main__':
-    test_instance = GetUuid()
+    test_instance = GetData()
     print(test_instance.get_uuid('user'), sep='\n')

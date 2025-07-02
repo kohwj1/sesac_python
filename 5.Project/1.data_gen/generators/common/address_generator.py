@@ -1,17 +1,10 @@
+from generators.common.get_data import GetData
 import random
 
-class AddressGenerator:
-    def __init__(self, city_path):
-        self.division = self.load_data_from_file(city_path)
-
-    def load_data_from_file(self, file_path):
-        with open(file_path,'r',encoding='UTF-8') as file:
-            data = file.read().splitlines() #한줄당 이름 하나씩 들어있는 경우
-        return data
-
+class AddressGenerator(GetData):
     def city(self):
         megacity = random.choice(['서울', '대전', '대구', '인천', '부산', '울산', '광주', '세종'])
-        division = random.choice(self.division)
+        division = self.get_rand('static/divisions.txt')
         return f'{megacity} {division}'
 
     def generate_address(self):

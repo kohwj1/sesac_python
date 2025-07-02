@@ -1,12 +1,12 @@
 from generators.common.uuid_generator import UuidGenerator
-from generators.common.get_uuid import GetUuid
+from generators.common.get_data import GetData
 import random
 
 class OrderItemGenerator:
     def __init__(self):
         self.id_gen = UuidGenerator()
-        self.order_id = GetUuid()
-        self.item_id = GetUuid()
+        self.order_id = GetData()
+        self.item_id = GetData()
         
     def generate_orderitem(self, count):
         orderitems = []
