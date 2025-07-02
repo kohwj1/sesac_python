@@ -12,13 +12,17 @@ generator
         ㄴ birthdate_generator.py
         ㄴ gender_generator.py
         ㄴ name_generator.py
-    ㄴ static
-        ㄴ cities.txt
-        ㄴ divisions.txt
-        ㄴ items.txt
-        ㄴ names.txt
-        ㄴ store_type.txt
     ㄴ table
         ㄴ user_generator.py
         ㄴ store_generator.py
         ㄴ item_generator.py
+static
+    ㄴ cities.txt
+    ㄴ divisions.txt
+    ㄴ items.txt
+    ㄴ names.txt
+    ㄴ store_type.txt
+export_csv
+    ㄴ user.csv
+    ㄴ store.csv
+    ㄴ item.csv

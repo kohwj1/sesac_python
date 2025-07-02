@@ -3,7 +3,7 @@ import pandas
 
 class GetUserId:
     def get_userid(self):
-        file = pandas.read_csv(r'C:\Users\user\PycharmProjects\sesac_python\5.Project\1.data_gen\user.csv')
+        file = pandas.read_csv(r'export/user.csv')
         user_id = file['Id']
         return list(user_id)
     

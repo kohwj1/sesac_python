@@ -1,6 +1,6 @@
-from generators.user.user_generator import UserGenerator
-from generators.store.store_generator import StoreGenerator
-from generators.store.item_generator import ItemGenerator
+from generators.table.user_generator import UserGenerator
+from generators.table.store_generator import StoreGenerator
+from generators.table.item_generator import ItemGenerator
 import sys, csv
 
 class UserDisplayData(UserGenerator):
@@ -15,7 +15,7 @@ class UserDisplayData(UserGenerator):
             print(f'Address:{address}')
     def export_csv(self, count):
         data = self.generate_user(count)
-        with open('export_csv/user.csv','w', newline='', encoding='UTF-8') as file:
+        with open('export/user.csv','w', newline='', encoding='UTF-8') as file:
             csv_writer = csv.writer(file)
             csv_writer.writerow(['Id','Name','Gender','Age','Birthdate','Address'])
             csv_writer.writerows(data)
@@ -31,7 +31,7 @@ class StoreDisplayData(StoreGenerator):
             print(f'Address:{store_address}')
     def export_csv(self, count):
         data = self.generate_store(count)
-        with open('export_csv/store.csv','w', newline='', encoding='UTF-8') as file:
+        with open('export/store.csv','w', newline='', encoding='UTF-8') as file:
             csv_writer = csv.writer(file)
             csv_writer.writerow(['Id','Name','Type','Address'])
             csv_writer.writerows(data)
@@ -46,7 +46,7 @@ class ItemDisplayData(ItemGenerator):
             print(f'UnitPrice:{item_price}')
     def export_csv(self, count):
         data = self.generate_item(count)
-        with open('export_csv/item.csv','w', newline='', encoding='UTF-8') as file:
+        with open('export/item.csv','w', newline='', encoding='UTF-8') as file:
             csv_writer = csv.writer(file)
             csv_writer.writerow(['Id','Name','Type','UnitPrice'])
             csv_writer.writerows(data)
