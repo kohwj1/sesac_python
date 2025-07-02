@@ -38,9 +38,11 @@ class DisplayData(UserGenerator, StoreGenerator, ItemGenerator, OrderGenerator, 
             for i in range(len(rowdata)):
                 current_line.append(f'{self.header[i]}:{rowdata[i]}')
             print(current_line)
+        print(f'{self.table_type} 데이터가 생성되었습니다. 상단의 콘솔 메시지를 확인해주세요.')
     
     def export_csv(self):
         with open(f'export/{self.table_type}.csv','w', newline='', encoding='UTF-8') as file:
             csv_writer = csv.writer(file)
             csv_writer.writerow(self.header)
             csv_writer.writerows(self.data)
+        print(f'{self.table_type} 데이터가 csv로 생성되었습니다. export 폴더를 확인해주세요.')
