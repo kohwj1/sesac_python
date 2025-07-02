@@ -1,6 +1,8 @@
 from generators.table.user_generator import UserGenerator
 from generators.table.store_generator import StoreGenerator
 from generators.table.item_generator import ItemGenerator
+from generators.table.order_generator import OrderGenerator
+from generators.table.orderitem_generator import OrderItemGenerator
 import sys, csv
 
 class UserDisplayData(UserGenerator):
@@ -50,7 +52,36 @@ class ItemDisplayData(ItemGenerator):
             csv_writer = csv.writer(file)
             csv_writer.writerow(['Id','Name','Type','UnitPrice'])
             csv_writer.writerows(data)
+
+class OrderDisplayData(OrderGenerator):
+    def print_data(self, count):
+        data = self.generate_order(count)
+        for order_id, order_at, store_id, user_id in data:
+            print(f'ID:{order_id}', end=',')
+            print(f'OrderAt:{order_at}', end=',')
+            print(f'StoreId:{store_id}', end=',')
+            print(f'UserId:{user_id}')
+    def export_csv(self, count):
+        data = self.generate_order(count)
+        with open('export/order.csv','w', newline='', encoding='UTF-8') as file:
+            csv_writer = csv.writer(file)
+            csv_writer.writerow(['Id','OrderAt','StoreId','UserId'])
+            csv_writer.writerows(data)
             
+class OrderItemDisplayData(OrderItemGenerator):
+    def print_data(self, count):
+        data = self.generate_orderitem(count)
+        for orderitem_id, order_id, item_id in data:
+            print(f'ID:{orderitem_id}', end=',')
+            print(f'OrderId:{order_id}', end=',')
+            print(f'ItemId:{item_id}')
+    def export_csv(self, count):
+        data = self.generate_orderitem(count)
+        with open('export/orderitem.csv','w', newline='', encoding='UTF-8') as file:
+            csv_writer = csv.writer(file)
+            csv_writer.writerow(['Id','OrderId','ItemId'])
+            csv_writer.writerows(data)
+
 #최종 실행
 if __name__ == '__main__':
     gen_arg = sys.argv
@@ -73,11 +104,15 @@ if __name__ == '__main__':
                     store_data.export_csv(count)
                 elif gen_arg[1] == 'item':
                     item_data = ItemDisplayData()
-                    # item_data.print_data()
+                    # item_data.print_data(count)
                     item_data.export_csv(count)
                 elif gen_arg[1] == 'order':
-                    pass
+                    order_data = OrderDisplayData()
+                    # order_data.print_data(count)
+                    order_data.export_csv(count)
                 elif gen_arg[1] == 'orderitem':
-                    pass
+                    orderitem_data = OrderItemDisplayData()
+                    # orderitem_data.print_data(count)
+                    orderitem_data.export_csv(count)
             except ValueError:
                 print('생성 횟수는 숫자로 입력해주세요')
