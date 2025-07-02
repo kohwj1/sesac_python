@@ -13,7 +13,7 @@ class OrderItemGenerator:
         for _ in range(count):
             orderitem_id = self.id_gen.generate_uuid()
             order_id = random.choice(self.order_id.get_uuid('order'))
-            item_id = random.choice(self.order_id.get_uuid('item'))
+            item_id = random.choice(self.item_id.get_uuid('item'))
             orderitems.append((orderitem_id, order_id, item_id))
         return orderitems
     
