@@ -7,10 +7,10 @@ from generators.common.uuid_generator import UuidGenerator
 class UserGenerator:
     def __init__(self):
         self.id_gen = UuidGenerator()
-        self.name_gen = NameGenerator('names.txt')
+        self.name_gen = NameGenerator('static/names.txt')
         self.bday_gen = BirthGenerator()
         self.gender_gen = GenderGenerator()
-        self.address_gen = AddressGenerator('cities.txt')
+        self.address_gen = AddressGenerator('static/cities.txt')
         
     def generate_user(self, count):
         users = []

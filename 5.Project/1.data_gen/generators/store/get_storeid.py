@@ -3,7 +3,7 @@ import pandas
 
 class GetStoreId:
     def get_storeid(self):
-        file = pandas.read_csv(r'C:\Users\user\PycharmProjects\sesac_python\5.Project\1.data_gen\store.csv')
+        file = pandas.read_csv(r'export_csv/store.csv')
         store_id = file['Id']
         return list(store_id)
     

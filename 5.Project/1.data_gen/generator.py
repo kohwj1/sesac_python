@@ -15,7 +15,7 @@ class UserDisplayData(UserGenerator):
             print(f'Address:{address}')
     def export_csv(self, count):
         data = self.generate_user(count)
-        with open('user.csv','w', newline='', encoding='UTF-8') as file:
+        with open('export_csv/user.csv','w', newline='', encoding='UTF-8') as file:
             csv_writer = csv.writer(file)
             csv_writer.writerow(['Id','Name','Gender','Age','Birthdate','Address'])
             csv_writer.writerows(data)
@@ -31,7 +31,7 @@ class StoreDisplayData(StoreGenerator):
             print(f'Address:{store_address}')
     def export_csv(self, count):
         data = self.generate_store(count)
-        with open('store.csv','w', newline='', encoding='UTF-8') as file:
+        with open('export_csv/store.csv','w', newline='', encoding='UTF-8') as file:
             csv_writer = csv.writer(file)
             csv_writer.writerow(['Id','Name','Type','Address'])
             csv_writer.writerows(data)
@@ -46,7 +46,7 @@ class ItemDisplayData(ItemGenerator):
             print(f'UnitPrice:{item_price}')
     def export_csv(self, count):
         data = self.generate_item(count)
-        with open('item.csv','w', newline='', encoding='UTF-8') as file:
+        with open('export_csv/item.csv','w', newline='', encoding='UTF-8') as file:
             csv_writer = csv.writer(file)
             csv_writer.writerow(['Id','Name','Type','UnitPrice'])
             csv_writer.writerows(data)

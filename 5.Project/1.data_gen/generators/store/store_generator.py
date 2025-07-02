@@ -6,8 +6,8 @@ import random
 class StoreGenerator:
     def __init__(self):
         self.id_gen = UuidGenerator()
-        self.storetype_gen = StoreTypeGenerator('store_type.txt')
-        self.address_gen = AddressGenerator('cities.txt')
+        self.storetype_gen = StoreTypeGenerator('static/store_type.txt')
+        self.address_gen = AddressGenerator('static/cities.txt')
         
     def generate_store(self, count):
         stores = []

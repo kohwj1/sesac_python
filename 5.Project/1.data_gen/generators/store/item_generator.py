@@ -5,7 +5,7 @@ import random
 
 class ItemGenerator:
     def __init__(self):
-        self.item_menu = ItemNameGenerator('items.txt')
+        self.item_menu = ItemNameGenerator('static/items.txt')
         self.id_gen = UuidGenerator()
         self.price = PriceGenerator()
         
