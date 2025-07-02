@@ -1,7 +1,6 @@
-from generators.common.uuid_generator import UuidGenerator
-from generators.store.price_generator import PriceGenerator
-from generators.store.itemname_generator import ItemNameGenerator
-import random
+from generators.common.uuid import UuidGenerator
+from generators.store.price import PriceGenerator
+from generators.store.itemname import ItemNameGenerator
 
 class ItemGenerator:
     def __init__(self):

@@ -1,14 +1,14 @@
-from generators.user.name_generator import NameGenerator
-from generators.common.date_generator import DateTimeGenerator
-from generators.user.gender_generator import GenderGenerator
-from generators.common.address_generator import AddressGenerator
-from generators.common.uuid_generator import UuidGenerator
+from generators.user.name import NameGenerator
+from generators.user.gender import GenderGenerator
+from generators.common.date import DateGenerator
+from generators.common.address import AddressGenerator
+from generators.common.uuid import UuidGenerator
 
 class UserGenerator:
     def __init__(self):
         self.id_gen = UuidGenerator()
         self.name_gen = NameGenerator()
-        self.bday_gen = DateTimeGenerator()
+        self.bday_gen = DateGenerator()
         self.gender_gen = GenderGenerator()
         self.address_gen = AddressGenerator()
         

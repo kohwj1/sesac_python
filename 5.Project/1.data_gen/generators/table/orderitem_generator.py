@@ -1,5 +1,5 @@
-from generators.common.uuid_generator import UuidGenerator
-from generators.common.get_data import GetData
+from generators.common.uuid import UuidGenerator
+from generators.common.getData import GetData
 import random
 
 class OrderItemGenerator:

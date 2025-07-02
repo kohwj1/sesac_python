@@ -1,5 +1,4 @@
-from generators.common.get_data import GetData
-import random
+from generators.common.getData import GetData
 
 class NameGenerator(GetData):
     def generate_name(self) -> str:

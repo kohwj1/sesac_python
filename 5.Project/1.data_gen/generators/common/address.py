@@ -1,4 +1,4 @@
-from generators.common.get_data import GetData
+from generators.common.getData import GetData
 import random
 
 class AddressGenerator(GetData):

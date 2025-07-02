@@ -1,6 +1,6 @@
-from generators.common.uuid_generator import UuidGenerator
-from generators.common.get_data import GetData
-from generators.order.orderAt_generator import OrderedAtGenerator
+from generators.common.uuid import UuidGenerator
+from generators.common.getData import GetData
+from generators.order.orderAt import OrderedAtGenerator
 import random
 
 class OrderGenerator:

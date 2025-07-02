@@ -1,7 +1,7 @@
 import random
 import datetime
     
-class DateTimeGenerator:
+class DateGenerator:
     def __init__(self):
         self.year = 1990
         self.month = 1

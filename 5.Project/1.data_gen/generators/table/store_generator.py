@@ -1,9 +1,10 @@
-from generators.store.storetype_generator import StoreTypeGenerator
-from generators.common.address_generator import AddressGenerator
-from generators.common.uuid_generator import UuidGenerator
+from generators.store.storetype import StoreTypeGenerator
+from generators.common.address import AddressGenerator
+from generators.common.uuid import UuidGenerator
+# from generators.common.getData import GetData
 import random
 
-class StoreGenerator:
+class StoreGenerator():
     def __init__(self):
         self.id_gen = UuidGenerator()
         self.storetype_gen = StoreTypeGenerator()
