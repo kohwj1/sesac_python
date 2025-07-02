@@ -10,7 +10,7 @@ class OrderGenerator:
         self.store_id = GetData()
         self.user_id = GetData()
         
-    def generate_order(self, count):
+    def generate_order(self, count:int) -> list:
         orders = []
         for _ in range(count):
             order_id = self.id_gen.generate_uuid()

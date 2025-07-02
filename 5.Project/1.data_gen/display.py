@@ -12,7 +12,7 @@ class DisplayData(UserGenerator, StoreGenerator, ItemGenerator, OrderGenerator, 
     order_header = ['Id','OrderAt','StoreId','UserId']
     orderitem_header = ['Id','OrderId','ItemId']
 
-    def __init__(self, table_type, count):
+    def __init__(self, table_type:str, count:int):
         self.table_type = table_type
         if self.table_type == 'user':
             self.header = DisplayData.user_header

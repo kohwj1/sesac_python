@@ -9,7 +9,7 @@ class ItemGenerator:
         self.id_gen = UuidGenerator()
         self.price = PriceGenerator()
         
-    def generate_item(self, count):
+    def generate_item(self, count:int) -> list:
         items = []
         for _ in range(count):
             item_id = self.id_gen.generate_uuid()

@@ -1,7 +1,7 @@
 import pandas, random
 
 class GetData:
-    def get_uuid(self, type):
+    def get_uuid(self, type:str) -> list:
         if type not in  ['user', 'store', 'item', 'order']:
             print('추출할 수 없는 타입입니다.')
         else:
@@ -13,7 +13,7 @@ class GetData:
                 # print('csv 파일이 없습니다. 해당 csv가 생성되어 있는지 확인해주세요.')
                 pass
     
-    def get_txt(self, file_path) -> list:
+    def get_txt(self, file_path:str) -> list:
         try:
             with open(file_path,'r',encoding='UTF-8') as file:
                 data = file.read().splitlines()

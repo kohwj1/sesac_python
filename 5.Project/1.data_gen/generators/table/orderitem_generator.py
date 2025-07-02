@@ -8,7 +8,7 @@ class OrderItemGenerator:
         self.order_id = GetData()
         self.item_id = GetData()
         
-    def generate_orderitem(self, count):
+    def generate_orderitem(self, count:int) -> list:
         orderitems = []
         for _ in range(count):
             orderitem_id = self.id_gen.generate_uuid()

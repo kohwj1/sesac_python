@@ -12,7 +12,7 @@ class UserGenerator:
         self.gender_gen = GenderGenerator()
         self.address_gen = AddressGenerator()
         
-    def generate_user(self, count):
+    def generate_user(self, count:int) -> list:
         users = []
         for _ in range(count):
             user_id = self.id_gen.generate_uuid()

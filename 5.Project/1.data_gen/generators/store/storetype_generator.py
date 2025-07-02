@@ -1,8 +1,7 @@
 from generators.common.get_data import GetData
-import random
 
 class StoreTypeGenerator(GetData):
-    def generate_storetype(self):
+    def generate_storetype(self) -> str:
         return self.get_rand('static/store_type.txt')
     
 # if __name__ == '__main__':

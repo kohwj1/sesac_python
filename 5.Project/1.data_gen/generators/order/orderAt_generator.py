@@ -3,7 +3,7 @@ from generators.common.date_generator import DateTimeGenerator
 import random
     
 class OrderedAtGenerator:
-    def generate_orderdate(self):
+    def generate_orderdate(self) -> str:
         day = DateTimeGenerator().generate_date('order')
         self.hour = random.randint(0,23)
         self.minute = random.randint(0,59)

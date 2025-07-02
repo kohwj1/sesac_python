@@ -1,8 +1,7 @@
 from generators.common.get_data import GetData
-import random
 
 class ItemNameGenerator(GetData):
-    def generate_itemname(self):
+    def generate_itemname(self) -> str:
         return self.get_rand('static/items.txt')
     
 # if __name__ == '__main__':

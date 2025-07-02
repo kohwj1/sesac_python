@@ -6,7 +6,7 @@ if __name__ == '__main__':
     gen_arg = sys.argv
 
     if len(gen_arg) != 3:
-        print('필수 인자가 누락되었습니다. python generator.py "유형" "건수"로 입력해주세요!')
+        print('필수 인자가 누락되었습니다. python generator.py "테이블종류" "건수"로 입력해주세요!')
     else:
         create_type = ['user', 'store', 'item', 'order', 'orderitem']
         if gen_arg[1] not in create_type:

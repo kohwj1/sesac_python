@@ -9,7 +9,7 @@ class StoreGenerator:
         self.storetype_gen = StoreTypeGenerator()
         self.address_gen = AddressGenerator()
         
-    def generate_store(self, count):
+    def generate_store(self, count:int) -> list:
         stores = []
         for _ in range(count):
             store_id = self.id_gen.generate_uuid()
