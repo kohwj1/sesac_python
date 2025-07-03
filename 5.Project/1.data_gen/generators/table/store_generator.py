@@ -1,7 +1,6 @@
 from generators.store.storetype import StoreTypeGenerator
 from generators.common.address import AddressGenerator
 from generators.common.uuid import UuidGenerator
-# from generators.common.getData import GetData
 import random
 
 class StoreGenerator():

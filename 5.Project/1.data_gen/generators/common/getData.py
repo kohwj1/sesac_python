@@ -1,4 +1,5 @@
-import pandas, random
+import pandas
+import random
 
 class GetData:
     def get_uuid(self, type:str) -> list:
