@@ -1,36 +1,23 @@
-from generators.table.user_generator import UserGenerator
-from generators.table.store_generator import StoreGenerator
-from generators.table.item_generator import ItemGenerator
-from generators.table.order_generator import OrderGenerator
-from generators.table.orderitem_generator import OrderItemGenerator
+from generators.table.user import User
+from generators.table.store import Store
+from generators.table.item import Item
+from generators.table.order import Order
+from generators.table.orderitem import OrderItem
 import csv
 
-class DisplayData(UserGenerator, StoreGenerator, ItemGenerator, OrderGenerator, OrderItemGenerator):
-    user_header = ['Id','Name','Gender','Age','Birthdate','Address']
-    store_header = ['Id','Name','Type','Address']
-    item_header = ['Id','Name','Type','UnitPrice']
-    order_header = ['Id','OrderAt','StoreId','UserId']
-    orderitem_header = ['Id','OrderId','ItemId']
+class DisplayData():
+    header = {'user':['Id','Name','Gender','Age','Birthdate','Address'],
+              'store':['Id','Name','Type','Address'],
+              'item':['Id','Name','Type','UnitPrice'],
+              'order':['Id','OrderAt','StoreId','UserId'],
+              'orderitem': [['Id','OrderId','ItemId']]
+              }
+    instance = {'user':User(), 'store':Store(), 'item':Item(), 'order': Order(), 'orderitem':OrderItem()}
 
     def __init__(self, table_type:str, count:int):
         self.table_type = table_type
-        if self.table_type == 'user':
-            self.header = DisplayData.user_header
-            self.data = UserGenerator().generate_user(count)
-        elif self.table_type == 'store':
-            self.header = DisplayData.store_header
-            self.data = StoreGenerator().generate_store(count)
-        elif self.table_type == 'item':
-            self.header = DisplayData.item_header
-            self.data = ItemGenerator().generate_item(count)
-        elif self.table_type == 'order':
-            self.header = DisplayData.order_header
-            self.data = OrderGenerator().generate_order(count)
-        elif self.table_type == 'orderitem':
-            self.header = DisplayData.orderitem_header
-            self.data = OrderItemGenerator().generate_orderitem(count)
-        else:
-            print('유효하지 않은 테이블 타입입니다.')
+        self.header = DisplayData.header[self.table_type]
+        self.data = DisplayData.instance[table_type].generate(count)
 
     def print_data(self):
         for rowdata in self.data:
@@ -45,4 +32,4 @@ class DisplayData(UserGenerator, StoreGenerator, ItemGenerator, OrderGenerator, 
             csv_writer = csv.writer(file)
             csv_writer.writerow(self.header)
             csv_writer.writerows(self.data)
-        print(f'{self.table_type} 데이터가 csv로 생성되었습니다. export 폴더를 확인해주세요.')
+        print(f'{self.table_type} 데이터가 csv로 생성되었습니다. output 폴더를 확인해주세요.')
