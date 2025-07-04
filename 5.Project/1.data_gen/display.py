@@ -1,23 +1,11 @@
-from generators.table.user import User
-from generators.table.store import Store
-from generators.table.item import Item
-from generators.table.order import Order
-from generators.table.orderitem import OrderItem
+from generators.table.tableType import TableType
 import csv
 
-class DisplayData():
-    header = {'user':['Id','Name','Gender','Age','Birthdate','Address'],
-              'store':['Id','Name','Type','Address'],
-              'item':['Id','Name','Type','UnitPrice'],
-              'order':['Id','OrderAt','StoreId','UserId'],
-              'orderitem': [['Id','OrderId','ItemId']]
-              }
-    instance = {'user':User(), 'store':Store(), 'item':Item(), 'order': Order(), 'orderitem':OrderItem()}
-
+class DisplayData(TableType):
     def __init__(self, table_type:str, count:int):
         self.table_type = table_type
-        self.header = DisplayData.header[self.table_type]
-        self.data = DisplayData.instance[table_type].generate(count)
+        self.header = TableType.instance[self.table_type][0]
+        self.data = TableType.instance[self.table_type][1].generate(count)
 
     def print_data(self):
         for rowdata in self.data:

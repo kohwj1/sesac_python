@@ -1,8 +1,9 @@
 from display import DisplayData
+from generators.table.tableType import TableType
 import sys
 
-
-create_type = ['user', 'store', 'item', 'order', 'orderitem'] #맨 위로
+# TableType.add_type('table_name',tuple([테이블_헤더_리스트],클래스()))
+table_type = list(TableType.instance.keys())
 
 #최종 실행
 if __name__ == '__main__':
@@ -11,8 +12,8 @@ if __name__ == '__main__':
     if len(sys.argv) < 3 or len(sys.argv) > 4:
         print('필수 인자가 누락되었습니다. python main.py "종류" "건수" "출력옵션(생략가능)"으로 입력해주세요!')
     else:
-        if sys.argv[1] not in create_type:
-            print(f'{sys.argv[1]}는 생성 가능한 제너레이터 유형이 아닙니다.\n생성 가능 유형: {create_type}')
+        if sys.argv[1] not in table_type:
+            print(f'{sys.argv[1]}는 생성 가능한 제너레이터 유형이 아닙니다.\n생성 가능 유형: {table_type}')
         else:
             try:
                 count = int(sys.argv[2])
