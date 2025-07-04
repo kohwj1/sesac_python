@@ -41,7 +41,7 @@ class DisplayData(UserGenerator, StoreGenerator, ItemGenerator, OrderGenerator, 
         print(f'{self.table_type} 데이터가 생성되었습니다. 상단의 콘솔 메시지를 확인해주세요.')
     
     def export_csv(self):
-        with open(f'export/{self.table_type}.csv','w', newline='', encoding='UTF-8') as file:
+        with open(f'output/{self.table_type}.csv','w', newline='', encoding='UTF-8') as file:
             csv_writer = csv.writer(file)
             csv_writer.writerow(self.header)
             csv_writer.writerows(self.data)

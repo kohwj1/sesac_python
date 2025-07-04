@@ -12,7 +12,7 @@ class GetData:
                 return list(uuid_list)
             except FileNotFoundError:
                 # print('csv 파일이 없습니다. 해당 csv가 생성되어 있는지 확인해주세요.')
-                pass
+                pass #예외처리 대응 필요
     
     def get_txt(self, file_path:str) -> list:
         try:
@@ -20,7 +20,7 @@ class GetData:
                 data = file.read().splitlines()
             return data
         except FileNotFoundError:
-            pass
+            pass #예외처리 대응 필요
     
     def get_rand(self, file_path) -> str:
         return random.choice(self.get_txt(file_path))
