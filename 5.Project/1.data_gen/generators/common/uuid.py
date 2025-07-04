@@ -1,5 +1,5 @@
 import uuid
 
-class UuidGenerator:
-    def generate_uuid(self):
+class Uuid:
+    def generate(self):
         return uuid.uuid4()
