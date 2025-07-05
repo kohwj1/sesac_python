@@ -6,6 +6,7 @@ from generators.common.uuid import Uuid
 
 class User:
     def __init__(self):
+        self.header = ['Id', 'Name', 'Gender', 'Age', 'Birthday', 'Address']
         self.id_gen = Uuid()
         self.name_gen = Name()
         self.bday_gen = Date()
@@ -22,4 +23,4 @@ class User:
             age = self.bday_gen.generate_age()
             address = self.address_gen.generate()
             users.append((user_id, name, gender, age, birthday, address))
-        return users
+        return users, self.header

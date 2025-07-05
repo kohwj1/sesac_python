@@ -4,6 +4,7 @@ from generators.store.itemname import ItemName
 
 class Item:
     def __init__(self):
+        self.header = ['Id', 'ItemName', 'ItemType', 'UnitPrice']
         self.item_menu = ItemName()
         self.id_gen = Uuid()
         self.price = Price()
@@ -16,7 +17,7 @@ class Item:
             item_type = item_name.split()[1]
             item_price = self.price.generate()
             items.append((item_id, item_name, item_type, item_price))
-        return items
+        return items, self.header
     
 if __name__ == '__main__':
     test_instance = Item()

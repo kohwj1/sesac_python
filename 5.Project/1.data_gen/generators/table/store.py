@@ -3,8 +3,9 @@ from generators.common.address import Address
 from generators.common.uuid import Uuid
 import random
 
-class Store():
+class Store:
     def __init__(self):
+        self.header = ['Id', 'StoreName', 'StoreType', 'Address']
         self.id_gen = Uuid()
         self.storetype_gen = StoreType()
         self.address_gen = Address()
@@ -18,7 +19,7 @@ class Store():
             store_division = store_address.split()[1][:-1]
             store_name = f'{store_type} {store_division}{random.randint(1,9)}호점'
             stores.append((store_id, store_name, store_type, store_address))
-        return stores
+        return stores, self.header
 
 if __name__ == '__main__':
     my_store = Store()

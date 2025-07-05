@@ -7,8 +7,6 @@ table_type = list(TableType.instance.keys())
 
 #최종 실행
 if __name__ == '__main__':
-    print(len(sys.argv))
-
     if len(sys.argv) < 3 or len(sys.argv) > 4:
         print('필수 인자가 누락되었습니다. python main.py "종류" "건수" "출력옵션(생략가능)"으로 입력해주세요!')
     else:
