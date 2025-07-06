@@ -1,12 +1,20 @@
 from display import DisplayData
 from registry import tablelist
 import sys
+import os
+import importlib
 # table 폴더 내 각 모듈을 동적 improt 할 방법?
-from generators.table.orderItem import OrderItem
-from generators.table.user import User
-from generators.table.store import Store
-from generators.table.item import Item
-from generators.table.order import Order
+# from generators.table.orderItem import OrderItem
+# from generators.table.user import User
+# from generators.table.store import Store
+# from generators.table.item import Item
+# from generators.table.order import Order
+
+#generators.table 안에 들어있는 py 파일 모두 임포트하기
+for filename in os.listdir(r'generators/table'):
+    if filename.endswith(".py") and not filename.startswith("__"):
+        module_name = filename[:-3]
+        importlib.import_module(f'generators.table.{module_name}')
 
 table_type = tablelist()
 
