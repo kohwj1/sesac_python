@@ -1,9 +1,14 @@
 from display import DisplayData
-from generators.table.tableType import TableType
+from registry import tablelist
 import sys
+# table 폴더 내 각 모듈을 동적 improt 할 방법?
+from generators.table.orderItem import OrderItem
+from generators.table.user import User
+from generators.table.store import Store
+from generators.table.item import Item
+from generators.table.order import Order
 
-# TableType.add_type('table_name',tuple([테이블_헤더_리스트],클래스()))
-table_type = list(TableType.instance.keys())
+table_type = tablelist()
 
 #최종 실행
 if __name__ == '__main__':
@@ -16,8 +21,6 @@ if __name__ == '__main__':
             try:
                 count = int(sys.argv[2])
                 csv_data = DisplayData(sys.argv[1], count)
-                # csv_data.export_csv()
-                # csv_data.print_data()
                 if len(sys.argv) == 4 and sys.argv[3] == 'console': #실행인자가 4개이고 console이라고 명시한 경우
                     csv_data.print_data()
                 elif len(sys.argv) == 3 or sys.argv[3] == 'csv': #실행인자가 3개(마지막 생략)거나 csv라고 명시한 경우

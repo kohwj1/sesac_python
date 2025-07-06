@@ -1,7 +1,9 @@
 from generators.common.uuid import Uuid
 from generators.common.getData import GetData
 import random
+from registry import register
 
+@register('orderitem')
 class OrderItem:
     def __init__(self):
         self.header = ['Id','OrderId','ItemId']

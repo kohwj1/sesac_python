@@ -1,7 +1,9 @@
 from generators.common.uuid import Uuid
 from generators.store.price import Price
 from generators.store.itemname import ItemName
+from registry import register
 
+@register('item')
 class Item:
     def __init__(self):
         self.header = ['Id', 'ItemName', 'ItemType', 'UnitPrice']

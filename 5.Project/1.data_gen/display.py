@@ -1,10 +1,10 @@
-from generators.table.tableType import TableType
+from registry import get_class
 import csv
-
-class DisplayData(TableType):
+    
+class DisplayData:
     def __init__(self, table_type:str, count:int):
         self.table_type = table_type
-        self.data = TableType.instance[self.table_type].generate(count)
+        self.data = get_class(self.table_type)().generate(count)
         self.header = self.data[1]
 
     def print_data(self):

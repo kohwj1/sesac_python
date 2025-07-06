@@ -3,7 +3,9 @@ from generators.user.gender import Gender
 from generators.common.date import Date
 from generators.common.address import Address
 from generators.common.uuid import Uuid
+from registry import register
 
+@register('user')
 class User:
     def __init__(self):
         self.header = ['Id', 'Name', 'Gender', 'Age', 'Birthday', 'Address']

@@ -2,7 +2,9 @@ from generators.store.storetype import StoreType
 from generators.common.address import Address
 from generators.common.uuid import Uuid
 import random
+from registry import register
 
+@register('store')
 class Store:
     def __init__(self):
         self.header = ['Id', 'StoreName', 'StoreType', 'Address']
