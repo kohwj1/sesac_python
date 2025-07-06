@@ -1,18 +1,14 @@
 .
 ├── display.py
-├── generator.py
-├── export
+├── registry.py
+├── main.py
+├── output
 │   ├── item.csv
 │   ├── order.csv
 │   ├── orderitem.csv
 │   ├── store.csv
 │   └── user.csv
 ├── generators
-│   ├── _practice
-│   │   ├── 1.user.py
-│   │   ├── 2.userclass.py
-│   │   ├── 3.userclassdir.py
-│   │   └── 4.userinput.py
 │   ├── common
 │   │   ├── address.py
 │   │   ├── date.py
@@ -33,7 +29,7 @@
 │   └── user
 │       ├── gender.py
 │       └── name.py
-├── static
+├── data
 │   ├── divisions.txt
 │   ├── family_names.txt
 │   ├── items.txt
