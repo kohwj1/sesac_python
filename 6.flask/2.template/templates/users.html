@@ -11,6 +11,6 @@
     <li>{{user['id']}} - {{user['name']}} ({{user['age']}}세, {{user['phone']}})</li>
     {% endfor %}
     </ul>
-    <a href="{{page_prev}}">Previous</a> | <a href="{{page_next}}">Next</a>
+    {% if page != '' %}<a href="{{page_prev}}">Previous</a> | <a href="{{page_next}}">Next</a>{% endif %}
 </body>
 </html>
