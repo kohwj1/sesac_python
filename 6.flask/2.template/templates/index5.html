@@ -19,18 +19,41 @@
             border-bottom: 1px solid #aaa;
         }
         tr:hover{
-            background: linear-gradient(to right, rgb(193, 229, 255), 80% , rgb(255, 203, 243));
+            background: linear-gradient(to right, rgb(206, 252, 226), 80% , rgb(253, 208, 178));
         }
         td {
             text-align: center;
+        }
+        input {
+            height: 35px;
+            border-radius: 10px;
+            border:1px solid #bbb;
+            padding:5px;
+            margin:10px;
+            width:25%;
+        }
+        #searchBtn {
+            height: 45px;
+            background-color: green;
+            width:10%;
+            color:#eee;
+            font-weight:800;
+        }
+        button {
+            margin-left:20px;
+        }
+        h1 {
+            display: inline;
         }
     </style>
 </head>
 <body>
     <h1>User Information:</h1>
+    <button onclick="location.href = 'http://localhost:5000'">새로고침</button>
     <form>
-        <input name="username" placeholder="이름을 입력하시오">
-        <input name="age" type="number" placeholder="나이를 입력하시오">
+        <input class="inputUi" name="username" placeholder="이름을 입력하시오">
+        <input class="inputUi" name="age" type="number" placeholder="나이를 입력하시오">
+        <input class="inputUi" name="phone" placeholder="휴대폰번호를 입력하시오">
         <input id="searchBtn" type="submit" value="Search">
     </form>
     <table>
