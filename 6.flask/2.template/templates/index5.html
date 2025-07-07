@@ -3,20 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <style>
+        table {
+            width:100%;
+            border-collapse: collapse;
+            margin-top:20px;
+        }
+        th {
+            background-color: #eee;
+        }
+        tr {
+            /* background-color: #eee; */
+            height: 60px;
+            border-top: 1px solid #aaa;
+            border-bottom: 1px solid #aaa;
+        }
+        tr:hover{
+            background: linear-gradient(to right, rgb(193, 229, 255), 80% , rgb(255, 203, 243));
+        }
+        td {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <h1>User Information:</h1>
     <form>
         <input name="username" placeholder="이름을 입력하시오">
-        <input name="age" placeholder="나이를 입력하시오">
+        <input name="age" type="number" placeholder="나이를 입력하시오">
         <input id="searchBtn" type="submit" value="Search">
     </form>
-    <table border="1">
+    <table>
         <tr>
-            <td>Name</td>
-            <td>Age</td>
-            <td>Mobile</td>
-        </tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Mobile</th>
+        </th>
     {% for user in users %}
         <tr>
             <td>{{user['name']}}</td>

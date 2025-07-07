@@ -3,9 +3,11 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 users = [
-    {'name':'Alice', 'age':25, 'mobile':'0**-12**-5**8'},
-    {'name':'Bob', 'age':30, 'mobile':'0**-11**-0**0'},
-    {'name':'Charlie', 'age':35, 'mobile':'0**-12**-9**9'},
+    {'name':'Alice', 'age':25, 'mobile':'050-1111-1111'},
+    {'name':'Alice', 'age':35, 'mobile':'050-5555-5555'},
+    {'name':'Bob', 'age':30, 'mobile':'050-2222-2222'},
+    {'name':'Charlie', 'age':35, 'mobile':'050-3333-3333'},
+    {'name':'Charlie', 'age':30, 'mobile':'050-4444-4444'}
 ]
 
 #이름/나이로 검색하기
@@ -13,8 +15,6 @@ users = [
 def user_search():
     name = request.args.get('username')
     age = request.args.get('age')
-    print(name, age)
-
     result = users
 
     if name and age:
