@@ -13,7 +13,7 @@ def index():
     return jsonify(users)
 
 @app.route('/user/<name>')
-def geet_user_by_name(name):
+def get_user_by_name(name):
     user = None
     # try:
     # age = int(name)

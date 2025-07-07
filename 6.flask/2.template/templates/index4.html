@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>User Information:</h1>
+    <form>
+        <input id="searchInput" name="username" placeholder="Search User">
+        <input id="searchBtn" type="submit" value="Search">
+    </form>
+    <table border="1">
+        <tr>
+            <td>Name</td>
+            <td>Age</td>
+            <td>Mobile</td>
+        </tr>
+    {% for user in users %}
+        <tr id="{{user['name']}}">
+            <td>{{user['name']}}</td>
+            <td>{{user['age']}}</td>
+            <td>{{user['mobile']}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>flask 템플릿 엔진</h1>
+    <p>여기서부터는 Jinja2 템플릿입니다</p>
+    <h2>사용자 목록</h2>   
+    <ul>
+        {% for name in names %}
+        <li>{{name}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

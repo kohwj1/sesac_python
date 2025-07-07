@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>User Information:</h1>
+    <form>
+        <input name="username" placeholder="이름을 입력하시오">
+        <input name="age" placeholder="나이를 입력하시오">
+        <input id="searchBtn" type="submit" value="Search">
+    </form>
+    <table border="1">
+        <tr>
+            <td>Name</td>
+            <td>Age</td>
+            <td>Mobile</td>
+        </tr>
+    {% for user in users %}
+        <tr>
+            <td>{{user['name']}}</td>
+            <td>{{user['age']}}</td>
+            <td>{{user['mobile']}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>
