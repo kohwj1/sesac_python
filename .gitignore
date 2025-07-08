@@ -1,6 +1,7 @@
 .DS_Store
 __pycache__/
 **/uploads/*
+**/static/*
 *.pyc
 *.csv
 .idea/misc.xml
