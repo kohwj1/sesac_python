@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask File Upload</title>
+    <style>
+    .btnDel {
+        width:25px;
+        height:25px;
+        border-radius: 15px;
+        margin-left: 10px;
+        font-size: 0.75em;
+        font-weight: 800;
+        padding: 5px;
+        border: none;
+        background: red;
+        color: #fff;
+    }
+    ul {
+        padding-left: 0;
+    }
+    li {
+        list-style: none;
+        padding: 15px;
+        background-color: #eee;
+        border-radius: 10px;
+        border: 3px dashed #ddd;
+        margin: 10px;
+    }
+    </style>
+</head>
+<body>
+    <h2>파일 목록</h2>
+        <ul>
+            {% for file in filelist%}
+                <!-- onclick에서 컨펌 호출 시, return을 넣지 않으면 창이 닫히면서 무조건 true로 동작하여 취소를 눌러도 href가 요청된다!! 주의 -->
+                <!-- <li>{{file}}<a class="btnDel" href="/delete/{{file}}" onclick="return confirm('정말 삭제하시겠습니까?')">X</a></li> -->
+                 <form action="/delete/{{file}}" method="POST">
+                    <li>{{file}}<button class="btnDel" onclick="return confirm('정말 삭제하시겠습니까?')">X</button></li>
+                 </form>
+            {% endfor %}
+        </ul>
+    <hr>
+    <h2>파일 업로드</h2>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
