@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='cidr.css')}}">
+</head>
+<body>
+    <div id="container">
+        <h3>CIDR 블록 계산 <button id="icoHelp">?</button></h3>
+        <div id="tooltipHelp" style="display:none;">
+            <h5>CIDR이란?</h5>
+            <p>{{description}}</p>
+        </div>
+        <form action="/calculate" method="POST">
+            <input id="addressInput" name="ipaddress" placeholder="IP주소 입력 (예: 192.168.0.0)" value="{{ipaddress}}"> / <input name="blocklength" type="number" min="1" max="32" placeholder="비트 입력" value="{{blocklength}}">
+            <button type="submit">계산하기</button>
+        </form>
+        <p id="msg">{{msg}}</p>
+    </div>
+    <script src="{{url_for('static', filename='cidr.js')}}"></script>
+</body>
+</html>

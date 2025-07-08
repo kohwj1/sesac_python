@@ -1,0 +1,53 @@
+#container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+#tooltipHelp {
+    position: fixed;
+    width:300px;
+    top: 8%;
+    left: 60%;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #ffffff49;
+    backdrop-filter: blur(5px);
+    border:1px solid #eee;
+}
+#icoHelp {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: aliceblue;
+    font-size:0.75em;
+}
+#addressInput {
+    width: 250px;
+}
+body {
+    background-color: #2a2a2a;
+    color:#fff
+}
+input, button {
+    text-align: center;
+    height: 35px;
+    border-radius: 15px;
+    font-size: 1.25em;
+    margin-left:10px;
+    margin-right:10px;
+}
+input::placeholder{
+    font-size:0.75em;
+    color:#ddd;
+}
+button {
+    font-size: 1em;
+    height:41px;
+    border: none;
+    background-color:aliceblue
+}
+form {
+    align-items: center;
+    display: flex;
+}
