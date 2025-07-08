@@ -15,9 +15,12 @@ def index():
 @app.route('/pages/<int:num>')
 def pages(num):
     page = int(num)
+    page_size = 10
     page_prev = f'/pages/{page - 1}'
     page_next = f'/pages/{page + 1}'
-    filtered_users = [user for user in users if users.index(user) // 10 == page - 1]
+    start = page_size * (page - 1)
+    end = start + page_size
+    filtered_users = users[start:end]
     return render_template('users.html', users=filtered_users, page=page, page_prev=page_prev, page_next=page_next)
 
 if __name__ == '__main__':

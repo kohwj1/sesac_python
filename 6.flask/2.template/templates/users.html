@@ -7,10 +7,22 @@
 <body>
     <h1>Page {{page}}</h1>
     <ul>
-    {% for user in users %}
-        <li>{{user['id']}} - {{user['name']}} ({{user['age']}}세, {{user['phone']}})</li>
-    {% endfor %}
+        {% for user in users %}
+            <li>{{user['id']}} - {{user['name']}} ({{user['age']}}세, {{user['phone']}})</li>
+        {% endfor %}
     </ul>
-    {% if page != '' %}<a href="{{page_prev}}">Previous</a> | <a href="{{page_next}}">Next</a>{% endif %}
+    {% if page != '' %}
+        {% if page > 1 %}
+            <a href="{{page_prev}}">Previous</a>
+        {% else %}
+            Previous
+        {% endif %}
+        |
+        {% if users|length > page %}
+            <a href="{{page_next}}">Next</a>
+        {% else %}
+            Next
+        {% endif %}
+    {% endif %}
 </body>
 </html>
