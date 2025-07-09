@@ -25,6 +25,9 @@
 #addressInput {
     width: 250px;
 }
+.alert {
+    background-color: red;
+}
 body {
     background-color: #2a2a2a;
     color:#fff
@@ -50,4 +53,7 @@ button {
 form {
     align-items: center;
     display: flex;
+}
+p {
+    padding: 10px;
 }

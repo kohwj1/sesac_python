@@ -27,11 +27,13 @@ def display_result():
         if is_validip(ip):
             try:
                 ip_range = cal_cidr(ip, suffix)
+                el_class= ""
                 msg = f'IP 범위: {ip_range[0]} ~ {ip_range[1]}'
             except ValueError:
+                el_class = "alert"
                 msg = '[!] 입력 범위 계산 시 호스트 비트가 포함되어 있습니다. 올바른 CIDR을 입력해주세요!'
-            return render_template('cidr.html', msg=msg)
-    return render_template('cidr.html', msg='[!] IP주소와 블록 길이를 올바르게 입력해주세요!')
+            return render_template('cidr.html', el_class=el_class, msg=msg)
+    return render_template('cidr.html', el_class="alert", msg='[!] IP주소와 블록 길이를 올바르게 입력해주세요!')
 
 if __name__ == '__main__':
     app.run(debug=True)

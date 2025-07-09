@@ -9,7 +9,7 @@
     <div id="container">
         <h3>CIDR 블록 계산 <button id="icoHelp">?</button></h3>
         <div id="tooltipHelp" style="display:none;">
-            <h5>CIDR이란?</h5>
+            <h3>CIDR?</h3>
             <p>
                 CIDR IP 주소는 비트 그룹이라고 불리는 두 개의 숫자 그룹으로 구성된다.<br>
                 네트워크 주소와 호스트 식별자로 구성되어 있으며, IP 주소를 세 블록 중 하나로 분류해야 하는 클래스 기반과 달리
@@ -25,8 +25,9 @@
         <form action="/calculate" method="POST">
             <input id="addressInput" name="ipaddress" placeholder="IP주소 입력 (예: 192.168.0.0)" value="{{ipaddress}}"> / <input name="blocklength" type="number" min="1" max="32" placeholder="비트 입력" value="{{blocklength}}">
             <button type="submit">계산하기</button>
+            <button type="reset">다시 입력하기</button>
         </form>
-        <p id="msg">{{msg}}</p>
+        <p class="{{el_class}}" id="msg">{{msg}}</p>
     </div>
     <script src="{{url_for('static', filename='cidr.js')}}"></script>
 </body>
