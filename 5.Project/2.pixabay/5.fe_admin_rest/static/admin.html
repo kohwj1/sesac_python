@@ -2,38 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>마이 API</title>
+    <title>마이 픽사베이 | ADMIN</title>
+    <link rel="stylesheet" href="static/css/admin.css">
 </head>
 <body>
-    <h1>이미지 검색</h1>
-    <form id="searchForm">
-        <input type="text" name="q" id="q" placeholder="검색어 입력" required>
-        <button type="submit">검색</button>
+    <h1>이미지 관리</h1>
+    <a href="/" class="toHome">Home 이동하기</a>
+    <!-- <form action="/api/upload" onsubmit="status_check(e)" name="uploadFileInput" method="POST" enctype="multipart/form-data"> -->
+    <form>
+        <input type="file" name="file" id="uploadFileInput" required>
+        <button type="button" onclick="upload()">등록</button>
     </form>
-    <div id="results">
-        <!-- 결과 표시 -->
-    </div>
-    <script>
-        document.getElementById('searchForm').addEventListener('submit', (e) => {
-            e.preventDefault(); //양식 전송 시 페이지 이동되는 것 막기
-            const q = document.getElementById('q').value;
-            fetch(`/api/search?q=${encodeURIComponent(q)}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    const resultDiv = document.getElementById('results');
-                    resultDiv.innerHTML = '';
-                    if (data.url.length == 0) {
-                        resultDiv.innerHTML = '<p>검색 결과가 없습니다.</p>'
-                    }
-                    else {
-                        for (item of data.url) {
-                            resultDiv.innerHTML += `<img src=${item}>`
-                        }
-                    }
-                })
-
-        })
-    </script>
+    <p id="status"></p>
+    <table>
+        <thead>
+            <tr>
+                <th>미리보기</th>
+                <th>파일명</th>
+                <th>키워드</th>
+                <th>관리</th>
+            </tr>
+        </thead>
+        <tbody id="imageList">
+            <!-- API로 받아온 목록 여기 표시할 예정 -->
+        </tbody>
+    </table>
+    <script src="static/js/admin.js"></script>
 </body>
 </html>

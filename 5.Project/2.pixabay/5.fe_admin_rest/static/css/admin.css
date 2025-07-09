@@ -1,0 +1,17 @@
+        img {
+            width:100px;
+        }
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th {
+            background-color: #eee;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 15px;
+        }
+        .toHome {
+            margin: 10px;
+        }

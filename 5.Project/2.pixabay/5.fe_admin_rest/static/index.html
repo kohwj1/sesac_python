@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>마이 API</title>
+    <link rel="stylesheet" href="static/css/index.css">
 </head>
 <body>
     <h1>이미지 검색</h1>
@@ -28,12 +29,16 @@
                     }
                     else {
                         for (item of data.url) {
-                            resultDiv.innerHTML += `<img src=${item}>`
+                            resultDiv.innerHTML += `
+                            <div class="card">
+                                <img src=${item}>
+                                <p>${item.replace('/static/img/','')}</p>
+                            </div>
+                            `
                         }
                     }
                 })
-
-        })
+            })
     </script>
 </body>
 </html>

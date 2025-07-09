@@ -43,7 +43,7 @@
                     <td>{{item['filename']}}</td>
                     <td>
                         <form action="{{url_for('admin.update_keyword', filename=item['filename'])}}" method="POST">
-                        <input id="newKeyword" name="newKeyword" value="{{item['keyword']}}">
+                        <input name="newKeyword" value="{{item['keyword']}}">
                         <button type="submit" onclick="return confirm('정말 수정하시겠습니까?')">수정</button>
                     </form>
                 </td>
