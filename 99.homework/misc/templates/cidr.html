@@ -10,7 +10,17 @@
         <h3>CIDR 블록 계산 <button id="icoHelp">?</button></h3>
         <div id="tooltipHelp" style="display:none;">
             <h5>CIDR이란?</h5>
-            <p>{{description}}</p>
+            <p>
+                CIDR IP 주소는 비트 그룹이라고 불리는 두 개의 숫자 그룹으로 구성된다.<br>
+                네트워크 주소와 호스트 식별자로 구성되어 있으며, IP 주소를 세 블록 중 하나로 분류해야 하는 클래스 기반과 달리
+                CIDR는 IP 주소 블록을 인터넷 서비스 공급자에게 할당할 수 있다.
+                그런 다음 인터넷 서비스 제공사업자는 할당 받은 블록을 분할하여 고객에게 할당할 수 있다.
+            </p>
+            <p>
+                CIDR 이전에는 A, B, C, D와 같은 클래스 기반을 통해 IP 주소의 범위를 표기하였는데,
+                이 방법을 더 이상 사용하지 않고 새로운 방법이라는 의미에서 CIDR의 명칭에 Classless로 표기되었으며,
+                클래스 대신 CIDR 블록과 서브넷 마스크 형태로 IP 주소의 범위를 표기한다.
+            </p>
         </div>
         <form action="/calculate" method="POST">
             <input id="addressInput" name="ipaddress" placeholder="IP주소 입력 (예: 192.168.0.0)" value="{{ipaddress}}"> / <input name="blocklength" type="number" min="1" max="32" placeholder="비트 입력" value="{{blocklength}}">

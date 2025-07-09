@@ -2,18 +2,6 @@ from flask import Flask, render_template, request
 import re
 import ipaddress
 
-DESCRIPTION = """
-CIDR IP 주소는 비트 그룹이라고 불리는 두 개의 숫자 그룹으로 구성된다.
-네트워크 주소와 호스트 식별자로 구성되어 있으며, IP 주소를 세 블록 중 하나로 분류해야 하는 클래스 기반과 달리
-CIDR는 IP 주소 블록을 인터넷 서비스 공급자에게 할당할 수 있다.
-그런 다음 인터넷 서비스 제공사업자는 할당 받은 블록을 분할하여 고객에게 할당할 수 있다.
-지금 우리가 통신사를 통해 할당 받은 IP 주소가 이런 식으로 할당된 것이다.
-
-CIDR 이전에는 A, B, C, D와 같은 클래스 기반을 통해 IP 주소의 범위를 표기하였는데,
-이 방법을 더 이상 사용하지 않고 새로운 방법이라는 의미에서 CIDR의 명칭에 Classless로 표기되었으며,
-클래스 대신 CIDR 블록과 서브넷 마스크 형태로 IP 주소의 범위를 표기한다.
-"""
-
 def is_validip(ip):
     pattern = re.compile(r'^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|(0|[1-9]\d?))){3}$')
     return bool(pattern.match(ip))
@@ -28,7 +16,7 @@ app = Flask(__name__)
 def home():
     ip = '192.168.0.0'
     suffix = '24'
-    return render_template('cidr.html', ipaddress=ip, blocklength=suffix, description=DESCRIPTION)
+    return render_template('cidr.html', ipaddress=ip, blocklength=suffix)
 
 @app.route('/calculate',methods=['POST'])
 def display_result():
