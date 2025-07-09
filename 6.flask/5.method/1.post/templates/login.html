@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<form action="#" method="POST">  <!-- href=# 인 경우 자기 자신(=빈 페이지)를 가리킴 -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" placeholder="아이디를 입력해주세요">
+    <input type="submit" value="로그인">
+</form>
+{% endblock %}
