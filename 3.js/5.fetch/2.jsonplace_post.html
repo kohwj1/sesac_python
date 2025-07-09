@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>외부 요청</h1>
+    <button id="load">데이터 로딩</button>
+    <div id="result"></div>
+    <script>
+        document.getElementById('load').addEventListener('click', () => {
+            console.log('클릭');
+            fetch('https://jsonplaceholder.typicode.com/posts/1')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('응답 오류')
+                    }
+                    return response.json()
+                .then(data => {
+                    console.log(data);
+                    document.getElementById('result').innerHTML =
+                        `<p><strong>Title:</strong>${data.title}</p>` + 
+                        `<p><strong>Body:</strong>${data.body}</p>`
+                })
+                .catch((error) => {
+                    document.getElementById('result').innerHTML = "게시글 가져오기 실패!"
+                })
+            })
+        })
+    </script>
+</body>
+</html>

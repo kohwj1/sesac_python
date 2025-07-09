@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>마이 픽사베이 | Admin</title>
+    <style>
+        img {
+            width:100px;
+        }
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th {
+            background-color: #eee;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>이미지 관리</h1>
+    <form action="{{url_for('upload')}}", method="POST", enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">등록</button>
+    </form>
+    <p>총 {{images|length}}개의 이미지가 등록되어 있습니다.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>미리보기</th>
+                <th>파일명</th>
+                <th>키워드</th>
+                <th>관리</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in images %}
+                <tr>
+                    <td><img src="/static/img/{{item['filename']}}"></td>
+                    <td>{{item['filename']}}</td>
+                    <td><form action="{{url_for('update_keyword', filename=item['filenamne'])}}" method="POST"><input id="newKeyword" name="newKeyword" value="{{item['keyword']}}"><button type="submit" onclick="return confirm('정말 수정하시겠습니까?')">수정</button></form></td>
+                    <td><form action="{{url_for('delete', filename=item['filename'])}}", method="POST"><button type="submit" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button></form></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

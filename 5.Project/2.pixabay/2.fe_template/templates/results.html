@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>마이 픽사베이</title>
+</head>
+<body>
+    <h2>{{q}}에 대한 검색 결과</h2>
+    <a onclick="history.back()">뒤로가기</a>
+    <div>
+        {% if results %}
+            {% for img in results %}
+                <img src="{{img}}">
+            {% endfor %}
+        {% else %}
+        <p>검색 결과가 없습니다.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

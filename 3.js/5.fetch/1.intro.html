@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>외부 요청</h1>
+    <button id="load">데이터 로딩</button>
+    <div id="result"></div>
+    <script>
+        document.getElementById('load').addEventListener('click', () => {
+            console.log('클릭');
+            //외부 요청 - fetch
+            fetch('http://127.0.0.1:5000/api/search?q=dog')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new error('오류');
+                    }
+                    return response.json() //리턴된 값을 다음에 오는 then에서 정한 변수가 받음
+                })
+                .then(data => {
+                    document.getElementById('result').innerHTML = `<p>${data}</p>`
+                })
+                .catch(error => { //fetch 도중 오류 발생 시 catch구문의 코드가 동작함
+                    console.log('오류 발생:', error)
+                })
+        })
+    </script>
+</body>
+</html>

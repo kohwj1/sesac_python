@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>외부 요청</h1>
+    <input id="userId">
+    <button id="load">검색</button>
+    <div id="result"></div>
+    <script>
+        document.getElementById('load').addEventListener('click', () => {
+            console.log('버튼 클릭');
+            const userId = document.getElementById('userId').value;
+            fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("네트워크 송수신오류")
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log(data);
+                    document.getElementById('result').innerHTML = 
+                        '<p><strong>이름:</strong>' + data.name + '</p>' +
+                        '<p><strong>전화번호:</strong>' + data.phone + '</p>'
+                })
+                .catch((error) => {
+                    document.getElementById('result').innerHTML = "정보를 가져올수 없습니다."
+                })
+        })
+    </script>
+</body>
+</html>

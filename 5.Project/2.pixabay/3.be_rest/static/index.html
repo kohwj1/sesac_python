@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>마이 API</title>
+</head>
+<body>
+    <h1>이미지 검색</h1>
+    <form id="searchForm">
+        <input type="text" name="q" id="q" placeholder="검색어 입력" required>
+        <button type="submit">검색</button>
+    </form>
+    <div id="results">
+        <!-- 결과 표시 -->
+    </div>
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', (e) => {
+            e.preventDefault(); //양식 전송 시 페이지 이동되는 것 막기
+            const q = document.getElementById('q').value;
+            fetch(`/api/search?q=${encodeURIComponent(q)}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    const resultDiv = document.getElementById('results');
+                    resultDiv.innerHTML = '';
+                    if (data.url.length == 0) {
+                        resultDiv.innerHTML = '<p>검색 결과가 없습니다.</p>'
+                    }
+                    else {
+                        for (item of data.url) {
+                            resultDiv.innerHTML += `<img src=${item}>`
+                        }
+                    }
+                })
+
+        })
+    </script>
+</body>
+</html>
