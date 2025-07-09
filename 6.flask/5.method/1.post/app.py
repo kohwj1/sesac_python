@@ -17,14 +17,14 @@ def login():
     if request.method == 'POST':
         user = request.form.get('name')
         print(f'입력된 이름은 {user}')
-        return redirect(url_for('user'), user=user)
+        return redirect(url_for('user', user=user))
         # return render_template('user.html', user=user)
     return render_template('login.html')
 
 @app.route('/user')
 @app.route('/user/<user>')
 def user(user=None):
-    return render_template('user.hmtl', user=user)
+    return render_template('user.html', user=user)
 
 @app.route('/product')
 def product():
