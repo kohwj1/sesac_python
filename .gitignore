@@ -2,8 +2,8 @@
 __pycache__/
 **/uploads/*
 **/static/img/*.jpg
+**/output/*.csv
 *.pyc
-*.csv
 .idea/misc.xml
 .idea/modules.xml
 .idea/sesac_python.iml
