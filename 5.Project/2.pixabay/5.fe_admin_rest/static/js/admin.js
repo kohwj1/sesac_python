@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     fetch('/api/list')
     .then((response) => response.json())
     .then((data) => {
-        const statusArea = document.getElementById('status')
+        const statusArea = document.getElementById('status');
         const imageList = document.getElementById('imageList');
         statusArea.textContent = `총 ${data.length}개의 이미지가 등록되어 있습니다.`
         imageList.innerHTML = '';
