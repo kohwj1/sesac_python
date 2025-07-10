@@ -10,7 +10,7 @@ def get_all_list():
 def delete_todo(idx):
     before_list = get_all_list()
     after_list = [item for item in before_list if item['idx'] != int(idx)]
-    print(after_list) 
+    # print(after_list) 
     
     with open('todo.csv', 'w', encoding='UTF-8', newline='\n') as file:
         csv_writer = csv.writer(file)
