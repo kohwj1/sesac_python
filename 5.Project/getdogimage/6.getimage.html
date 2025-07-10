@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        img {
+            width:350px;
+        }
+    </style>
+</head>
+<body>
+    <div id="sec1">
+        <button id="reqImg">강아지 랜덤 소환</button>
+    </div>
+    <div id="sec2">
+        <select id="selectBreed">
+        </select>
+        <select id="subBreed">
+            <option value="">서브 품종</option>
+        </select>
+        <button id="searchByBreed">선택한 품종의 사진 보기</button>
+    </div>
+    <div id="results"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectBreed = document.getElementById('selectBreed');
+            fetch('https://dog.ceo/api/breeds/list/all')
+                .then((response) => response.json())
+                .then((data) => {
+                    const breedList = Object.keys(data.message) ;
+                    // console.log(breedList);
+                    for (breed of breedList) {
+                        selectBreed.innerHTML += `<option value='${breed}'>${breed}</option>`
+                    }
+                })
+        });
+
+        document.getElementById('reqImg').addEventListener('click', () => {
+            fetch('https://dog.ceo/api/breeds/image/random')
+                .then((response) => response.json())
+                .then((data) => {
+                    document.getElementById('results').innerHTML = `<img src=${data.message}>`
+                })
+        })
+
+        document.getElementById('selectBreed').addEventListener('change', () => {
+            const breed = document.getElementById('selectBreed').value;
+            fetch(`https://dog.ceo/api/breed/${breed}/list`)
+                .then((response) => {
+                    document.getElementById('subBreed').innerHTML = ``
+                    return response.json()
+                })
+                .then((data) => {
+                    const subList = data.message ;
+                    // console.log(subList);
+                    if (subList.length === 0) {
+                        document.getElementById('subBreed').innerHTML = `<option value='' disabled>하위 품종이 없습니다.</option>`
+                    } else {
+                    for (sub of subList) {
+                        document.getElementById('subBreed').innerHTML += `<option value='${sub}'>${sub}</option>`
+                    }}
+                })
+        })
+
+        document.getElementById('searchByBreed').addEventListener('click', () => {
+            const breed = document.getElementById('selectBreed').value;
+            const subBreed = document.getElementById('subBreed').value;
+
+            if (subBreed != undefined) {
+                searchTarget = breed;
+            } else {
+                searchTarget = subBreed;
+            }
+
+            fetch(`https://dog.ceo/api/breed/${searchTarget}/images`)
+                .then((response) => response.json())
+                .then((data) => {
+                    target_num = Math.floor(Math.random() * data.message.length);
+                    // console.log(target_num);
+                    document.getElementById('results').innerHTML = `<img src=${data.message[target_num]}>`
+                })
+            })
+    </script>
+</body>
+</html>
