@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ToDo List</title>
+    <title>(api) ToDo List</title>
     <style>
         body {
             background-color: #eee;
@@ -115,10 +115,10 @@
                         if (item.status == 'checked') {
                             textDecoration = 'line-through'
                         }
-                        todoList.innerHTML += `<li id=${item.idx}>
+                        todoList.innerHTML += `<li id=__${item.idx}>
                             <div class="lineContainer">
-                                <input type="checkbox" id="__${item.idx}" ${item.status}>
-                                <label onclick="switchItem(${item.idx})" for="__${item.idx}" style="text-decoration:${textDecoration};">${item.content}</label>
+                                <input type="checkbox" id="${item.idx}" ${item.status} onclick="switchItem(${item.idx})">
+                                <label for="${item.idx}" style="text-decoration:${textDecoration};">${item.content}</label>
                             </div>
                             <a href="#" onclick="deleteItem(${item.idx})">X</a></li>`
                     }
@@ -126,7 +126,7 @@
         })
 
         function switchItem(idx) {
-            const label = document.getElementById(`__${idx}`).nextElementSibling;
+            const label = document.getElementById(`${idx}`).nextElementSibling;
             if (label.style.textDecoration == 'line-through') {
                 label.style.textDecoration = 'none'
             } else {
