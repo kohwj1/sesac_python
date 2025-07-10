@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, send_file
-from common import add_todo, delete_todo, get_all_list
+from common import add_todo, delete_todo, get_all_list, switch_todo
 
 app = Flask(__name__)
 
@@ -17,6 +17,13 @@ def item_add():
     todo = request.form.get('userInput')
     add_todo(todo)
     return jsonify({'result':0,'data':get_all_list()})
+
+
+@app.route('/api/update/<idx>', methods=['PUT'])
+def item_update(idx):
+    switch_todo(idx)
+    return jsonify({'result':0,'data':get_all_list()})
+
 
 @app.route('/api/delete/<idx>', methods=['DELETE'])
 def item_delete(idx):

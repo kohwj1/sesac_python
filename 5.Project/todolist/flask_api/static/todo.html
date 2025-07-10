@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ToDo List</title>
+    <title>(api) ToDo List</title>
     <style>
         body {
             background-color: #eee;
@@ -39,8 +39,8 @@
             background: red;
             color: #fff;
             font-size: 0.7em;
-            width: 10px;
-            height: 10px;
+            width: 20px;
+            height: 20px;
             text-decoration: none;
             border-radius: 5px;
             text-align: center;
@@ -48,10 +48,20 @@
         form {
             width: 100%;
         }
+        label {
+            margin-left:10px;
+        }
+        label:checked {
+            text-decoration-line: line-through;
+        }
         .container {
             display: flex;
             align-items: center;
             justify-content: space-evenly;
+        }
+        .lineContainer {
+            display: flex;
+            align-items: center;
         }
         .btnAdd {
             border-radius: 20px;
@@ -78,8 +88,8 @@
             color:#fff;
         }
         [type=checkbox] {
-            width:15px;
-            height:15px;
+            width:20px;
+            height:20px;
             accent-color: rgb(94, 156, 125);
         }
     </style>
@@ -101,10 +111,31 @@
                 .then((response) => response.json())
                 .then((data) => {
                     for (item of data.data) {
-                        todoList.innerHTML += `<li id=${item.idx}>${item.content}<a href="#" onclick="deleteItem(${item.idx})">X</a></li>`
+                        let textDecoration = 'none'
+                        if (item.status == 'checked') {
+                            textDecoration = 'line-through'
+                        }
+                        todoList.innerHTML += `<li id=__${item.idx}>
+                            <div class="lineContainer">
+                                <input type="checkbox" id="${item.idx}" ${item.status} onclick="switchItem(${item.idx})">
+                                <label for="${item.idx}" style="text-decoration:${textDecoration};">${item.content}</label>
+                            </div>
+                            <a href="#" onclick="deleteItem(${item.idx})">X</a></li>`
                     }
                 })
         })
+
+        function switchItem(idx) {
+            const label = document.getElementById(`${idx}`).nextElementSibling;
+            if (label.style.textDecoration == 'line-through') {
+                label.style.textDecoration = 'none'
+            } else {
+                label.style.textDecoration = 'line-through'
+            }
+            fetch(`http://localhost:5000/api/update/${idx}`, {
+                    method:'PUT',
+                })
+        };
 
         function addItem() {
             if (inputBox.value.length > 0) {
