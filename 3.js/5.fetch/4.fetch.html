@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .error {
+            color:red;
+        }
+        .success {
+            color:green;
+        }
+    </style>
+</head>
+<body>
+    <button id="load">로딩</button>
+    <div id="result">
+        <!-- 여기에 응답 뿌리기 -->
+    </div>
+    <script>
+        const loadBtn = document.getElementById('load');
+        const resultDiv = document.getElementById('result')
+        loadBtn.addEventListener('click', () => {
+            console.log('버튼클릭');
+            fetch('http://127.0.0.1:5000/data')
+                .then((response) => {
+                    console.log(response)
+                    if (!response.ok) {
+                        throw new Error('통신 중 오류 발생');
+                    }
+                    // return response.text()  여기서 리턴한 값은 다음 then으로 넘어감
+                    return response.json()  //여기서 리턴한 값은 다음 then으로 넘어감
+                })
+                .then((data) => {
+                    // console.log(data);
+                    if (data.result === 0) {   // 예전 방식 (또는 status를 무조건 200으로 내리고 body내용으로 구분하는 경우)
+                        resultDiv.classList.add('success');
+                    } else {
+                        resultDiv.classList.add('error');
+                    }
+                    resultDiv.innerHTML = data.message
+                })
+                .catch((error) => {
+                    resultDiv.classList.add('error');
+                    resultDiv.innerHTML = '통신 중 오류가 발생했습니다.'
+                })
+            console.log('조회끝')
+        })
+    </script>    
+</body>
+</html>

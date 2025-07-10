@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #container {
+            display:flex;
+            justify-content: space-evenly;
+        }
+        button {
+            width:200px;
+            height:200px;
+            font-size:3em;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <button id="create">C</button>
+        <button id="read">R</button>
+        <button id="update">U</button>
+        <button id="delete">D</button>
+    </div>
+    <div id="result"></div>
+    <script>
+        document.getElementById('read').addEventListener('click', () => {
+            console.log('버튼 클릭 시작');
+            fetch('https://jsonplaceholder.typicode.com/posts/1')
+                .then((response) => response.json())
+                .then((json) => {
+                    document.getElementById('result').innerText = JSON.stringify(json) //JSON.stringfy:json 객체를 문자열로 변환하는 함수
+                })
+            console.log('fetch 이후');
+        });
+
+        document.getElementById('create').addEventListener('click', () => {
+            const new_data = {title:'제목제목', body:'여기에 본문 입력', userId:5}
+            fetch('https://jsonplaceholder.typicode.com/posts', {
+                method:'POST',
+                header: {
+                    'content-type':'application/json',
+                    'charset':'UTF-8'
+                },
+                body:JSON.stringify(new_data)
+            })
+                .then((response) => response.json())
+                .then((json) => {
+                    document.getElementById('result').innerText = JSON.stringify(json) //JSON.stringfy:json 객체를 문자열로 변환하는 함수
+                })
+            console.log('fetch 이후');
+        })
+
+        document.getElementById('update').addEventListener('click', () => {
+            const new_data = {title:'제목 수정', body:'수정한 본문', userId:5}
+            fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                method:'PUT',
+                header: {
+                    'content-type':'application/json',
+                    'charset':'UTF-8'
+                },
+                body:JSON.stringify(new_data)
+            })
+                .then((response) => response.json())
+                .then((json) => {
+                    document.getElementById('result').innerText = JSON.stringify(json) //JSON.stringfy:json 객체를 문자열로 변환하는 함수
+                })
+            console.log('fetch 이후');
+        })
+
+        document.getElementById('delete').addEventListener('click', () => {
+            fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                method:'DELETE'
+            })
+                .then((response) => response.json())
+                .then((json) => {
+                    document.getElementById('result').innerText = JSON.stringify(json) //JSON.stringfy:json 객체를 문자열로 변환하는 함수
+                })
+            console.log('fetch 이후');
+        })
+    </script>    
+</body>
+</html>
