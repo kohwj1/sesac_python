@@ -5,14 +5,36 @@
     <title>Document</title>
     <style>
         img {
-            width:350px;
+            box-sizing: border-box;
+            border: 30px solid #fff;
+            filter: drop-shadow(2px 4px 6px black);
+            rotate: 5deg;
+        }
+        div {
+            display: flex;
+            justify-content: center;
+        }
+        select, #searchByBreed, #reqImg {
+            height: 30px;
+            min-width: 250px;
+            margin: 5px;
+            border-radius: 10px;
+        }
+        button {
+            border:none;
+            background-color:rgb(43, 120, 100);
+            color:#fff;
+            font-weight: 700;
+
+        }
+        #results {
+            height: 450px;
+            margin: 20px;
+            padding: 20px;
         }
     </style>
 </head>
 <body>
-    <div id="sec1">
-        <button id="reqImg">강아지 랜덤 소환</button>
-    </div>
     <div id="sec2">
         <select id="selectBreed">
         </select>
@@ -22,6 +44,9 @@
         <button id="searchByBreed">선택한 품종의 사진 보기</button>
     </div>
     <div id="results"></div>
+    <div id="sec1">
+        <button id="reqImg">강아지 랜덤 소환</button>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const selectBreed = document.getElementById('selectBreed');
@@ -55,7 +80,7 @@
                     const subList = data.message ;
                     // console.log(subList);
                     if (subList.length === 0) {
-                        document.getElementById('subBreed').innerHTML = `<option value='' disabled>하위 품종이 없습니다.</option>`
+                        document.getElementById('subBreed').innerHTML = `<option value='' disabled>하위 카테고리가 없습니다.</option>`
                     } else {
                     for (sub of subList) {
                         document.getElementById('subBreed').innerHTML += `<option value='${sub}'>${sub}</option>`
@@ -66,19 +91,18 @@
         document.getElementById('searchByBreed').addEventListener('click', () => {
             const breed = document.getElementById('selectBreed').value;
             const subBreed = document.getElementById('subBreed').value;
-
-            if (subBreed != undefined) {
-                searchTarget = breed;
+            let searchTarget;
+            if (subBreed) {
+                searchTarget = `${breed}/${subBreed}`;
             } else {
-                searchTarget = subBreed;
+                searchTarget = breed;
             }
+            console.log(breed,subBreed,searchTarget);
 
-            fetch(`https://dog.ceo/api/breed/${searchTarget}/images`)
+            fetch(`https://dog.ceo/api/breed/${searchTarget}/images/random`)
                 .then((response) => response.json())
                 .then((data) => {
-                    target_num = Math.floor(Math.random() * data.message.length);
-                    // console.log(target_num);
-                    document.getElementById('results').innerHTML = `<img src=${data.message[target_num]}>`
+                    document.getElementById('results').innerHTML = `<img src=${data.message}>`
                 })
             })
     </script>
