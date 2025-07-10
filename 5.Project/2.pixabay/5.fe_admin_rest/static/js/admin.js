@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
 })
 
 function upload() {
+    if (document.getElementById('uploadFileInput').files.length == 0) {
+        alert('첨부할 파일을 선택해주세요')
+    } else {
     const file = document.getElementById('uploadFileInput').files[0];
     const filedata = new FormData();
     filedata.append('file', file);
@@ -50,7 +53,7 @@ function upload() {
     .catch((error) => {
         console.log(error)
     });
-}
+}}
 
 function update_keyword(target) {
     if (confirm('정말로 수정하시겠습니까?')) {
