@@ -12,3 +12,4 @@ SELECT ii.InvoiceID, COUNT(ii.InvoiceLineID) AS LineCount FROM invoice_items ii 
 SELECT i.InvoiceLineID, t.Name FROM invoice_items i JOIN tracks t WHERE i.TrackId = t.TrackId;
 SELECT i.InvoiceLineID, t.Name, a.Name FROM invoice_items i JOIN tracks t JOIN albums al JOIN artists a WHERE i.TrackId = t.TrackId AND t.AlbumId = al.AlbumId AND al.ArtistId = a.ArtistId GROUP BY i.InvoiceLineID;
 SELECT BillingCountry, COUNT(*) AS InvoiceCount FROM invoices GROUP BY BillingCountry;
+Hi!
