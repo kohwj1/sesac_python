@@ -4,7 +4,7 @@ def get_all_list():
     with open('todo.csv', 'r', encoding='UTF-8') as file:
         csv_reader = csv.reader(file)
         my_todolist = [{'idx':int(row[0]), 'status':row[1], 'content':row[2]} for row in csv_reader]
-        my_todolist.sort(key=lambda x: x['idx'])
+        my_todolist.sort(key=lambda x: (x['status'], x['idx']))
     return my_todolist
 
 def delete_todo(idx):
