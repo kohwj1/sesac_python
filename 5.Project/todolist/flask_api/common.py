@@ -19,7 +19,7 @@ def delete_todo(idx):
     return True
 
 def add_todo(content):
-    new_idx = int(get_all_list()[-1]['idx']) + 1
+    new_idx = max([int(i['idx']) for i in get_all_list()]) + 1
     with open('todo.csv', 'a', encoding='UTF-8', newline='') as file:
         csv_writer = csv.writer(file)
         csv_writer.writerow([new_idx, '', content])
