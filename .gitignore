@@ -4,6 +4,7 @@ __pycache__/
 **/static/img/*.jpg
 **/output/*.csv
 *.pyc
+*.db
 .idea/misc.xml
 .idea/modules.xml
 .idea/sesac_python.iml
