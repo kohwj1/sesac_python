@@ -1,7 +1,7 @@
-SELECT CONCAT(FirstName, ' ', LastName) FullName, CustomerId, Country from customers WHERE Country != 'USA';
-SELECT * from customers WHERE Country = 'Brazil';
+SELECT CONCAT(FirstName, ' ', LastName) FullName, CustomerId, Country FROM customers WHERE Country != 'USA';
+SELECT * FROM customers WHERE Country = 'Brazil';
 SELECT CONCAT(c.FirstName, ' ', c.LastName) AS FullName, c.CustomerId, i.InvoiceID, i.InvoiceDate, i.BillingCountry FROM customers c JOIN invoices i WHERE c.Country = 'Brazil';
-SELECT CONCAT(FirstName, ' ', LastName) AS FullName, Title from employees WHERE Title LIKE 'Sales%';
+SELECT CONCAT(FirstName, ' ', LastName) AS FullName, Title FROM employees WHERE Title LIKE 'Sales%';
 SELECT DISTINCT BillingCountry FROM invoices;
 SELECT CONCAT(e.FirstName, ' ', e.LastName) AS AgentName, i.InvoiceId FROM invoices i JOIN customers c JOIN employees e WHERE e.EmployeeId = c.SupportRepid AND c.CustomerId = i.CustomerId;
 SELECT i.Total, CONCAT(c.FirstName, ' ', c.LastName) AS CustomerName, c.Country, CONCAT(e.FirstName, ' ', e.LastName) AS EmployeeName FROM invoices i JOIN customers c JOIN employees e WHERE i.CustomerId = c.CustomerId AND c.SupportRepid = e.EmployeeId;
@@ -12,4 +12,7 @@ SELECT ii.InvoiceID, COUNT(ii.InvoiceLineID) AS LineCount FROM invoice_items ii 
 SELECT i.InvoiceLineID, t.Name FROM invoice_items i JOIN tracks t WHERE i.TrackId = t.TrackId;
 SELECT i.InvoiceLineID, t.Name, a.Name FROM invoice_items i JOIN tracks t JOIN albums al JOIN artists a WHERE i.TrackId = t.TrackId AND t.AlbumId = al.AlbumId AND al.ArtistId = a.ArtistId GROUP BY i.InvoiceLineID;
 SELECT BillingCountry, COUNT(*) AS InvoiceCount FROM invoices GROUP BY BillingCountry;
-Hi!
+SELECT p.Name, count(*) as ListCount FROM playlists p JOIN playlist_track pt JOIN tracks t WHERE p.PlaylistId = pt.PlaylistId AND pt.TrackId = t.TrackId GROUP BY p.Name;
+SELECT t.Name, m.Name, g.Name FROM media_types m JOIN tracks t JOIN genres g WHERE m.MediaTypeId = t.MediaTypeId AND t.GenreId = g.GenreId;
+SELECT i.InvoiceId, COUNT(*) AS LineCount from invoice_items ii JOIN invoices i where i.InvoiceId = ii.InvoiceId group by i.InvoiceId;
+SELECT CONCAT(e.FirstName,' ', e.LastName) AS EmployeeName, SUM(i.Total) FROM invoices i JOIN customers c JOIN employees e WHERE c.SupportRepId = e.EmployeeId GROUP BY EmployeeName;
