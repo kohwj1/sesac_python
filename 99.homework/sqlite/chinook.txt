@@ -1,18 +1,206 @@
-SELECT CONCAT(FirstName, ' ', LastName) FullName, CustomerId, Country FROM customers WHERE Country != 'USA';
-SELECT * FROM customers WHERE Country = 'Brazil';
-SELECT CONCAT(c.FirstName, ' ', c.LastName) AS FullName, c.CustomerId, i.InvoiceID, i.InvoiceDate, i.BillingCountry FROM customers c JOIN invoices i WHERE c.Country = 'Brazil';
-SELECT CONCAT(FirstName, ' ', LastName) AS FullName, Title FROM employees WHERE Title LIKE 'Sales%';
+#1 
+SELECT CONCAT(FirstName, ' ', LastName) FullName, CustomerId, Country
+FROM customers
+WHERE Country != 'USA';
+
+#2
+SELECT * FROM customers
+WHERE Country = 'Brazil';
+
+#3
+SELECT CONCAT(c.FirstName, ' ', c.LastName) AS FullName, c.CustomerId, i.InvoiceID, i.InvoiceDate, i.BillingCountry
+FROM customers c JOIN invoices i
+WHERE c.Country = 'Brazil';
+
+#4
+SELECT CONCAT(FirstName, ' ', LastName) AS FullName, Title
+FROM employees
+WHERE Title LIKE 'Sales%';
+
+#5
 SELECT DISTINCT BillingCountry FROM invoices;
-SELECT CONCAT(e.FirstName, ' ', e.LastName) AS AgentName, i.InvoiceId FROM invoices i JOIN customers c JOIN employees e WHERE e.EmployeeId = c.SupportRepid AND c.CustomerId = i.CustomerId;
-SELECT i.Total, CONCAT(c.FirstName, ' ', c.LastName) AS CustomerName, c.Country, CONCAT(e.FirstName, ' ', e.LastName) AS EmployeeName FROM invoices i JOIN customers c JOIN employees e WHERE i.CustomerId = c.CustomerId AND c.SupportRepid = e.EmployeeId;
-SELECT strftime('%Y', InvoiceDate) AS Year, COUNT(*) FROM invoices WHERE Year='2009' OR Year='2011' GROUP BY Year;
-SELECT strftime('%Y', i.InvoiceDate) AS Year, SUM(ii.UnitPrice * ii.Quantity) AS TotalSales FROM invoices i JOIN invoice_items ii WHERE i.InvoiceID = ii.InvoiceID GROUP BY Year;
-SELECT COUNT(ii.InvoiceLineID) FROM invoice_items ii JOIN invoices i WHERE i.InvoiceId=37;
-SELECT ii.InvoiceID, COUNT(ii.InvoiceLineID) AS LineCount FROM invoice_items ii JOIN invoices i WHERE i.InvoiceId = ii.InvoiceId GROUP BY ii.InvoiceId;
-SELECT i.InvoiceLineID, t.Name FROM invoice_items i JOIN tracks t WHERE i.TrackId = t.TrackId;
-SELECT i.InvoiceLineID, t.Name, a.Name FROM invoice_items i JOIN tracks t JOIN albums al JOIN artists a WHERE i.TrackId = t.TrackId AND t.AlbumId = al.AlbumId AND al.ArtistId = a.ArtistId GROUP BY i.InvoiceLineID;
-SELECT BillingCountry, COUNT(*) AS InvoiceCount FROM invoices GROUP BY BillingCountry;
-SELECT p.Name, count(*) as ListCount FROM playlists p JOIN playlist_track pt JOIN tracks t WHERE p.PlaylistId = pt.PlaylistId AND pt.TrackId = t.TrackId GROUP BY p.Name;
-SELECT t.Name, m.Name, g.Name FROM media_types m JOIN tracks t JOIN genres g WHERE m.MediaTypeId = t.MediaTypeId AND t.GenreId = g.GenreId;
-SELECT i.InvoiceId, COUNT(*) AS LineCount from invoice_items ii JOIN invoices i where i.InvoiceId = ii.InvoiceId group by i.InvoiceId;
-SELECT CONCAT(e.FirstName,' ', e.LastName) AS EmployeeName, SUM(i.Total) FROM invoices i JOIN customers c JOIN employees e WHERE c.SupportRepId = e.EmployeeId GROUP BY EmployeeName;
+
+#6
+SELECT CONCAT(e.FirstName, ' ', e.LastName) AS AgentName, i.InvoiceId
+FROM invoices i
+JOIN customers c JOIN employees e
+WHERE e.EmployeeId = c.SupportRepid AND c.CustomerId = i.CustomerId;
+
+#7
+SELECT i.Total, CONCAT(c.FirstName, ' ', c.LastName) AS CustomerName, c.Country, CONCAT(e.FirstName, ' ', e.LastName) AS EmployeeName
+FROM invoices i
+JOIN customers c JOIN employees e
+WHERE i.CustomerId = c.CustomerId AND c.SupportRepid = e.EmployeeId;
+
+#8
+SELECT strftime('%Y', InvoiceDate) AS Year, COUNT(*) FROM invoices
+WHERE Year='2009' OR Year='2011'
+GROUP BY Year;
+
+#9
+SELECT strftime('%Y', i.InvoiceDate) AS Year, SUM(ii.UnitPrice * ii.Quantity) AS TotalSales
+FROM invoices i
+JOIN invoice_items ii
+WHERE i.InvoiceID = ii.InvoiceID
+GROUP BY Year;
+
+#10
+SELECT COUNT(ii.InvoiceLineID)
+FROM invoice_items ii
+JOIN invoices i
+WHERE i.InvoiceId=37;
+
+#11
+SELECT ii.InvoiceID, COUNT(ii.InvoiceLineID) AS LineCount
+FROM invoice_items ii
+JOIN invoices i
+WHERE i.InvoiceId = ii.InvoiceId
+GROUP BY ii.InvoiceId;
+
+#12
+SELECT i.InvoiceLineID, t.Name
+FROM invoice_items i
+JOIN tracks t
+WHERE i.TrackId = t.TrackId;
+
+#13
+SELECT i.InvoiceLineID, t.Name, a.Name
+FROM invoice_items i
+JOIN tracks t
+JOIN albums al
+JOIN artists a
+WHERE i.TrackId = t.TrackId AND t.AlbumId = al.AlbumId AND al.ArtistId = a.ArtistId
+GROUP BY i.InvoiceLineID;
+
+#14
+SELECT BillingCountry, COUNT(*) AS InvoiceCount
+FROM invoices
+GROUP BY BillingCountry;
+
+#15
+SELECT p.Name, count(*) as ListCount
+FROM playlists p
+JOIN playlist_track pt
+JOIN tracks t
+WHERE p.PlaylistId = pt.PlaylistId AND pt.TrackId = t.TrackId
+GROUP BY p.Name;
+
+#16
+SELECT t.Name, m.Name, g.Name
+FROM media_types m
+JOIN tracks t
+JOIN genres g
+WHERE m.MediaTypeId = t.MediaTypeId AND t.GenreId = g.GenreId;
+
+#17
+SELECT i.InvoiceId, COUNT(*) AS LineCount
+FROM invoice_items ii
+JOIN invoices i
+WHERE i.InvoiceId = ii.InvoiceId
+GROUP BY i.InvoiceId;
+
+#18
+SELECT CONCAT(e.FirstName,' ', e.LastName) AS EmployeeName, SUM(i.Total)
+FROM invoices i
+JOIN customers c
+JOIN employees e
+WHERE c.SupportRepId = e.EmployeeId
+GROUP BY EmployeeName;
+
+#19
+SELECT CONCAT(e.FirstName,' ', e.LastName) AS EmployeeName, SUM(i.Total) AS TotalSales
+FROM invoices i
+JOIN customers c ON c.CustomerId = i.CustomerId
+JOIN employees e ON c.SupportRepId = e.EmployeeId
+WHERE i.InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31' 
+GROUP BY EmployeeName HAVING TotalSales = (
+
+SELECT MAX(sales)
+FROM (SELECT SUM(i2.Total) AS sales
+FROM invoices i2
+JOIN customers c2 ON c2.CustomerId = i2.CustomerId
+JOIN employees e2 ON c2.SupportRepId = e2.EmployeeId
+WHERE i2.InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31'
+GROUP BY CONCAT(e2.FirstName,' ', e2.LastName)
+));
+
+
+#20
+SELECT CONCAT(e.FirstName,' ', e.LastName) AS EmployeeName, SUM(i.Total) AS TotalSales
+FROM invoices i
+JOIN customers c ON c.CustomerId = i.CustomerId
+JOIN employees e ON c.SupportRepId = e.EmployeeId
+GROUP BY EmployeeName HAVING TotalSales = (
+    SELECT MAX(sales)
+    FROM (SELECT SUM(i2.Total) AS sales
+    FROM invoices i2
+    JOIN customers c2 ON c2.CustomerId = i2.CustomerId
+    JOIN employees e2 ON c2.SupportRepId = e2.EmployeeId
+    GROUP BY CONCAT(e2.FirstName,' ', e2.LastName)
+    ));
+
+#21
+SELECT CONCAT(e.FirstName, ' ', e.LastName) AS EmployeeName, COUNT(*) AS CustomerCount
+FROM customers c JOIN employees e ON c.SupportRepId = e.EmployeeId
+GROUP BY EmployeeName;
+
+#22
+SELECT BillingCountry, SUM(Total) AS TotalPerCountry FROM invoices GROUP BY BillingCountry;
+
+#23
+SELECT BillingCountry, SUM(Total) AS TotalPerCountry FROM invoices GROUP BY BillingCountry
+HAVING TotalPerCountry = (SELECT MAX(countrytotal) FROM (
+    SELECT BillingCountry, SUM(Total) AS countrytotal
+    FROM invoices
+    GROUP BY BillingCountry
+    )
+);
+
+#24
+SELECT t.Name, COUNT(ii.TrackId) AS PurchaseCount
+FROM invoices i
+JOIN invoice_items ii ON i.InvoiceId = ii.InvoiceId
+JOIN tracks t ON ii.TrackId = t.TrackId
+WHERE i.InvoiceDate BETWEEN '2013-01-01' AND '2013-12-31'
+GROUP BY t.Name
+HAVING PurchaseCount = (SELECT MAX(pCount) FROM (
+    SELECT t2.Name, COUNT(ii2.TrackId) AS pCount
+    FROM invoices i2
+    JOIN invoice_items ii2 ON i2.InvoiceId = ii2.InvoiceId
+    JOIN tracks t2 ON ii2.TrackId = t2.TrackId
+    WHERE i2.InvoiceDate BETWEEN '2013-01-01' AND '2013-12-31'
+    GROUP BY t2.Name
+    )
+);
+
+#25
+SELECT t.Name, COUNT(ii.TrackId) AS PurchaseCount
+FROM invoice_items ii JOIN tracks t ON ii.TrackId = t.TrackId
+GROUP BY t.Name
+ORDER BY PurchaseCount DESC
+LIMIT 5;
+
+#26
+SELECT a.Name, COUNT(ii.TrackId) AS PurchaseCount
+FROM invoice_items ii
+JOIN tracks t ON ii.TrackId = t.TrackId
+JOIN albums al ON t.AlbumId = al.AlbumId
+JOIN artists a ON al.ArtistId = a.ArtistId
+GROUP BY a.Name
+ORDER BY PurchaseCount DESC
+LIMIT 3;
+
+#27
+SELECT m.Name, COUNT(ii.TrackId) AS PurchaseCount
+FROM invoice_items ii
+JOIN tracks t ON ii.TrackId = t.TrackId
+JOIN media_types m ON t.MediaTypeId = m.MediaTypeId
+GROUP BY m.Name
+HAVING PurchaseCount = (SELECT MAX(mCount) FROM (
+    SELECT m2.Name, COUNT(ii2.TrackId) AS mCount
+    FROM invoice_items
+    ii2 JOIN tracks t2 ON ii2.TrackId = t2.TrackId
+    JOIN media_types m2 ON t2.MediaTypeId = m2.MediaTypeId
+    GROUP BY m2.Name
+    )
+);
