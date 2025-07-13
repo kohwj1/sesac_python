@@ -1,0 +1,80 @@
+#1
+SELECT s.Name, o.OrderAt
+FROM stores s
+JOIN orders o ON s.Id = o.StoreId
+JOIN users u ON o.UserId = u.Id
+WHERE u.Id = '3e00736a-5978-48ee-9aa9-366b0c4ed0b8';
+
+#2
+SELECT Name, Gender, Age FROM users WHERE Age Between 20 AND 29;
+
+#3
+SELECT s.Name, i.Name
+FROM items i
+JOIN orderitems oi ON i.Id = oi.ItemId
+JOIN orders o ON oi.OrderId = o.Id
+JOIN stores s ON o.StoreId = s.Id
+JOIN users u ON u.Id = o.UserId
+WHERE u.Id = '3e00736a-5978-48ee-9aa9-366b0c4ed0b8';
+
+#4
+SELECT DISTINCT i.Name
+FROM items i
+JOIN orderitems oi ON i.Id = oi.ItemId
+JOIN orders o ON oi.OrderId = o.Id
+JOIN stores s ON o.StoreId = s.Id
+JOIN users u ON u.Id = o.UserId
+WHERE u.Id = '3e00736a-5978-48ee-9aa9-366b0c4ed0b8';
+
+#5
+SELECT SUM(i.UnitPrice)
+FROM orders o
+JOIN orderitems oi ON oi.OrderId = o.Id
+JOIN items i ON i.Id = oi.ItemId
+WHERE o.UserId = '3e00736a-5978-48ee-9aa9-366b0c4ed0b8';
+
+#6
+SELECT s.Name, strftime('%Y-%m', o.OrderAt) AS Monthly, SUM(i.UnitPrice)
+FROM stores s
+JOIN orders o ON s.Id = o.StoreId
+JOIN orderitems oi ON o.Id = oi.OrderId
+JOIN items i ON oi.ItemId = i.Id
+GROUP BY s.Name, Monthly;
+
+#7
+SELECT s.Name, COUNT(o.Id)
+FROM orders o
+JOIN stores s ON o.StoreId = s.Id
+JOIN users u ON u.Id = o.UserId
+WHERE u.Id = 'aa927e62-7fb6-4807-831e-c7de4e604cfd'
+GROUP BY s.Name
+ORDER BY COUNT(o.Id) DESC
+LIMIT 5;
+
+#8
+SELECT u.Id, u.Name, SUM(i.UnitPrice)
+FROM users u
+JOIN orders o ON u.Id = o.UserId
+JOIN orderitems oi ON oi.OrderId = o.Id
+JOIN items i ON i.Id = oi.ItemId
+GROUP BY u.Id
+ORDER BY SUM(i.UnitPrice) DESC
+LIMIT 10;
+
+#9 그 외 통계 만들어보기
+예) 조회 시점의 날짜 기준으로 이번 달 생일인 고객 아이디, 이름, 생년월일 조회하기
+
+SELECT Id, Name, Birthdate
+FROM users
+WHERE strftime('%m', Birthdate) = strftime('%m', date('now'));
+
+
+예) 각 점포별 만 20세 미만 고객 매출합 통계
+SELECT s.Name, SUM(i.UnitPrice)
+FROM users u
+JOIN orders o ON u.Id = o.UserId
+JOIN orderitems oi ON o.Id = oi.OrderId
+LEFT JOIN stores s ON o.StoreId = s.Id
+JOIN items i ON oi.ItemId = i.Id
+WHERE u.Age < 20
+GROUP BY s.Name;
