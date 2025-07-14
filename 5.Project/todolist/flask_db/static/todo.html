@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>(api) ToDo List</title>
+    <style>
+        body {
+            background-color: #eee;
+        }
+        h1 {
+            text-align: center;
+        }
+        #userInput, #dateInput {
+            border-radius: 20px;
+            border:none;
+            height:20px;
+            padding:10px;
+            margin:10px;
+            width:60%;
+        }
+        #dateInput {
+            width:20%;
+        }
+        ul {
+            padding-left:0;
+        }
+        li {
+            display:flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 15px;
+            border: 3px dashed #ddd;
+            list-style-type: none;
+            margin-bottom:5px;
+            align-items: center;
+        }
+        a {
+            position: relative;
+            margin: 1px;
+            padding: 1px;
+            background: red;
+            color: #fff;
+            font-size: 0.7em;
+            width: 20px;
+            height: 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            align-content: center;
+        }
+        form {
+            width: 100%;
+        }
+        label {
+            margin-left:10px;
+        }
+        label:checked {
+            text-decoration-line: line-through;
+        }
+        span {
+            margin-right:10px;
+            width:90px;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .lineContainer {
+            display: flex;
+            align-items: center;
+        }
+        .btnAdd {
+            border-radius: 20px;
+            background-color: rgb(94, 156, 125);
+            color:#fff;
+            border:none;
+            width:20%;
+            padding: 10px;
+            margin: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .show {
+            display: block;
+            color: red;
+            text-align: center;
+        }
+        .del {
+            border:none;
+            margin-left: 10px;
+            border-radius: 20px;
+            background-color: rgb(162, 62, 62);
+            color:#fff;
+        }
+        [type=checkbox] {
+            width:20px;
+            height:20px;
+            accent-color: rgb(94, 156, 125);
+        }
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <div class="container">
+            <input type="text" placeholder="할 일 추가하기" id="userInput" name="userInput" required>
+            <input type="date" placeholder="마감일 입력하기" id="dateInput" name="dateInput">
+            <button id="addTodo" class="btnAdd" type="button" onclick="addItem()">추가</button>
+    </div>
+    <ul id="todoList"></ul>
+    <script>
+        const todoList = document.getElementById('todoList');
+        const addTodo = document.getElementById('addTodo');
+        const inputBox = document.getElementById('userInput');
+        const dateBox = document.getElementById('dateInput');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('http://localhost:5000/api/list')
+                .then((response) => response.json())
+                .then((data) => {
+                    for (item of data.data) {
+                        let textDecoration = 'none'
+                        let duedate = ''
+                        if (item.status == 'checked') {
+                            textDecoration = 'line-through'
+                        }
+                        if (item.duedate != null) {
+                            duedate = item.duedate
+                        }
+
+                        todoList.innerHTML += `<li id=__${item.idx}>
+                            <div class="lineContainer">
+                                <input type="checkbox" id="${item.idx}" ${item.status} onclick="switchItem(${item.idx})">
+                                <label for="${item.idx}" style="text-decoration:${textDecoration};">${item.content}</label>
+                            </div>
+                            <div class="lineContainer">
+                                <span>${duedate}</span>
+                                <a href="#" onclick="deleteItem(${item.idx})">X</a>
+                             </div>   
+                        </li>`
+                    }
+                })
+        })
+
+        function switchItem(idx) {
+            const label = document.getElementById(`${idx}`).nextElementSibling;
+            if (label.style.textDecoration == 'line-through') {
+                label.style.textDecoration = 'none'
+            } else {
+                label.style.textDecoration = 'line-through'
+            }
+            fetch(`http://localhost:5000/api/update/${idx}`, {
+                    method:'PUT',
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.result === 0) {
+                        location.href = '/';
+                    }
+                })
+        };
+
+        function addItem() {
+            if (inputBox.value.length > 0) {
+            new_content = new FormData();
+            new_content.append('userInput', inputBox.value);
+            new_content.append('dateInput', dateBox.value);
+            fetch(`http://localhost:5000/api/add`, {
+                    method:'POST',
+                    body: new_content
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.result === 0) {
+                        location.href = '/';
+                    }
+                })
+            } else {
+                alert('내용을 입력해주세요.')
+            }
+        }
+
+        function deleteItem(target) {
+            if (confirm('삭제하시겠습니까?')) {
+                fetch(`http://localhost:5000/api/delete/${target}`, {
+                    method:'DELETE'
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.result === 0) {
+                        location.href = '/';
+                    }
+                })
+            }
+        }
+    </script>    
+</body>
+</html>
