@@ -1,8 +1,9 @@
 import sqlite3
-MY_DATABASE = 'total.db'
+MY_DATABASE = 'flaskdb.db'
 
 def connect_db():
     conn = sqlite3.connect(MY_DATABASE) #DB 연결
+    conn.row_factory = sqlite3.Row #각 행을 dict로 보내줌
     return conn
 
 def create_table():
@@ -24,7 +25,7 @@ def insert_user(name, age):
     conn = connect_db()
     cur = conn.cursor()
 
-    cur.execute("""INSERT INTO users (name, age) VALUES(?, ?)""", (name, age))
+    cur.execute("INSERT INTO users (name, age) VALUES(?, ?)", (name, age))
 
     conn.commit()
     conn.close()
@@ -40,25 +41,43 @@ def get_users():
     conn.close()
     return rows
 
-def get_user(name):
+def get_user(id):
     conn = connect_db()
     cur = conn.cursor()
 
-    cur.execute(f"SELECT * FROM users WHERE name = ?", (name, ))
+    cur.execute(f"SELECT * FROM users WHERE id = ?", (id, ))
     row = cur.fetchone()
     conn.commit()
     conn.close()
     if row: #존재하지 않는 쿼리를 요청한 경우 None으로 리턴됨
         return row
-    return f'검색한 사용자 {name} 없음'
+    return f'검색한 사용자 {id} 없음'
 
-def update_user_age(name, age):
+# def update_user_name(id, name):
+#     conn = connect_db()
+#     cur = conn.cursor()
+
+#     cur.execute(f"UPDATE users SET name = ? WHERE id = ?", (name, id))
+
+#     conn.commit()
+#     conn.close()
+
+# def update_user_age(id, age):
+#     conn = connect_db()
+#     cur = conn.cursor()
+
+#     cur.execute(f"UPDATE users SET age = ? WHERE id = ?", (age, id))
+
+#     conn.commit()
+#     conn.close()
+
+def update_user(id, name, age):
     conn = connect_db()
     cur = conn.cursor()
 
-    cur.execute(f"UPDATE users SET age = ? WHERE name = ?", (age, name))
-
+    cur.execute(f"UPDATE users SET age = ?, name = ? WHERE id = ?", (age, name, id))
     conn.commit()
+
     conn.close()
 
 def delete_user_by_id(id):
@@ -66,15 +85,6 @@ def delete_user_by_id(id):
     cur = conn.cursor()
 
     cur.execute(f"DELETE FROM users WHERE id = ?", (id, ))
-
-    conn.commit()
-    conn.close()
-
-def delete_user_by_name(name):
-    conn = connect_db()
-    cur = conn.cursor()
-
-    cur.execute(f"DELETE FROM users WHERE name = ?", (name, ))
 
     conn.commit()
     conn.close()

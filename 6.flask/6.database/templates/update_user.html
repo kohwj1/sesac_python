@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h2>사용자 수정</h2>
+    <form action="/update/{{user.id}}" method="POST">
+        <label for="username">이름: </label>        
+        <input placeholder="이름을 입력해 주세요." id="username" name="username" value ="{{user.name}}" required>
+        <label for="age">나이: </label>        
+        <input placeholder="나이(숫자 입력)" type="number" id="age" name="age" value ="{{user.age}}" required>
+        <button type="submit">수정</button>
+    </form>
+    <p><a href="/">&lt; 돌아가기</a></p>
+</body>
+</html>
