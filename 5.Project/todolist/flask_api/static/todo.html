@@ -135,6 +135,12 @@
             fetch(`http://localhost:5000/api/update/${idx}`, {
                     method:'PUT',
                 })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.result === 0) {
+                        location.href = '/';
+                    }
+                })
         };
 
         function addItem() {
