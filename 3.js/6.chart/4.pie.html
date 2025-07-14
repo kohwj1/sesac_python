@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('myChart');
+const data = {
+  labels: [
+    '커피',
+    '우유',
+    '과일주스'
+  ],
+  datasets: [{
+    label: 'XX카페 음료 상품별 판매량',
+    data: [300, 50, 100],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)'
+    ],
+    hoverOffset: 40
+  }]
+};
+
+const config = {
+  type: 'pie',
+  data: data,
+  options: {
+    responsive:false
+  }
+};
+
+new Chart(ctx, config);
+  
+</script>
+
+</body>
+</html>
