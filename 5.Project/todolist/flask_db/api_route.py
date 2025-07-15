@@ -6,7 +6,7 @@ api_bp = Blueprint('api', __name__)
 @api_bp.route('/list')
 def get_list():
     mylist = get_all_list()
-    print(mylist)
+    # print(mylist)
     return jsonify({'data':mylist})
 
 @api_bp.route('/add', methods=['POST'])
