@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="myChart"></canvas>
+    <script>
+        function fetchData() {
+            fetch('/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    drawChart(data)
+                })
+        }
+
+        function drawChart(revenue) {
+            console.log(revenue)
+            const ctx = document.getElementById('myChart');
+            const labels = revenue.labels;
+            const data = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'My First Dataset',
+                        data: revenue.values
+                    },
+                ],
+            };
+
+            const config = {
+                type: 'bar',
+                data: data,
+                options: {
+                }
+            };
+
+            new Chart(ctx, config);
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchData);
+    </script>
+</body>
+</html>

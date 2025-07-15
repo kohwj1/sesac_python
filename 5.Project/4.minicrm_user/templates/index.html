@@ -2,16 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>상점 관리</title>
+    <title>유저 관리</title>
     <style>
         table {
-            width:100%;
             margin-top:20px;
+        }
+        ul {
+            display:flex;
+        }
+        li {
+            width:2%;
+            list-style-type: none;
         }
     </style>
 </head>
 <body>
-    <h1>상점 리스트</h1>
+    <h1>유저 리스트</h1>
     <form>
         <input placeholder="검색어 입력" name="q" value="{{keyword}}">
         <button type="submit">검색</button>
@@ -20,18 +26,27 @@
     <table border=1>
         <tr>
             <th>ID</th>
-            <th>상호명</th>
-            <th>유형</th>
-            <th>주소</th>
+            <th>이름</th>
+            <th>성별</th>
+            <th>연령</th>
         </tr>
-        {% for s in stores %}
+        {% for u in users %}
             <tr>
-                <td>{{s.Id}}</td>
-                <td>{{s.Name}}</td>
-                <td>{{s.Type}}</td>
-                <td>{{s.Address}}</td>
+                <td>{{u.Id}}</td>
+                <td>{{u.Name}}</td>
+                <td>{{u.Gender}}</td>
+                <td>{{u.Age}}</td>
             </tr>
         {% endfor %}
     </table>
+    <ul>
+        <li><a href="/?page=1">&lt;&lt;</a></li>
+        <li><a href="/?page={{liststart}}">&lt;</a></li>
+    {% for p in pages %}
+        <li><a href="/?page={{p}}">{{p}}</a></li>
+    {% endfor %}
+        <li><a href="/?page={{liststart + 10}}">&gt;</a></li>
+        <li><a href="/?page={{lastpage}}">&gt;&gt;</a></li>
+    </ul>
 </body>
 </html>
