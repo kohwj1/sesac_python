@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>상점 관리</title>
+    <style>
+        table {
+            width:100%;
+            margin-top:20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>상점 리스트</h1>
+    <form>
+        <input placeholder="검색어 입력" name="q" value="{{keyword}}">
+        <button type="submit">검색</button>
+    </form>
+    <a href="/"">초기화</a>
+    <table border=1>
+        <tr>
+            <th>ID</th>
+            <th>상호명</th>
+            <th>유형</th>
+            <th>주소</th>
+        </tr>
+        {% for s in stores %}
+            <tr>
+                <td>{{s.Id}}</td>
+                <td>{{s.Name}}</td>
+                <td>{{s.Type}}</td>
+                <td>{{s.Address}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
