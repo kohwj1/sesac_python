@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
-<body>
+<body style="background-color: #eee;">
 <div>
   <canvas id="myChart" height="100"></canvas>
 </div>
@@ -22,9 +22,9 @@
       width = chartWidth;
       height = chartHeight;
       gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
-      gradient.addColorStop(0, 'rgb(75, 192, 192)');
-      gradient.addColorStop(0.5, 'rgb(255, 255, 0)');
-      gradient.addColorStop(1, 'rgb(75, 192, 192)');
+      gradient.addColorStop(0, 'blue');
+      gradient.addColorStop(0.5, 'rgb(75, 192, 192)');
+      gradient.addColorStop(1, 'green');
     }
   return gradient;
 }
@@ -33,7 +33,7 @@
   const data = {
   labels: labels,
   datasets: [{
-    label: '검색어 "에어콘" 에 대한 트렌드 점수',
+    label: '에어콘 청소',
     data: [21.80042, 25.04962, 33.2415, 48.03812, 25.94498, 21.8693, 48.64076, 100, 46.36288, 50.99765, 72.77579, 60.23376, 39.69938, 64.9607, 47.42231],
     borderColor: function(context) {
         const chart = context.chart;
@@ -45,10 +45,27 @@
         }
         return getGradient(ctx, chartArea);
       },
-    borderWidth: 1,
-    fill: false,
+    borderWidth: 2,
+    fill: false,  //true로 설정 시 막대 아래쪽을 채워줌
     tension: 0.4  //텐션이 0에 가까울 수록 직선, 1에 가까울 수록 곡선화됨
-  }]
+  },
+  {
+      label: '에어콘 수리',
+      data: [32.06, 59, 70, 22, 26, 45, 90, 20, 11, 23, 45, 70, 82, 60, 30],
+      borderColor: function(context) {
+          const chart = context.chart;
+          const {ctx, chartArea} = chart;
+
+          if (!chartArea) {
+            // 첫 로딩
+            return;
+          }
+          return getGradient(ctx, chartArea);
+        },
+      borderWidth: 2,
+      fill: false,
+      tension: 0.4  //텐션이 0에 가까울 수록 직선, 1에 가까울 수록 곡선화됨
+    }]
 };
   const config = {
   type: 'line',
