@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="#" onclick="history.back()">&lt; 뒤로가기</a>
+<h2>고객 정보</h2>
+<table>
+    <thead>
+        <tr>
+            <th>이름</th>
+            <th>성별</th>
+            <th>연령</th>
+            <th>생일</th>
+            <th>주소</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{user.Name}}</td>
+            <td>{{user.Gender}}</td>
+            <td>{{user.Age}}</td>
+            <td>{{user.Birthdate}}</td>
+            <td>{{user.Address}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>주문 정보</h2>
+<table>
+    <thead>
+        <tr>
+            <th class="idColumn">주문ID</th>
+            <th>구매일자</th>
+            <th>매장명</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for o in orderlist%}
+        <tr>
+            <td><a href="/orders/detail/{{o.OrderId}}">{{o.OrderId}}</a></td>
+            <td>{{o.OrderAt}}</td>
+            <td><a href="/stores/detail/{{o.StoreId}}">{{o.StoreName}}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+<h2>자주 방문한 매장 Top 5</h2>
+<h2>자주 주문한 상품 Top 5</h2>
+{% endblock %}
