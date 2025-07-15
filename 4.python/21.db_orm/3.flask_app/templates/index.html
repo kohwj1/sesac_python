@@ -7,13 +7,16 @@
 <body>
     <h1>사용자 목록</h1>
     <form action="/add" method="POST">
-        <input placeholder="이름" name="name">
-        <input type="number" placeholder="나이" name="age">
+        <input placeholder="이름" name="name" required>
+        <input type="number" placeholder="나이" name="age" required>
         <button type="submit">등록</button>
     </form>
     <ul>
         {% for u in users %}
-            <li>{{u.id}}: {{u.name}} ({{u.age}}세) <a href="/delete/{{u.id}}">삭제</a></li>
+            <li>{{u.id}}: {{u.name}} ({{u.age}}세)
+                <a href="/edit/{{u.id}}">수정</a>
+                <a href="/delete/{{u.id}}">삭제</a>
+            </li>
         {% endfor %}
     </ul>   
 </body>

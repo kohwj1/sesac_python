@@ -25,6 +25,24 @@ def add_user():
     db.session.commit()
     return redirect('/')
 
+@app.route('/edit/<int:user_id>', methods=['GET', 'POST'])
+def edit_user(user_id):
+    user = db.session.get(User, user_id)
+
+    if not user:
+        print(f'사용자 {user_id} 없음')
+    
+    else:
+        if request.method == 'GET':
+            return render_template('edit.html', user=user)
+        new_name = request.form.get('name')
+        new_age = int(request.form.get('age'))
+        user.name = new_name
+        user.age = new_age
+        db.session.commit()
+    
+    return redirect('/')
+
 @app.route('/delete/<int:user_id>')
 def delete_user(user_id):
     user = db.session.get(User, user_id)
