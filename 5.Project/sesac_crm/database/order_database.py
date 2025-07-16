@@ -50,7 +50,7 @@ def get_order_summary(orderid):
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""SELECT o.Id AS OrderId, o.OrderAt AS OrderAt, s.Name AS StoreName, u.Id AS UserId, u.Name AS UserName
+    cur.execute("""SELECT o.Id AS OrderId, o.OrderAt AS OrderAt, s.Id AS StoreId, s.Name AS StoreName, u.Id AS UserId, u.Name AS UserName
                 FROM users u 
                 JOIN orders o ON u.Id = o.UserId
                 JOIN stores s ON o.StoreId = s.Id
