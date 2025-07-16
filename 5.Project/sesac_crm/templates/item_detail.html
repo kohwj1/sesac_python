@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="#" onclick="history.back()">&lt; 뒤로가기</a>
+
+<h2>상품 정보</h2>
+<p>상품 ID: {{item.ItemId}}</p>
+<table>
+    <thead>
+        <tr>
+            <th>상품명</th>
+            <th>유형</th>
+            <th>개당 가격</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{item.Name}}</td>
+            <td>{{item.Type}}</td>
+            <td>{{item.UnitPrice}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>월간 매출액</h2>
+<table>
+    <thead>
+        <tr>
+            <th>기간</th>
+            <th>매출 합계</th>
+            <th>주문 횟수</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if sales %}
+            {% for s in sales %}
+            <tr>
+                {% if is_filtered %}
+                <td>{{s.OrderDate}}</td>
+                {% else %}
+                <td><a href="?month={{s.OrderDate}}">{{s.OrderDate}}</a></td>
+                {% endif %}
+                <td>{{s.Sales}}원</td>
+                <td>{{s.SaleCount}}</td>
+            </tr> 
+            {% endfor %}
+        {% else %}
+            <tr><td colspan="3">매출 정보가 없습니다.</td></tr>          
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}
