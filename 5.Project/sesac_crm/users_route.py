@@ -8,7 +8,9 @@ def user_list():
     name = request.args.get('name', default='')
     gender = request.args.get('gender', default='')
     page = int(request.args.get('page', default=1))
-    pagesize = 30
+    pagesize = 20
+    pagination_size = 10
+    total_count = 0
 
     if name and gender:
         users = [u for u in userdb.search_users_by_name(name, page, pagesize) if u['Gender'] == gender]
@@ -19,7 +21,17 @@ def user_list():
     else:
         users = userdb.get_all_list(page, pagesize)
 
-    return render_template('users.html', users=users, name=name, gender=gender, currentpage=page)
+    if users:
+        total_count = users[0]['Totalcount']
+        total_page = (total_count - 1) // pagesize + 1
+
+
+        page_start = ((page - 1) // pagination_size) * pagination_size + 1
+        page_end = min(page_start + pagination_size, total_page + 1)
+        print(total_count, total_page, page_start, page_end)
+        pages = [i for i in range(page_start, page_end)]
+
+    return render_template('users.html', users=users, name=name, gender=gender, currentPage=page, pages=pages, totalPage=total_page)
 
 @user_bp.route('/detail/<userid>')
 def user_detail(userid):

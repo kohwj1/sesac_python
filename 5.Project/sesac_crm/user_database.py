@@ -12,7 +12,7 @@ def get_all_list(page, pagesize) -> list | None:
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("SELECT * FROM users LIMIT ? OFFSET ?", (pagesize, off_start))
+    cur.execute("SELECT *, COUNT(*) OVER() AS Totalcount FROM users LIMIT ? OFFSET ?", (pagesize, off_start))
     return cur.fetchall()
 
 def search_users_by_name(name, page, pagesize) -> list | None:
@@ -20,7 +20,7 @@ def search_users_by_name(name, page, pagesize) -> list | None:
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("SELECT * FROM users WHERE Name LIKE ? LIMIT ? OFFSET ?", (f'%{name}%', pagesize, off_start))
+    cur.execute("SELECT *, COUNT(*) OVER() AS Totalcount FROM users WHERE Name LIKE ? LIMIT ? OFFSET ?", (f'%{name}%', pagesize, off_start))
     return cur.fetchall()
 
 def filter_gender(gender, page, pagesize) -> list | None:
@@ -28,7 +28,7 @@ def filter_gender(gender, page, pagesize) -> list | None:
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("SELECT * FROM users WHERE Gender = ? LIMIT ? OFFSET ?", (gender, pagesize, off_start))
+    cur.execute("SELECT *, COUNT(*) OVER() AS Totalcount FROM users WHERE Gender = ? LIMIT ? OFFSET ?", (gender, pagesize, off_start))
     return cur.fetchall()
 
 def get_user_info(userid):
@@ -43,7 +43,8 @@ def get_user_info(userid):
                     FROM users u
                     JOIN orders o ON u.Id = o.UserId
                     JOIN stores s ON o.StoreId = s.Id 
-                    WHERE u.Id = ?""", (userid, ))
+                    WHERE u.Id = ?
+                    ORDER BY OrderAt DESC""", (userid, ))
         user_history = cur.fetchall()
         return user_history
 

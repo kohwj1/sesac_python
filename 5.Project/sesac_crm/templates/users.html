@@ -8,8 +8,16 @@
     <select name="gender" id="gender">
         <!-- 성별 필터링했을 때 어떻게 selected 상태 남겨줄건가??-->
         <option></option>
-        <option value="Male">남성</option>
-        <option value="Female">여성</option>
+        {% if gender == 'Male' %}
+            <option value="Male" selected>남성</option>
+            <option value="Female">여성</option>
+        {% elif gender == 'Female' %}
+            <option value="Male">남성</option>
+            <option value="Female" selected>여성</option>
+        {% else %}
+            <option value="Male">남성</option>
+            <option value="Female">여성</option>
+        {% endif %}
     </select>
     <button type="submit">검색</button>
 </form>
@@ -40,13 +48,27 @@
         {% endif %}
     </tbody>
 </table>
-<ul id="pagenation">
-    {% if currentpage - 1 < 1 %}
-    <li>이전</li>
-    {% else %}
-    <li><a href="?name={{name}}&gender={{gender}}&page={{currentpage - 1}}">이전</a></li>
-    {% endif %}
-    <li class="currentPage">{{currentpage}}</li>
-    <li><a href="?name={{name}}&gender={{gender}}&page={{currentpage + 1}}">다음</a></li>
-</ul>
+<div class="pagenation">
+    <ul class="pagenation">
+        {% if pages %}
+            {% if currentPage == 1 %}
+                <li class="pageNum"><a href="#">Prev</a></li>
+                {% else %}
+                <li class="pageNum"><a href="?page={{pages[0] - 1}}&name={{name}}&gender={{gender}}">Prev</a></li>
+            {% endif %}
+            {% for p in pages %}
+                {% if p == currentPage %}
+                    <li class="pageNum currentPage"><a href='?page={{p}}&name={{name}}&gender={{gender}}'>{{p}}</a></li>
+                    {% else %}
+                    <li class="pageNum"><a href='?page={{p}}&name={{name}}&gender={{gender}}'>{{p}}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if currentPage == totalPage %}
+                <li class="pageNum"><a href="#">Next</a></li>
+                {% else %}
+                <li class="pageNum"><a href="?page={{pages[-1] + 1}}&name={{name}}&gender={{gender}}">Next</a></li>
+            {% endif %}
+        {% endif %}
+    </ul>
+</div>
 {% endblock %}
