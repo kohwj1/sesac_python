@@ -26,9 +26,14 @@ def store_list():
 @store_bp.route('/detail/<storeid>')
 def store_detail(storeid):
     month_filter = request.args.get('month', default='')
-    store = storedb.get_store_info(storeid, month_filter)
-    storeinfo = store['info']
+    storeinfo = storedb.get_store_summary(storeid)
+    regular_limit = 10
 
-    storesales = ['매출 목록']
-    regularlist = ['단골 목록']
-    return render_template('store_detail.html', store=storeinfo, salse=storesales, regularlist=regularlist)
+    if month_filter:
+        sales = storedb.get_daily_sales(storeid, month_filter)
+        regulars = storedb.get_daily_regulars(storeid, month_filter, regular_limit)
+    else:
+        sales = storedb.get_sales(storeid)
+        regulars = storedb.get_regulars(storeid, regular_limit)
+
+    return render_template('store_detail.html', store=storeinfo, sales=sales, regulars=regulars, limit=regular_limit, is_filtered=bool(month_filter))

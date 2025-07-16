@@ -31,28 +31,52 @@
             <th>기간</th>
             <th>매출 합계</th>
             <th>주문 횟수</th>
-            <th>최다 매출 아이템?</th>
         </tr>
     </thead>
     <tbody>
+        {% if sales %}
+            {% for s in sales %}
+            <tr>
+                {% if is_filtered %}
+                <td>{{s.OrderDate}}</td>
+                {% else %}
+                <td><a href="?month={{s.OrderDate}}">{{s.OrderDate}}</a></td>
+                {% endif %}
+                <td>{{s.Sales}}원</td>
+                <td>{{s.SaleCount}}</td>
+            </tr> 
+            {% endfor %}
+        {% else %}
+            <tr><td colspan="3">매출 정보가 없습니다.</td></tr>          
+        {% endif %}
     </tbody>
 </table>
 
 <hr>
 
 <h2>자주 방문한 고객</h2>
-최대 10명까지 표시됩니다.
+<p>최대 {{limit}}명까지 표시됩니다.</p>
 <!-- 여기 숫자 하드코딩말고 변수로 제어할 수 있게 진자템플릿으로 빼는 게 좋겠음 -->
 <table>
     <thead>
         <tr>
-            <th>고객 ID</th>
+            <th class="idColumn">고객 ID</th>
             <th>고객명</th>
             <th>주문 횟수</th>
         </tr>
     </thead>
     <tbody>
-
+        {% if regulars %}
+            {% for r in regulars %}
+            <tr>
+                <td><a href="/users/detail/{{r.UserId}}">{{r.UserId}}</a></td>
+                <td>{{r.UserName}}</td>
+                <td>{{r.OrderCount}}</td>
+            </tr> 
+            {% endfor %}
+        {% else %}
+        <tr><td colspan="3">자주 방문한 고객 정보가 없습니다.</td></tr>          
+        {% endif %}
     </tbody>
 </table>
 {% endblock %}

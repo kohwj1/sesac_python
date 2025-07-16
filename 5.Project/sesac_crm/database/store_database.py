@@ -28,10 +28,66 @@ def get_store_summary(storeid):
     storeinfo = cur.fetchone()
     return storeinfo
 
-def get_sales(month_filter):
-    pass
+def get_sales(storeid):
+    conn = get_connection()
+    cur = conn.cursor()
 
-def get_store_info(orderid, month_filter) -> list | None:
-    storeinfo = get_store_summary(orderid)
-    sales = get_sales(month_filter)
-    return {'info':storeinfo, 'sales':sales}
+    cur.execute("""SELECT strftime('%Y-%m', o.OrderAt) AS OrderDate, SUM(i.UnitPrice) AS Sales, Count(*) AS SaleCount
+                FROM items i
+                JOIN orderitems oi ON i.Id = oi.ItemId
+                JOIN orders o ON oi.OrderId = o.Id
+                JOIN stores s ON o.StoreId = s.Id
+                WHERE s.Id = ?
+                GROUP BY OrderDate
+                ORDER BY OrderDate DESC""", (storeid,))
+    
+    sales = cur.fetchall()
+    return sales
+
+def get_daily_sales(storeid, month_filter):
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""SELECT strftime('%Y-%m-%d', o.OrderAt) AS OrderDate, SUM(i.UnitPrice) AS Sales, Count(*) AS SaleCount
+                FROM items i
+                JOIN orderitems oi ON i.Id = oi.ItemId
+                JOIN orders o ON oi.OrderId = o.Id
+                JOIN stores s ON o.StoreId = s.Id
+                WHERE s.Id = ? AND strftime('%Y-%m', o.OrderAt) = ?
+                GROUP BY OrderDate
+                ORDER BY OrderDate DESC""", (storeid, month_filter))
+    
+    sales = cur.fetchall()
+    return sales
+
+def get_regulars(storeid, regular_limit):
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""SELECT u.Id AS UserId, u.Name AS UserName, COUNT(*) AS OrderCount
+                FROM users u
+                JOIN orders o ON u.Id = o.UserId
+                JOIN stores s ON o.StoreId = s.Id
+                WHERE s.Id = ?
+                GROUP BY UserId
+                ORDER BY OrderCount DESC
+                LIMIT ?""", (storeid, regular_limit))
+    
+    regulars = cur.fetchall()
+    return regulars
+
+def get_daily_regulars(storeid, month_filter, regular_limit):
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""SELECT u.Id AS UserId, u.Name AS UserName, COUNT(*) AS OrderCount
+                FROM users u
+                JOIN orders o ON u.Id = o.UserId
+                JOIN stores s ON o.StoreId = s.Id
+                WHERE s.Id = ? AND strftime('%Y-%m', o.OrderAt) = ?
+                GROUP BY UserId
+                ORDER BY OrderCount DESC
+                LIMIT ?""", (storeid, month_filter, regular_limit))
+    
+    regulars = cur.fetchall()
+    return regulars
