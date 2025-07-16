@@ -39,6 +39,9 @@
     color:#fff;
     font-weight: 700;
 }
+.noResult {
+    padding: 10px 0px;
+}
 body {
     margin-top:0px;
     box-sizing: border-box;
