@@ -64,5 +64,10 @@ def get_user_summary(userid):
 
     cur.execute("SELECT * FROM users WHERE Id = ?", (userid, ))
     summary = cur.fetchone()
-
     return summary
+
+def get_regular_store(userid):
+    pass
+
+def get_favorite_items(userid):
+    pass

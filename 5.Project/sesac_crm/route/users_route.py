@@ -37,5 +37,7 @@ def user_list():
 def user_detail(userid):
     userinfo = userdb.get_user_summary(userid)
     orderlist = userdb.get_user_history(userid)
+    regulars = userdb.get_regular_store(userid)
+    favorites = userdb.get_favorite_items(userid)
 
-    return render_template('user_detail.html', user=userinfo, orderlist=orderlist)
+    return render_template('user_detail.html', user=userinfo, orderlist=orderlist, regulars=regulars, favorites=favorites)
