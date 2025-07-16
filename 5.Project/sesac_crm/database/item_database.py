@@ -23,7 +23,7 @@ def get_item_summary(itemid):
 
     cur.execute("""SELECT Id AS ItemId, Name, Type, UnitPrice
                 FROM items
-                WHERE Id = ?""", (itemid, ))
+                WHERE ItemId = ?""", (itemid, ))
     
     storeinfo = cur.fetchone()
     return storeinfo

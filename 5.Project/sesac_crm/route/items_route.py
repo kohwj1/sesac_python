@@ -26,5 +26,6 @@ def item_list():
 @item_bp.route('/detail/<itemid>')
 def item_detail(itemid):
     item = itemdb.get_item_summary(itemid)
+    sales = itemdb.get_sales(itemid)
 
-    return render_template('item_detail.html', item=item)
+    return render_template('item_detail.html', item=item, sales=sales)

@@ -37,13 +37,9 @@
         {% if sales %}
             {% for s in sales %}
             <tr>
-                {% if is_filtered %}
-                <td>{{s.OrderDate}}</td>
-                {% else %}
-                <td><a href="?month={{s.OrderDate}}">{{s.OrderDate}}</a></td>
-                {% endif %}
-                <td>{{s.Sales}}원</td>
-                <td>{{s.SaleCount}}</td>
+                <td class="chartdata">{{s.OrderDate}}</a></td>
+                <td class="chartdata">{{s.Sales}}</td>
+                <td class="chartdata">{{s.SaleCount}}</td>
             </tr> 
             {% endfor %}
         {% else %}
@@ -51,4 +47,66 @@
         {% endif %}
     </tbody>
 </table>
+<canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let itemLabels = []
+    let barValues = []
+    let lineValues = []
+    const dataArray = document.getElementsByClassName('chartdata')
+    const ctx = document.getElementById('myChart')
+
+    function drawchart() {
+        for (i = 0; i < dataArray.length; i += 3) {
+            itemLabels.push(dataArray[i].innerText);
+            barValues.push(dataArray[i+1].innerText);
+            lineValues.push(dataArray[i+2].innerText);
+        }
+
+        itemLabels.reverse();
+        barValues.reverse();
+        lineValues.reverse();
+
+        const data = {
+            labels: itemLabels,
+            datasets: [{
+                type: 'bar',
+                label: '매출(원)',
+                data: barValues,
+                backgroundColor: '#6c848452',
+                yAxisID: 'yleft'
+            }, {
+                type: 'line',
+                label: '판매량(개)',
+                data: lineValues,
+                fill: false,
+                borderColor: '#6c8484',
+                borderWidth: 1,
+                fill: false,
+                tension:0.1,
+                yAxisID: 'yright'
+            }]
+            };
+
+            const config = {
+            type: 'scatter',
+            data: data,
+            options: {
+                scales: {
+                    yleft: {position: 'left'},
+                    yright: {position:'right'}
+                },
+                plugins: {
+                    tooltip: {
+                        intersect:false
+                    }
+                }
+            }
+            };
+
+        new Chart(ctx, config);
+    }
+
+    document.addEventListener('DOMContentLoaded', drawchart)
+</script>
 {% endblock %}
