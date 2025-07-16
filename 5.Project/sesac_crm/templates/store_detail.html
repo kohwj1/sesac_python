@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="#" onclick="history.back()">&lt; 뒤로가기</a>
+
+<h2>매장 정보</h2>
+<p>매장 ID: {{store.StoreId}}</p>
+<table>
+    <thead>
+        <tr>
+            <th>매장명</th>
+            <th>유형</th>
+            <th>주소</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{store.Name}}</td>
+            <td>{{store.Type}}</td>
+            <td>{{store.Address}}</a></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>월간 매출액</h2>
+<table>
+    <thead>
+        <tr>
+            <th>기간</th>
+            <th>매출 합계</th>
+            <th>주문 횟수</th>
+            <th>최다 매출 아이템?</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>자주 방문한 고객</h2>
+최대 10명까지 표시됩니다.
+<!-- 여기 숫자 하드코딩말고 변수로 제어할 수 있게 진자템플릿으로 빼는 게 좋겠음 -->
+<table>
+    <thead>
+        <tr>
+            <th>고객 ID</th>
+            <th>고객명</th>
+            <th>주문 횟수</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+{% endblock %}

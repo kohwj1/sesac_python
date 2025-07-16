@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table>
+    <thead>
+        <tr>
+            <th class="idColumn">매장 ID</th>
+            <th>유형</th>
+            <th>매장명</th>
+            <th>주소</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in stores %}
+        <tr>
+            <td><a href="/stores/detail/{{s.Id}}">{{s.Id}}</a></td>
+            <td>{{s.Type}}</td>
+            <td>{{s.StoreName}}</a></td>
+            <td>{{s.Address}}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="pagination">
+    <ul class="pagination">
+        {% if pages %}
+            {% if currentPage == 1 %}
+                <li class="pageNum"><a href="#">Prev</a></li>
+                {% else %}
+                <li class="pageNum"><a href="?page={{pages[0] - 1}}">Prev</a></li>
+            {% endif %}
+            {% for p in pages %}
+                {% if p == currentPage %}
+                    <li class="pageNum currentPage"><a href='?page={{p}}'>{{p}}</a></li>
+                    {% else %}
+                    <li class="pageNum"><a href='?page={{p}}'>{{p}}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if currentPage == totalPage %}
+                <li class="pageNum"><a href="#">Next</a></li>
+                {% else %}
+                <li class="pageNum"><a href="?page={{pages[-1] + 1}}">Next</a></li>
+            {% endif %}
+        {% endif %}
+    </ul>
+</div>
+{% endblock %}
