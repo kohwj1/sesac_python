@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="#" onclick="history.back()">&lt; 뒤로가기</a>
+
+<h2>주문 정보</h2>
+<p>주문 ID: {{order.OrderId}}</p>
+<table>
+    <thead>
+        <tr>
+            <th>고객</th>
+            <th>구매일자</th>
+            <th>매장명</th>
+            <th>총 결제금액</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="/users/detail/{{order.UserId}}">{{order.UserName}}</a></td>
+            <td>{{order.OrderAt}}</td>
+            <td><a href="/stores/detail/{{order.StoreId}}">{{order.StoreName}}</a></td>
+            <td>{{totalprice}}원</a></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>주문 상세 내역</h2>
+<table>
+    <thead>
+        <tr>
+            <th>상품명</th>
+            <th>개당 가격</th>
+            <th>구매 수량</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for oi in orderitems %}
+        <tr>
+            <td><a href="/items/detail/{{oi.ItemId}}">{{oi.ItemName}}</a></td>
+            <td>{{oi.UnitPrice}}</td>
+            <td>{{oi.UnitCount}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

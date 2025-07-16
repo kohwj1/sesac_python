@@ -1,6 +1,6 @@
 import sqlite3
 
-DATABASE = 'mycrm.db'
+DATABASE = 'database/mycrm.db'
 
 def get_connection():
     conn = sqlite3.connect(DATABASE)

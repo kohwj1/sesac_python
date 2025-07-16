@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint
-import user_database as userdb
+import database.user_database as userdb
 
 user_bp = Blueprint('users', __name__)
 

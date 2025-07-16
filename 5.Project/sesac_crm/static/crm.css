@@ -20,7 +20,7 @@
 .idColumn {
     width:40%;
 }
-.pagenation {
+.pagination {
     display:flex;
     flex-direction:row;
     justify-content: space-evenly;
