@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block title %}CRM - 고객 목록{% endblock %}
 {% block content %}
 <form>
     <label for="name">이름: </label>
@@ -63,7 +63,7 @@
                     <li class="pageNum"><a href='?page={{p}}&name={{name}}&gender={{gender}}'>{{p}}</a></li>
                 {% endif %}
             {% endfor %}
-            {% if currentPage == totalPage %}
+            {% if currentPage == lastPage %}
                 <li class="pageNum"><a href="#">Next</a></li>
                 {% else %}
                 <li class="pageNum"><a href="?page={{pages[-1] + 1}}&name={{name}}&gender={{gender}}">Next</a></li>
