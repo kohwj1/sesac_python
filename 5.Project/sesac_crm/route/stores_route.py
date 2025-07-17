@@ -8,8 +8,8 @@ store_bp = Blueprint('stores', __name__)
 def list():
     page = int(request.args.get('page', default=1))
     q = request.args.get('q', default='')
-    pages = [0]
-    lastpage = 1
+    pages = [1]
+    total_page = 1
 
     if q:
         stores = storedb.search_stores(q, page, PAGE_SIZE)
