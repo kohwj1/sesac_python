@@ -38,14 +38,35 @@
     <tbody>
         {% for o in orderList%}
         <tr>
-            <td><a href="{{url_for('orders.order_detail', orderid=o.OrderId)}}">{{o.OrderId}}</a></td>
+            <td><a href="{{url_for('orders.detail', id=o.OrderId)}}">{{o.OrderId}}</a></td>
             <td>{{o.OrderAt}}</td>
-            <td><a href="{{url_for('stores.store_detail', storeid=o.StoreId)}}">{{o.StoreName}}</a></td>
+            <td><a href="{{url_for('stores.detail', id=o.StoreId)}}">{{o.StoreName}}</a></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 <hr>
+
 <h2>자주 방문한 매장 Top 5</h2>
+{% if regulars %}
+    <ul>
+    {% for r in regulars %}
+        <li class="additional">{{r.StoreName}} ({{r.OrderCount}}번 방문)</li>
+    {% endfor %}
+    </ul>
+{% else %}
+<p>자주 방문한 매장이 없습니다.</p>
+{% endif %}
+
 <h2>자주 주문한 상품 Top 5</h2>
+{% if favorites %}
+    <ul>
+    {% for f in favorites %}
+        <li class="additional">{{f.ItemName}} ({{f.ItemCount}}번 주문)</li>
+    {% endfor %}
+    </ul>
+{% else %}
+<p>자주 주문한 상품이 없습니다.</p>
+{% endif %}
+
 {% endblock %}
