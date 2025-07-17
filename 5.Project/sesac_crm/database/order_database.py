@@ -43,8 +43,8 @@ def get_total_price(orderid):
                     JOIN orderitems oi ON o.Id = oi.OrderId
                     JOIN items i ON oi.ItemId = i.Id
                     WHERE o.Id = ?""", (orderid,))
-        total_price = cur.fetchone()[0]
-        return total_price
+        totalprice = cur.fetchone()[0]
+        return totalprice
 
 def get_order_summary(orderid):
     conn = get_connection()
