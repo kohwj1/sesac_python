@@ -59,11 +59,3 @@ def get_order_summary(orderid):
     
     orderinfo = cur.fetchone()
     return orderinfo
-
-
-def get_order_info(orderid) -> list | None:
-    orderinfo = get_order_summary(orderid)
-    total_price = get_total_price(orderid)
-    orderitems = get_orderitems(orderid)
-
-    return {'info':orderinfo, 'price':total_price, 'history':orderitems}
