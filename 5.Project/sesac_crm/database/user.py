@@ -74,6 +74,7 @@ def get_regular_store(userid):
                 JOIN orders o ON u.Id = o.UserId
                 JOIN stores s ON o.StoreId = s.Id 
                 WHERE u.Id = ?
+                GROUP BY s.Id
                 ORDER BY OrderCount DESC
                 LIMIT 5""", (userid, ))
     regulars = cur.fetchall()
@@ -86,7 +87,9 @@ def get_favorite_items(userid):
                 FROM users u
                 JOIN orders o ON u.Id = o.UserId
                 JOIN orderitems oi ON o.Id = oi.OrderId
+                JOIN items i ON oi.ItemId = i.Id
                 WHERE u.Id = ?
+                GROUP BY i.Id
                 ORDER BY ItemCount DESC
                 LIMIT 5""", (userid, ))
     regulars = cur.fetchall()
