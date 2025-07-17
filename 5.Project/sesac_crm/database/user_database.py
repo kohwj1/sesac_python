@@ -67,7 +67,7 @@ def get_user_summary(userid):
     return summary
 
 def get_regular_store(userid):
-    pass
+    return []
 
 def get_favorite_items(userid):
-    pass
+    return []

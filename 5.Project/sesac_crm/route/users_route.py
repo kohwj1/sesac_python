@@ -1,5 +1,6 @@
 from flask import render_template, request, Blueprint
 import database.user_database as userdb
+from common.pagination import PAGE_SIZE, pagination
 
 user_bp = Blueprint('users', __name__)
 
@@ -8,30 +9,23 @@ def user_list():
     name = request.args.get('name', default='')
     gender = request.args.get('gender', default='')
     page = int(request.args.get('page', default=1))
-    pagesize = 20
-    pagination_size = 10
-    pages = 0
-    totalpage = 0
-    total_count = 0
+    pages = [1]
+    total_page = 1
 
     if name and gender:
-        users = [u for u in userdb.search_users_by_name_and_gender(name, gender, page, pagesize) if u['Gender'] == gender]
+        users = [u for u in userdb.search_users_by_name_and_gender(name, gender, page, PAGE_SIZE) if u['Gender'] == gender]
     elif name:
-        users = userdb.search_users_by_name(name, page, pagesize)
+        users = userdb.search_users_by_name(name, page, PAGE_SIZE)
     elif gender:
-        users = userdb.search_users_by_gender(gender, page, pagesize)
+        users = userdb.search_users_by_gender(gender, page, PAGE_SIZE)
     else:
-        users = userdb.get_all_list(page, pagesize)
+        users = userdb.get_all_list(page, PAGE_SIZE)
 
     if users:
-        total_count = users[0]['Totalcount']
-        totalpage = (total_count - 1) // pagesize + 1
-        page_start = ((page - 1) // pagination_size) * pagination_size + 1
-        page_end = min(page_start + pagination_size, totalpage + 1)
-        print(total_count, totalpage, page_start, page_end)
-        pages = [i for i in range(page_start, page_end)]
+        pages = pagination(page, users)['pages']
+        total_page = pagination(page, users)['totalPage']
 
-    return render_template('users.html', users=users, name=name, gender=gender, currentPage=page, pages=pages, totalPage=totalpage)
+    return render_template('users.html', users=users, name=name, gender=gender, currentPage=page, pages=pages, totalPage=total_page)
 
 @user_bp.route('/detail/<userid>')
 def user_detail(userid):
@@ -40,4 +34,4 @@ def user_detail(userid):
     regulars = userdb.get_regular_store(userid)
     favorites = userdb.get_favorite_items(userid)
 
-    return render_template('user_detail.html', user=userinfo, orderlist=orderlist, regulars=regulars, favorites=favorites)
+    return render_template('user_detail.html', user=userinfo, orderList=orderlist, regulars=regulars, favorites=favorites)
