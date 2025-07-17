@@ -12,7 +12,7 @@ def get_all_list(page, pagesize) -> list | None:
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""SELECT o.Id AS Id, o.OrderAt AS OrderAt, s.Name AS StoreName, s.Id AS StoreId, u.Id AS UserId, COUNT(*) OVER() AS Totalcount
+    cur.execute("""SELECT o.Id AS Id, o.OrderAt AS OrderAt, s.Name AS StoreName, s.Id AS StoreId, u.Id AS UserId, u.Name AS UserName, COUNT(*) OVER() AS Totalcount
                 FROM users u 
                 JOIN orders o ON u.Id = o.UserId
                 JOIN stores s ON o.StoreId = s.Id
