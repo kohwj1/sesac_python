@@ -25,8 +25,7 @@ def order_list():
 
 @order_bp.route('/detail/<orderid>')
 def order_detail(orderid):
-    order = orderdb.get_order_info(orderid)
-    orderinfo = order['info']
-    orderitems = order['history']
-    totalprice = order['price']
-    return render_template('order_detail.html', order=orderinfo, orderitems=orderitems, totalprice=totalprice)
+    orderinfo = orderdb.get_order_summary(orderid)
+    orderitems = orderdb.get_orderitems(orderid)
+    totalprice = orderdb.get_total_price(orderid)
+    return render_template('order_detail.html', order=orderinfo, orderItems=orderitems, totalPrice=totalprice)
