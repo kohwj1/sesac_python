@@ -67,7 +67,27 @@ def get_user_summary(userid):
     return summary
 
 def get_regular_store(userid):
-    return []
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("""SELECT s.Name AS StoreName, COUNT(o.Id) AS OrderCount
+                FROM users u
+                JOIN orders o ON u.Id = o.UserId
+                JOIN stores s ON o.StoreId = s.Id 
+                WHERE u.Id = ?
+                ORDER BY OrderCount DESC
+                LIMIT 5""", (userid, ))
+    regulars = cur.fetchall()
+    return regulars
 
 def get_favorite_items(userid):
-    return []
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("""SELECT i.Name AS ItemName, COUNT(oi.Id) AS ItemCount
+                FROM users u
+                JOIN orders o ON u.Id = o.UserId
+                JOIN orderitems oi ON o.Id = oi.OrderId
+                WHERE u.Id = ?
+                ORDER BY ItemCount DESC
+                LIMIT 5""", (userid, ))
+    regulars = cur.fetchall()
+    return regulars
