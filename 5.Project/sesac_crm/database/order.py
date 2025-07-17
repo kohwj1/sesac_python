@@ -21,30 +21,30 @@ def get_all_list(page, pagesize) -> list | None:
     return cur.fetchall()
 
 def get_orderitems(orderid):
-        conn = get_connection()
-        cur = conn.cursor()
+    conn = get_connection()
+    cur = conn.cursor()
 
-        cur.execute("""SELECT i.Id AS ItemId, i.Name AS ItemName, i.UnitPrice AS UnitPrice, COUNT(*) AS UnitCount
-                    FROM orders o
-                    JOIN orderitems oi ON o.Id = oi.OrderId
-                    JOIN items i ON oi.ItemId = i.Id
-                    WHERE o.Id = ?
-                    GROUP BY ItemName
-                    ORDER BY OrderAt DESC, UnitCount DESC""", (orderid,))
-        orderitems = cur.fetchall()
-        return orderitems
+    cur.execute("""SELECT i.Id AS ItemId, i.Name AS ItemName, i.UnitPrice AS UnitPrice, COUNT(*) AS UnitCount
+                FROM orders o
+                JOIN orderitems oi ON o.Id = oi.OrderId
+                JOIN items i ON oi.ItemId = i.Id
+                WHERE o.Id = ?
+                GROUP BY ItemName
+                ORDER BY OrderAt DESC, UnitCount DESC""", (orderid,))
+    orderitems = cur.fetchall()
+    return orderitems
 
 def get_total_price(orderid):
-        conn = get_connection()
-        cur = conn.cursor()
+    conn = get_connection()
+    cur = conn.cursor()
 
-        cur.execute("""SELECT SUM(i.UnitPrice) AS TotalPrice
-                    FROM orders o
-                    JOIN orderitems oi ON o.Id = oi.OrderId
-                    JOIN items i ON oi.ItemId = i.Id
-                    WHERE o.Id = ?""", (orderid,))
-        totalprice = cur.fetchone()[0]
-        return totalprice
+    cur.execute("""SELECT SUM(i.UnitPrice) AS TotalPrice
+                FROM orders o
+                JOIN orderitems oi ON o.Id = oi.OrderId
+                JOIN items i ON oi.ItemId = i.Id
+                WHERE o.Id = ?""", (orderid,))
+    totalprice = cur.fetchone()[0]
+    return totalprice
 
 def get_order_summary(orderid):
     conn = get_connection()
