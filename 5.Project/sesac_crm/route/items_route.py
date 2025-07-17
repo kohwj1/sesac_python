@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint
-import database.item_database as itemdb
+import database.item as itemdb
 
 item_bp = Blueprint('items', __name__)
 

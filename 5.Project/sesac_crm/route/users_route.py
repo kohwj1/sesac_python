@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint
-import database.user_database as userdb
+import database.user as userdb
 from common.pagination import PAGE_SIZE, pagination
 
 user_bp = Blueprint('users', __name__)

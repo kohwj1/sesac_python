@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint
-import database.store_database as storedb
+import database.store as storedb
 from common.pagination import PAGE_SIZE, pagination
 
 store_bp = Blueprint('stores', __name__)

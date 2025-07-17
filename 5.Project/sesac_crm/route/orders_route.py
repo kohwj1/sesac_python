@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint
-import database.order_database as orderdb
+import database.order as orderdb
 
 order_bp = Blueprint('orders', __name__)
 
