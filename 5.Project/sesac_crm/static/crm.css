@@ -44,6 +44,10 @@
 .noResult {
     padding: 10px 0px;
 }
+.additional {
+    list-style-type: disc;
+}
+
 body {
     margin-top:0px;
     box-sizing: border-box;
