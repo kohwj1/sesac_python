@@ -12,8 +12,8 @@ def get_all_list(page, pagesize) -> list | None:
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""SELECT Id OrderId, ItemId, COUNT(*) OVER() AS Totalcount
+    cur.execute("""SELECT Id, OrderId, ItemId, COUNT(*) OVER() AS Totalcount
                 FROM orderitems
-                ORDER BY OrderAt DESC
+                ORDER BY OrderId
                 LIMIT ? OFFSET ?""", (pagesize, off_start))
     return cur.fetchall()
