@@ -29,6 +29,10 @@
     border-right: 1px solid #bbb;
     padding: 5px 15px;
 }
+.disabled {
+    color: #ddd;
+}
+
 .pageNum:last-of-type {
     border-right: none;
 }
