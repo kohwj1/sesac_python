@@ -38,8 +38,6 @@
 }
 .currentPage {
     background-color: #136262;
-}
-.currentPage > a {
     color:#fff;
     font-weight: 700;
 }
