@@ -8,10 +8,11 @@
 <body>
     <nav>
         <ul class="gnb">
-            <li><a class="gnbItem" href="/users">고객정보</a></li>
-            <li><a class="gnbItem" href="/orders">주문정보</a></li>
-            <li><a class="gnbItem" href="/stores">매장정보</a></li>
-            <li><a class="gnbItem" href="/items">상품정보</a></li>
+            <li><a class="gnbItem" href="{{url_for('users.list')}}">User</a></li>
+            <li><a class="gnbItem" href="{{url_for('orders.list')}}">Order</a></li>
+            <li><a class="gnbItem" href="/orderitems">OrderItem</a></li>
+            <li><a class="gnbItem" href="{{url_for('stores.list')}}">Store</a></li>
+            <li><a class="gnbItem" href="{{url_for('items.list')}}">Item</a></li>
         </ul>
     </nav>
     <main>

@@ -4,7 +4,7 @@ import database.item as itemdb
 item_bp = Blueprint('items', __name__)
 
 @item_bp.route('/')
-def item_list():
+def list():
     page = int(request.args.get('page', default=1))
     pagesize = 20
     pagination_size = 10
@@ -23,9 +23,9 @@ def item_list():
 
     return render_template('items.html', items=items, currentPage=page, pages=pages, totalPage=total_page)
 
-@item_bp.route('/detail/<itemid>')
-def item_detail(itemid):
-    item = itemdb.get_item_summary(itemid)
-    sales = itemdb.get_sales(itemid)
+@item_bp.route('/detail/<id>')
+def detail(id):
+    item = itemdb.get_item_summary(id)
+    sales = itemdb.get_sales(id)
 
     return render_template('item_detail.html', item=item, sales=sales)

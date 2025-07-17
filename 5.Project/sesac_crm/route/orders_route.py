@@ -1,31 +1,26 @@
 from flask import render_template, request, Blueprint
 import database.order as orderdb
+from common.pagination import pagination, PAGE_SIZE
 
 order_bp = Blueprint('orders', __name__)
 
 @order_bp.route('/')
-def order_list():
+def list():
     page = int(request.args.get('page', default=1))
-    pagesize = 20
-    pagination_size = 10
-    total_count = 0
+    pages = [1]
+    total_page = 1
 
-    orders = orderdb.get_all_list(page, pagesize)
+    orders = orderdb.get_all_list(page, PAGE_SIZE)
 
     if orders:
-        total_count = orders[0]['Totalcount']
-        total_page = (total_count - 1) // pagesize + 1
-
-        page_start = ((page - 1) // pagination_size) * pagination_size + 1
-        page_end = min(page_start + pagination_size, total_page + 1)
-        print(total_count, total_page, page_start, page_end)
-        pages = [i for i in range(page_start, page_end)]
+        pages = pagination(page, orders)['pages']
+        total_page = pagination(page, orders)['totalPage']
 
     return render_template('orders.html', orders=orders, currentPage=page, pages=pages, totalPage=total_page)
 
-@order_bp.route('/detail/<orderid>')
-def order_detail(orderid):
-    orderinfo = orderdb.get_order_summary(orderid)
-    orderitems = orderdb.get_orderitems(orderid)
-    totalprice = orderdb.get_total_price(orderid)
-    return render_template('order_detail.html', order=orderinfo, orderItems=orderitems, totalPrice=totalprice)
+@order_bp.route('/detail/<id>')
+def detail(id):
+    orderinfo = orderdb.get_order_summary(id)
+    order_items = orderdb.get_orderitems(id)
+    total_price = orderdb.get_total_price(id)
+    return render_template('order_detail.html', order=orderinfo, orderItems=order_items, totalPrice=total_price)

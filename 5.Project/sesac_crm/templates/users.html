@@ -38,7 +38,7 @@
         {% else %}
             {% for u in users %}
             <tr>
-                <td><a href="/users/detail/{{u.Id}}">{{u.Id}}</a></td>
+                <td><a href="{{url_for('users.detail',id=u.Id)}}">{{u.Id}}</a></td>
                 <td>{{u.Name}}</td>
                 <td>{{u.Gender}}</td>
                 <td>{{u.Age}}</td>
@@ -54,19 +54,19 @@
             {% if pages[0] - 1 < 1 %}
                 <li class="pageNum disabled">Prev</li>
                 {% else %}
-                <li class="pageNum"><a href="?page={{pages[0] - 1}}&name={{name}}&gender={{gender}}">Prev</a></li>
+                <li class="pageNum"><a href="{{url_for('users.list', page=pages[0] - 1, name=name, gender=gender)}}">Prev</a></li>
             {% endif %}
             {% for p in pages %}
                 {% if p == currentPage %}
-                    <li class="pageNum currentPage"><a href='?page={{p}}&name={{name}}&gender={{gender}}'>{{p}}</a></li>
+                    <li class="pageNum currentPage">{{p}}</li>
                     {% else %}
-                    <li class="pageNum"><a href='?page={{p}}&name={{name}}&gender={{gender}}'>{{p}}</a></li>
+                    <li class="pageNum"><a href="{{url_for('users.list', page=p, name=name, gender=gender)}}">{{p}}</a></li>
                 {% endif %}
             {% endfor %}
             {% if pages[-1] + 1 >= totalPage %}
                 <li class="pageNum disabled">Next</li>
                 {% else %}
-                <li class="pageNum"><a href="?page={{pages[-1] + 1}}&name={{name}}&gender={{gender}}">Next</a></li>
+                <li class="pageNum"><a href="{{url_for('users.list', page=pages[-1] + 1, name=name, gender=gender)}}">Next</a></li>
             {% endif %}
         {% endif %}
     </ul>

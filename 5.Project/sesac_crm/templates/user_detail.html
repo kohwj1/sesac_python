@@ -38,9 +38,9 @@
     <tbody>
         {% for o in orderList%}
         <tr>
-            <td><a href="/orders/detail/{{o.OrderId}}">{{o.OrderId}}</a></td>
+            <td><a href="{{url_for('orders.order_detail', orderid=o.OrderId)}}">{{o.OrderId}}</a></td>
             <td>{{o.OrderAt}}</td>
-            <td><a href="/stores/detail/{{o.StoreId}}">{{o.StoreName}}</a></td>
+            <td><a href="{{url_for('stores.store_detail', storeid=o.StoreId)}}">{{o.StoreName}}</a></td>
         </tr>
         {% endfor %}
     </tbody>

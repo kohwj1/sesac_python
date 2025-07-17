@@ -13,10 +13,10 @@
     <tbody>
         {% for o in orders %}
         <tr>
-            <td><a href="/orders/detail/{{o.Id}}">{{o.Id}}</a></td>
+            <td><a href="{{url_for('orders.detail', id=o.Id)}}">{{o.Id}}</a></td>
             <td>{{o.OrderAt}}</td>
-            <td><a href="/stores/detail/{{o.StoreId}}">{{o.StoreName}}</a></td>
-            <td><a href="/users/detail/{{o.UserId}}">상세보기</a></td>
+            <td><a href="{{url_for('stores.detail', id=o.StoreId)}}">{{o.StoreName}}</a></td>
+            <td><a href="{{url_for('users.detail', id=o.UserId)}}">{{o.UserName}}</a></td>
         </tr>
         {% endfor %}
     </tbody>
@@ -24,22 +24,22 @@
 <div class="pagination">
     <ul class="pagination">
         {% if pages %}
-            {% if currentPage == 1 %}
-                <li class="pageNum"><a href="#">Prev</a></li>
+            {% if pages[0] - 1 < 1 %}
+                <li class="pageNum disabled">Prev</li>
                 {% else %}
-                <li class="pageNum"><a href="?page={{pages[0] - 1}}">Prev</a></li>
+                <li class="pageNum"><a href="{{url_for('orders.list', page=pages[0] - 1)}}">Prev</a></li>
             {% endif %}
             {% for p in pages %}
                 {% if p == currentPage %}
-                    <li class="pageNum currentPage"><a href='?page={{p}}'>{{p}}</a></li>
+                    <li class="pageNum currentPage">{{p}}</li>
                     {% else %}
-                    <li class="pageNum"><a href='?page={{p}}'>{{p}}</a></li>
+                    <li class="pageNum"><a href="{{url_for('orders.list', page=p)}}">{{p}}</a></li>
                 {% endif %}
             {% endfor %}
-            {% if currentPage == totalPage %}
-                <li class="pageNum"><a href="#">Next</a></li>
+            {% if pages[-1] + 1 >= totalPage %}
+                <li class="pageNum disabled">Next</li>
                 {% else %}
-                <li class="pageNum"><a href="?page={{pages[-1] + 1}}">Next</a></li>
+                <li class="pageNum"><a href="{{url_for('orders.list', page=pages[-1] + 1)}}">Next</a></li>
             {% endif %}
         {% endif %}
     </ul>

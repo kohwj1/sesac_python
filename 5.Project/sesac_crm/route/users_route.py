@@ -5,7 +5,7 @@ from common.pagination import PAGE_SIZE, pagination
 user_bp = Blueprint('users', __name__)
 
 @user_bp.route('/')
-def user_list():
+def list():
     name = request.args.get('name', default='')
     gender = request.args.get('gender', default='')
     page = int(request.args.get('page', default=1))
@@ -27,11 +27,11 @@ def user_list():
 
     return render_template('users.html', users=users, name=name, gender=gender, currentPage=page, pages=pages, totalPage=total_page)
 
-@user_bp.route('/detail/<userid>')
-def user_detail(userid):
-    userinfo = userdb.get_user_summary(userid)
-    orderlist = userdb.get_user_history(userid)
-    regulars = userdb.get_regular_store(userid)
-    favorites = userdb.get_favorite_items(userid)
+@user_bp.route('/detail/<id>')
+def detail(id):
+    userinfo = userdb.get_user_summary(id)
+    orderlist = userdb.get_user_history(id)
+    regulars = userdb.get_regular_store(id)
+    favorites = userdb.get_favorite_items(id)
 
     return render_template('user_detail.html', user=userinfo, orderList=orderlist, regulars=regulars, favorites=favorites)
