@@ -17,6 +17,17 @@ def get_all_list(page, pagesize) -> list | None:
                 LIMIT ? OFFSET ?""", (pagesize, off_start))
     return cur.fetchall()
 
+def search_stores(q, page, pagesize) -> list | None:
+    off_start = (page - 1) * pagesize
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""SELECT Id, Type, Name AS StoreName, Address, COUNT(*) OVER () AS TotalCount
+                FROM stores
+                WHERE Name LIKE ? OR Address LIKE ?
+                LIMIT ? OFFSET ?""", (f'%{q}%', f'%{q}%', pagesize, off_start))
+    return cur.fetchall()
+
 def get_store_summary(storeid):
     conn = get_connection()
     cur = conn.cursor()

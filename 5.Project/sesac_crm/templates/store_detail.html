@@ -37,7 +37,7 @@
         {% if sales %}
             {% for s in sales %}
             <tr>
-                {% if is_filtered %}
+                {% if isFiltered %}
                 <td>{{s.OrderDate}}</td>
                 {% else %}
                 <td><a href="?month={{s.OrderDate}}">{{s.OrderDate}}</a></td>
