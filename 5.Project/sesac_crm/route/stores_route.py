@@ -8,7 +8,7 @@ store_bp = Blueprint('stores', __name__)
 def store_list():
     page = int(request.args.get('page', default=1))
     q = request.args.get('q', default='')
-    pages = 0
+    pages = [0]
     lastpage = 1
 
     if q:
@@ -17,10 +17,10 @@ def store_list():
         stores = storedb.get_all_list(page, PAGE_SIZE)
 
     if stores:
-        pages = pagination(page, stores)
-        lastpage = len(pages)
+        pages = pagination(page, stores)['pages']
+        total_page = pagination(page, stores)['totalPage']
 
-    return render_template('stores.html', stores=stores, currentPage=page, pages=pages, lastPage=lastpage, q=q)
+    return render_template('stores.html', stores=stores, currentPage=page, pages=pages, totalPage=total_page, q=q)
 
 @store_bp.route('/detail/<storeid>')
 def store_detail(storeid):

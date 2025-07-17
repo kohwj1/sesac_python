@@ -19,7 +19,7 @@
             <td><a href="/users/detail/{{order.UserId}}">{{order.UserName}}</a></td>
             <td>{{order.OrderAt}}</td>
             <td><a href="/stores/detail/{{order.StoreId}}">{{order.StoreName}}</a></td>
-            <td>{{totalprice}}원</a></td>
+            <td>{{totalPrice}}원</a></td>
         </tr>
     </tbody>
 </table>
@@ -36,7 +36,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for oi in orderitems %}
+        {% for oi in orderItems %}
         <tr>
             <td><a href="/items/detail/{{oi.ItemId}}">{{oi.ItemName}}</a></td>
             <td>{{oi.UnitPrice}}</td>
