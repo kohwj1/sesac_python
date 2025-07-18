@@ -31,9 +31,9 @@ def list():
         users = userdb.get_all_list(page, PAGE_SIZE)
     
     if users:
-        total_page = pagination(page, users)
+        last_page = pagination(users)
 
-    return jsonify({'data':users['data'], 'totalPage':total_page})
+    return jsonify({'data':users['data'], 'lastPage':last_page})
 
 @user_bp.route('/api/summary/<id>')
 def summary(id):

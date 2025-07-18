@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>고객 목록</title>
+    <title>매장 목록</title>
     <link rel="stylesheet" href="/static/css/crm.css">
 </head>
 <body>
@@ -16,25 +16,13 @@
         </ul>
     </nav>
     <main>
-        <form>
-            <label for="name">이름: </label>
-            <input type="search" placeholder="이름으로 검색" name="name" id="name">
-            <label for="gender">성별: </label>
-            <select name="gender" id="gender">
-                <option></option>
-                <option id="male" value="Male">남성</option>
-                <option id="female" value="Female">여성</option>
-            </select>
-            <button type="submit" id="btnSubmit">검색</button>
-        </form>
         <table>
             <thead>
                 <tr>
-                    <th class="idColumn">ID</th>
-                    <th>이름</th>
-                    <th>성별</th>
-                    <th>연령</th>
-                    <th>생일</th>
+                    <th class="idColumn">매장 ID</th>
+                    <th>유형</th>
+                    <th>매장명</th>
+                    <th>주소</th>
                 </tr>
             </thead>
             <tbody id="tableContent"><!-- 표 구성 영역 --></tbody>
@@ -43,6 +31,6 @@
             <ul class="pagination" id="pageList"><!--페이지네이션 구성 영역 --></ul>
         </div>
     </main>
-    <script src="/static/js/userList.js"></script>
+    <script src="/static/js/storeList.js"></script>
 </body>
 </html>

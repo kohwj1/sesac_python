@@ -1,4 +1,3 @@
-# import sqlite3
 from sqlalchemy import select, func, desc
 from sqlalchemy.orm import Session
 from database.tables import User, Store, Order, OrderItem, Item, engine

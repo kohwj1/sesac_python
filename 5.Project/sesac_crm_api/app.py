@@ -8,10 +8,10 @@ from route.items_route import item_bp
 
 app = Flask(__name__)
 app.register_blueprint(user_bp, url_prefix='/users')
-app.register_blueprint(order_bp, url_prefix='/api/orders')
-app.register_blueprint(store_bp, url_prefix='/api/stores')
-app.register_blueprint(item_bp, url_prefix='/api/items')
-app.register_blueprint(orderitem_bp, url_prefix='/api/orderitems')
+app.register_blueprint(order_bp, url_prefix='/orders')
+app.register_blueprint(store_bp, url_prefix='/stores')
+app.register_blueprint(item_bp, url_prefix='/items')
+app.register_blueprint(orderitem_bp, url_prefix='/orderitems')
 
 @app.route('/')
 def index():

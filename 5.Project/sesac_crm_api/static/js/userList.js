@@ -49,11 +49,11 @@ function displayList() {
                             `
                 }
             };
-            createPagination(parseInt(page), data.totalPage)   
+            createPagination(parseInt(page), data.lastPage)   
         })
     };
 
-function createPagination(currentPage, totalPage) {
+function createPagination(currentPage, lastPage) {
     const pagination = document.getElementById('pageList')
     if (currentPage -1 < 1) {
         pagination.innerHTML = `<li class="pageNum disabled">Prev</li>`
@@ -63,7 +63,7 @@ function createPagination(currentPage, totalPage) {
 
     pagination.innerHTML += `<li class="pageNum currentPage">${currentPage}</li>`
 
-    if (currentPage + 1 > totalPage) {
+    if (currentPage + 1 > lastPage) {
         pagination.innerHTML += `<li class="pageNum disabled">Next</li>`
     } else {
         pagination.innerHTML += `<li class="pageNum"><a href="?page=${currentPage + 1}&name=${username}&gender=${gender}">Next</a></li>`
