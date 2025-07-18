@@ -49,6 +49,8 @@
 }
 
 body {
+    max-width: 1100px;
+    margin:auto;
     margin-top:0px;
     box-sizing: border-box;
 }
@@ -96,4 +98,8 @@ form {
 }
 input, label, button {
     margin: 0px 5px;
+}
+
+canvas {
+    padding: 20px 0px;
 }
