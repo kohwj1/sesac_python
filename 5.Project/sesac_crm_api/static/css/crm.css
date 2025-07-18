@@ -1,0 +1,113 @@
+
+.gnb {
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+    align-items: center;
+    margin:0;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    background-color: #2b1362;
+    position: fixed;
+    left:0;
+    width:100%;
+}
+
+.gnbItem {
+    color:#fff;
+    text-decoration: none;
+}
+.idColumn {
+    width:40%;
+}
+.pagination {
+    display:flex;
+    flex-direction:row;
+    justify-content: space-evenly;
+}
+.pageNum {
+    border-right: 1px solid #bbb;
+    padding: 5px 15px;
+}
+.disabled {
+    color: #ddd;
+}
+
+.pageNum:last-of-type {
+    border-right: none;
+}
+.currentPage {
+    background-color: #2b1362;
+    color:#fff;
+    font-weight: 700;
+}
+.noResult {
+    padding: 10px 0px;
+}
+.additional {
+    list-style-type: disc;
+}
+
+.userStatistics {
+    padding-left:25px;
+}
+
+body {
+    max-width: 1100px;
+    margin:auto;
+    margin-top:0px;
+    box-sizing: border-box;
+}
+
+main {
+    padding-top: 60px;
+}
+ul {
+    padding-left:0;
+}
+
+li {
+    list-style-type: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* margin-left:auto;
+    margin-right:auto; */
+
+}
+
+th, td {
+    height:36px;
+    text-align: center;
+}
+
+tr {
+    border-bottom: 1px solid #a399b8;
+}
+
+tr:hover{
+    background-color: #d0c5e7;
+}
+
+th {
+    background-color: #b7a8d6;
+}
+a {
+    text-decoration-line: none;
+    color:#2b1362;
+}
+form {
+    margin:15px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+input, label, button {
+    margin: 0px 5px;
+}
+
+canvas {
+    padding: 20px 0px;
+}

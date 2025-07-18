@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>고객 목록</title>
+    <link rel="stylesheet" href="/static/css/crm.css">
+</head>
+<body>
+    <nav>
+        <ul class="gnb">
+            <li><a class="gnbItem" href="/users">User</a></li>
+            <li><a class="gnbItem" href="/orders">Order</a></li>
+            <li><a class="gnbItem" href="#">OrderItem</a></li>
+            <li><a class="gnbItem" href="#">Store</a></li>
+            <li><a class="gnbItem" href="#">Item</a></li>
+        </ul>
+    </nav>
+    <main>
+        <form>
+            <label for="name">이름: </label>
+            <input type="search" placeholder="이름으로 검색" name="name" id="name">
+            <label for="gender">성별: </label>
+            <select name="gender" id="gender">
+                <option></option>
+                <option id="male" value="Male">남성</option>
+                <option id="female" value="Female">여성</option>
+            </select>
+            <button type="submit" id="btnSubmit">검색</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="idColumn">ID</th>
+                    <th>이름</th>
+                    <th>성별</th>
+                    <th>연령</th>
+                    <th>생일</th>
+                </tr>
+            </thead>
+            <tbody id="tableContent"><!-- 표 구성 영역 --></tbody>
+        </table>
+        <div class="pagination">
+            <ul class="pagination" id="pageList"><!--페이지네이션 구성 영역 --></ul>
+        </div>
+    </main>
+    <script src="/static/js/users/list.js"></script>
+</body>
+</html>
