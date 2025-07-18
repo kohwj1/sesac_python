@@ -1,19 +1,19 @@
 function getChartData() {
     const dataArray = document.getElementsByClassName('chartdata')
     let itemLabels = []
-    let barValues = []
     let lineValues = []
-    for (i = 0; i < dataArray.length; i += 3) {
-        itemLabels.push(dataArray[i].innerText);
-        barValues.push(dataArray[i+1].innerText);
-        lineValues.push(dataArray[i+2].innerText);
+    let barValues = []
+    for (i = 0; i + 2 < dataArray.length; i += 3) {
+        itemLabels.push(dataArray[i].textContent);
+        lineValues.push(dataArray[i+1].textContent);
+        barValues.push(dataArray[i+2].textContent);
     }
     
     itemLabels.reverse();
-    barValues.reverse();
     lineValues.reverse();
+    barValues.reverse();
     
-    return {'itemLabels':itemLabels, 'barValues':barValues, 'lineValues':lineValues}
+    return {'itemLabels':itemLabels, 'lineValues':lineValues, 'barValues':barValues}
 }
 
 function drawChart() {
@@ -23,22 +23,25 @@ function drawChart() {
 
     const data = {
         labels: raw_data.itemLabels,
-        datasets: [{
-            type: 'bar',
+        datasets: [
+            {
+            type: 'line',
             label: '매출(원)',
+            data: raw_data.lineValues,
+            //fill: false,
+            //borderDash: [5, 5],
+            borderColor: '#136262',
+            backgroundColor: '#136262',
+            borderWidth: 2,
+            tension:0,
+            yAxisID: 'yright'
+        },
+            {
+            type: 'bar',
+            label: '판매량(개)',
             data: raw_data.barValues,
             backgroundColor: '#6c848452',
             yAxisID: 'yleft'
-        }, {
-            type: 'line',
-            label: '판매량(개)',
-            data: raw_data.lineValues,
-            fill: false,
-            borderColor: '#6c8484',
-            borderWidth: 1,
-            fill: false,
-            tension:0.1,
-            yAxisID: 'yright'
         }]
         };
 
@@ -46,11 +49,10 @@ function drawChart() {
         type: 'scatter',
         data: data,
         options: {
+            interaction: {intersect: true, mode: 'index'},
             aspectRatio:2.5,
-            scales: {
-                yleft: {position: 'left'},
-                yright: {position:'right'}
-            }
+            scales: {yleft: {position: 'left'}, yright: {position:'right', grid: {drawOnChartArea: false}}},
+            plugins: {legend: {align: 'start'}}
         }
         };
 

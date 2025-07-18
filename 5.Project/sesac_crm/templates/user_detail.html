@@ -24,8 +24,6 @@
     </tbody>
 </table>
 
-<hr>
-
 <h2>주문 정보</h2>
 <table>
     <thead>
@@ -45,11 +43,10 @@
         {% endfor %}
     </tbody>
 </table>
-<hr>
 
 <h2>자주 방문한 매장 Top 5</h2>
 {% if regulars %}
-    <ul>
+    <ul class="userStatistics">
     {% for r in regulars %}
         <li class="additional">{{r.StoreName}} ({{r.OrderCount}}번 방문)</li>
     {% endfor %}
@@ -60,7 +57,7 @@
 
 <h2>자주 주문한 상품 Top 5</h2>
 {% if favorites %}
-    <ul>
+    <ul class="userStatistics">
     {% for f in favorites %}
         <li class="additional">{{f.ItemName}} ({{f.ItemCount}}번 주문)</li>
     {% endfor %}
