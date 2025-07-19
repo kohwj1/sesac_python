@@ -25,7 +25,7 @@ function displayHistory() {
         .then((data) => {
             table_data = data.data;
             const userHistory = document.getElementById('history')
-            console.log(table_data)
+            // console.log(table_data)
             if (table_data.length == 0) {
                 userHistory.innerHTML = '<tr><td colspan="3" class="noResult">표시할 데이터가 없습니다</td></tr>'
             } else {
@@ -48,7 +48,7 @@ function displayRegulars() {
         .then((data) => {
             table_data = data.data;
             const userRegulars = document.getElementById('regulars')
-            console.log(table_data)
+            // console.log(table_data)
             if (table_data.length == 0) {
                 userRegulars.innerHTML = '<li>표시할 데이터가 없습니다</li>'
             } else {
@@ -66,7 +66,7 @@ function displayFavorites() {
         .then((data) => {
             table_data = data.data;
             const userFavorites = document.getElementById('favorites')
-            console.log(table_data)
+            // console.log(table_data)
             if (table_data.length == 0) {
                 userFavorites.innerHTML = '<li>표시할 데이터가 없습니다</li>'
             } else {
