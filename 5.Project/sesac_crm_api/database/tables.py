@@ -1,10 +1,11 @@
 from sqlalchemy import create_engine, Column, Integer, String, DateTime
-from sqlalchemy.orm import declarative_base, Session
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 DATABASE = 'database/mycrm.db'
 
 engine = create_engine(f'sqlite:///{DATABASE}', echo=True)
 Base = declarative_base()
+session = sessionmaker(bind=engine)
 
 class User(Base):
     __tablename__ = 'users'
