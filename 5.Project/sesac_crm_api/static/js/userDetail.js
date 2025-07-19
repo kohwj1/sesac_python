@@ -1,5 +1,5 @@
 const args = new URLSearchParams(window.location.search)
-let userid = args.get('id')
+const userid = args.get('id')
 // console.log(userid)
 
 function displaySummary() {

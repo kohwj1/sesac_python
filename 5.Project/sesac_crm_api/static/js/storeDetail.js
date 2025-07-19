@@ -1,5 +1,5 @@
 const args = new URLSearchParams(window.location.search)
-let storeid = args.get('id')
+const storeid = args.get('id')
 let month = args.get('month')
 // console.log(storeid)
 
@@ -12,8 +12,8 @@ function displaySummary() {
             const storeId = document.getElementById('storeId')
             storeId.textContent = data.Id
 
-            const userSummary = document.getElementById('summary');
-            userSummary.innerHTML = `                    
+            const storeSummary = document.getElementById('summary');
+            storeSummary.innerHTML = `                    
                                     <tr>
                                         <td>${data.Name}</td>
                                         <td>${data.Type}</td>
