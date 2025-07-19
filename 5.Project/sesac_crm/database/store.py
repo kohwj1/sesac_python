@@ -1,11 +1,4 @@
-import sqlite3
-
-DATABASE = 'database/mycrm.db'
-
-def get_connection():
-    conn = sqlite3.connect(DATABASE)
-    conn.row_factory = sqlite3.Row
-    return conn
+from database.db_connect import get_connection
 
 def get_all_list(page, pagesize) -> list | None:
     off_start = (page - 1) * pagesize
