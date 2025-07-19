@@ -36,7 +36,7 @@
                     <li class="pageNum"><a href="{{url_for('items.list', page=p)}}">{{p}}</a></li>
                 {% endif %}
             {% endfor %}
-            {% if pages[-1] + 1 >= totalPage %}
+            {% if pages[-1] + 1 >= lastPage %}
                 <li class="pageNum disabled">Next</li>
                 {% else %}
                 <li class="pageNum"><a href="{{url_for('items.list', page=pages[-1] + 1)}}">Next</a></li>

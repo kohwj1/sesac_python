@@ -8,15 +8,15 @@ order_bp = Blueprint('orders', __name__)
 def list():
     page = int(request.args.get('page', default=1))
     pages = [1]
-    total_page = 1
+    last_page = 1
 
     orders = orderdb.get_all_list(page, PAGE_SIZE)
 
     if orders:
         pages = pagination(page, orders)['pages']
-        total_page = pagination(page, orders)['totalPage']
+        last_page = pagination(page, orders)['totalPage']
 
-    return render_template('orders.html', orders=orders, currentPage=page, pages=pages, totalPage=total_page)
+    return render_template('orders.html', orders=orders, currentPage=page, pages=pages, lastPage=last_page)
 
 @order_bp.route('/detail/<id>')
 def detail(id):

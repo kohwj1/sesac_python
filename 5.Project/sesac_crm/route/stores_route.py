@@ -9,7 +9,7 @@ def list():
     page = int(request.args.get('page', default=1))
     q = request.args.get('q', default='')
     pages = [1]
-    total_page = 1
+    last_page = 1
 
     if q:
         stores = storedb.search_stores(q, page, PAGE_SIZE)
@@ -18,9 +18,9 @@ def list():
 
     if stores:
         pages = pagination(page, stores)['pages']
-        total_page = pagination(page, stores)['totalPage']
+        last_page = pagination(page, stores)['totalPage']
 
-    return render_template('stores.html', stores=stores, currentPage=page, pages=pages, totalPage=total_page, q=q)
+    return render_template('stores.html', stores=stores, currentPage=page, pages=pages, lastPage=last_page, q=q)
 
 @store_bp.route('/detail/<id>')
 def detail(id):

@@ -10,7 +10,7 @@ def list():
     gender = request.args.get('gender', default='')
     page = int(request.args.get('page', default=1))
     pages = [1]
-    total_page = 1
+    last_page = 1
 
     if name and gender:
         users = [u for u in userdb.search_users_by_name_and_gender(name, gender, page, PAGE_SIZE) if u['Gender'] == gender]
@@ -23,9 +23,9 @@ def list():
 
     if users:
         pages = pagination(page, users)['pages']
-        total_page = pagination(page, users)['totalPage']
+        last_page = pagination(page, users)['totalPage']
 
-    return render_template('users.html', users=users, name=name, gender=gender, currentPage=page, pages=pages, totalPage=total_page)
+    return render_template('users.html', users=users, name=name, gender=gender, currentPage=page, pages=pages, lastPage=last_page)
 
 @user_bp.route('/detail/<id>')
 def detail(id):
