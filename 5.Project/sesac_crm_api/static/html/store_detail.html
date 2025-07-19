@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>매장 상세 :: </title>
+    <link rel="stylesheet" href="/static/css/crm.css">
+</head>
+<body>
+    <nav>
+        <ul class="gnb">
+            <li><a class="gnbItem" href="/users">User</a></li>
+            <li><a class="gnbItem" href="/orders">Order</a></li>
+            <li><a class="gnbItem" href="/orderitems">OrderItem</a></li>
+            <li><a class="gnbItem" href="/stores">Store</a></li>
+            <li><a class="gnbItem" href="/items">Item</a></li>
+        </ul>
+    </nav>
+    <main>
+        <a href="#" onclick="history.back()">&lt; 뒤로가기</a>
+
+        <h2>매장 정보</h2>
+        <p>매장 ID: <span id="storeId"></span></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>매장명</th>
+                    <th>유형</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody id="summary"><!-- 매장 요약정보 들어가는 곳 --></tbody>
+        </table>
+
+        <h2>월간 매출액</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>기간</th>
+                    <th>매출 합계</th>
+                    <th>주문 횟수</th>
+                </tr>
+            </thead>
+            <tbody id="monthlySales"><!-- 월 매출 들어가는 곳 --></tbody>
+        </table>
+
+        <h2>자주 방문한 고객</h2>
+        <p>최대 10명까지 표시됩니다.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th class="idColumn">고객 ID</th>
+                    <th>고객명</th>
+                    <th>주문 횟수</th>
+                </tr>
+            </thead>
+            <tbody id="regulars"><!-- 자주 방문하는 고객 표 들어가는 곳 --></tbody>
+        </table>
+    </main>
+    <script src="/static/js/storeDetail.js"></script>
+</body>
+</html>
