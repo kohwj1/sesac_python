@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>주문 상세</title>
+    <link rel="stylesheet" href="/static/css/crm.css">
+</head>
+<body>
+    <nav>
+        <ul class="gnb">
+            <li><a class="gnbItem" href="/users">User</a></li>
+            <li><a class="gnbItem" href="/orders">Order</a></li>
+            <li><a class="gnbItem" href="/orderitems">OrderItem</a></li>
+            <li><a class="gnbItem" href="/stores">Store</a></li>
+            <li><a class="gnbItem" href="/items">Item</a></li>
+        </ul>
+    </nav>
+    <main>
+        <a href="#" onclick="history.back()">&lt; 뒤로가기</a>
+        <h2>주문 정보</h2>
+        <p>주문 ID: <span id="orderId"></span></p>
+    <table>
+        <thead>
+            <tr>
+                <th>고객</th>
+                <th>구매일자</th>
+                <th>매장명</th>
+                <th>총 결제금액</th>
+            </tr>
+        </thead>
+        <tbody id="summary"><!-- 주문 요약 --></tbody>
+    </table>
+
+    <h2>주문 상세 내역</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>상품명</th>
+                <th>개당 가격</th>
+                <th>구매 수량</th>
+            </tr>
+        </thead>
+        <tbody id="orderDetail"><!-- 주문 상세 표 --></tbody>
+    </table>
+    <script src="/static/js/orderDetail.js"></script>
+</body>
+</html>

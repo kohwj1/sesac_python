@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>주문 목록</title>
+    <title>주문아이템 목록</title>
     <link rel="stylesheet" href="/static/css/crm.css">
 </head>
 <body>
@@ -19,18 +19,17 @@
         <table>
             <thead>
                 <tr>
-                    <th class="idColumn">주문 ID</th>
-                    <th>구매일시</th>
-                    <th>매장명</th>
-                    <th>고객</th>
+                    <th class="idColumn">ID</th>
+                    <th>주문ID</th>
+                    <th>상품ID</th>
                 </tr>
             </thead>
-            <tbody id="tableContent"><!-- 표 구성 영역 --></tbody>
+            <tbody id="tableContent"></tbody>
         </table>
         <div class="pagination">
-            <ul class="pagination" id="pageList"><!--페이지네이션 구성 영역 --></ul>
+            <ul class="pagination" id="pageList"></ul>
         </div>
     </main>
-    <script src="/static/js/orderList.js"></script>
+    <script src="/static/js/orderitemList.js"></script>
 </body>
 </html>
