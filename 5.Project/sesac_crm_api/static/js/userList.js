@@ -49,7 +49,7 @@ function displayList() {
                             `
                 }
             };
-            createPagination_user(parseInt(page), data.lastPage, username, gender)   
+            createPagination('user', parseInt(page), data.lastPage, [username, gender])   
         })
     };
 

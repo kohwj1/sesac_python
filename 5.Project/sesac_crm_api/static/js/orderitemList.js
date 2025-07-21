@@ -23,7 +23,7 @@ function displayList() {
                                                 </tr>`;
                 }
             };
-            createPagination(parseInt(page), data.lastPage)   
+            createPagination('default', parseInt(page), data.lastPage, [])   
         })
     };
     
