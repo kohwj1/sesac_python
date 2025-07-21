@@ -9,6 +9,12 @@
     <nav id="nav">
     </nav>
     <main>
+        <form>
+            <input type="search" placeholder="매장명으로 검색" name="name" value="" id="name">
+            <!-- type=month 사용 시 사파리 호환 안됨! 클라이언트 힌트로 체크해서 숨김? 사용자에게 포맷 맞춰 입력하라고 요구? -->
+            <input type="month" placeholder="yyyy-mm 형식으로 입력" name="month" value="" id="month">
+            <button type="submit">검색</button>
+        </form>
         <table>
             <thead>
                 <tr>

@@ -1,12 +1,24 @@
 const args = new URLSearchParams(window.location.search)
 let page = args.get('page')
+let month = args.get('month')
+let storename = args.get('name')
+
+if (month == null) {
+    month = ''
+}
+
+if (storename == null) {
+    storename = ''
+}
 
 if (page == null) {
     page = 1;
 }
 
 function displayList() {
-    fetch(`http://localhost:5500/orders/api/list?page=${page}`)
+    const nameInput = document.getElementById('name')
+    nameInput.value = storename
+    fetch(`http://localhost:5500/orders/api/list?&month=${month}&name=${storename}&page=${page}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;
@@ -26,7 +38,7 @@ function displayList() {
                             `
                 }
             };
-            createPagination(parseInt(page), data.lastPage)   
+            createPagination('order', parseInt(page), data.lastPage, [storename, month])   
         })
     };
 

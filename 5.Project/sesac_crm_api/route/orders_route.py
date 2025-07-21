@@ -17,7 +17,17 @@ def order_detail():
 @order_bp.route('/api/list')
 def list():
     page = int(request.args.get('page', default=1))
-    orders = orderdb.get_all_list(page, PAGE_SIZE)
+    store_name = request.args.get('name', default='')
+    month = request.args.get('month', default='')
+
+    if store_name and month:
+        orders = orderdb.get_list_by_storename_month(store_name, month, page, PAGE_SIZE)
+    elif store_name:
+        orders = orderdb.get_list_by_storename(store_name, page, PAGE_SIZE)
+    elif month:
+        orders = orderdb.get_list_by_month(month, page, PAGE_SIZE)
+    else:
+        orders = orderdb.get_all_list(page, PAGE_SIZE)
 
     if orders:
         last_page = pagination(orders)
