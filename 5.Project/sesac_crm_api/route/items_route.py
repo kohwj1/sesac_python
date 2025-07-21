@@ -17,7 +17,13 @@ def order_detail():
 @item_bp.route('/api/list')
 def list():
     page = int(request.args.get('page', default=1))
-    items = itemdb.get_all_list(page, PAGE_SIZE)
+    item_name = request.args.get('name', default='').title()
+
+    if item_name:
+        items = itemdb.get_list_by_itemname(item_name, page, PAGE_SIZE)
+    else:
+        items = itemdb.get_all_list(page, PAGE_SIZE)
+
 
     if items:
         last_page = pagination(items)

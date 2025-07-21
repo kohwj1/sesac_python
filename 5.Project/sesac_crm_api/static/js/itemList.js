@@ -1,12 +1,19 @@
 const args = new URLSearchParams(window.location.search)
 let page = args.get('page')
+let itemname = args.get('name')
+
+if (itemname == null) {
+    itemname = ''
+}
 
 if (page == null) {
     page = 1;
 }
 
 function displayList() {
-    fetch(`http://localhost:5500/items/api/list?page=${page}`)
+    const nameInput = document.getElementById('name')
+    nameInput.value = itemname
+    fetch(`http://localhost:5500/items/api/list?page=${page}&name=${itemname}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;
@@ -24,7 +31,7 @@ function displayList() {
                                                 </tr>`;
                 }
             };
-            createPagination(parseInt(page), data.lastPage)   
+            createPagination('item', parseInt(page), data.lastPage, [itemname])   
         })
     };
 

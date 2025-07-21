@@ -17,6 +17,23 @@ def get_all_list(page, pagesize) -> list | None:
     
     return {'data':all_list, 'totalCount':row_count}
 
+def get_list_by_itemname(item_name, page, pagesize) -> list | None:
+    off_start = (page - 1) * pagesize
+    with session() as sess:
+        row_count = sess.execute(select(func.count(Item.Id))
+                                 .where(Item.Name.like(f'%{item_name}%'))).fetchone()[0]
+        query = sess.execute(select(Item)
+                             .where(Item.Name.like(f'%{item_name}%'))
+                             .limit(pagesize)
+                             .offset(off_start)).fetchall()
+        all_list = []
+
+        for i in query:
+            row = i[0]
+            all_list.append({'Id':row.Id, 'Type':row.Type, 'Name':row.Name, 'UnitPrice':row.UnitPrice})
+    
+    return {'data':all_list, 'totalCount':row_count}
+
 def get_item_summary(itemid):
     with session() as sess:
         item_info = sess.execute(select(Item)
