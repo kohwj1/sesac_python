@@ -8,6 +8,7 @@ function displaySummary() {
     fetch(`http://localhost:5500/items/api/summary/${itemId}`)
         .then((response) => response.json())
         .then((data) => {
+            document.title += data.Name;
             const itemId = document.getElementById('itemId')
             itemId.textContent = data.ItemId
 
