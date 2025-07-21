@@ -30,6 +30,7 @@ function displayList() {
         })
     };
 
+
 function createPagination(currentPage, lastPage) {
     const pagination = document.getElementById('pageList')
     if (currentPage -1 < 1) {

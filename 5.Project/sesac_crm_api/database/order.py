@@ -58,15 +58,3 @@ def get_orderitems(orderid):
             all_list.append({'ItemId':row.Id, 'ItemName':row.Name, 'UnitPrice':row.UnitPrice, 'UnitCount':row.UnitCount})
     
     return all_list
-#     conn = get_connection()
-#     cur = conn.cursor()
-
-#     cur.execute("""SELECT i.Id AS ItemId, i.Name AS ItemName, i.UnitPrice AS UnitPrice, COUNT(*) AS UnitCount
-#                 FROM orders o
-#                 JOIN orderitems oi ON o.Id = oi.OrderId
-#                 JOIN items i ON oi.ItemId = i.Id
-#                 WHERE o.Id = ?
-#                 GROUP BY ItemName
-#                 ORDER BY OrderAt DESC, UnitCount DESC""", (orderid,))
-#     orderitems = cur.fetchall()
-#     return orderitems

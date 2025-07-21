@@ -2,7 +2,7 @@ const args = new URLSearchParams(window.location.search)
 const orderid = args.get('id')
 
 function displaySummary() {
-    fetch(`http://localhost:5500/orders/api/summary/${orderid}`)
+    fetch(`http://localhost:5500/orders/api/summary/${orderId}`)
         .then((response) => response.json())
         .then((data) => {
             const orderId = document.getElementById('orderId')
@@ -19,7 +19,7 @@ function displaySummary() {
     };
 
 function displayDetail() {    
-    fetch(`http://localhost:5500/orders/api/orderitems/${orderid}`)
+    fetch(`http://localhost:5500/orders/api/orderitems/${orderId}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;
