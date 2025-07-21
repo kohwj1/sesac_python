@@ -1,6 +1,29 @@
 from database.db_connect import get_connection
 
-def get_all_list(page, pagesize) -> list | None:
+def get_all_list(page, pagesize):
+    off_start = (page - 1) * pagesize
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""SELECT Id, Type, Name AS ItemName, UnitPrice, COUNT(*) OVER () AS TotalCount
+                FROM items
+                LIMIT ? OFFSET ?""", (pagesize, off_start))
+    return cur.fetchall()
+
+def get_list_by_itemname(page, pagesize, item_name):
+    off_start = (page - 1) * pagesize
+    keyword = item_name.title()
+    print(keyword)
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""SELECT Id, Type, Name AS ItemName, UnitPrice, COUNT(*) OVER () AS TotalCount
+                FROM items
+                WHERE Name LIKE ?
+                LIMIT ? OFFSET ?""", (f'%{keyword}%', pagesize, off_start))
+    return cur.fetchall()
+
+def get_all_list(page, pagesize):
     off_start = (page - 1) * pagesize
     conn = get_connection()
     cur = conn.cursor()
