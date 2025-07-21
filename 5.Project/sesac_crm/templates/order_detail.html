@@ -16,9 +16,9 @@
     </thead>
     <tbody>
         <tr>
-            <td><a href="/users/detail/{{order.UserId}}">{{order.UserName}}</a></td>
+            <td><a href="{{url_for('users.detail', id=order.UserId)}}">{{order.UserName}}</a></td>
             <td>{{order.OrderAt}}</td>
-            <td><a href="/stores/detail/{{order.StoreId}}">{{order.StoreName}}</a></td>
+            <td><a href="{{url_for('stores.detail', id=order.storeId)}}">{{order.StoreName}}</a></td>
             <td>{{totalPrice}}원</a></td>
         </tr>
     </tbody>
@@ -36,7 +36,7 @@
     <tbody>
         {% for oi in orderItems %}
         <tr>
-            <td><a href="/items/detail/{{oi.ItemId}}">{{oi.ItemName}}</a></td>
+            <td><a href="{{url_for('items.detail', id=oi.ItemId)}}">{{oi.ItemName}}</a></td>
             <td>{{oi.UnitPrice}}</td>
             <td>{{oi.UnitCount}}</td>
         </tr>

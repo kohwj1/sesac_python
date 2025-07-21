@@ -1,4 +1,4 @@
-from flask import Flask, redirect
+from flask import Flask, redirect, url_for
 from route.users_route import user_bp
 from route.orders_route import order_bp
 from route.stores_route import store_bp
@@ -14,7 +14,7 @@ app.register_blueprint(orderitem_bp, url_prefix='/orderitems')
 
 @app.route('/')
 def index():
-    return redirect('/users')
+    return redirect(url_for('users.list'))
 
 if __name__ == '__main__':
     app.run(debug=True)

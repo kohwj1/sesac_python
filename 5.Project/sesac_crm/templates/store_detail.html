@@ -38,7 +38,7 @@
                 {% if isFiltered %}
                 <td>{{s.OrderDate}}</td>
                 {% else %}
-                <td><a href="?month={{s.OrderDate}}">{{s.OrderDate}}</a></td>
+                <td><a href="{{url_for('stores.detail', id=store.StoreId, month=s.OrderDate)}}">{{s.OrderDate}}</a></td>
                 {% endif %}
                 <td>{{s.Sales}}원</td>
                 <td>{{s.SaleCount}}</td>
@@ -65,7 +65,7 @@
         {% if regulars %}
             {% for r in regulars %}
             <tr>
-                <td><a href="/users/detail/{{r.UserId}}">{{r.UserId}}</a></td>
+                <td><a href="{{url_for('users.detail', id=r.UserId)}}">{{r.UserId}}</a></td>
                 <td>{{r.UserName}}</td>
                 <td>{{r.OrderCount}}</td>
             </tr> 
