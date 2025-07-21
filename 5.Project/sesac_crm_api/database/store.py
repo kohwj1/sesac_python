@@ -16,6 +16,22 @@ def get_all_list(page, pagesize):
     
     return {'data':all_list, 'totalCount':row_count}
 
+def get_list_by_keyword(page, pagesize, q) -> list | None:
+    off_start = (page - 1) * pagesize
+    with session() as sess:
+        row_count = sess.execute(select(func.count(Store.Id))
+                                 .where(Store.Name.like(f'%{q}%') | Store.Address.like(f'%{q}%'))).fetchone()[0]
+        query = sess.execute(select(Store)
+                             .where(Store.Name.like(f'%{q}%') | Store.Address.like(f'%{q}%'))
+                             .limit(pagesize).offset(off_start)).fetchall()
+        all_list = []
+
+        for s in query:
+            row = s[0]
+            all_list.append({'Id':row.Id, 'StoreName':row.Name, 'Type':row.Type, 'Address':row.Address})
+    
+    return {'data':all_list, 'totalCount':row_count}
+
 def get_store_summary(storeid):
     with session() as sess:
         store_info = sess.execute(select(Store).where(Store.Id == storeid)).fetchone()[0]

@@ -17,7 +17,12 @@ def store_detail():
 @store_bp.route('/api/list')
 def list():
     page = int(request.args.get('page', default=1))
-    stores = storedb.get_all_list(page, PAGE_SIZE)
+    q = request.args.get('q', default='')
+
+    if q:
+        stores = storedb.get_list_by_keyword(page, PAGE_SIZE, q)
+    else:
+        stores = storedb.get_all_list(page, PAGE_SIZE)
 
     if stores:
         last_page = pagination(stores)
