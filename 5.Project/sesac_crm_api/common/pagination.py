@@ -1,6 +1,5 @@
 PAGE_SIZE = 20
-PAGINATION_SIZE = 5
-TOTAL_COUNT = 0
+PAGINATION_SIZE = 10
 
 def pagination(selectquery):
     total_count = selectquery['totalCount']
