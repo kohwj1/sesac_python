@@ -1,5 +1,5 @@
 const args = new URLSearchParams(window.location.search)
-const orderid = args.get('id')
+const orderId = args.get('id')
 
 function displaySummary() {
     fetch(`http://localhost:5500/orders/api/summary/${orderId}`)
