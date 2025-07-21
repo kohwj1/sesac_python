@@ -33,7 +33,7 @@ function displayList() {
                             `
                 }
             };
-            createUi('store', parseInt(page), data.lastPage, [q])   
+            createPagination('store', parseInt(page), data.lastPage, [q])   
         })
     };
 
