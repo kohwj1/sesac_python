@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 상세</title>
+    <link rel="stylesheet" href="/static/css/crm.css">
+</head>
+<body>
+    <nav id="nav">
+    </nav>
+    <main>
+        <a href="#" onclick="history.back()">&lt; 뒤로가기</a>
+
+        <h2>상품 정보</h2>
+        <p>상품 ID: <span id="itemId"></span></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>상품명</th>
+                    <th>유형</th>
+                    <th>개당 가격</th>
+                </tr>
+            </thead>
+            <tbody id="summary">
+                <tr>
+                    <td>{{item.Name}}</td>
+                    <td>{{item.Type}}</td>
+                    <td>{{item.UnitPrice}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>월간 매출액</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>기간</th>
+                    <th>매출 합계</th>
+                    <th>주문 횟수</th>
+                </tr>
+            </thead>
+            <tbody id="monthlySales">
+            </tbody>
+        </table>
+        <canvas id="myChart"></canvas>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/common/chart.js"></script>
+    <script src="/static/js/common/navigation.js"></script>
+    <script src="/static/js/itemDetail.js"></script>
+</body>
+</html>

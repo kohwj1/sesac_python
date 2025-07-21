@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 목록</title>
+    <link rel="stylesheet" href="/static/css/crm.css">
+</head>
+<body>
+    <nav id="nav">
+    </nav>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th class="idColumn">상품 ID</th>
+                    <th>유형</th>
+                    <th>상품명</th>
+                    <th>개당 가격</th>
+                </tr>
+            </thead>
+            <tbody id="tableContent"></tbody>
+        </table>
+        <div class="pagination">
+            <ul class="pagination" id="pageList"></ul>
+        </div>
+    </main>
+    <script src="/static/js/common/navigation.js"></script>
+    <script src="/static/js/common/pagination.js"></script>
+    <script src="/static/js/itemList.js"></script>
+</body>
+</html>
