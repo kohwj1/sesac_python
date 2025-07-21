@@ -6,15 +6,7 @@
     <link rel="stylesheet" href="/static/css/crm.css">
 </head>
 <body>
-    <nav>
-        <ul class="gnb">
-            <li><a class="gnbItem" href="/users">User</a></li>
-            <li><a class="gnbItem" href="/orders">Order</a></li>
-            <li><a class="gnbItem" href="/orderitems">OrderItem</a></li>
-            <li><a class="gnbItem" href="/stores">Store</a></li>
-            <li><a class="gnbItem" href="/items">Item</a></li>
-        </ul>
-    </nav>
+    <nav id="nav"></nav>
     <main>
         <form>
             <label for="name">이름: </label>
@@ -43,6 +35,8 @@
             <ul class="pagination" id="pageList"><!--페이지네이션 구성 영역 --></ul>
         </div>
     </main>
+    <script src="/static/js/common/navigation.js"></script>
+    <script src="/static/js/common/pagination.js"></script>
     <script src="/static/js/userList.js"></script>
 </body>
 </html>

@@ -6,15 +6,7 @@
     <link rel="stylesheet" href="/static/css/crm.css">
 </head>
 <body>
-    <nav>
-        <ul class="gnb">
-            <li><a class="gnbItem" href="/users">User</a></li>
-            <li><a class="gnbItem" href="/orders">Order</a></li>
-            <li><a class="gnbItem" href="/orderitems">OrderItem</a></li>
-            <li><a class="gnbItem" href="/stores">Store</a></li>
-            <li><a class="gnbItem" href="/items">Item</a></li>
-        </ul>
-    </nav>
+    <nav id="nav"></nav>
     <main>
         <a href="#" onclick="history.back()">&lt; 뒤로가기</a>
         <h2>주문 정보</h2>
@@ -42,6 +34,7 @@
         </thead>
         <tbody id="orderDetail"><!-- 주문 상세 표 --></tbody>
     </table>
+    <script src="/static/js/common/navigation.js"></script>
     <script src="/static/js/orderDetail.js"></script>
 </body>
 </html>

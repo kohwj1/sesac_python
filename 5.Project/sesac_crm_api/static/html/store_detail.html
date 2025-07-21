@@ -6,14 +6,7 @@
     <link rel="stylesheet" href="/static/css/crm.css">
 </head>
 <body>
-    <nav>
-        <ul class="gnb">
-            <li><a class="gnbItem" href="/users">User</a></li>
-            <li><a class="gnbItem" href="/orders">Order</a></li>
-            <li><a class="gnbItem" href="/orderitems">OrderItem</a></li>
-            <li><a class="gnbItem" href="/stores">Store</a></li>
-            <li><a class="gnbItem" href="/items">Item</a></li>
-        </ul>
+    <nav id="nav">
     </nav>
     <main>
         <a href="#" onclick="history.back()">&lt; 뒤로가기</a>
@@ -56,6 +49,7 @@
             <tbody id="regulars"><!-- 자주 방문하는 고객 표 들어가는 곳 --></tbody>
         </table>
     </main>
+    <script src="/static/js/common/navigation.js"></script>
     <script src="/static/js/storeDetail.js"></script>
 </body>
 </html>
