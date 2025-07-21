@@ -1,26 +1,5 @@
-// function getChartData() {
-//     const dataArray = document.getElementsByClassName('chartdata')
-//     let itemLabels = []
-//     let lineValues = []
-//     let barValues = []
-//     for (i = 0; i + 2 < dataArray.length; i += 3) {
-//         itemLabels.push(dataArray[i].textContent);
-//         lineValues.push(dataArray[i+1].textContent);
-//         barValues.push(dataArray[i+2].textContent);
-//     }
-    
-//     itemLabels.reverse();
-//     lineValues.reverse();
-//     barValues.reverse();
-    
-//     return {'itemLabels':itemLabels, 'lineValues':lineValues, 'barValues':barValues}
-// }
-
 function drawChart(itemLabels, lineValues, barValues) {
     const ctx = document.getElementById('myChart')
-    // const raw_data = getChartData()  //API 방식으로 교체할 거면 여기 나중에 수정하기
-    // console.log(raw_data)
-
     const data = {
         labels: itemLabels,
         datasets: [
@@ -58,5 +37,3 @@ function drawChart(itemLabels, lineValues, barValues) {
 
     new Chart(ctx, config);
 }
-
-// document.addEventListener('DOMContentLoaded', drawChart)
