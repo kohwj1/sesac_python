@@ -1,5 +1,5 @@
 PAGE_SIZE = 20
-PAGINATION_SIZE = 5
+PAGINATION_SIZE = 10
 TOTAL_COUNT = 0
 
 def pagination(page, selectquery:list):
