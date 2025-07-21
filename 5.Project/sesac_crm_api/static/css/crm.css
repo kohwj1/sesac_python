@@ -7,7 +7,7 @@
     margin:0;
     padding-top: 16px;
     padding-bottom: 16px;
-    background-color: #2b1362;
+    background-color: #212121;
     position: fixed;
     left:0;
     width:100%;
@@ -37,7 +37,7 @@
     border-right: none;
 }
 .currentPage {
-    background-color: #2b1362;
+    background-color: #212121;
     color:#fff;
     font-weight: 700;
 }
@@ -85,19 +85,19 @@ th, td {
 }
 
 tr {
-    border-bottom: 1px solid #a399b8;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 tr:hover{
-    background-color: #d0c5e7;
+    background-color: #eee;
 }
 
 th {
-    background-color: #b7a8d6;
+    background-color: #e5e5e5;
 }
 a {
     text-decoration-line: none;
-    color:#2b1362;
+    color:#2141aa;
 }
 form {
     margin:15px 0px;
