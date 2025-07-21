@@ -10,7 +10,7 @@ function createPagination(currentPage, lastPage) {
         pagination.innerHTML = `<li class="pageNum"><a href="?page=${list_start - 1}">Prev</a></li>`
     }
     
-    for (i = list_start; i < list_end; i++) {
+    for (i = list_start; i <= list_end; i++) {
         if (i == currentPage) {
             pagination.innerHTML += `<li class="pageNum currentPage">${currentPage}</li>`
         } else {
