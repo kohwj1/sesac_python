@@ -46,14 +46,15 @@ function displaySales() {
             };
         })
         .then(() => {
+            // console.log('역순으로 담긴 리스트 순서 리버스');
             itemLabels.reverse();
             lineValues.reverse();
             barValues.reverse();
             console.log(itemLabels, lineValues, barValues)
         })
         .then(() => {
-            console.log('이제차트그릴타이밍');
-            drawChart(itemLabels, lineValues, barValues)
+            // console.log('이제차트그릴타이밍');
+            drawChart(itemLabels, lineValues, barValues);
         })
     };
 
