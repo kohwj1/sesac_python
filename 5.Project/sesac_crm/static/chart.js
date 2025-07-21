@@ -34,14 +34,14 @@ function drawChart() {
             backgroundColor: '#136262',
             borderWidth: 2,
             tension:0,
-            yAxisID: 'yright'
+            yAxisID: 'yleft'
         },
             {
             type: 'bar',
             label: '판매량(개)',
             data: raw_data.barValues,
             backgroundColor: '#6c848452',
-            yAxisID: 'yleft'
+            yAxisID: 'yright'
         }]
         };
 
