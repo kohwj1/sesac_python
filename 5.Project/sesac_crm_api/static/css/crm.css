@@ -51,6 +51,10 @@
 .userStatistics {
     padding-left:25px;
 }
+#tableOverflow {
+    height: 265px;
+    overflow-y: auto;
+}
 
 body {
     max-width: 1100px;
@@ -72,10 +76,7 @@ li {
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    /* margin-left:auto;
-    margin-right:auto; */
-
+    border-collapse: collapse;  
 }
 
 th, td {

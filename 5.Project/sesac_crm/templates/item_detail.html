@@ -23,28 +23,30 @@
 </table>
 
 <h2>월간 매출액</h2>
-<table>
-    <thead>
-        <tr>
-            <th>기간</th>
-            <th>매출 합계</th>
-            <th>주문 횟수</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% if sales %}
-            {% for s in sales %}
+<div id="tableOverflow">
+    <table>
+        <thead>
             <tr>
-                <td class="chartdata">{{s.OrderDate}}</a></td>
-                <td class="chartdata">{{s.Sales}}</td>
-                <td class="chartdata">{{s.SaleCount}}</td>
-            </tr> 
-            {% endfor %}
-        {% else %}
-            <tr><td colspan="3">매출 정보가 없습니다.</td></tr>          
-        {% endif %}
-    </tbody>
-</table>
+                <th>기간</th>
+                <th>매출 합계</th>
+                <th>주문 횟수</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if sales %}
+                {% for s in sales %}
+                <tr>
+                    <td class="chartdata">{{s.OrderDate}}</a></td>
+                    <td class="chartdata">{{s.Sales}}</td>
+                    <td class="chartdata">{{s.SaleCount}}</td>
+                </tr> 
+                {% endfor %}
+            {% else %}
+                <tr><td colspan="3">매출 정보가 없습니다.</td></tr>          
+            {% endif %}
+        </tbody>
+    </table>
+</div>
 <canvas id="myChart"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{{url_for('static', filename='chart.js')}}"></script>
