@@ -1,6 +1,6 @@
 from database.db_connect import get_connection
 
-def get_all_list(page, pagesize) -> list | None:
+def get_all_list(page, pagesize):
     off_start = (page - 1) * pagesize
     conn = get_connection()
     cur = conn.cursor()
@@ -11,6 +11,50 @@ def get_all_list(page, pagesize) -> list | None:
                 JOIN stores s ON o.StoreId = s.Id
                 ORDER BY OrderAt DESC
                 LIMIT ? OFFSET ?""", (pagesize, off_start))
+    return cur.fetchall()
+
+def get_list_by_storename(page, pagesize, store_name):
+    off_start = (page - 1) * pagesize
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""SELECT o.Id AS Id, o.OrderAt AS OrderAt, s.Name AS StoreName, s.Id AS StoreId,
+                u.Id AS UserId, u.Name AS UserName, COUNT(*) OVER() AS Totalcount
+                FROM users u 
+                JOIN orders o ON u.Id = o.UserId
+                JOIN stores s ON o.StoreId = s.Id
+                WHERE StoreName LIKE ?
+                ORDER BY OrderAt DESC
+                LIMIT ? OFFSET ?""", (f'%{store_name}%', pagesize, off_start))
+    return cur.fetchall()
+
+def get_list_by_month(page, pagesize, month):
+    off_start = (page - 1) * pagesize
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""SELECT o.Id AS Id, o.OrderAt AS OrderAt, s.Name AS StoreName, s.Id AS StoreId,
+                u.Id AS UserId, u.Name AS UserName, COUNT(*) OVER() AS Totalcount
+                FROM users u 
+                JOIN orders o ON u.Id = o.UserId
+                JOIN stores s ON o.StoreId = s.Id
+                WHERE strftime('%Y-%m', OrderAt) = ?
+                ORDER BY OrderAt DESC
+                LIMIT ? OFFSET ?""", (month, pagesize, off_start))
+    return cur.fetchall()
+
+def get_list_by_storename_month(page, pagesize, store_name, month):
+    off_start = (page - 1) * pagesize
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""SELECT o.Id AS Id, o.OrderAt AS OrderAt, s.Name AS StoreName, s.Id AS StoreId, u.Id AS UserId, u.Name AS UserName, COUNT(*) OVER() AS Totalcount
+                FROM users u 
+                JOIN orders o ON u.Id = o.UserId
+                JOIN stores s ON o.StoreId = s.Id
+                WHERE StoreName LIKE ? AND strftime('%Y-%m', OrderAt) = ?
+                ORDER BY OrderAt DESC
+                LIMIT ? OFFSET ?""", (f'%{store_name}%', month, pagesize, off_start))
     return cur.fetchall()
 
 def get_orderitems(orderid):
