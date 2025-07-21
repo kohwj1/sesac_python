@@ -3,7 +3,7 @@ PAGINATION_SIZE = 10
 
 def pagination(selectquery):
     total_count = selectquery['totalCount']
-    total_page = (total_count - 1) // PAGE_SIZE + 1
-    print(total_page)
+    last_page = (total_count - 1) // PAGE_SIZE + 1
+    print(last_page)
     
-    return total_page
+    return last_page
