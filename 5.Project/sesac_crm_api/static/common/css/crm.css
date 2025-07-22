@@ -51,9 +51,51 @@
 .userStatistics {
     padding-left:25px;
 }
+
 #tableOverflow {
     height: 265px;
     overflow-y: auto;
+}
+
+#upperMenu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#createOrderForm {
+    display: block;
+    padding:30px;
+    border:1px solid #aaa;
+    border-radius: 10px;
+}
+
+#itemList {
+    display:grid;
+    grid-template: 'a a a a a a';
+}
+
+.sectionContainer, .submitContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.formLabel {
+    min-width:20%;
+}
+
+.submitContainer {
+    justify-content: center;
+    margin-top:30px;
+}
+
+.resetOrder, .submitOrder {
+    width:120px;
+}
+
+.resetOrder {
+    background-color: #bbb;
+    color:#000;
 }
 
 body {
@@ -101,12 +143,12 @@ a {
     color:#0088ff;
 }
 form {
-    margin:15px 0px;
+    margin:15px auto;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-input, select, button {
+.searchInput, select, button {
     margin: 0px 5px;
     height: 30px;
     background: #eee;   
@@ -114,13 +156,26 @@ input, select, button {
     font-family: "IBM Plex Sans KR", sans-serif;
 }
 
-input {
-    width: 200px;
+.searchInput {
+    width: 300px;
     padding-left: 10px;
 }
 
-input::placeholder, input:active{
+.searchInput::placeholder, .searchInput:active{
     font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+.required {
+    color:#ff0000;
+    font-weight:700;
+}
+
+label {
+    margin-right:45px;
+}
+
+hr {
+    margin:20px 0px;
 }
 
 select {
