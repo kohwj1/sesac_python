@@ -6,12 +6,12 @@ store_bp = Blueprint('stores', __name__)
 
 @store_bp.route('/')
 def store_list():
-    return send_file('static/html/stores.html')
+    return send_file('static/stores/stores.html')
 
 
 @store_bp.route('/detail')
 def store_detail():
-    return send_file('static/html/store_detail.html')
+    return send_file('static/stores/store_detail.html')
 
 
 @store_bp.route('/api/list')

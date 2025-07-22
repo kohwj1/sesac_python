@@ -7,12 +7,12 @@ user_bp = Blueprint('users', __name__)
 
 @user_bp.route('/')
 def user_list():
-    return send_file('static/html/users.html')
+    return send_file('static/users/users.html')
 
 
 @user_bp.route('/detail')
 def user_detail():
-    return send_file('static/html/user_detail.html')
+    return send_file('static/users/user_detail.html')
 
 
 @user_bp.route('/api/list')
