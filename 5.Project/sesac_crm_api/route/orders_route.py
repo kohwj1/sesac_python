@@ -5,14 +5,16 @@ from common.pagination import pagination, PAGE_SIZE
 order_bp = Blueprint('orders', __name__)
 
 @order_bp.route('/')
-def order_list():
+def page_order_list():
     return send_file('static/orders/orders.html')
 
-
 @order_bp.route('/detail')
-def order_detail():
+def page_order_detail():
     return send_file('static/orders/order_detail.html')
 
+@order_bp.route('/create')
+def page_order_create():
+    return send_file('static/orders/order_create.html')
 
 @order_bp.route('/api/list')
 def list():
@@ -43,3 +45,16 @@ def summary(id):
 def order_items(id):
     order_items = orderdb.get_orderitems(id)
     return jsonify({'data':order_items})
+
+@order_bp.route('/api/create', methods=['POST'])
+def order_create():
+    order_at = request.form.get('OrderAt')
+    user_id = request.form.get('UserId')
+    item_id = request.form.get('ItemId')
+    isCreated = orderdb.create_order(order_at, user_id, item_id)
+    return jsonify({'isCreated':isCreated[0], 'OrderId': isCreated[1]})
+
+@order_bp.route('/api/delete/<id>', methods=['DELETE'])
+def order_delete(id):
+    isDeleted = orderdb.delete_order(id)
+    return jsonify({'isDeleted':isDeleted})

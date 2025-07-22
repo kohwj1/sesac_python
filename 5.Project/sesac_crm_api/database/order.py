@@ -1,6 +1,7 @@
-from sqlalchemy import select, func, desc
+from sqlalchemy import select, func, desc, insert, delete
 from database.tables import User, Store, Order, OrderItem, Item, session
 from datetime import datetime
+import uuid
 
 def get_all_list(page, pagesize):
     off_start = (page - 1) * pagesize
@@ -21,20 +22,20 @@ def get_all_list(page, pagesize):
     
     return {'data':all_list, 'totalCount':row_count}
 
-def get_list_by_storename_month(store_name, month, page, pagesize):
+def get_list_by_storename_month(storename, month, page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
         row_count = sess.execute(select(func.count(Order.Id))
                                 .select_from(User)
                                 .join(Order, User.Id == Order.UserId)
                                 .join(Store, Order.StoreId == Store.Id)
-                                .where(Store.Name.like(f'%{store_name}%'), func.strftime('%Y-%m', Order.OrderAt) == month)).fetchone()[0]
+                                .where(Store.Name.like(f'%{storename}%'), func.strftime('%Y-%m', Order.OrderAt) == month)).fetchone()[0]
         query = sess.execute(select(Order.Id, func.strftime('%Y-%m-%d %H:%M:%S',Order.OrderAt).label('OrderAt'),
                                     Store.Name.label('StoreName'), Store.Id.label('StoreId'), User.Id.label('UserId'), User.Name.label('UserName'))
                              .select_from(User)
                              .join(Order, User.Id == Order.UserId)
                              .join(Store, Order.StoreId == Store.Id)
-                             .where(Store.Name.like(f'%{store_name}%'), func.strftime('%Y-%m', Order.OrderAt) == month)
+                             .where(Store.Name.like(f'%{storename}%'), func.strftime('%Y-%m', Order.OrderAt) == month)
                              .order_by(desc(Order.OrderAt))
                              .limit(pagesize)
                              .offset(off_start)).fetchall()
@@ -45,20 +46,20 @@ def get_list_by_storename_month(store_name, month, page, pagesize):
     
     return {'data':all_list, 'totalCount':row_count}
 
-def get_list_by_storename(store_name, page, pagesize):
+def get_list_by_storename(storename, page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
         row_count = sess.execute(select(func.count(Order.Id))
                                 .select_from(User)
                                 .join(Order, User.Id == Order.UserId)
                                 .join(Store, Order.StoreId == Store.Id)
-                                .where(Store.Name.like(f'%{store_name}%'))).fetchone()[0]
+                                .where(Store.Name.like(f'%{storename}%'))).fetchone()[0]
         query = sess.execute(select(Order.Id, func.strftime('%Y-%m-%d %H:%M:%S',Order.OrderAt).label('OrderAt'),
                                     Store.Name.label('StoreName'), Store.Id.label('StoreId'), User.Id.label('UserId'), User.Name.label('UserName'))
                              .select_from(User)
                              .join(Order, User.Id == Order.UserId)
                              .join(Store, Order.StoreId == Store.Id)
-                             .where(Store.Name.like(f'%{store_name}%'))
+                             .where(Store.Name.like(f'%{storename}%'))
                              .order_by(desc(Order.OrderAt))
                              .limit(pagesize)
                              .offset(off_start)).fetchall()
@@ -130,3 +131,38 @@ def get_orderitems(orderid):
             all_list.append({'ItemId':row.Id, 'ItemName':row.Name, 'UnitPrice':row.UnitPrice, 'UnitCount':row.UnitCount})
     
     return all_list
+
+def create_order(orderat, userid, itemid):
+    storeid = '15a3ac41-c9ce-4e99-b896-ad402dcf6523'
+    new_order_key = str(uuid.uuid4())
+    new_orderitem_key = str(uuid.uuid4())
+    with session() as sess:
+        sess.execute(insert(Order).values(Id=new_order_key ,OrderAt=datetime.strptime(orderat, '%Y-%m-%d %H:%M:%S'), UserId=userid, StoreId=storeid))
+        sess.commit()
+    
+    with session() as sess:
+        sess.execute(insert(OrderItem).values(Id=new_orderitem_key, OrderId=new_order_key, ItemId=itemid))
+        sess.commit()
+
+    with session() as sess:
+        isCreated = sess.execute(select(func.count(Order.Id))
+                                .where(Order.Id == new_order_key)).fetchone()[0]
+        if isCreated:
+            return True, new_order_key
+    return False, 'N/A'
+
+def delete_order(orderid):
+    with session() as sess:
+        sess.execute(delete(Order)
+                     .where(Order.Id == orderid))
+        sess.commit()
+    
+    with session() as sess:
+        sess.execute(delete(OrderItem)
+                     .where(OrderItem.OrderId == orderid))
+        sess.commit()
+    
+    with session() as sess:
+        isDeleted = sess.execute(select(func.count(Order.Id))
+                                .where(Order.Id == orderid)).fetchone()[0]
+    return not isDeleted
