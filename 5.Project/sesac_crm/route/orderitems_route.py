@@ -16,4 +16,4 @@ def list():
         pages = pagination(page, orderitems)['pages']
         last_page = pagination(page, orderitems)['totalPage']
 
-    return render_template('orderitems.html', orderitems=orderitems, currentPage=page, pages=pages, lastPage=last_page)
+    return render_template('orderitems/orderitems.html', orderitems=orderitems, currentPage=page, pages=pages, lastPage=last_page)

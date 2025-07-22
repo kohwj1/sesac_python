@@ -20,7 +20,7 @@ def list():
         pages = pagination(page, stores)['pages']
         last_page = pagination(page, stores)['totalPage']
 
-    return render_template('stores.html', stores=stores, currentPage=page, pages=pages, lastPage=last_page, q=q)
+    return render_template('stores/stores.html', stores=stores, currentPage=page, pages=pages, lastPage=last_page, q=q)
 
 @store_bp.route('/detail/<id>')
 def detail(id):
@@ -35,4 +35,4 @@ def detail(id):
         sales = storedb.get_sales(id)
         regulars = storedb.get_regulars(id, regular_limit)
 
-    return render_template('store_detail.html', store=store_info, sales=sales, regulars=regulars, limit=regular_limit, isFiltered=bool(month_filter))
+    return render_template('stores/store_detail.html', store=store_info, sales=sales, regulars=regulars, limit=regular_limit, isFiltered=bool(month_filter))

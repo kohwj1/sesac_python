@@ -26,11 +26,11 @@ def list():
         pages = pagination(page, orders)['pages']
         last_page = pagination(page, orders)['totalPage']
 
-    return render_template('orders.html', orders=orders, currentPage=page, pages=pages, lastPage=last_page, name=name, month=month)
+    return render_template('orders/orders.html', orders=orders, currentPage=page, pages=pages, lastPage=last_page, name=name, month=month)
 
 @order_bp.route('/detail/<id>')
 def detail(id):
     orderinfo = orderdb.get_order_summary(id)
     order_items = orderdb.get_orderitems(id)
     total_price = orderdb.get_total_price(id)
-    return render_template('order_detail.html', order=orderinfo, orderItems=order_items, totalPrice=total_price)
+    return render_template('orders/order_detail.html', order=orderinfo, orderItems=order_items, totalPrice=total_price)

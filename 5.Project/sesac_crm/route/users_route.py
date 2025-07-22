@@ -25,7 +25,7 @@ def list():
         pages = pagination(page, users)['pages']
         last_page = pagination(page, users)['totalPage']
 
-    return render_template('users.html', users=users, name=name, gender=gender, currentPage=page, pages=pages, lastPage=last_page)
+    return render_template('users/users.html', users=users, name=name, gender=gender, currentPage=page, pages=pages, lastPage=last_page)
 
 @user_bp.route('/detail/<id>')
 def detail(id):
@@ -34,4 +34,4 @@ def detail(id):
     regulars = userdb.get_regular_store(id)
     favorites = userdb.get_favorite_items(id)
 
-    return render_template('user_detail.html', user=userinfo, orderList=orderlist, regulars=regulars, favorites=favorites)
+    return render_template('users/user_detail.html', user=userinfo, orderList=orderlist, regulars=regulars, favorites=favorites)
