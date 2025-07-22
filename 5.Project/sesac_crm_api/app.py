@@ -15,7 +15,7 @@ app.register_blueprint(orderitem_bp, url_prefix='/orderitems')
 
 @app.route('/')
 def index():
-    return redirect('/users')
+    return send_file('static/login/login.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=5500)
