@@ -106,8 +106,31 @@ form {
     align-items: center;
     justify-content: center;
 }
-input, label, button {
+input, select, button {
     margin: 0px 5px;
+    height: 30px;
+    background: #eee;   
+    border: none;
+}
+
+input {
+    width: 200px;
+    padding-left: 10px;
+}
+
+input::placeholder, input:active{
+    font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+select {
+    width: 70px;
+    padding-left: 10px;
+}
+
+button {
+    width: 60px;
+    background: #136262;
+    color: #fff;
 }
 
 canvas {
