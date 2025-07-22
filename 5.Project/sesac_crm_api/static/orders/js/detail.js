@@ -2,18 +2,23 @@ const args = new URLSearchParams(window.location.search)
 const orderId = args.get('id')
 
 function displaySummary() {
+    let totalPrice = 'N/A';
     fetch(`http://localhost:5500/orders/api/summary/${orderId}`)
         .then((response) => response.json())
         .then((data) => {
             const orderId = document.getElementById('orderId')
             orderId.textContent = data.OrderId
 
+            if (data.totalPrice != null) {
+                totalPrice = data.totalPrice
+            }
+
             const orderSummary = document.getElementById('summary');
             orderSummary.innerHTML = `<tr>
                                         <td><a href="/users/detail?id=${data.UserId}">${data.UserName}</a></td>
                                         <td>${data.OrderAt}</td>
                                         <td><a href="/stores/detail?id=${data.StoreId}">${data.StoreName}</a></td>
-                                        <td>${data.totalPrice}원</a></td>
+                                        <td>${totalPrice}원</a></td>
                                     </tr>`;
     })
     };
