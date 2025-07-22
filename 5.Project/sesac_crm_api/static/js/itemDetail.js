@@ -50,11 +50,11 @@ function displaySales() {
             itemLabels.reverse();
             lineValues.reverse();
             barValues.reverse();
-            console.log(itemLabels, lineValues, barValues)
+            // console.log(itemLabels, lineValues, barValues)
         })
         .then(() => {
             // console.log('이제차트그릴타이밍');
-            drawChart(itemLabels, lineValues, barValues);
+            drawMixedChart('mixedChart', itemLabels, lineValues, barValues);
         })
     };
 
