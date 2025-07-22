@@ -54,7 +54,7 @@ function displaySales() {
         })
         .then(() => {
             // console.log('이제차트그릴타이밍');
-            drawMixedChart('mixedChart', itemLabels, lineValues, barValues);
+            drawMixedChart('myChart', itemLabels, lineValues, barValues);
         })
     };
 
