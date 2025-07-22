@@ -1,0 +1,38 @@
+.
+├── app.py
+├── common
+│   └── pagination.py
+├── database
+│   ├── db_connect.py
+│   ├── item.py
+│   ├── mycrm.db
+│   ├── order.py
+│   ├── orderitem.py
+│   ├── store.py
+│   └── user.py
+├── route
+│   ├── items_route.py
+│   ├── orderitems_route.py
+│   ├── orders_route.py
+│   ├── stores_route.py
+│   └── users_route.py
+├── static
+│   ├── chart.js
+│   └── crm.css
+├── templates
+│   ├── base.html
+│   ├── items
+│   │   ├── item_detail.html
+│   │   └── items.html
+│   ├── orderitems
+│   │   └── orderitems.html
+│   ├── orders
+│   │   ├── order_detail.html
+│   │   └── orders.html
+│   ├── stores
+│   │   ├── store_detail.html
+│   │   └── stores.html
+│   └── users
+│       ├── user_detail.html
+│       └── users.html
+└── tree.txt
