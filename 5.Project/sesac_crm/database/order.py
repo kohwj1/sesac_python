@@ -1,9 +1,8 @@
-from database.db_connect import get_connection
+from database.db_connect import cursor
 
 def get_all_list(page, pagesize):
     off_start = (page - 1) * pagesize
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT o.Id AS Id, o.OrderAt AS OrderAt, s.Name AS StoreName, s.Id AS StoreId, u.Id AS UserId, u.Name AS UserName, COUNT(*) OVER() AS Totalcount
                 FROM users u 
@@ -15,8 +14,7 @@ def get_all_list(page, pagesize):
 
 def get_list_by_storename(page, pagesize, store_name):
     off_start = (page - 1) * pagesize
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT o.Id AS Id, o.OrderAt AS OrderAt, s.Name AS StoreName, s.Id AS StoreId,
                 u.Id AS UserId, u.Name AS UserName, COUNT(*) OVER() AS Totalcount
@@ -30,8 +28,7 @@ def get_list_by_storename(page, pagesize, store_name):
 
 def get_list_by_month(page, pagesize, month):
     off_start = (page - 1) * pagesize
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT o.Id AS Id, o.OrderAt AS OrderAt, s.Name AS StoreName, s.Id AS StoreId,
                 u.Id AS UserId, u.Name AS UserName, COUNT(*) OVER() AS Totalcount
@@ -45,8 +42,7 @@ def get_list_by_month(page, pagesize, month):
 
 def get_list_by_storename_month(page, pagesize, store_name, month):
     off_start = (page - 1) * pagesize
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT o.Id AS Id, o.OrderAt AS OrderAt, s.Name AS StoreName, s.Id AS StoreId, u.Id AS UserId, u.Name AS UserName, COUNT(*) OVER() AS Totalcount
                 FROM users u 
@@ -58,8 +54,7 @@ def get_list_by_storename_month(page, pagesize, store_name, month):
     return cur.fetchall()
 
 def get_orderitems(orderid):
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT i.Id AS ItemId, i.Name AS ItemName, i.UnitPrice AS UnitPrice, COUNT(*) AS UnitCount
                 FROM orders o
@@ -72,8 +67,7 @@ def get_orderitems(orderid):
     return orderitems
 
 def get_total_price(orderid):
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT SUM(i.UnitPrice) AS TotalPrice
                 FROM orders o
@@ -84,8 +78,7 @@ def get_total_price(orderid):
     return totalprice
 
 def get_order_summary(orderid):
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT o.Id AS OrderId, o.OrderAt AS OrderAt, s.Id AS StoreId, s.Name AS StoreName, u.Id AS UserId, u.Name AS UserName
                 FROM users u 

@@ -1,17 +1,15 @@
-from database.db_connect import get_connection
+from database.db_connect import cursor
 
 def get_all_list(page, pagesize) -> list | None:
     off_start = (page - 1) * pagesize
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("SELECT *, COUNT(*) OVER() AS Totalcount FROM users LIMIT ? OFFSET ?", (pagesize, off_start))
     return cur.fetchall()
 
 def search_users_by_name(name, page, pagesize) -> list | None:
     off_start = (page - 1) * pagesize
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT *, COUNT(*) OVER() AS Totalcount
                 FROM users
@@ -20,8 +18,7 @@ def search_users_by_name(name, page, pagesize) -> list | None:
 
 def search_users_by_gender(gender, page, pagesize) -> list | None:
     off_start = (page - 1) * pagesize
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT *, COUNT(*) OVER() AS Totalcount
                 FROM users
@@ -30,8 +27,7 @@ def search_users_by_gender(gender, page, pagesize) -> list | None:
 
 def search_users_by_name_and_gender(name, gender, page, pagesize) -> list | None:
     off_start = (page - 1) * pagesize
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT *, COUNT(*) OVER() AS Totalcount
                 FROM users
@@ -40,8 +36,7 @@ def search_users_by_name_and_gender(name, gender, page, pagesize) -> list | None
     return cur.fetchall()
 
 def get_user_history(userid):
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
     cur.execute("""SELECT o.Id AS OrderId, o.OrderAt AS OrderAt, s.Name AS StoreName, s.Id AS StoreId
                 FROM users u
                 JOIN orders o ON u.Id = o.UserId
@@ -52,16 +47,14 @@ def get_user_history(userid):
     return user_history
 
 def get_user_summary(userid):
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("SELECT * FROM users WHERE Id = ?", (userid, ))
     summary = cur.fetchone()
     return summary
 
 def get_regular_store(userid):
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
     cur.execute("""SELECT s.Name AS StoreName, COUNT(o.Id) AS OrderCount
                 FROM users u
                 JOIN orders o ON u.Id = o.UserId
@@ -74,8 +67,7 @@ def get_regular_store(userid):
     return regulars
 
 def get_favorite_items(userid):
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
     cur.execute("""SELECT i.Name AS ItemName, COUNT(oi.Id) AS ItemCount
                 FROM users u
                 JOIN orders o ON u.Id = o.UserId

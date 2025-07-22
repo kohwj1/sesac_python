@@ -1,9 +1,8 @@
-from database.db_connect import get_connection
+from database.db_connect import cursor
 
 def get_all_list(page, pagesize) -> list | None:
     off_start = (page - 1) * pagesize
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT Id, Type, Name AS StoreName, Address, COUNT(*) OVER () AS TotalCount
                 FROM stores
@@ -12,8 +11,7 @@ def get_all_list(page, pagesize) -> list | None:
 
 def search_stores(q, page, pagesize) -> list | None:
     off_start = (page - 1) * pagesize
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT Id, Type, Name AS StoreName, Address, COUNT(*) OVER () AS TotalCount
                 FROM stores
@@ -22,8 +20,7 @@ def search_stores(q, page, pagesize) -> list | None:
     return cur.fetchall()
 
 def get_store_summary(storeid):
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT Id AS StoreId, Name, Type, Address
                 FROM stores
@@ -33,8 +30,7 @@ def get_store_summary(storeid):
     return storeinfo
 
 def get_sales(storeid):
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT strftime('%Y-%m', o.OrderAt) AS OrderDate, SUM(i.UnitPrice) AS Sales, Count(*) AS SaleCount
                 FROM items i
@@ -49,8 +45,7 @@ def get_sales(storeid):
     return sales
 
 def get_daily_sales(storeid, month_filter):
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT strftime('%Y-%m-%d', o.OrderAt) AS OrderDate, SUM(i.UnitPrice) AS Sales, Count(*) AS SaleCount
                 FROM items i
@@ -65,8 +60,7 @@ def get_daily_sales(storeid, month_filter):
     return sales
 
 def get_regulars(storeid, regular_limit):
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT u.Id AS UserId, u.Name AS UserName, COUNT(*) AS OrderCount
                 FROM users u
@@ -81,8 +75,7 @@ def get_regulars(storeid, regular_limit):
     return regulars
 
 def get_daily_regulars(storeid, month_filter, regular_limit):
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT u.Id AS UserId, u.Name AS UserName, COUNT(*) AS OrderCount
                 FROM users u

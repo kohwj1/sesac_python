@@ -1,9 +1,8 @@
-from database.db_connect import get_connection
+from database.db_connect import cursor
 
 def get_all_list(page, pagesize):
     off_start = (page - 1) * pagesize
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT Id, Type, Name AS ItemName, UnitPrice, COUNT(*) OVER () AS TotalCount
                 FROM items
@@ -14,8 +13,7 @@ def get_list_by_itemname(page, pagesize, item_name):
     off_start = (page - 1) * pagesize
     keyword = item_name.title()
     print(keyword)
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT Id, Type, Name AS ItemName, UnitPrice, COUNT(*) OVER () AS TotalCount
                 FROM items
@@ -25,8 +23,7 @@ def get_list_by_itemname(page, pagesize, item_name):
 
 def get_all_list(page, pagesize):
     off_start = (page - 1) * pagesize
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT Id, Type, Name AS ItemName, UnitPrice, COUNT(*) OVER () AS TotalCount
                 FROM items
@@ -34,8 +31,7 @@ def get_all_list(page, pagesize):
     return cur.fetchall()
 
 def get_item_summary(itemid):
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT Id AS ItemId, Name, Type, UnitPrice
                 FROM items
@@ -45,8 +41,7 @@ def get_item_summary(itemid):
     return storeinfo
 
 def get_sales(itemid):
-    conn = get_connection()
-    cur = conn.cursor()
+    cur = cursor()
 
     cur.execute("""SELECT strftime('%Y-%m', o.OrderAt) AS OrderDate, SUM(i.UnitPrice) AS Sales, Count(*) AS SaleCount
                 FROM items i
