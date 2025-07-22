@@ -54,5 +54,5 @@ def get_monthly_sales(itemid):
 
         for row in query:
             all_list.append({'Month':row.Month, 'Sales':row.Sales,'SalesCount':row.SalesCount})
-    
-    return all_list
+        
+        return all_list
