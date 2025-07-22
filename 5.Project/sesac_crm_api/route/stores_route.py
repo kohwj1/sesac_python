@@ -5,12 +5,12 @@ from common.pagination import PAGE_SIZE, pagination
 store_bp = Blueprint('stores', __name__)
 
 @store_bp.route('/')
-def store_list():
+def page_store_list():
     return send_file('static/stores/stores.html')
 
 
 @store_bp.route('/detail')
-def store_detail():
+def page_store_detail():
     return send_file('static/stores/store_detail.html')
 
 

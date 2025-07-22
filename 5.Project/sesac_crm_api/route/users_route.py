@@ -6,12 +6,12 @@ user_bp = Blueprint('users', __name__)
 
 
 @user_bp.route('/')
-def user_list():
+def page_user_list():
     return send_file('static/users/users.html')
 
 
 @user_bp.route('/detail')
-def user_detail():
+def page_user_detail():
     return send_file('static/users/user_detail.html')
 
 

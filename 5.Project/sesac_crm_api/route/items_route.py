@@ -5,12 +5,12 @@ from common.pagination import pagination, PAGE_SIZE
 item_bp = Blueprint('items', __name__)
 
 @item_bp.route('/')
-def order_list():
+def page_order_list():
     return send_file('static/items/items.html')
 
 
 @item_bp.route('/detail')
-def order_detail():
+def page_order_detail():
     return send_file('static/items/item_detail.html')
 
 

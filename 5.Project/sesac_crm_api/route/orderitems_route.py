@@ -6,7 +6,7 @@ orderitem_bp = Blueprint('orderitems', __name__)
 
 
 @orderitem_bp.route('/')
-def order_list():
+def page_order_list():
     return send_file('static/orderitems/orderitems.html')
 
 
