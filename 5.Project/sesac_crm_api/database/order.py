@@ -122,7 +122,7 @@ def get_orderitems(orderid):
                              .join(OrderItem, Order.Id == OrderItem.OrderId)
                              .join(Item, OrderItem.ItemId == Item.Id)
                              .where(Order.Id == orderid)
-                             .group_by(Item.Name)
+                             .group_by(Item.Id)
                              .order_by(desc('UnitCount'))).fetchall()
         all_list = []
 
