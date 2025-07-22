@@ -16,8 +16,10 @@ if (page == null) {
 }
 
 function displayList() {
-    const nameInput = document.getElementById('name')
-    nameInput.value = storename
+    const nameInput = document.getElementById('name');
+    const monthInput = document.getElementById('month');
+    nameInput.value = storename;
+    monthInput.value = month;
     fetch(`http://localhost:5500/orders/api/list?&month=${month}&name=${storename}&page=${page}`)
         .then((response) => response.json())
         .then((data) => {

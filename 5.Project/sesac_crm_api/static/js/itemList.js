@@ -11,8 +11,7 @@ if (page == null) {
 }
 
 function displayList() {
-    const nameInput = document.getElementById('name')
-    nameInput.value = itemname
+    document.getElementById('name').value = itemname
     fetch(`http://localhost:5500/items/api/list?page=${page}&name=${itemname}`)
         .then((response) => response.json())
         .then((data) => {

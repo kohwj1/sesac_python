@@ -19,7 +19,7 @@ function drawChart(itemLabels, lineValues, barValues) {
             type: 'bar',
             label: '판매량(개)',
             data: barValues,
-            backgroundColor: '#8a8a8a94',
+            backgroundColor: '#0088ff55',
             yAxisID: 'yright'
         }]
         };

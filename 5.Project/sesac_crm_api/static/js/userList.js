@@ -14,8 +14,7 @@ if (username == null) {
 }
 
 function displayList() {
-    const nameInput = document.getElementById('name')
-    nameInput.value = username
+    document.getElementById('name').value = username
     // console.log(username, gender)
     switch (gender) {
         case 'Male':
