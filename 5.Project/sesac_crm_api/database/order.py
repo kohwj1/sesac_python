@@ -25,7 +25,10 @@ def get_list_by_storename_month(store_name, month, page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
         row_count = sess.execute(select(func.count(Order.Id))
-                                 .where(Store.Name == store_name, func.strftime('%Y-%m', Order.OrderAt) == month)).fetchone()[0]
+                                .select_from(User)
+                                .join(Order, User.Id == Order.UserId)
+                                .join(Store, Order.StoreId == Store.Id)
+                                .where(Store.Name.like(f'%{store_name}%'), func.strftime('%Y-%m', Order.OrderAt) == month)).fetchone()[0]
         query = sess.execute(select(Order.Id, func.strftime('%Y-%m-%d %H:%M:%S',Order.OrderAt).label('OrderAt'),
                                     Store.Name.label('StoreName'), Store.Id.label('StoreId'), User.Id.label('UserId'), User.Name.label('UserName'))
                              .select_from(User)
@@ -46,7 +49,10 @@ def get_list_by_storename(store_name, page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
         row_count = sess.execute(select(func.count(Order.Id))
-                                 .where(Store.Name.like(f'%{store_name}%'))).fetchone()[0]
+                                .select_from(User)
+                                .join(Order, User.Id == Order.UserId)
+                                .join(Store, Order.StoreId == Store.Id)
+                                .where(Store.Name.like(f'%{store_name}%'))).fetchone()[0]
         query = sess.execute(select(Order.Id, func.strftime('%Y-%m-%d %H:%M:%S',Order.OrderAt).label('OrderAt'),
                                     Store.Name.label('StoreName'), Store.Id.label('StoreId'), User.Id.label('UserId'), User.Name.label('UserName'))
                              .select_from(User)
@@ -67,7 +73,10 @@ def get_list_by_month(month, page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
         row_count = sess.execute(select(func.count(Order.Id))
-                                 .where(func.strftime('%Y-%m', Order.OrderAt) == month)).fetchone()[0]
+                                .select_from(User)
+                                .join(Order, User.Id == Order.UserId)
+                                .join(Store, Order.StoreId == Store.Id)
+                                .where(func.strftime('%Y-%m', Order.OrderAt) == month)).fetchone()[0]
         query = sess.execute(select(Order.Id, func.strftime('%Y-%m-%d %H:%M:%S',Order.OrderAt).label('OrderAt'),
                                     Store.Name.label('StoreName'), Store.Id.label('StoreId'), User.Id.label('UserId'), User.Name.label('UserName'))
                              .select_from(User)
