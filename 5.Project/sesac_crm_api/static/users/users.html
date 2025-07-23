@@ -10,15 +10,18 @@
 <body>
     <nav id="nav"></nav>
     <main>
-        <form>
-            <input class="searchInput" type="search" placeholder="이름으로 검색" name="name" id="name">
-            <select name="gender" id="gender">
-                <option></option>
-                <option id="male" value="Male">남성</option>
-                <option id="female" value="Female">여성</option>
-            </select>
-            <button type="submit" id="btnSubmit">검색</button>
-        </form>
+        <div id="upperMenu">
+            <form>
+                <input class="searchInput" type="search" placeholder="이름으로 검색" name="name" id="name">
+                <select name="gender" id="gender">
+                    <option></option>
+                    <option id="male" value="Male">남성</option>
+                    <option id="female" value="Female">여성</option>
+                </select>
+                <button type="submit" id="btnSubmit">검색</button>
+            </form>
+            <a id="addData" href="/users/create">+ 고객 등록하기</a>
+        </div>
         <table>
             <thead>
                 <tr>

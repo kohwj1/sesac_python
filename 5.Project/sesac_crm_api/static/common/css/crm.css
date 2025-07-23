@@ -63,7 +63,7 @@
     justify-content: center;
 }
 
-#createOrderForm {
+#createForm {
     display: block;
     padding:30px;
     border:1px solid #aaa;
@@ -171,6 +171,7 @@ form {
 }
 
 label {
+    margin:5px;
     margin-right:45px;
 }
 
