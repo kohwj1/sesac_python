@@ -1,5 +1,7 @@
-from sqlalchemy import select, func, desc
+from sqlalchemy import select, func, desc, insert
+from database.util.commitchecker import commit_checker
 from database.tables import User, Store, Order, OrderItem, Item, session
+import uuid
 
 def get_all_list(page, pagesize):
     off_start = (page - 1) * pagesize
@@ -103,3 +105,11 @@ def get_favorite_items(userid):
             all_list.append({'ItemName':row[0], 'OrderCount':row[1]})
     
     return all_list
+
+def create_user(username, birthdate, age, gender, address):
+    with session() as sess:
+        new_user_key = str(uuid.uuid4())
+        sess.execute(insert(User).values(Id=new_user_key, Name=username, Birthdate=birthdate, Age=age, Gender=gender, Address=address))
+        sess.commit()
+
+    return commit_checker('create', User, new_user_key), new_user_key

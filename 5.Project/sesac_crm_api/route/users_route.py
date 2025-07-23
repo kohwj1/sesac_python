@@ -1,6 +1,8 @@
 from flask import request, Blueprint, send_file, jsonify
 import database.user as userdb
-from common.pagination import PAGE_SIZE, pagination
+from route.util.getage import get_age
+from route.util.pagination import PAGE_SIZE, pagination
+import datetime
 
 user_bp = Blueprint('users', __name__)
 
@@ -13,6 +15,10 @@ def page_user_list():
 @user_bp.route('/detail')
 def page_user_detail():
     return send_file('static/users/user_detail.html')
+
+@user_bp.route('/create')
+def page_user_create():
+    return send_file('static/users/user_create.html')
 
 
 @user_bp.route('/api/list')
@@ -57,3 +63,15 @@ def regulars(id):
 def favorites(id):
     favorites = userdb.get_favorite_items(id)
     return jsonify({'data':favorites})
+
+@user_bp.route('/api/create', methods=['POST'])
+def user_create():
+    UserName = request.form.get('UserName')
+    date_cast = datetime.datetime.strptime(request.form.get('Birthdate'), '%Y-%m-%d')
+    Birthdate = date_cast.date()
+    Age = get_age(date_cast)
+    Gender = request.form.get('Gender')
+    Address = request.form.get('Address')
+
+    isCreated = userdb.create_user(UserName, Birthdate, Age, Gender, Address)
+    return jsonify({'isCreated':isCreated[0], 'UserId': isCreated[1]})
