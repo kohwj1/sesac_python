@@ -1,5 +1,5 @@
 from flask import request, Blueprint, jsonify, send_file
-import database.item as itemdb
+import database.query.item as itemdb
 from route.util.pagination import PAGE_SIZE, pagination
 
 item_bp = Blueprint('items', __name__)

@@ -1,5 +1,5 @@
 from flask import request, Blueprint, send_file, jsonify
-import database.user as userdb
+import database.query.user as userdb
 from route.util.getage import get_age
 from route.util.pagination import PAGE_SIZE, pagination
 import datetime

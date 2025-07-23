@@ -1,5 +1,5 @@
 from sqlalchemy import select, func, desc, insert
-from database.tables import User, Store, Order, OrderItem, Item, session
+from database.db.tables import User, Store, Order, OrderItem, Item, session
 from database.util.commitchecker import commit_checker
 import uuid
 from datetime import datetime
@@ -18,7 +18,7 @@ def get_all_list(page, pagesize):
     
     return {'data':all_list, 'totalCount':row_count}
 
-def get_list_by_keyword(page, pagesize, q) -> list | None:
+def get_list_by_keyword(page, pagesize, q):
     off_start = (page - 1) * pagesize
     with session() as sess:
         row_count = sess.execute(select(func.count(Store.Id))

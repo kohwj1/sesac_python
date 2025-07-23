@@ -1,5 +1,5 @@
 from flask import request, Blueprint, send_file, jsonify
-import database.store as storedb
+import database.query.store as storedb
 from route.util.pagination import PAGE_SIZE, pagination
 
 store_bp = Blueprint('stores', __name__)

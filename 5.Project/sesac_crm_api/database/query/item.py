@@ -1,9 +1,9 @@
 from sqlalchemy import select, func, desc, insert
-from database.tables import User, Store, Order, OrderItem, Item, session
+from database.db.tables import User, Store, Order, OrderItem, Item, session
 from database.util.commitchecker import commit_checker
 import uuid
 
-def get_all_list(page, pagesize) -> list | None:
+def get_all_list(page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
         row_count = sess.execute(select(func.count(Item.Id))).fetchone()[0]
@@ -18,7 +18,7 @@ def get_all_list(page, pagesize) -> list | None:
     
     return {'data':all_list, 'totalCount':row_count}
 
-def get_list_by_itemname(item_name, page, pagesize) -> list | None:
+def get_list_by_itemname(item_name, page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
         row_count = sess.execute(select(func.count(Item.Id))
