@@ -1,5 +1,7 @@
-from sqlalchemy import select, func, desc
+from sqlalchemy import select, func, desc, insert
 from database.tables import User, Store, Order, OrderItem, Item, session
+from database.util.commitchecker import commit_checker
+import uuid
 from datetime import datetime
 
 
@@ -105,3 +107,23 @@ def get_filtered_regulars(storeid, month_filter):
             all_list.append({'UserId':row.UserId, 'UserName':row.UserName, 'OrderCount':row.OrderCount})
     
     return all_list
+
+def get_store_type():
+    with session() as sess:
+        query = sess.execute(select(func.distinct(Store.Type))).fetchall()
+        all_list = []
+
+        for s in query:
+            row = s[0]
+            all_list.append(row)
+    
+    # print(all_list)
+    return all_list
+
+def create_store(storename, type, address):
+    with session() as sess:
+        new_store_key = str(uuid.uuid4())
+        sess.execute(insert(Store).values(Id=new_store_key, Name=storename, Type=type, Address=address))
+        sess.commit()
+
+    return commit_checker('create', Store, new_store_key), new_store_key

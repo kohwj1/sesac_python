@@ -14,6 +14,11 @@ def page_store_detail():
     return send_file('static/stores/store_detail.html')
 
 
+@store_bp.route('/create')
+def page_store_create():
+    return send_file('static/stores/store_create.html')
+
+
 @store_bp.route('/api/list')
 def list():
     page = int(request.args.get('page', default=1))
@@ -51,3 +56,17 @@ def regulars(id):
     else:
         regulars = storedb.get_regulars(id)
     return jsonify({'data':regulars})
+
+@store_bp.route('/api/typelist')
+def store_type():
+    type_list = storedb.get_store_type()
+    return jsonify({'data':type_list})
+
+@store_bp.route('/api/create', methods=['POST'])
+def store_create():
+    StoreName = request.form.get('StoreName')
+    Type = request.form.get('Type')
+    Address = request.form.get('Address')
+
+    isCreated = storedb.create_store(StoreName, Type, Address)
+    return jsonify({'isCreated':isCreated[0], 'StoreId': isCreated[1]})
