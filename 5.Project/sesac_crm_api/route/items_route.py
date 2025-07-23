@@ -8,11 +8,13 @@ item_bp = Blueprint('items', __name__)
 def page_order_list():
     return send_file('static/items/items.html')
 
-
 @item_bp.route('/detail')
 def page_order_detail():
     return send_file('static/items/item_detail.html')
 
+@item_bp.route('/create')
+def page_item_create():
+    return send_file('static/items/item_create.html')
 
 @item_bp.route('/api/list')
 def list():
@@ -39,3 +41,17 @@ def summary(id):
 def monthly_sales(id):
     monthly_sales = itemdb.get_monthly_sales(id)
     return jsonify({'data':monthly_sales})
+
+@item_bp.route('/api/typelist')
+def item_type():
+    type_list = itemdb.get_item_type()
+    return jsonify({'data':type_list})
+
+@item_bp.route('/api/create', methods=['POST'])
+def item_create():
+    ItemName = request.form.get('ItemName')
+    Type = request.form.get('Type')
+    UnitPrice = int(request.form.get('UnitPrice'))
+
+    isCreated = itemdb.create_item(ItemName, Type, UnitPrice)
+    return jsonify({'isCreated':isCreated[0], 'ItemId': isCreated[1]})

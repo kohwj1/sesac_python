@@ -1,6 +1,7 @@
-from sqlalchemy import select, func, desc
+from sqlalchemy import select, func, desc, insert
 from database.tables import User, Store, Order, OrderItem, Item, session
-from datetime import datetime
+from database.util.commitchecker import commit_checker
+import uuid
 
 def get_all_list(page, pagesize) -> list | None:
     off_start = (page - 1) * pagesize
@@ -56,3 +57,22 @@ def get_monthly_sales(itemid):
             all_list.append({'Month':row.Month, 'Sales':row.Sales,'SalesCount':row.SalesCount})
         
         return all_list
+
+def get_item_type():
+    with session() as sess:
+        query = sess.execute(select(func.distinct(Item.Type))).fetchall()
+        all_list = []
+
+        for s in query:
+            row = s[0]
+            all_list.append(row)
+    
+    return all_list
+
+def create_item(itemname, type, unitprice):
+    with session() as sess:
+        new_item_key = str(uuid.uuid4())
+        sess.execute(insert(Item).values(Id=new_item_key, Name=itemname, Type=type, UnitPrice=unitprice))
+        sess.commit()
+
+    return commit_checker('create', Item, new_item_key), new_item_key

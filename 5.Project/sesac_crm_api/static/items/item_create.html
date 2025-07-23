@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CRM :: 상품 등록</title>
+    <link rel="stylesheet" href="/static/common/css/crm.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav id="nav">
+    </nav>
+    <main>
+        <h2>상품 등록하기</h2>
+        <p>필수 정보를 입력해주세요</p>
+        <form id="createForm">
+            <div class="sectionContainer">
+                <div class="formLabel">상품명<span class="required">*</span></div>
+                <input class="searchInput" type="search" placeholder="상품명을 입력해주세요" name="ItemName" id="ItemName" required>
+            </div>
+            <hr>
+            <div class="sectionContainer">
+                <div class="formLabel">상품 유형<span class="required">*</span></div>
+                <div id="typeList"><!-- js로 상품유형목록 받아와서 렌더링 --></div>
+            </div>
+            <hr>
+            <div class="sectionContainer">
+                <div class="formLabel">개당 가격<span class="required">*</span></div>
+                <input class="searchInput" type="number" placeholder="가격을 입력해주세요" name="UnitPrice" id="UnitPrice" min="1000" required>
+            </div>
+            <div class="submitContainer">
+                <button class="resetOrder" type="reset">초기화하기</button>
+                <button class="submitOrder" type="submit">등록하기</button>
+            </div>
+        </form>
+    </main>
+    <script src="/static/common/js/navigation.js"></script>
+    <script src="/static/items/js/create.js"></script>
+</body>
+</html>
