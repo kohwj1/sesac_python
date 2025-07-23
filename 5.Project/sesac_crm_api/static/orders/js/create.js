@@ -1,3 +1,6 @@
+const args = new URLSearchParams(window.location.search)
+const userid = args.get('userid')
+
 function getItemList() {
     fetch(`http://localhost:5500/items/api/list`)
         .then((response) => response.json())
@@ -60,7 +63,11 @@ function createOrder() {
         })
     };
 
-document.addEventListener('DOMContentLoaded', getItemList)
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('userid').value = userid
+    getItemList()
+})
+
 document.getElementById('createForm').addEventListener('submit', e => {
     e.preventDefault();
     createOrder();

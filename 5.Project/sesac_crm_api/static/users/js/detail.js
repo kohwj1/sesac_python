@@ -1,6 +1,5 @@
 const args = new URLSearchParams(window.location.search)
 const userid = args.get('id')
-// console.log(userid)
 
 function displaySummary() {
     fetch(`http://localhost:5500/users/api/summary/${userid}`)
@@ -82,3 +81,6 @@ document.addEventListener('DOMContentLoaded', displaySummary)
 document.addEventListener('DOMContentLoaded', displayHistory)
 document.addEventListener('DOMContentLoaded', displayRegulars)
 document.addEventListener('DOMContentLoaded', displayFavorites)
+document.getElementById('createOrder').addEventListener('click', () => {
+    location.href = `/orders/create?userid=${userid}`
+})

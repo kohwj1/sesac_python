@@ -63,6 +63,16 @@
     justify-content: center;
 }
 
+.flexContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#createOrder {
+    width:130px;
+}
+
 #createForm {
     display: block;
     padding:30px;
