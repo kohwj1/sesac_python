@@ -52,7 +52,7 @@
     padding-left:25px;
 }
 
-#tableOverflow {
+.tableOverflow {
     height: 265px;
     overflow-y: auto;
 }
