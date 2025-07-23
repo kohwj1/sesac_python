@@ -1,6 +1,6 @@
 from flask import request, Blueprint, jsonify, send_file
 import database.order as orderdb
-from common.pagination import pagination, PAGE_SIZE
+from route.util.pagination import PAGE_SIZE, pagination
 
 order_bp = Blueprint('orders', __name__)
 
@@ -50,7 +50,7 @@ def order_items(id):
 def order_create():
     order_at = request.form.get('OrderAt')
     user_id = request.form.get('UserId')
-    item_id = request.form.get('ItemId')
+    item_id = request.form.getlist('ItemId')
     isCreated = orderdb.create_order(order_at, user_id, item_id)
     return jsonify({'isCreated':isCreated[0], 'OrderId': isCreated[1]})
 

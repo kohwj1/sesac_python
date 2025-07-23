@@ -10,7 +10,7 @@ function getItemList() {
                 itemList.innerHTML = ''
                 for (row of item_data) {
                     itemList.innerHTML += `
-                                        <input class="itemUi" type="radio" id="${row.Id}" name="ItemId" value="${row.Id}" required>
+                                        <input class="itemUi" type="checkbox" id="${row.Id}" name="ItemId" value="${row.Id}">
                                         <label for="${row.Id}">${row.Name} (${row.UnitPrice}원)</label>`
                 }
             }
@@ -26,12 +26,17 @@ function createOrder() {
     const minute = String(now.getMinutes()).padStart(2, '0')
     const second = String(parseInt(now.getSeconds())).padStart(2, '0')
     const orderat = `${year}-${month}-${day} ${hour}:${minute}:${second}`
-    const orderForm = document.getElementById('createOrderForm')
+    const orderForm = document.getElementById('createForm')
     let bodyData = new FormData(orderForm);
     bodyData.append('OrderAt', orderat);
     // console.log(bodyData.get('OrderAt'))  
     // console.log(bodyData.get('UserId'))  
-    // console.log(bodyData.get('ItemId'))  
+    // console.log(bodyData.getAll('ItemId'))
+    
+    if (bodyData.getAll('ItemId').length == 0) {
+        alert('상품을 1개 이상 선택해주세요.');
+        return;
+    }
 
     fetch(`http://localhost:5500/orders/api/create`, {
         method: 'POST',
@@ -39,10 +44,15 @@ function createOrder() {
     })
         .then((response) => response.json())
         .then((data) => {
+            console.log(data)
             OrderId = data.OrderId;
-            console.log(OrderId)
-            alert(`주문이 완료되었습니다.\n주문ID: ${OrderId}`)
-            location.href = `/orders/detail?id=${OrderId}`
+
+            if (data.isCreated) {
+                alert(`주문이 완료되었습니다.\n주문ID: ${OrderId}`)
+                location.href = `/orders/detail?id=${OrderId}`
+            } else {
+                throw new Error;
+            }
         })
         .catch((error) => {
             console.log(error)
@@ -51,7 +61,7 @@ function createOrder() {
     };
 
 document.addEventListener('DOMContentLoaded', getItemList)
-document.getElementById('createOrderForm').addEventListener('submit', e => {
+document.getElementById('createForm').addEventListener('submit', e => {
     e.preventDefault();
     createOrder();
 })
