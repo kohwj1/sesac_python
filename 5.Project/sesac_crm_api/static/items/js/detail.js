@@ -54,8 +54,12 @@ function displaySales() {
         })
         .then(() => {
             // console.log('이제차트그릴타이밍');
-            drawMixedChart('myChart', itemLabels, lineValues, barValues);
-        })
+            if (table_data.length != 0) {
+                drawMixedChart('myChart', itemLabels, lineValues, barValues);
+        }   else {
+                console.log('차트 그릴 데이터가 없어요!!');
+        }
+    })
     };
 
 document.addEventListener('DOMContentLoaded', displaySummary)
