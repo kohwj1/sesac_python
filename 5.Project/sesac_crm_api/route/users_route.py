@@ -1,8 +1,6 @@
 from flask import request, Blueprint, send_file, jsonify
 import database.query.user as userdb
-from route.util.getage import get_age
 from route.util.pagination import PAGE_SIZE, pagination
-import datetime
 
 user_bp = Blueprint('users', __name__)
 
@@ -67,9 +65,8 @@ def favorites(id):
 @user_bp.route('/api/create', methods=['POST'])
 def user_create():
     UserName = request.form.get('UserName')
-    date_cast = datetime.datetime.strptime(request.form.get('Birthdate'), '%Y-%m-%d')
-    Birthdate = date_cast.date()
-    Age = get_age(date_cast)
+    Birthdate = request.form.get('Birthdate')
+    Age = request.form.get('Age')
     Gender = request.form.get('Gender')
     Address = request.form.get('Address')
 
