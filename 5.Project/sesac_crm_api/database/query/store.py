@@ -41,7 +41,8 @@ def get_store_summary(storeid):
 
 def get_sales(storeid):
     with session() as sess:
-        query = sess.execute(select(func.strftime('%Y-%m', Order.OrderAt).label('OrderDate'), func.sum(Item.UnitPrice).label('Sales'), func.count('*').label('SaleCount'))
+        query = sess.execute(select(func.strftime('%Y-%m', Order.OrderAt).label('OrderDate'),
+                                    func.sum(Item.UnitPrice).label('Sales'), func.count('Order.*').label('SaleCount'))
                                  .select_from(Item)
                                  .join(OrderItem, Item.Id == OrderItem.ItemId)
                                  .join(Order, OrderItem.OrderId == Order.Id)
@@ -50,15 +51,16 @@ def get_sales(storeid):
                                  .group_by('OrderDate')
                                  .order_by(desc('OrderDate'))
                                  ).fetchall()
-        all_list = []
+        sale_list = []
         for row in query:
-            all_list.append({'OrderDate':row.OrderDate, 'Sales':row.Sales, 'SaleCount':row.SaleCount})
+            sale_list.append({'OrderDate':row.OrderDate, 'Sales':row.Sales, 'SaleCount':row.SaleCount})
     
-    return all_list
+    return sale_list
 
 def get_filtered_sales(storeid, month_filter):
     with session() as sess:
-        query = sess.execute(select(func.strftime('%Y-%m-%d', Order.OrderAt).label('OrderDate'), func.sum(Item.UnitPrice).label('Sales'), func.count('*').label('SaleCount'))
+        query = sess.execute(select(func.strftime('%Y-%m-%d', Order.OrderAt).label('OrderDate'),
+                                    func.sum(Item.UnitPrice).label('Sales'), func.count('Order.*').label('SaleCount'))
                                  .select_from(Item)
                                  .join(OrderItem, Item.Id == OrderItem.ItemId)
                                  .join(Order, OrderItem.OrderId == Order.Id)
@@ -67,15 +69,15 @@ def get_filtered_sales(storeid, month_filter):
                                  .group_by('OrderDate')
                                  .order_by(desc('OrderDate'))
                                  ).fetchall()
-        all_list = []
+        sale_list = []
         for row in query:
-            all_list.append({'OrderDate':row.OrderDate, 'Sales':row.Sales, 'SaleCount':row.SaleCount})
+            sale_list.append({'OrderDate':row.OrderDate, 'Sales':row.Sales, 'SaleCount':row.SaleCount})
     
-    return all_list
+    return sale_list
 
 def get_regulars(storeid):
     with session() as sess:
-        query = sess.execute(select(User.Id.label('UserId'), User.Name.label('UserName'), func.count('*').label('OrderCount'))
+        query = sess.execute(select(User.Id.label('UserId'), User.Name.label('UserName'), func.count('Order.*').label('OrderCount'))
                                  .select_from(User)
                                  .join(Order, Order.UserId == User.Id)
                                  .join(Store, Order.StoreId == Store.Id)
@@ -84,15 +86,15 @@ def get_regulars(storeid):
                                  .order_by(desc('OrderCount'))
                                  .limit(10)
                                  ).fetchall()
-        all_list = []
+        regular_list = []
         for row in query:
-            all_list.append({'UserId':row.UserId, 'UserName':row.UserName, 'OrderCount':row.OrderCount})
+            regular_list.append({'UserId':row.UserId, 'UserName':row.UserName, 'OrderCount':row.OrderCount})
     
-    return all_list
+    return regular_list
 
 def get_filtered_regulars(storeid, month_filter):
     with session() as sess:
-        query = sess.execute(select(User.Id.label('UserId'), User.Name.label('UserName'), func.count('*').label('OrderCount'))
+        query = sess.execute(select(User.Id.label('UserId'), User.Name.label('UserName'), func.count('Order.*').label('OrderCount'))
                                  .select_from(User)
                                  .join(Order, Order.UserId == User.Id)
                                  .join(Store, Order.StoreId == Store.Id)
@@ -101,11 +103,11 @@ def get_filtered_regulars(storeid, month_filter):
                                  .order_by(desc('OrderCount'))
                                  .limit(10)
                                  ).fetchall()
-        all_list = []
+        regular_list = []
         for row in query:
-            all_list.append({'UserId':row.UserId, 'UserName':row.UserName, 'OrderCount':row.OrderCount})
+            regular_list.append({'UserId':row.UserId, 'UserName':row.UserName, 'OrderCount':row.OrderCount})
     
-    return all_list
+    return regular_list
 
 def get_store_type():
     with session() as sess:
