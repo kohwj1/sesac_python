@@ -61,7 +61,7 @@ function displayRegulars() {
                 for (row of table_data) {
                     monthlyregulars.innerHTML += `                    
                             <tr>
-                                <td><a href="/user/deatil?id=${row.UserId}">${row.UserId}</td>
+                                <td><a href="/users/detail?id=${row.UserId}">${row.UserId}</td>
                                 <td>${row.UserName}</td>
                                 <td>${row.OrderCount}</td>
                             </tr>
