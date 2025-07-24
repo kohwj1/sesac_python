@@ -158,6 +158,12 @@ form {
     align-items: center;
     justify-content: center;
 }
+
+/* input[type="checkbox"] {
+    width:15px;
+    height: 15px;
+}  */
+
 .searchInput, select, button {
     margin: 0px 5px;
     height: 30px;
@@ -182,7 +188,7 @@ form {
 
 label {
     margin:5px;
-    margin-right:35px;
+    margin-right:20px;
 }
 
 hr {

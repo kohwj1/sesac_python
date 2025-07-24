@@ -15,7 +15,7 @@ function getItemList() {
                 for (row of item_data) {
                     itemList.innerHTML += `
                                         <input class="itemUi" type="checkbox" id="${row.Id}" name="ItemId" value="${row.Id}">
-                                        <label for="${row.Id}">${row.Name} (${row.UnitPrice}원)</label>`
+                                        <label for="${row.Id}">${row.Name} / ${row.UnitPrice}원</label>`
                 }
             }
         })
