@@ -9,7 +9,7 @@ session = sessionmaker(bind=engine)
 
 class User(Base):
     __tablename__ = 'users'
-    Id = Column(Integer, primary_key=True)
+    Id = Column(String, primary_key=True)
     Name = Column(String)
     Gender = Column(String)
     Age = Column(Integer)
@@ -18,28 +18,28 @@ class User(Base):
 
 class Order(Base):
     __tablename__ = 'orders'
-    Id = Column(Integer, primary_key=True)
+    Id = Column(String, primary_key=True)
     OrderAt = Column(DateTime)
     StoreId = Column(String)
     UserId = Column(String)
 
 class Store(Base):
     __tablename__ = 'stores'
-    Id = Column(Integer, primary_key=True)
+    Id = Column(String, primary_key=True)
     Name = Column(String)
     Type = Column(String)
     Address = Column(String)
 
 class Item(Base):
     __tablename__ = 'items'
-    Id = Column(Integer, primary_key=True)
+    Id = Column(String, primary_key=True)
     Name = Column(String)
     Type = Column(String)
     UnitPrice = Column(Integer)
 
 class OrderItem(Base):
     __tablename__ = 'orderitems'
-    Id = Column(Integer, primary_key=True)
+    Id = Column(String, primary_key=True)
     OrderId = Column(String)
     ItemId = Column(String)
 

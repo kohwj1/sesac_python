@@ -29,7 +29,7 @@ def list():
     elif month:
         orders = orderdb.get_list_by_month(month, page, PAGE_SIZE)
     else:
-        orders = orderdb.get_all_list(page, PAGE_SIZE)
+        orders = orderdb.get_list(page, PAGE_SIZE)
 
     if orders:
         last_page = pagination(orders)

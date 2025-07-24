@@ -24,7 +24,7 @@ def list():
     if item_name:
         items = itemdb.get_list_by_itemname(item_name, page, PAGE_SIZE)
     else:
-        items = itemdb.get_all_list(page, PAGE_SIZE)
+        items = itemdb.get_list(page, PAGE_SIZE)
 
 
     if items:
@@ -46,6 +46,19 @@ def monthly_sales(id):
 def item_type():
     type_list = itemdb.get_item_type()
     return jsonify({'data':type_list})
+
+@item_bp.route('/api/uniquelist')
+def list_unique():
+    all_list = itemdb.get_list_all()
+    filter = []
+    unique_list = []
+
+    for item in all_list:
+        if item['Name'] not in filter:
+            unique_list.append(item)
+            filter.append(item['Name'])
+
+    return jsonify({'data':unique_list})
 
 @item_bp.route('/api/create', methods=['POST'])
 def item_create():

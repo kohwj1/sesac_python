@@ -2,8 +2,9 @@ from sqlalchemy import select, func, desc, insert
 from database.util.commitchecker import commit_checker
 from database.db.tables import User, Store, Order, OrderItem, Item, session
 import uuid
+from datetime import datetime
 
-def get_all_list(page, pagesize):
+def get_list(page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
         row_count = sess.execute(select(func.count(User.Id))).fetchone()[0]

@@ -1,3 +1,4 @@
+const env = apiPath()
 const args = new URLSearchParams(window.location.search)
 let page = args.get('page')
 let q = args.get('q')
@@ -12,7 +13,7 @@ if (page == null) {
 
 function displayList() {
     document.getElementById('q').value = q
-    fetch(`http://localhost:5500/stores/api/list?q=${q}&page=${page}`)
+    fetch(`${env}/stores/api/list?q=${q}&page=${page}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;

@@ -34,7 +34,7 @@ def list():
     elif gender:
         users = userdb.search_users_by_gender(gender, page, PAGE_SIZE)
     else:
-        users = userdb.get_all_list(page, PAGE_SIZE)
+        users = userdb.get_list(page, PAGE_SIZE)
     
     if users:
         last_page = pagination(users)

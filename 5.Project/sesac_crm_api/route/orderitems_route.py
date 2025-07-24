@@ -13,7 +13,7 @@ def page_order_list():
 @orderitem_bp.route('/api/list')
 def list():
     page = int(request.args.get('page', default=1))
-    orderitems = orderitemdb.get_all_list(page, PAGE_SIZE)
+    orderitems = orderitemdb.get_list(page, PAGE_SIZE)
 
     if orderitems:
         last_page = pagination(orderitems)

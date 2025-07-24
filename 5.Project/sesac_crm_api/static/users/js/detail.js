@@ -1,8 +1,9 @@
 const args = new URLSearchParams(window.location.search)
 const userid = args.get('id')
+const env = apiPath()
 
 function displaySummary() {
-    fetch(`http://localhost:5500/users/api/summary/${userid}`)
+    fetch(`${env}/users/api/summary/${userid}`)
         .then((response) => response.json())
         .then((data) => {
             document.title += data.Name;
@@ -19,7 +20,7 @@ function displaySummary() {
     };
 
 function displayHistory() {    
-    fetch(`http://localhost:5500/users/api/history/${userid}`)
+    fetch(`${env}/users/api/history/${userid}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;
@@ -42,7 +43,7 @@ function displayHistory() {
     };
 
 function displayRegulars() {    
-    fetch(`http://localhost:5500/users/api/regulars/${userid}`)
+    fetch(`${env}/users/api/regulars/${userid}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;
@@ -60,7 +61,7 @@ function displayRegulars() {
     };
 
 function displayFavorites() {    
-    fetch(`http://localhost:5500/users/api/favorites/${userid}`)
+    fetch(`${env}/users/api/favorites/${userid}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;

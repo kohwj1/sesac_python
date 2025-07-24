@@ -1,9 +1,10 @@
+const env = apiPath()
 const args = new URLSearchParams(window.location.search)
 const orderId = args.get('id')
 
 function displaySummary() {
     let totalPrice = 'N/A';
-    fetch(`http://localhost:5500/orders/api/summary/${orderId}`)
+    fetch(`${env}/orders/api/summary/${orderId}`)
         .then((response) => response.json())
         .then((data) => {
             const orderId = document.getElementById('orderId')
@@ -24,7 +25,7 @@ function displaySummary() {
     };
 
 function displayDetail() {    
-    fetch(`http://localhost:5500/orders/api/orderitems/${orderId}`)
+    fetch(`${env}/orders/api/orderitems/${orderId}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;

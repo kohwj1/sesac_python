@@ -3,7 +3,7 @@ from database.db.tables import User, Store, Order, OrderItem, Item, session
 from database.util.commitchecker import commit_checker
 import uuid
 
-def get_all_list(page, pagesize):
+def get_list(page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
         row_count = sess.execute(select(func.count(Item.Id))).fetchone()[0]
@@ -60,7 +60,7 @@ def get_monthly_sales(itemid):
 
 def get_item_type():
     with session() as sess:
-        query = sess.execute(select(func.distinct(Item.Type))).fetchall()
+        query = sess.execute(select(Item.Type.distinct())).fetchall()
         all_list = []
 
         for s in query:
@@ -76,3 +76,15 @@ def create_item(itemname, type, unitprice):
         sess.commit()
 
     return commit_checker('create', Item, new_item_key), new_item_key
+
+
+def get_list_all():
+    with session() as sess:
+        query = sess.execute(select(Item)).fetchall()
+        all_list = []
+
+        for i in query:
+            row = i[0]
+            all_list.append({'Id':row.Id, 'Type':row.Type, 'Name':row.Name, 'UnitPrice':row.UnitPrice})
+    
+    return all_list

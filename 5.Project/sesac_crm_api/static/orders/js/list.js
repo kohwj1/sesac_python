@@ -1,3 +1,4 @@
+const env = apiPath()
 const args = new URLSearchParams(window.location.search)
 let page = args.get('page')
 let month = args.get('month')
@@ -20,7 +21,7 @@ function displayList() {
     const monthInput = document.getElementById('month');
     nameInput.value = storename;
     monthInput.value = month;
-    fetch(`http://localhost:5500/orders/api/list?&month=${month}&name=${storename}&page=${page}`)
+    fetch(`${env}/orders/api/list?&month=${month}&name=${storename}&page=${page}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;

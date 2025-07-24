@@ -1,5 +1,7 @@
+const env = apiPath()
+
 function getTypeList() {
-    fetch(`http://localhost:5500/items/api/typelist`)
+    fetch(`${env}/items/api/typelist`)
         .then((response) => response.json())
         .then((data) => {
             const type_data = data.data;
@@ -23,7 +25,7 @@ function createItem() {
     let bodyData = new FormData(userForm);
     console.log(bodyData)
 
-    fetch(`http://localhost:5500/items/api/create`, {
+    fetch(`${env}/items/api/create`, {
         method: 'POST',
         body: bodyData
     })

@@ -1,8 +1,9 @@
+const env = apiPath()
 const args = new URLSearchParams(window.location.search)
 const userid = args.get('userid')
 
 function getItemList() {
-    fetch(`http://localhost:5500/items/api/list`)
+    fetch(`${env}/items/api/uniquelist`)
         .then((response) => response.json())
         .then((data) => {
             const item_data = data.data;
@@ -41,7 +42,7 @@ function createOrder() {
         return;
     }
 
-    fetch(`http://localhost:5500/orders/api/create`, {
+    fetch(`${env}/orders/api/create`, {
         method: 'POST',
         body: bodyData
     })

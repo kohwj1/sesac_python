@@ -1,9 +1,11 @@
+const env = apiPath()
+
 function createUser() {
     const userForm = document.getElementById('createForm')
     let bodyData = new FormData(userForm);
     console.log(bodyData)
 
-    fetch(`http://localhost:5500/users/api/create`, {
+    fetch(`${env}/users/api/create`, {
         method: 'POST',
         body: bodyData
     })

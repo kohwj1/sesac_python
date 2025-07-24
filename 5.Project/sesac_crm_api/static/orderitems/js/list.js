@@ -1,3 +1,4 @@
+const env = apiPath()
 const args = new URLSearchParams(window.location.search)
 let page = args.get('page')
 
@@ -6,7 +7,7 @@ if (page == null) {
 }
 
 function displayList() {
-    fetch(`http://localhost:5500/orderitems/api/list?page=${page}`)
+    fetch(`${env}/orderitems/api/list?page=${page}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;
