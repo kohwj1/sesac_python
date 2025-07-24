@@ -17,7 +17,7 @@ function displayList() {
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;
-            console.log(table_data)
+            // console.log(table_data)
             const tablecontent = document.getElementById('tableContent')
             if (table_data.length == 0) {
                 tablecontent.innerHTML = '<tr><td colspan="4" class="noResult">표시할 데이터가 없습니다<div><a href="#" onclick="history.back()">뒤로가기</a></div></td></tr>'
