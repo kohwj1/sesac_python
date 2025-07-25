@@ -1,4 +1,4 @@
-from flask import Flask, send_file, redirect, request
+from flask import Flask, send_file
 from route.users_route import user_bp
 from route.orders_route import order_bp
 from route.stores_route import store_bp
