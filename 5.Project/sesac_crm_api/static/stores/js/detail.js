@@ -1,11 +1,9 @@
-const env = apiPath()
 const args = new URLSearchParams(window.location.search)
 const storeid = args.get('id')
 let month = args.get('month')
-// console.log(storeid)
 
 function displaySummary() {
-    fetch(`${env}/stores/api/summary/${storeid}`)
+    fetch(`/stores/api/summary/${storeid}`)
         .then((response) => response.json())
         .then((data) => {
             document.title += data.Name;
@@ -24,7 +22,7 @@ function displaySummary() {
     };
 
 function displaySales() {    
-    fetch(`${env}/stores/api/sales_monthly/${storeid}`)
+    fetch(`/stores/api/sales_monthly/${storeid}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;
@@ -48,7 +46,7 @@ function displaySales() {
     };
 
 function displayRegulars() {    
-    fetch(`${env}/stores/api/regulars/${storeid}`)
+    fetch(`/stores/api/regulars/${storeid}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;
@@ -73,7 +71,7 @@ function displayRegulars() {
 
 //여기는 월 필터 붙여서 API request 보내는 부분
 function filteredSales(month) {    
-    fetch(`${env}/stores/api/sales_monthly/${storeid}?month=${month}`)
+    fetch(`/stores/api/sales_monthly/${storeid}?month=${month}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;
@@ -97,7 +95,7 @@ function filteredSales(month) {
     };
 
 function filteredRegulars(month) {    
-    fetch(`${env}/stores/api/regulars/${storeid}?month=${month}`)
+    fetch(`/stores/api/regulars/${storeid}?month=${month}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;

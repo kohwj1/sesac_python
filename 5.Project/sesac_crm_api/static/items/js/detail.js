@@ -1,4 +1,3 @@
-const env = apiPath()
 const args = new URLSearchParams(window.location.search)
 const itemId = args.get('id')
 let itemLabels = []
@@ -6,7 +5,7 @@ let lineValues = []
 let barValues = []
 
 function displaySummary() {
-    fetch(`${env}/items/api/summary/${itemId}`)
+    fetch(`/items/api/summary/${itemId}`)
         .then((response) => response.json())
         .then((data) => {
             document.title += data.Name;
@@ -23,7 +22,7 @@ function displaySummary() {
     };
 
 function displaySales() {    
-    fetch(`${env}/items/api/sales_monthly/${itemId}`)
+    fetch(`/items/api/sales_monthly/${itemId}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;

@@ -1,4 +1,3 @@
-const env = apiPath()
 
 function getAge (birth) {
     const today = new Date();
@@ -21,13 +20,12 @@ function createUser() {
 
     console.log(bodyData)
 
-    fetch(`${env}/users/api/create`, {
+    fetch(`/users/api/create`, {
         method: 'POST',
         body: bodyData
     })
         .then((response) => response.json())
         .then((data) => {
-            // console.log(data)
             UserId = data.UserId;
 
             if (data.isCreated) {
@@ -38,7 +36,6 @@ function createUser() {
             }
         })
         .catch((error) => {
-            // console.log(error)
             alert(error)
         })
     };

@@ -2,7 +2,6 @@ const args = new URLSearchParams(window.location.search)
 let username = args.get('name')
 let gender = args.get('gender')
 let page = args.get('page')
-const env = apiPath()
 
 if (page == null) {
     page = 1;
@@ -28,7 +27,7 @@ function displayList() {
             break;
     }
     
-    fetch(`${env}/users/api/list?page=${page}&name=${username}&gender=${gender}`)
+    fetch(`/users/api/list?page=${page}&name=${username}&gender=${gender}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;

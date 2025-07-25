@@ -1,4 +1,3 @@
-const env = apiPath()
 const args = new URLSearchParams(window.location.search)
 let page = args.get('page')
 let itemname = args.get('name')
@@ -13,7 +12,7 @@ if (page == null) {
 
 function displayList() {
     document.getElementById('name').value = itemname
-    fetch(`${env}/items/api/list?page=${page}&name=${itemname}`)
+    fetch(`/items/api/list?page=${page}&name=${itemname}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;

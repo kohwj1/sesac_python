@@ -1,7 +1,5 @@
-const env = apiPath()
-
 function getTypeList() {
-    fetch(`${env}/items/api/typelist`)
+    fetch(`/items/api/typelist`)
         .then((response) => response.json())
         .then((data) => {
             const type_data = data.data;
@@ -25,7 +23,7 @@ function createItem() {
     let bodyData = new FormData(userForm);
     console.log(bodyData)
 
-    fetch(`${env}/items/api/create`, {
+    fetch(`/items/api/create`, {
         method: 'POST',
         body: bodyData
     })

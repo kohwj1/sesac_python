@@ -1,9 +1,8 @@
 const args = new URLSearchParams(window.location.search)
 const userid = args.get('id')
-const env = apiPath()
 
 function displaySummary() {
-    fetch(`${env}/users/api/summary/${userid}`)
+    fetch(`/users/api/summary/${userid}`)
         .then((response) => response.json())
         .then((data) => {
             document.title += data.Name;
@@ -20,12 +19,11 @@ function displaySummary() {
     };
 
 function displayHistory() {    
-    fetch(`${env}/users/api/history/${userid}`)
+    fetch(`/users/api/history/${userid}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;
             const userHistory = document.getElementById('history')
-            // console.log(table_data)
             if (table_data.length == 0) {
                 userHistory.innerHTML = '<tr><td colspan="3" class="noResult">표시할 데이터가 없습니다</td></tr>'
             } else {
@@ -43,12 +41,11 @@ function displayHistory() {
     };
 
 function displayRegulars() {    
-    fetch(`${env}/users/api/regulars/${userid}`)
+    fetch(`/users/api/regulars/${userid}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;
             const userRegulars = document.getElementById('regulars')
-            // console.log(table_data)
             if (table_data.length == 0) {
                 userRegulars.innerHTML = '<li>표시할 데이터가 없습니다</li>'
             } else {
@@ -61,12 +58,11 @@ function displayRegulars() {
     };
 
 function displayFavorites() {    
-    fetch(`${env}/users/api/favorites/${userid}`)
+    fetch(`/users/api/favorites/${userid}`)
         .then((response) => response.json())
         .then((data) => {
             table_data = data.data;
             const userFavorites = document.getElementById('favorites')
-            // console.log(table_data)
             if (table_data.length == 0) {
                 userFavorites.innerHTML = '<li>표시할 데이터가 없습니다</li>'
             } else {
