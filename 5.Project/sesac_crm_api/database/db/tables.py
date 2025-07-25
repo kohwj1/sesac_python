@@ -3,7 +3,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 
 DATABASE = 'database/db/mycrm.db'
 
-engine = create_engine(f'sqlite:///{DATABASE}', echo=True)
+engine = create_engine(f'sqlite:///{DATABASE}', echo=False)
 Base = declarative_base()
 session = sessionmaker(bind=engine)
 
