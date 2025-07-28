@@ -140,8 +140,8 @@ def get_orderitems(orderid):
     
     return all_list
 
-def create_order(orderat, userid, itemid):
-    storeid = '15a3ac41-c9ce-4e99-b896-ad402dcf6523'
+def create_order(orderat, userid, storeid, itemid):
+    # storeid = '15a3ac41-c9ce-4e99-b896-ad402dcf6523'
     with session() as sess:
         new_order_key = str(uuid.uuid4())
         sess.execute(insert(Order).values(Id=new_order_key ,OrderAt=datetime.strptime(orderat, '%Y-%m-%d %H:%M:%S'),

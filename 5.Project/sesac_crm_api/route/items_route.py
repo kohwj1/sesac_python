@@ -49,15 +49,7 @@ def item_type():
 
 @item_bp.route('/api/unique')
 def list_unique():
-    all_list = itemdb.get_list_all()
-    filter = []
-    unique_list = []
-
-    for item in all_list:
-        if item['Name'] not in filter:
-            unique_list.append(item)
-            filter.append(item['Name'])
-
+    unique_list = itemdb.get_list_unique()
     return jsonify({'data':unique_list})
 
 @item_bp.route('/api/create', methods=['POST'])

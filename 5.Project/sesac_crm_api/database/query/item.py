@@ -78,13 +78,14 @@ def create_item(itemname, type, unitprice):
     return commit_checker('create', Item, new_item_key), new_item_key
 
 
-def get_list_all():
+def get_list_unique():
     with session() as sess:
-        query = sess.execute(select(Item)).fetchall()
-        all_list = []
+        query = sess.execute(select(Item)
+                             .group_by(Item.Name)).fetchall()
+        unique_list = []
 
         for i in query:
             row = i[0]
-            all_list.append({'Id':row.Id, 'Type':row.Type, 'Name':row.Name, 'UnitPrice':row.UnitPrice})
+            unique_list.append({'Id':row.Id, 'Type':row.Type, 'Name':row.Name, 'UnitPrice':row.UnitPrice})
     
-    return all_list
+    return unique_list

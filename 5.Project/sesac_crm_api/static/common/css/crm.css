@@ -94,6 +94,10 @@
     min-width:20%;
 }
 
+#StoreId {
+    width:300px;
+}
+
 .submitContainer {
     justify-content: center;
     margin-top:30px;

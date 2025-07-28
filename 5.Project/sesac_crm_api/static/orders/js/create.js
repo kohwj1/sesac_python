@@ -1,7 +1,7 @@
 const args = new URLSearchParams(window.location.search)
 const userid = args.get('userid')
 
-function getItemList() {
+function getUniqueItemList() {
     fetch(`/items/api/unique`)
         .then((response) => response.json())
         .then((data) => {
@@ -15,6 +15,23 @@ function getItemList() {
                     itemList.innerHTML += `
                                         <input class="itemUi" type="checkbox" id="${row.Id}" name="ItemId" value="${row.Id}">
                                         <label for="${row.Id}">${row.Name} / ${row.UnitPrice}원</label>`
+                }
+            }
+        })
+    };
+
+function getUniqueStoreList() {
+    fetch(`/stores/api/unique`)
+        .then((response) => response.json())
+        .then((data) => {
+            const store_data = data.data;
+            const storeList = document.getElementById('StoreId')
+            if (store_data.length == 0) {
+                storeList.innerText = '매장 정보를 가져오는 데 실패하였습니다.'
+            } else {
+                storeList.innerHTML = ''
+                for (row of store_data) {
+                    storeList.innerHTML += `<option value="${row.Id}">${row.Name}</option>`
                 }
             }
         })
@@ -65,7 +82,8 @@ function createOrder() {
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('userid').value = userid
-    getItemList()
+    getUniqueItemList()
+    getUniqueStoreList()
 })
 
 document.getElementById('createForm').addEventListener('submit', e => {

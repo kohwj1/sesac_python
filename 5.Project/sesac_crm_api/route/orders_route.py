@@ -50,8 +50,9 @@ def order_items(id):
 def order_create():
     order_at = request.form.get('OrderAt')
     user_id = request.form.get('UserId')
+    store_id = request.form.get('StoreId')
     item_id = request.form.getlist('ItemId')
-    isCreated = orderdb.create_order(order_at, user_id, item_id)
+    isCreated = orderdb.create_order(order_at, user_id, store_id, item_id)
     return jsonify({'isCreated':isCreated[0], 'OrderId': isCreated[1]})
 
 @order_bp.route('/api/delete/<id>', methods=['DELETE'])

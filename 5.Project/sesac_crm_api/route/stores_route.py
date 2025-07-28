@@ -62,6 +62,11 @@ def store_type():
     type_list = storedb.get_store_type()
     return jsonify({'data':type_list})
 
+@store_bp.route('/api/unique')
+def list_unique():
+    unique_list = storedb.get_list_unique()
+    return jsonify({'data':unique_list})
+
 @store_bp.route('/api/create', methods=['POST'])
 def store_create():
     StoreName = request.form.get('StoreName')

@@ -121,6 +121,18 @@ def get_store_type():
     # print(all_list)
     return all_list
 
+def get_list_unique():
+    with session() as sess:
+        query = sess.execute(select(Store)
+                             .group_by(Store.Type)).fetchall()
+        unique_list = []
+
+        for i in query:
+            row = i[0]
+            unique_list.append({'Id':row.Id, 'Type':row.Type, 'Name':row.Name})
+    
+    return unique_list
+
 def create_store(storename, type, address):
     with session() as sess:
         new_store_key = str(uuid.uuid4())
