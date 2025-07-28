@@ -57,7 +57,7 @@ def regulars(id):
         regulars = storedb.get_regulars(id)
     return jsonify({'data':regulars})
 
-@store_bp.route('/api/typelist')
+@store_bp.route('/api/type')
 def store_type():
     type_list = storedb.get_store_type()
     return jsonify({'data':type_list})

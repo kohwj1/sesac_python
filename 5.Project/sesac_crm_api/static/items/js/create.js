@@ -1,5 +1,5 @@
 function getTypeList() {
-    fetch(`/items/api/typelist`)
+    fetch(`/items/api/type`)
         .then((response) => response.json())
         .then((data) => {
             const type_data = data.data;

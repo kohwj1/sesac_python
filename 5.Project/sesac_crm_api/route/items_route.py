@@ -42,12 +42,12 @@ def monthly_sales(id):
     monthly_sales = itemdb.get_monthly_sales(id)
     return jsonify({'data':monthly_sales})
 
-@item_bp.route('/api/typelist')
+@item_bp.route('/api/type')
 def item_type():
     type_list = itemdb.get_item_type()
     return jsonify({'data':type_list})
 
-@item_bp.route('/api/uniquelist')
+@item_bp.route('/api/unique')
 def list_unique():
     all_list = itemdb.get_list_all()
     filter = []

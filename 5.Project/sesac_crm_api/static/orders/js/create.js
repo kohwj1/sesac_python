@@ -2,7 +2,7 @@ const args = new URLSearchParams(window.location.search)
 const userid = args.get('userid')
 
 function getItemList() {
-    fetch(`/items/api/uniquelist`)
+    fetch(`/items/api/unique`)
         .then((response) => response.json())
         .then((data) => {
             const item_data = data.data;
