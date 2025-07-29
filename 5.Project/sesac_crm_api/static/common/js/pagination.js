@@ -23,9 +23,9 @@ function createPagination(type, currentPage, lastPage, param) {
     }
 
     if (list_start -1 < 1) {
-        pagination.innerHTML = `<li class="pageNum disabled">Prev</li>`
+        pagination.innerHTML = `<li class="pageNum disabled">- 10</li>`
     } else {
-        pagination.innerHTML = `<li class="pageNum"><a href="?page=${list_start - 1}${q_param}">Prev</a></li>`
+        pagination.innerHTML = `<li class="pageNum"><a href="?page=${list_start - 1}${q_param}">- 10</a></li>`
     }
     
     for (i = list_start; i <= list_end; i++) {
@@ -37,8 +37,8 @@ function createPagination(type, currentPage, lastPage, param) {
     }
     
     if (list_end + 1 > lastPage) {
-        pagination.innerHTML += `<li class="pageNum disabled">Next</li>`
+        pagination.innerHTML += `<li class="pageNum disabled">+ 10</li>`
     } else {
-        pagination.innerHTML += `<li class="pageNum"><a href="?page=${list_end + 1}${q_param}">Next</a></li>`
+        pagination.innerHTML += `<li class="pageNum"><a href="?page=${list_end + 1}${q_param}">+ 10</a></li>`
     }
 }
