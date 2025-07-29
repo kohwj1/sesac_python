@@ -1,6 +1,6 @@
 from sqlalchemy import select, func, desc, insert, delete
 from database.util.commitchecker import commit_checker
-from database.db.tables import User, Store, Order, OrderItem, Item, session
+from database.model.tables import User, Store, Order, OrderItem, Item, session
 from datetime import datetime
 import uuid
 

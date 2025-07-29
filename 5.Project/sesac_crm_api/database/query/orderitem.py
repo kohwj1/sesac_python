@@ -1,5 +1,5 @@
 from sqlalchemy import select, func, desc
-from database.db.tables import User, Store, Order, OrderItem, Item, session
+from database.model.tables import User, Store, Order, OrderItem, Item, session
 from datetime import datetime
 
 def get_list(page, pagesize):

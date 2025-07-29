@@ -1,5 +1,5 @@
 from sqlalchemy import select, func, desc, insert
-from database.db.tables import User, Store, Order, OrderItem, Item, session
+from database.model.tables import User, Store, Order, OrderItem, Item, session
 from database.util.commitchecker import commit_checker
 import uuid
 
@@ -139,4 +139,4 @@ def create_store(storename, type, address):
         sess.execute(insert(Store).values(Id=new_store_key, Name=storename, Type=type, Address=address))
         sess.commit()
 
-    return commit_checker('create', Store, new_store_key), new_store_key
+    return {'isCreated': commit_checker('create', Store, new_store_key), 'newId': new_store_key}

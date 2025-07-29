@@ -1,5 +1,5 @@
 from sqlalchemy import select, func, desc, insert
-from database.db.tables import User, Store, Order, OrderItem, Item, session
+from database.model.tables import User, Store, Order, OrderItem, Item, session
 from database.util.commitchecker import commit_checker
 import uuid
 

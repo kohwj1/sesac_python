@@ -1,6 +1,6 @@
 from sqlalchemy import select, func, desc, insert
 from database.util.commitchecker import commit_checker
-from database.db.tables import User, Store, Order, OrderItem, Item, session
+from database.model.tables import User, Store, Order, OrderItem, Item, session
 import uuid
 from datetime import datetime
 
@@ -8,12 +8,15 @@ def get_list(page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
         row_count = sess.execute(select(func.count(User.Id))).fetchone()[0]
-        query = sess.execute(select(User).limit(pagesize).offset(off_start)).fetchall()
+        query = sess.execute(select(User)
+                             .limit(pagesize)
+                             .offset(off_start)).fetchall()
         all_list = []
 
         for u in query:
             row = u[0]
-            all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender, 'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
+            all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender,
+                             'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
     
     return {'data':all_list, 'totalCount':row_count}
 
@@ -21,7 +24,10 @@ def search_users_by_name(name, page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
         row_count = sess.execute(select(func.count(User.Id)).where(User.Name.like(f'%{name}%'))).fetchone()[0]
-        query = sess.execute(select(User).where(User.Name.like(f'%{name}%')).limit(pagesize).offset(off_start)).fetchall()
+        query = sess.execute(select(User)
+                             .where(User.Name.like(f'%{name}%'))
+                             .limit(pagesize)
+                             .offset(off_start)).fetchall()
         all_list = []
 
         for u in query:
@@ -34,7 +40,10 @@ def search_users_by_gender(gender, page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
         row_count = sess.execute(select(func.count(User.Id)).where(User.Gender == gender)).fetchone()[0]
-        query = sess.execute(select(User).where(User.Gender == gender).limit(pagesize).offset(off_start)).fetchall()
+        query = sess.execute(select(User)
+                             .where(User.Gender == gender)
+                             .limit(pagesize)
+                             .offset(off_start)).fetchall()
         all_list = []
 
         for u in query:
@@ -47,12 +56,15 @@ def search_users_by_name_and_gender(name, gender, page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
         row_count = sess.execute(select(func.count(User.Id)).where(User.Gender == gender, User.Name.like(f'%{name}%'))).fetchone()[0]
-        query = sess.execute(select(User).where(User.Gender == gender, User.Name.like(f'%{name}%')).limit(pagesize).offset(off_start)).fetchall()
+        query = sess.execute(select(User)
+                             .where(User.Gender == gender, User.Name.like(f'%{name}%'))
+                             .limit(pagesize).offset(off_start)).fetchall()
         all_list = []
 
         for u in query:
             row = u[0]
-            all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender, 'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
+            all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender,
+                             'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
     
     return {'data':all_list, 'totalCount':row_count}
 
@@ -60,7 +72,8 @@ def get_user_summary(userid):
     with session() as sess:
         user_info = sess.execute(select(User).where(User.Id == userid)).fetchone()[0]
     
-    return {'Id':user_info.Id, 'Name':user_info.Name, 'Gender':user_info.Gender, 'Age':user_info.Age, 'Birthdate':user_info.Birthdate, 'Address':user_info.Address}
+    return {'Id':user_info.Id, 'Name':user_info.Name, 'Gender':user_info.Gender,
+            'Age':user_info.Age, 'Birthdate':user_info.Birthdate, 'Address':user_info.Address}
 
 def get_user_history(userid):
     with session() as sess:
@@ -113,4 +126,4 @@ def create_user(username, birthdate, age, gender, address):
         sess.execute(insert(User).values(Id=new_user_key, Name=username, Birthdate=birthdate, Age=age, Gender=gender, Address=address))
         sess.commit()
 
-    return commit_checker('create', User, new_user_key), new_user_key
+    return {'isCreated':commit_checker('create', User, new_user_key), 'newId': new_user_key}
