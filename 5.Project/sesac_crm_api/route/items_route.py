@@ -57,6 +57,7 @@ def list_unique():
 def item_create():
     ItemName = html.escape(request.form.get('ItemName'))
     Type = html.escape(request.form.get('Type'))
+    min_price = 1000
     is_created = False
     msg = '정의되지 않은 오류'
     new_id = None
@@ -64,8 +65,8 @@ def item_create():
     try:
         #가격 타입캐스팅 가능 여부 체크
         UnitPrice = int(request.form.get('UnitPrice'))
-        #천원 이하 처리불가
-        if UnitPrice < 1000:
+        #최소금액 미만 등록 불가
+        if UnitPrice < min_price:
             msg = '가격을 1000원 이상으로 입력해주세요'
 
         else:
