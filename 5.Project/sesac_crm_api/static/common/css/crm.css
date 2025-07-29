@@ -19,6 +19,7 @@
 }
 
 .gnbActive {
+    /* color:orange; */
     border-bottom: 3px solid orange;
 }
 
