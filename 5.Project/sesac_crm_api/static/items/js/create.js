@@ -29,19 +29,20 @@ function createItem() {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data)
+            // console.log(data)
             ItemId = data.ItemId;
 
             if (data.isCreated) {
                 alert(`상품 등록이 완료되었습니다.\n상품ID: ${ItemId}`)
                 location.href = `/items/detail?id=${ItemId}`
             } else {
+                alert(data.msg)
                 throw new Error;
             }
         })
         .catch((error) => {
             console.log(error)
-            alert(error)
+            // alert(error)
         })
     };
 

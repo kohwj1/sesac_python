@@ -1,6 +1,7 @@
 from flask import request, Blueprint, send_file, jsonify
 import database.query.user as userdb
 from route.util.pagination import PAGE_SIZE, pagination
+import html
 
 user_bp = Blueprint('users', __name__)
 
@@ -64,11 +65,26 @@ def favorites(id):
 
 @user_bp.route('/api/create', methods=['POST'])
 def user_create():
-    UserName = request.form.get('UserName')
-    Birthdate = request.form.get('Birthdate')
-    Age = request.form.get('Age')
-    Gender = request.form.get('Gender')
-    Address = request.form.get('Address')
+    #html.escape를 이용하여 text필드 XSS 1차 방어 처리
+    UserName = html.escape(request.form.get('UserName', default=''))
+    Birthdate = request.form.get('Birthdate', default='')
+    Gender = request.form.get('Gender', default='')
+    Address = html.escape(request.form.get('Address', default=''))
 
-    result = userdb.create_user(UserName, Birthdate, Age, Gender, Address)
-    return jsonify({'isCreated':result['isCreated'], 'UserId': result['newId']})
+    try:
+        #나이 숫자 캐스팅 가능 여부 체크
+        Age = int(request.form.get('Age', default=0))
+        #필수값 입력 여부 체크
+        if UserName and Birthdate and Age and Gender and Address:
+            result = userdb.create_user(UserName, Birthdate, Age, Gender, Address)
+            is_created = result['isCreated']
+            new_id = result['newId']
+            msg = 'success'
+
+    except ValueError:
+            is_created = False
+            new_id = None
+            msg = '나이는 숫자만 입력할 수 있습니다.'
+    
+    finally:
+        return jsonify({'isCreated':is_created, 'msg': msg, 'UserId':new_id})

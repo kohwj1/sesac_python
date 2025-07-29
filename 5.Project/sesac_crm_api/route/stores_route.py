@@ -1,6 +1,7 @@
 from flask import request, Blueprint, send_file, jsonify
 import database.query.store as storedb
 from route.util.pagination import PAGE_SIZE, pagination
+import html
 
 store_bp = Blueprint('stores', __name__)
 
@@ -69,9 +70,13 @@ def list_unique():
 
 @store_bp.route('/api/create', methods=['POST'])
 def store_create():
-    StoreName = request.form.get('StoreName')
-    Type = request.form.get('Type')
-    Address = request.form.get('Address')
+    StoreName = html.escape(request.form.get('StoreName', default=''))
+    Type = request.form.get('Type', default='')
+    Address = html.escape(request.form.get('Address', default=''))
 
-    result = storedb.create_store(StoreName, Type, Address)
-    return jsonify({'isCreated':result['isCreated'], 'StoreId': result['newId']})
+    #필수값 입력 여부 체크
+    if StoreName and Type and Address:
+        result = storedb.create_store(StoreName, Type, Address)
+        return jsonify({'isCreated':result['isCreated'], 'StoreId': result['newId']})
+    
+    return jsonify({'isCreated':False, 'msg': '올바르지 않은 값이 입력되었습니다.'})

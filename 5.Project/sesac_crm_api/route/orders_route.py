@@ -52,8 +52,13 @@ def order_create():
     user_id = request.form.get('UserId')
     store_id = request.form.get('StoreId')
     item_id = request.form.getlist('ItemId')
-    result = orderdb.create_order(order_at, user_id, store_id, item_id)
-    return jsonify({'isCreated':result['isCreated'], 'OrderId': result['newId']})
+
+    if order_at and user_id and store_id and item_id:
+        result = orderdb.create_order(order_at, user_id, store_id, item_id)
+        return jsonify({'isCreated':result['isCreated'], 'OrderId': result['newId']})
+    
+    return jsonify({'isCreated':False, 'msg': '올바르지 않은 값이 입력되었습니다.'})
+
 
 @order_bp.route('/api/delete/<id>', methods=['DELETE'])
 def order_delete(id):

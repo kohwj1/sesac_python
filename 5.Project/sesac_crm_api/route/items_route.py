@@ -1,8 +1,9 @@
 from flask import request, Blueprint, jsonify, send_file
 import database.query.item as itemdb
 from route.util.pagination import PAGE_SIZE, pagination
+import html
 
-item_bp = Blueprint('items', __name__)
+item_bp = Blueprint('items', __name__   )
 
 @item_bp.route('/')
 def page_order_list():
@@ -54,9 +55,28 @@ def list_unique():
 
 @item_bp.route('/api/create', methods=['POST'])
 def item_create():
-    ItemName = request.form.get('ItemName')
-    Type = request.form.get('Type')
-    UnitPrice = int(request.form.get('UnitPrice'))
+    ItemName = html.escape(request.form.get('ItemName'))
+    Type = html.escape(request.form.get('Type'))
+    is_created = False
+    msg = '정의되지 않은 오류'
+    new_id = None
 
-    result = itemdb.create_item(ItemName, Type, UnitPrice)
-    return jsonify({'isCreated':result['isCreated'], 'ItemId': result['newId']})
+    try:
+        #가격 타입캐스팅 가능 여부 체크
+        UnitPrice = int(request.form.get('UnitPrice'))
+        #천원 이하 처리불가
+        if UnitPrice < 1000:
+            msg = '가격을 1000원 이상으로 입력해주세요'
+
+        else:
+            #필수값 입력 여부 체크
+            if ItemName and Type and UnitPrice:
+                result = itemdb.create_item(ItemName, Type, UnitPrice)
+                is_created = result['isCreated']
+                new_id = result['newId']
+        
+    except ValueError:
+        msg = '가격은 숫자로만 입력할 수 있습니다.'
+        
+    finally:
+        return jsonify({'isCreated':is_created, 'msg': msg, 'ItemId': new_id})
