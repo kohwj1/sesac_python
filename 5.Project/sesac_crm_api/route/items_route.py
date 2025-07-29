@@ -58,5 +58,5 @@ def item_create():
     Type = request.form.get('Type')
     UnitPrice = int(request.form.get('UnitPrice'))
 
-    isCreated = itemdb.create_item(ItemName, Type, UnitPrice)
-    return jsonify({'isCreated':isCreated[0], 'ItemId': isCreated[1]})
+    result = itemdb.create_item(ItemName, Type, UnitPrice)
+    return jsonify({'isCreated':result['isCreated'], 'ItemId': result['newId']})

@@ -154,7 +154,7 @@ def create_order(orderat, userid, storeid, itemid):
             sess.execute(insert(OrderItem).values(Id=new_orderitem_key, OrderId=new_order_key, ItemId=i))
         sess.commit()
 
-    return commit_checker('create', Order, new_order_key), new_order_key
+    return {'isCreated': commit_checker('create', Order, new_order_key), 'newId': new_order_key}
 
 def delete_order(orderid):
     #여기 쿼리 하나로 테이블 두 개에서 동시에 삭제 가능할지 확인해볼것..

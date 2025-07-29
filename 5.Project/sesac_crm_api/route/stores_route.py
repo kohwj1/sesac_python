@@ -73,5 +73,5 @@ def store_create():
     Type = request.form.get('Type')
     Address = request.form.get('Address')
 
-    isCreated = storedb.create_store(StoreName, Type, Address)
-    return jsonify({'isCreated':isCreated[0], 'StoreId': isCreated[1]})
+    result = storedb.create_store(StoreName, Type, Address)
+    return jsonify({'isCreated':result['isCreated'], 'StoreId': result['newId']})

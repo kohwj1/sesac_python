@@ -23,7 +23,8 @@ def get_list(page, pagesize):
 def search_users_by_name(name, page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
-        row_count = sess.execute(select(func.count(User.Id)).where(User.Name.like(f'%{name}%'))).fetchone()[0]
+        row_count = sess.execute(select(func.count(User.Id))
+                                 .where(User.Name.like(f'%{name}%'))).fetchone()[0]
         query = sess.execute(select(User)
                              .where(User.Name.like(f'%{name}%'))
                              .limit(pagesize)
@@ -32,7 +33,8 @@ def search_users_by_name(name, page, pagesize):
 
         for u in query:
             row = u[0]
-            all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender, 'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
+            all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender,
+                             'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
     
     return {'data':all_list, 'totalCount':row_count}
 
@@ -48,14 +50,16 @@ def search_users_by_gender(gender, page, pagesize):
 
         for u in query:
             row = u[0]
-            all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender, 'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
+            all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender, 
+                             'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
     
     return {'data':all_list, 'totalCount':row_count}
 
 def search_users_by_name_and_gender(name, gender, page, pagesize):
     off_start = (page - 1) * pagesize
     with session() as sess:
-        row_count = sess.execute(select(func.count(User.Id)).where(User.Gender == gender, User.Name.like(f'%{name}%'))).fetchone()[0]
+        row_count = sess.execute(select(func.count(User.Id))
+                                 .where(User.Gender == gender, User.Name.like(f'%{name}%'))).fetchone()[0]
         query = sess.execute(select(User)
                              .where(User.Gender == gender, User.Name.like(f'%{name}%'))
                              .limit(pagesize).offset(off_start)).fetchall()
@@ -84,7 +88,8 @@ def get_user_history(userid):
                              .order_by(desc(Order.OrderAt))).fetchall()
         all_list = []
         for row in query:
-            all_list.append({'OrderId':row[0], 'OrderAt':row[1].strftime('%Y-%m-%d %H:%M:%S'), 'StoreId':row[2], 'StoreName':row[3]})
+            all_list.append({'OrderId':row[0], 'OrderAt':row[1].strftime('%Y-%m-%d %H:%M:%S'),
+                             'StoreId':row[2], 'StoreName':row[3]})
     
     return all_list
 
@@ -123,7 +128,12 @@ def get_favorite_items(userid):
 def create_user(username, birthdate, age, gender, address):
     with session() as sess:
         new_user_key = str(uuid.uuid4())
-        sess.execute(insert(User).values(Id=new_user_key, Name=username, Birthdate=birthdate, Age=age, Gender=gender, Address=address))
+        sess.execute(insert(User).values(Id=new_user_key,
+                                         Name=username,
+                                         Birthdate=birthdate,
+                                         Age=age,
+                                         Gender=gender,
+                                         Address=address))
         sess.commit()
 
     return {'isCreated':commit_checker('create', User, new_user_key), 'newId': new_user_key}

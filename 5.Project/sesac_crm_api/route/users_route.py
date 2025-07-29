@@ -70,5 +70,5 @@ def user_create():
     Gender = request.form.get('Gender')
     Address = request.form.get('Address')
 
-    isCreated = userdb.create_user(UserName, Birthdate, Age, Gender, Address)
-    return jsonify({'isCreated':isCreated[0], 'UserId': isCreated[1]})
+    result = userdb.create_user(UserName, Birthdate, Age, Gender, Address)
+    return jsonify({'isCreated':result['isCreated'], 'UserId': result['newId']})
