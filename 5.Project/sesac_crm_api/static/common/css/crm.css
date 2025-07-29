@@ -17,6 +17,11 @@
     color:#fff;
     text-decoration: none;
 }
+
+.gnbActive {
+    border-bottom: 3px solid orange;
+}
+
 .idColumn {
     width:40%;
 }
@@ -94,7 +99,7 @@
     min-width:20%;
 }
 
-#StoreId {
+#storeid {
     width:300px;
 }
 
