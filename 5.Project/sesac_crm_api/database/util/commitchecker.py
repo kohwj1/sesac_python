@@ -1,5 +1,5 @@
 from sqlalchemy import select, func
-from database.db.tables import session
+from database.model.tables import session
 
 
 def commit_checker(tasktype, table, id):

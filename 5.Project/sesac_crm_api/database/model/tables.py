@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-DATABASE = 'database/db/mycrm.db'
+DATABASE = 'database/model/mycrm.db'
 
 engine = create_engine(f'sqlite:///{DATABASE}', echo=False)
 Base = declarative_base()
