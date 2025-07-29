@@ -46,5 +46,7 @@ function displayDetail() {
         })
     };
 
-document.addEventListener('DOMContentLoaded', displaySummary)
-document.addEventListener('DOMContentLoaded', displayDetail)
+document.addEventListener('DOMContentLoaded', () => {
+    displaySummary()
+    displayDetail()
+})

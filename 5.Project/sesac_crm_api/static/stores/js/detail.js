@@ -118,14 +118,24 @@ function filteredRegulars(month) {
         })
     };
 
-document.addEventListener('DOMContentLoaded', displaySummary)
+document.addEventListener('DOMContentLoaded', () => {
+    displaySummary()
 
-if (month == null) {
-    month = '';
-    document.addEventListener('DOMContentLoaded', displaySales)
-    document.addEventListener('DOMContentLoaded', displayRegulars)
-} else {
-    document.addEventListener('DOMContentLoaded', filteredSales(month))
-    document.addEventListener('DOMContentLoaded', filteredRegulars(month))
-}
+    if (month == null) {
+        displaySales()
+        displayRegulars()
+    } else {
+        filteredSales(month)
+        filteredRegulars(month)
+    }
+})
+
+// if (month == null) {
+//     month = '';
+//     document.addEventListener('DOMContentLoaded', displaySales)
+//     document.addEventListener('DOMContentLoaded', displayRegulars)
+// } else {
+//     document.addEventListener('DOMContentLoaded', filteredSales(month))
+//     document.addEventListener('DOMContentLoaded', filteredRegulars(month))
+// }
 
