@@ -10,10 +10,10 @@ def get_list(page, pagesize):
                              .order_by(OrderItem.OrderId)
                              .limit(pagesize)
                              .offset(off_start)).fetchall()
-        all_list = []
+        all_list = [{'Id':row[0].Id, 'OrderId':row[0].OrderId, 'ItemId':row[0].ItemId} for row in query]
 
-        for s in query:
-            row = s[0]
-            all_list.append({'Id':row.Id, 'OrderId':row.OrderId, 'ItemId':row.ItemId})
+        # for s in query:
+        #     row = s[0]
+        #     all_list.append({'Id':row.Id, 'OrderId':row.OrderId, 'ItemId':row.ItemId})
     
     return {'data':all_list, 'totalCount':row_count}

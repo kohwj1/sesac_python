@@ -11,12 +11,9 @@ def get_list(page, pagesize):
         query = sess.execute(select(User)
                              .limit(pagesize)
                              .offset(off_start)).fetchall()
-        all_list = []
-
-        for u in query:
-            row = u[0]
-            all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender,
-                             'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
+        all_list = [{'Id':row[0].Id, 'Name':row[0].Name, 'Gender':row[0].Gender,
+                    'Age':row[0].Age, 'Birthdate':row[0].Birthdate, 'Address':row[0].Address}
+                    for row in query]
     
     return {'data':all_list, 'totalCount':row_count}
 
@@ -29,12 +26,13 @@ def search_users_by_name(name, page, pagesize):
                              .where(User.Name.like(f'%{name}%'))
                              .limit(pagesize)
                              .offset(off_start)).fetchall()
-        all_list = []
+        all_list = [{'Id':row[0].Id, 'Name':row[0].Name, 'Gender':row[0].Gender,
+                    'Age':row[0].Age, 'Birthdate':row[0].Birthdate, 'Address':row[0].Address} for row in query]
 
-        for u in query:
-            row = u[0]
-            all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender,
-                             'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
+        # for u in query:
+        #     row = u[0]
+        #     all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender,
+        #                      'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
     
     return {'data':all_list, 'totalCount':row_count}
 
@@ -46,12 +44,13 @@ def search_users_by_gender(gender, page, pagesize):
                              .where(User.Gender == gender)
                              .limit(pagesize)
                              .offset(off_start)).fetchall()
-        all_list = []
+        all_list = [{'Id':row[0].Id, 'Name':row[0].Name, 'Gender':row[0].Gender, 
+                    'Age':row[0].Age, 'Birthdate':row[0].Birthdate, 'Address':row[0].Address} for row in query]
 
-        for u in query:
-            row = u[0]
-            all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender, 
-                             'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
+        # for u in query:
+        #     row = u[0]
+        #     all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender, 
+        #                      'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
     
     return {'data':all_list, 'totalCount':row_count}
 
@@ -63,12 +62,13 @@ def search_users_by_name_and_gender(name, gender, page, pagesize):
         query = sess.execute(select(User)
                              .where(User.Gender == gender, User.Name.like(f'%{name}%'))
                              .limit(pagesize).offset(off_start)).fetchall()
-        all_list = []
-
-        for u in query:
-            row = u[0]
-            all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender,
-                             'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
+        all_list = [{'Id':row[0].Id, 'Name':row[0].Name, 'Gender':row[0].Gender,
+                    'Age':row[0].Age, 'Birthdate':row[0].Birthdate, 'Address':row[0].Address}
+                    for row in query]
+        # for u in query:
+        #     row = u[0]
+        #     all_list.append({'Id':row.Id, 'Name':row.Name, 'Gender':row.Gender,
+        #                      'Age':row.Age, 'Birthdate':row.Birthdate, 'Address':row.Address})
     
     return {'data':all_list, 'totalCount':row_count}
 
@@ -86,11 +86,12 @@ def get_user_history(userid):
                              .join(Store, Order.StoreId == Store.Id)
                              .where(User.Id == userid)
                              .order_by(desc(Order.OrderAt))).fetchall()
-        all_list = []
-        for row in query:
-            all_list.append({'OrderId':row[0], 'OrderAt':row[1].strftime('%Y-%m-%d %H:%M:%S'),
-                             'StoreId':row[2], 'StoreName':row[3]})
-    
+        all_list = [{'OrderId':row[0], 'OrderAt':row[1].strftime('%Y-%m-%d %H:%M:%S'),
+                    'StoreId':row[2], 'StoreName':row[3]} for row in query]
+        # for row in query:
+        #     all_list.append({'OrderId':row[0], 'OrderAt':row[1].strftime('%Y-%m-%d %H:%M:%S'),
+        #                      'StoreId':row[2], 'StoreName':row[3]})
+
     return all_list
 
 def get_regular_store(userid):
@@ -102,9 +103,9 @@ def get_regular_store(userid):
                              .group_by(Store.Id)
                              .order_by(desc("OrderCount"))
                              .limit(5)).fetchall()
-        all_list = []
-        for row in query:
-            all_list.append({'StoreName':row[0], 'OrderCount':row[1]})
+        all_list = [{'StoreName':row[0], 'OrderCount':row[1]} for row in query]
+        # for row in query:
+        #     all_list.append({'StoreName':row[0], 'OrderCount':row[1]})
     
     return all_list
 
@@ -119,9 +120,9 @@ def get_favorite_items(userid):
                              .group_by(Item.Id)
                              .order_by(desc("ItemCount"))
                              .limit(5)).fetchall()
-        all_list = []
-        for row in query:
-            all_list.append({'ItemName':row[0], 'OrderCount':row[1]})
+        all_list = [{'ItemName':row[0], 'OrderCount':row[1]} for row in query]
+        # for row in query:
+        #     all_list.append({'ItemName':row[0], 'OrderCount':row[1]})
     
     return all_list
 

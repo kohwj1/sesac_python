@@ -9,18 +9,20 @@ def get_list(page, pagesize):
     with session() as sess:
         row_count = sess.execute(select(func.count(Order.Id))).fetchone()[0]
         query = sess.execute(select(Order.Id, func.strftime('%Y-%m-%d %H:%M:%S',Order.OrderAt).label('OrderAt'),
-                                    Store.Name.label('StoreName'), Store.Id.label('StoreId'), User.Id.label('UserId'), User.Name.label('UserName'))
+                                    Store.Name.label('StoreName'), Store.Id.label('StoreId'),
+                                    User.Id.label('UserId'), User.Name.label('UserName'))
                              .select_from(User)
                              .join(Order, User.Id == Order.UserId)
                              .join(Store, Order.StoreId == Store.Id)
                              .order_by(desc(Order.OrderAt))
                              .limit(pagesize)
                              .offset(off_start)).fetchall()
-        all_list = []
+        all_list = [{'Id':row.Id, 'OrderAt':row.OrderAt, 'StoreName':row.StoreName, 'StoreId':row.StoreId,
+                    'UserId':row.UserId, 'UserName':row.UserName} for row in query]
 
-        for row in query:
-            all_list.append({'Id':row.Id, 'OrderAt':row.OrderAt, 'StoreName':row.StoreName, 'StoreId':row.StoreId,
-                             'UserId':row.UserId, 'UserName':row.UserName})
+        # for row in query:
+        #     all_list.append({'Id':row.Id, 'OrderAt':row.OrderAt, 'StoreName':row.StoreName, 'StoreId':row.StoreId,
+        #                      'UserId':row.UserId, 'UserName':row.UserName})
     
     return {'data':all_list, 'totalCount':row_count}
 
@@ -33,7 +35,8 @@ def get_list_by_storename_month(storename, month, page, pagesize):
                                 .join(Store, Order.StoreId == Store.Id)
                                 .where(Store.Name.like(f'%{storename}%'), func.strftime('%Y-%m', Order.OrderAt) == month)).fetchone()[0]
         query = sess.execute(select(Order.Id, func.strftime('%Y-%m-%d %H:%M:%S',Order.OrderAt).label('OrderAt'),
-                                    Store.Name.label('StoreName'), Store.Id.label('StoreId'), User.Id.label('UserId'), User.Name.label('UserName'))
+                                    Store.Name.label('StoreName'), Store.Id.label('StoreId'),
+                                    User.Id.label('UserId'), User.Name.label('UserName'))
                              .select_from(User)
                              .join(Order, User.Id == Order.UserId)
                              .join(Store, Order.StoreId == Store.Id)
@@ -41,11 +44,12 @@ def get_list_by_storename_month(storename, month, page, pagesize):
                              .order_by(desc(Order.OrderAt))
                              .limit(pagesize)
                              .offset(off_start)).fetchall()
-        all_list = []
+        all_list = [{'Id':row.Id, 'OrderAt':row.OrderAt, 'StoreName':row.StoreName, 'StoreId':row.StoreId,
+                    'UserId':row.UserId, 'UserName':row.UserName} for row in query]
 
-        for row in query:
-            all_list.append({'Id':row.Id, 'OrderAt':row.OrderAt, 'StoreName':row.StoreName, 'StoreId':row.StoreId,
-                             'UserId':row.UserId, 'UserName':row.UserName})
+        # for row in query:
+        #     all_list.append({'Id':row.Id, 'OrderAt':row.OrderAt, 'StoreName':row.StoreName, 'StoreId':row.StoreId,
+        #                      'UserId':row.UserId, 'UserName':row.UserName})
     
     return {'data':all_list, 'totalCount':row_count}
 
@@ -67,11 +71,12 @@ def get_list_by_storename(storename, page, pagesize):
                              .order_by(desc(Order.OrderAt))
                              .limit(pagesize)
                              .offset(off_start)).fetchall()
-        all_list = []
+        all_list = [{'Id':row.Id, 'OrderAt':row.OrderAt, 'StoreName':row.StoreName, 'StoreId':row.StoreId,
+                    'UserId':row.UserId, 'UserName':row.UserName} for row in query]
 
-        for row in query:
-            all_list.append({'Id':row.Id, 'OrderAt':row.OrderAt, 'StoreName':row.StoreName, 'StoreId':row.StoreId,
-                             'UserId':row.UserId, 'UserName':row.UserName})
+        # for row in query:
+        #     all_list.append({'Id':row.Id, 'OrderAt':row.OrderAt, 'StoreName':row.StoreName, 'StoreId':row.StoreId,
+        #                      'UserId':row.UserId, 'UserName':row.UserName})
         
         return {'data':all_list, 'totalCount':row_count}
 
@@ -93,11 +98,12 @@ def get_list_by_month(month, page, pagesize):
                              .order_by(desc(Order.OrderAt))
                              .limit(pagesize)
                              .offset(off_start)).fetchall()
-        all_list = []
+        all_list = [{'Id':row.Id, 'OrderAt':row.OrderAt, 'StoreName':row.StoreName, 'StoreId':row.StoreId,
+                    'UserId':row.UserId, 'UserName':row.UserName} for row in query]
 
-        for row in query:
-            all_list.append({'Id':row.Id, 'OrderAt':row.OrderAt, 'StoreName':row.StoreName, 'StoreId':row.StoreId,
-                             'UserId':row.UserId, 'UserName':row.UserName})
+        # for row in query:
+        #     all_list.append({'Id':row.Id, 'OrderAt':row.OrderAt, 'StoreName':row.StoreName, 'StoreId':row.StoreId,
+                            #  'UserId':row.UserId, 'UserName':row.UserName})
     
     return {'data':all_list, 'totalCount':row_count}
 
@@ -133,19 +139,21 @@ def get_orderitems(orderid):
                              .where(Order.Id == orderid)
                              .group_by(Item.Id)
                              .order_by(desc('UnitCount'))).fetchall()
-        all_list = []
+        all_list = [{'ItemId':row.Id, 'ItemName':row.Name, 'UnitPrice':row.UnitPrice, 'UnitCount':row.UnitCount}
+                    for row in query]
 
-        for row in query:
-            all_list.append({'ItemId':row.Id, 'ItemName':row.Name, 'UnitPrice':row.UnitPrice, 'UnitCount':row.UnitCount})
+        # for row in query:
+        #     all_list.append({'ItemId':row.Id, 'ItemName':row.Name, 'UnitPrice':row.UnitPrice, 'UnitCount':row.UnitCount})
     
     return all_list
 
 def create_order(orderat, userid, storeid, itemid):
-    # storeid = '15a3ac41-c9ce-4e99-b896-ad402dcf6523'
     with session() as sess:
         new_order_key = str(uuid.uuid4())
-        sess.execute(insert(Order).values(Id=new_order_key ,OrderAt=datetime.strptime(orderat, '%Y-%m-%d %H:%M:%S'),
-                                          UserId=userid, StoreId=storeid))
+        sess.execute(insert(Order).values(Id=new_order_key,
+                                          OrderAt=datetime.strptime(orderat, '%Y-%m-%d %H:%M:%S'),
+                                          UserId=userid,
+                                          StoreId=storeid))
         sess.commit()
     
     with session() as sess:
