@@ -46,21 +46,21 @@ function displaySales() {
             };
         })
         .then(() => {
-            // console.log('역순으로 담긴 리스트 순서 리버스');
             itemLabels.reverse();
             lineValues.reverse();
             barValues.reverse();
-            // console.log(itemLabels, lineValues, barValues)
         })
         .then(() => {
-            // console.log('이제차트그릴타이밍');
             if (table_data.length != 0) {
                 drawMixedChart('myChart', itemLabels, lineValues, barValues);
         }   else {
-                console.log('차트 그릴 데이터가 없어요!!');
+                console.log('차트 데이터가 존재하지 않습니다.');
         }
     })
     };
 
-document.addEventListener('DOMContentLoaded', displaySummary)
-document.addEventListener('DOMContentLoaded', displaySales)
+document.addEventListener('DOMContentLoaded', () => {
+    displaySummary()
+    displaySales()
+})
+// document.addEventListener('DOMContentLoaded', displaySales)
