@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <h2>로그인</h2>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="POST" action="/login">
+        <input type="text" placeholder="아이디 입력" name="id">
+        <input type="password" placeholder="비밀번호 입력" name="pw">
+        <input type="submit" value="login">
+    </form>
+</body>
+</html>

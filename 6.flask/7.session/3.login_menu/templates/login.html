@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}홈페이지{% endblock %}
+{% block content %}
+
+<h1>Login</h1>
+    {% if error %}<p style="color:red">{{error}}</p>{% endif %}
+    <br>
+    <form method="POST">
+        <input placeholder="아이디" name="id">
+        <input placeholder="비밀번호" type="password" name="pw">
+        <input type="submit" value="로그인">
+    </form>
+
+{% endblock %}

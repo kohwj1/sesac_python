@@ -40,14 +40,12 @@ def dashboard():
 @app.route('/profile', methods=['POST', 'GET'])
 def profile():
     user = session.get('user')
-
     if request.method == 'POST':
         pass
     else:
         if user:
-            return f"당신은 아까 왔던 사용자군요"
-        return '로그인 후 이용 가능합니다.'
-
+            return render_template('profile', user=user)
+        return '<p>로그인 후 이용 가능합니다.</p><a href="/">로그인하기</a>'
 
 @app.route('/logout')
 def logout():

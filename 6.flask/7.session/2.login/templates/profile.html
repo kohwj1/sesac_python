@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>안녕하세요, {{user.name}}님</h2>
+    <h4>개인정보 수정</h4>
+    <form>
+        <label for="name">비밀번호</label>
+        <input name="name" value="{{user.name}}" required>
+        <label for="pw">비밀번호</label>
+        <input name="pw" type="password" required></input>
+        <input type="submit" value="수정하기">
+    </form>
+</body>
+</html>

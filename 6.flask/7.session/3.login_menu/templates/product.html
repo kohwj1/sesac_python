@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}홈페이지{% endblock %}
+{% block content %}
+
+<h1>Product</h1>
+{% if error %}<p style="color:red">{{error}}</p>{% endif %}
+<ul>
+    {% for i in items %}
+    <li>
+        <form method="POST" action="{{url_for('add_cart')}}">
+            <span>{{i.name}}</span>
+            <input type="hidden" name="pid" value="{{i.id}}">
+            <input type="submit" value="담기">
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
