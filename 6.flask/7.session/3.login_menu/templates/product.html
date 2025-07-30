@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
-{% block title %}홈페이지{% endblock %}
+{% block title %}상품{% endblock %}
 {% block content %}
 
 <h1>Product</h1>
 {% if error %}<p style="color:red">{{error}}</p>{% endif %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <p>{{msg}}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 <ul>
     {% for i in items %}
     <li>

@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session, redirect, url_for
+from flask import Flask, request, render_template, session, redirect, url_for, flash
 # from flask_session import Session
 
 users = [
@@ -54,41 +54,71 @@ def product():
     current_user = session.get('user', None)
     return render_template('product.html', items=items, isSigned=current_user)
 
-@app.route('/add-to-cart', methods=['POST'])
+@app.route('/product', methods=['POST'])
 def add_cart():
     current_user = session.get('user')
 
     if current_user:
         pid = request.form.get('pid')
-        mycart = session['cart']
+        mycart = session['cart'] #현재 카트정보 가져오기
 
         if pid in mycart:
             mycart[pid] += 1
         else:
             mycart[pid] = 1
         
-        session['cart'] = mycart
+        flash(f'장바구니에 {pid}을(를) 담았습니다')
+        session['cart'] = mycart #변경된 카트정보로 세션 업데이트
 
-        print(session['cart'])
+        # print(session['cart'])
         return render_template('product.html', items=items, isSigned=current_user)
 
     else:
         return render_template('product.html', items=items, isSigned=False, error='로그인 후 이용 가능합니다.')
 
-@app.route('/cart')
+@app.route('/cart', methods=['POST', 'GET'])
 def mycart():
     current_user = session.get('user', None)
     cart_data = session.get('cart', {})
-    mycart = []
 
-    for item_id, item_qantity in cart_data.items():
-        item = next((i for i in items if i['id'] == item_id), None)
-        if item:
-            a_item = item.copy()
-            a_item['quantity'] = item_qantity
-            mycart.append(a_item)
+    #장바구니 수량 변경
+    if request.method == 'POST':
+        mycart = session['cart']
+        for pid in request.form.keys():
+            # print(pid, request.form.get(pid))
+            mycart[pid] = int(request.form.get(pid))
+        
+        session['cart'] = mycart
+        flash('장바구니 상품 수량이 변경되었습니다')
+        return redirect(url_for('mycart'))
+    
+    #장바구니 조회
+    else:
+        mycart = []
 
-    return render_template('cart.html', mycart=mycart, isSigned=current_user)
+        for pid, q in cart_data.items():
+            item = next((i for i in items if i['id'] == pid), None) #pid를 기준으로 매칭되는 아이템을 items에서 찾아옴
+            if item:
+                a_item = item.copy()
+                a_item['q'] = q
+                mycart.append(a_item)
+
+        return render_template('cart.html', mycart=mycart, isSigned=current_user)
+    
+@app.route('/delete')
+def delete_cart():
+    current_user = session.get('user', None)
+    pid = request.args.get('pid')
+
+    if not current_user or not pid:
+        return '잘못된 접근입니다.'
+
+    mycart = session['cart']
+    mycart.pop(pid)
+    session['cart'] = mycart
+    flash('장바구니에서 상품을 삭제하였습니다')
+    return redirect(url_for('mycart'))
+
 
 @app.route('/logout')
 def logout():

@@ -1,18 +1,28 @@
 {% extends 'base.html' %}
-{% block title %}내 장바구니{% endblock %}
+{% block title %}장바구니{% endblock %}
 {% block content %}
-<h2>장바구니</h2>
+<h2>Cart</h2>
 {% if isSigned %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     {% if mycart %}
-        <ul>
-        {% for i in mycart %}
-            <li>{{i.name}} - {{i.quantity}}개</li>
-        {% endfor %}
-        </ul>
+        <form method="POST">
+            <ul>
+            {% for i in mycart %}
+                <li>{{i.name}} <input type=number name="{{i.id}}" value="{{i.q}}" min="1"><a href="/delete?pid={{i.id}}">삭제</a></li>
+            {% endfor %}
+            </ul>
+        <button type="sumbit">변경한 수량 적용하기</button>
+        </form>
     {% else %}
-    장바구니에 아이템이 없습니다
+        <p>장바구니에 상품이 없습니다.</p>
     {% endif %}
 {% else %}
-로그인 후 사용 가능합니다
+로그인 후 이용 가능합니다
 {% endif %}
 {% endblock %}
