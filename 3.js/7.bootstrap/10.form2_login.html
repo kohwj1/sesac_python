@@ -17,8 +17,8 @@
     4. 생년월일:
     5. 관심분야 (체크박스 1~4개)
     -->
-    <div class="container">
-        <h2>회원가입</h2>
+    <div class="container" style="width: 40rem;">
+        <h2 class="mt-3">회원가입</h2>
         <form id="validationForm" novalidate> <!-- novalidate: html5의 기본 체크 기능 비활성화 / bs로 직접 제어할 거라 꺼둠... -->
             <div class="mb-3">
                 <label for="userid" class="form-label">사용자명</label>
@@ -33,7 +33,7 @@
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
                     <input id="userpw" name="userpw" type="password" class="form-control" placeholder="3~10글자" required>
-                    <div class="invalid-feedback">비밀번호는 대소문자 및 숫자, 특수문자를 </div>
+                    <div class="invalid-feedback">비밀번호는 대소문자 및 숫자, 특수문자로 8글자 이상 입력해야 합니다. </div>
                 </div>
             </div>
             <div class="mb-3">
@@ -52,6 +52,24 @@
                     <div class="invalid-feedback">생년월일을 입력해 주세요.</div>
                 </div>
             </div>
+            <div class="form-label">관심 분야 (최소 1개, 최대 3개)</div>
+            <div class="form-check mb-1">
+                <input type="checkbox" class="form-check-input" id="c1" value="c1">
+                <label for="c1" class="form-check-label">관심 분야 1</label>
+            </div>
+            <div class="form-check mb-1">
+                <input type="checkbox" class="form-check-input" id="c2" value="c2">
+                <label for="c2" class="form-check-label">관심 분야 2</label>
+            </div>
+            <div class="form-check mb-1">
+                <input type="checkbox" class="form-check-input" id="c3" value="c3">
+                <label for="c3" class="form-check-label">관심 분야 3</label>
+            </div>
+            <div class="form-check mb-1">
+                <input type="checkbox" class="form-check-input" id="c4" value="c4">
+                <label for="c4" class="form-check-label">관심 분야 4</label>
+            </div>
+            <button type="submit" class="btn btn-primary my-4">제출</button>
         </form>
     </div>
 
@@ -59,6 +77,7 @@
     <script>
         const form = document.getElementById('validationForm')
         document.getElementById('userid').addEventListener('blur', validateUserId)
+        document.getElementById('userpw').addEventListener('blur', validateUserPw)
         document.getElementById('name').addEventListener('blur', validateUserName)
         document.getElementById('birth').addEventListener('blur', validateBirth)
 
@@ -70,6 +89,17 @@
             } else {
                 userId.classList.remove('is-invalid')
                 userId.classList.add('is-valid')
+            }
+        }
+        
+        function validateUserPw() {
+            const userPw = document.getElementById('userpw')
+            if (userPw.value.length < 8) {
+                userPw.classList.remove('is-valid')
+                userPw.classList.add('is-invalid')
+            } else {
+                userPw.classList.remove('is-invalid')
+                userPw.classList.add('is-valid')
             }
         }
 
@@ -84,7 +114,7 @@
             }
         }
 
-        function validateUserName() {
+        function validateBirth() {
             const birth = document.getElementById('birth')
             if (birth.value == '') {
                 birth.classList.remove('is-valid')
