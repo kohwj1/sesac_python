@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #container {
+            display:flex;
+            justify-content: space-evenly;
+        }
+        button {
+            width:50px;
+            height:50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <button id="create">C</button>
+        <button id="read">R</button>
+        <button id="update">U</button>
+        <button id="delete">D</button>
+    </div>
+    <div id="result"></div>
+    <script>
+        const msg_area = document.getElementById('result')
+        const errmsg = '요청 처리에 실패하였습니다.'
+
+        document.getElementById('read').addEventListener('click', async () => {
+            try {
+                const response = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+                const result = await response.json();
+                msg_area.innerText = JSON.stringify(result, null, 4)
+            } catch {
+                msg_area.innerText = errmsg
+            }
+        });
+
+        document.getElementById('create').addEventListener('click', async () => {
+            try {
+                const new_data = {title:'제목제목', body:'여기에 본문 입력', userId:5}
+                const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+                    method:'POST',
+                    header: {
+                        'content-type':'application/json',
+                        'charset':'UTF-8'
+                    },
+                    body:JSON.stringify(new_data)
+                });
+                const result = await response.json();
+                msg_area.innerText = JSON.stringify(result, null, 4)
+            } catch {
+                msg_area.innerText = errmsg
+            }
+        })
+
+        document.getElementById('update').addEventListener('click', async () => {
+            try {
+                const new_data = {title:'제목 수정', body:'수정한 본문', userId:5};
+                const response = await fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                    method:'PUT',
+                    header: {
+                        'content-type':'application/json',
+                        'charset':'UTF-8'
+                    },
+                    body:JSON.stringify(new_data)
+                });
+                const result = await response.json();
+                msg_area.innerText = JSON.stringify(result, null, 4)
+            } catch {
+                msg_area.innerText = errmsg
+            }
+        })
+
+        document.getElementById('delete').addEventListener('click', async () => {
+            try {
+                    const response = await fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                    method:'DELETE'
+                });
+                const result = await response.json();
+                msg_area.innerText = JSON.stringify(result, null, 4)
+            } catch {
+                msg_area.innerText = errmsg
+            }
+        })
+    </script>    
+</body>
+</html>
