@@ -15,16 +15,16 @@
             <i class="bi bi-shield-lock-fill me-2" style="font-size:1.25em;"></i>
             <h2 style="margin-bottom:0px;">로그인</h2>
         </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, msg in messages %}
+                    <div class="alert alert-{{category}} alert-dismissible fade show my-3" role="alert">{{msg}}
+                        <button class="btn btn-close" data-bs-dismiss="alert" aria-lebel="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <div class="card p-4">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    {% for category, msg in messages %}
-                        <div class="alert alert-{{category}} alert-dismissible fade show my-3" role="alert">{{msg}}
-                            <button class="btn btn-close" data-bs-dismiss="alert" aria-lebel="Close"></button>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
             <form class="" method="POST" action="/login">
                 <label for="id" class="form-label my-3"><i class="bi bi-person-circle me-2"></i>아이디</label>
                 <input class="form-control" type="text" placeholder="아이디 입력" name="id" id="id" required>
