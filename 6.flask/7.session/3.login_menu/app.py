@@ -140,6 +140,17 @@ def delete_cart():
     flash('장바구니에서 상품을 삭제하였습니다')
     return redirect(url_for('mycart'))
 
+@app.route('/clear-all')
+def clear_cart():
+    current_user = session.get('user', None)
+
+    if not current_user:
+        return '잘못된 접근입니다.'
+
+    session['cart'] = {}
+    flash('장바구니에서 모든 상품을 삭제하였습니다')
+    return redirect(url_for('mycart'))
+
 
 @app.route('/logout')
 def logout():
