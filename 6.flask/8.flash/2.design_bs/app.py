@@ -24,11 +24,11 @@ def login():
             session['user'] = user
             flash('로그인에 성공했습니다', 'success')
             return redirect(url_for('user'))
-        flash('아이디 또는 비밀번호가 일치하지 않습니다', 'danger')
+        flash('아이디 또는 비밀번호가 일치하지 않습니다.', 'danger')
         return redirect(url_for('home')) #로그인 실패했으면
     else:
         if 'user' in session: #이미 로그인한 상태로 접근한 경우
-            flash('이미 로그인 상태입니다', 'warning')
+            flash('이미 로그인 상태입니다.', 'warning')
             return redirect(url_for('user'))
         return redirect(url_for('home')) #로그인 안한 상태로 접근한 경우    
 
@@ -37,7 +37,7 @@ def user():
     user = session.get('user')
 
     if not user:
-        flash('로그인 후 이용 가능합니다', 'warning')
+        flash('로그인 후 이용 가능합니다.', 'warning')
         return redirect(url_for('home')) 
 
     return render_template('user.html', name=user['name'])
@@ -47,10 +47,10 @@ def logout():
     user = session.get('user')
 
     if not user:
-        flash('이미 로그아웃되었습니다', 'warning')
+        flash('이미 로그아웃되었습니다.', 'warning')
     else:
         session.pop('user', None)
-        flash('정상적으로 로그아웃되었습니다', 'success')
+        flash('정상적으로 로그아웃되었습니다.', 'success')
         
     return redirect(url_for('home'))
 
