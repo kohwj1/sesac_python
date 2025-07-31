@@ -6,4 +6,14 @@
 
 <p>안녕하세요, {{name}}님</p>
 
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <p>{{msg}}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<a href="{{url_for('profile')}}">정보 수정하기</a>
+
 {% endblock %}

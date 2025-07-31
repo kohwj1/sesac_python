@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}내정보{% endblock %}
+{% block content %}
+
+<h1>Profile</h1>
+
+<form method="POST">
+    <label for="new_name">이름</label>
+    <input id="new_name" name="name" value="{{name}}" required>
+    <br>
+    <label for="new_pw">비밀번호</label>
+    <input id="new_pw" type="password" name="pw" required>
+    <br>
+    <button type="submit">수정하기</button>
+</form>
+
+{% endblock %}

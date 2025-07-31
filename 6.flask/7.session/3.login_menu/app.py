@@ -29,6 +29,27 @@ def user():
         return render_template('user.html', name=current_user['name'], isSigned=current_user)
     return redirect(url_for('login'))
 
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    current_user = session.get('user', None)
+
+    if current_user:
+        if request.method == 'POST':
+            new_name = request.form.get('name')
+            new_pw = request.form.get('pw')
+
+            if new_name and new_pw:
+                user = next((u for u in users if u['id'] == current_user['id']), None)
+                user['name'] = new_name
+                user['pw'] = new_pw
+                session['user'] = user
+                flash('정보가 업데이트되었습니다.') 
+            else:
+                return '비정상 접근입니다.'
+        else:
+            return render_template('profile.html', name=current_user['name'], isSigned=current_user)
+    return redirect(url_for('login'))
+
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == 'POST':
