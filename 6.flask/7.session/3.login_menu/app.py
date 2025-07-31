@@ -43,7 +43,7 @@ def profile():
                 user['name'] = new_name
                 user['pw'] = new_pw
                 session['user'] = user
-                flash('정보가 업데이트되었습니다.') 
+                flash('정보가 업데이트되었습니다.', 'success') 
             else:
                 return '비정상 접근입니다.'
         else:
@@ -63,7 +63,8 @@ def login():
             session['cart'] = {}
             return redirect(url_for('user'))
         else:
-            return render_template('login.html', error='아이디 또는 비밀번호가 잘못되었습니다?')
+            flash('아이디 또는 비밀번호가 잘못되었습니다.','danger')
+            return render_template('login.html')
 
     else:
         if session.get('user'):
@@ -88,7 +89,7 @@ def add_cart():
         else:
             mycart[pid] = 1
         
-        flash(f'장바구니에 {pid}을(를) 담았습니다')
+        flash(f'장바구니에 {pid}을(를) 담았습니다', 'info')
         session['cart'] = mycart #변경된 카트정보로 세션 업데이트
 
         # print(session['cart'])
@@ -110,7 +111,7 @@ def mycart():
             mycart[pid] = int(request.form.get(pid))
         
         session['cart'] = mycart
-        flash('장바구니 상품 수량이 변경되었습니다')
+        flash('장바구니 상품 수량이 변경되었습니다', 'info')
         return redirect(url_for('mycart'))
     
     #장바구니 조회
@@ -137,7 +138,7 @@ def delete_cart():
     mycart = session['cart']
     mycart.pop(pid)
     session['cart'] = mycart
-    flash('장바구니에서 상품을 삭제하였습니다')
+    flash('장바구니에서 상품을 삭제하였습니다.', 'info')
     return redirect(url_for('mycart'))
 
 @app.route('/clear-all')
@@ -148,7 +149,7 @@ def clear_cart():
         return '잘못된 접근입니다.'
 
     session['cart'] = {}
-    flash('장바구니에서 모든 상품을 삭제하였습니다')
+    flash('장바구니에서 모든 상품을 삭제하였습니다.', 'info')
     return redirect(url_for('mycart'))
 
 

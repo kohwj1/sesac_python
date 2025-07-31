@@ -2,18 +2,27 @@
 {% block title %}내정보{% endblock %}
 {% block content %}
 
-<h1>User</h1>
-
-<p>안녕하세요, {{name}}님</p>
-
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for msg in messages %}
-            <p>{{msg}}</p>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-
-<a href="{{url_for('profile')}}">정보 수정하기</a>
+<div class="container d-flex justify-content-center">
+    <div style="min-width: 40rem;">
+        <div class="d-flex align-items-center mt-5 mb-3">
+            <i class="bi bi-speedometer2 me-2" style="font-size:1.25em;"></i>
+            <h2 style="margin-bottom:0px;">대시보드</h2>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, msg in messages %}
+                    <div class="alert alert-{{category}} alert-dismissible fade show my-3" role="alert">{{msg}}
+                        <button class="btn btn-close" data-bs-dismiss="alert" aria-lebel="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div class="card p-4">
+            <h4 class="my-2"><i class="bi bi-person-fill m-2"></i>안녕하세요, <span class="text-primary">{{name}}</span>님</h4 class="my-2">
+            <hr>
+            <a class="btn btn-primary" href="{{url_for('profile')}}"><i class="bi bi-box-arrow-in-left me-2"></i>정보 수정하기</a>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
