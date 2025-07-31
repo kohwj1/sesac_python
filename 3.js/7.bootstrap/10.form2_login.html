@@ -33,7 +33,7 @@
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
                     <input id="userpw" name="userpw" type="password" class="form-control" placeholder="3~10글자" required>
-                    <div class="invalid-feedback">비밀번호는 대소문자 및 숫자, 특수문자로 8글자 이상 입력해야 합니다. </div>
+                    <div class="invalid-feedback">비밀번호는 대소문자, 숫자 또는 특수문자 중 3가지 이상 조합하여 8자 이상 입력해야 합니다. </div>
                 </div>
             </div>
             <div class="mb-3">
@@ -53,33 +53,43 @@
                 </div>
             </div>
             <div class="form-label">관심 분야 (최소 1개, 최대 3개)</div>
-            <div class="form-check mb-1">
-                <input type="checkbox" class="form-check-input" id="c1" value="c1">
-                <label for="c1" class="form-check-label">관심 분야 1</label>
-            </div>
-            <div class="form-check mb-1">
-                <input type="checkbox" class="form-check-input" id="c2" value="c2">
-                <label for="c2" class="form-check-label">관심 분야 2</label>
-            </div>
-            <div class="form-check mb-1">
-                <input type="checkbox" class="form-check-input" id="c3" value="c3">
-                <label for="c3" class="form-check-label">관심 분야 3</label>
-            </div>
-            <div class="form-check mb-1">
-                <input type="checkbox" class="form-check-input" id="c4" value="c4">
-                <label for="c4" class="form-check-label">관심 분야 4</label>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <input type="checkbox" class="form-check-input" name="favorite" id="f1" value="f1">
+                    <label for="f1" class="form-check-label">관심 분야 1</label>
+                </li>
+                <li class="list-group-item">
+                    <input type="checkbox" class="form-check-input" name="favorite" id="f2" value="f2">
+                    <label for="f2" class="form-check-label">관심 분야 2</label>
+                </li>
+                <li class="list-group-item">
+                    <input type="checkbox" class="form-check-input" name="favorite" id="f3" value="f3">
+                    <label for="f3" class="form-check-label">관심 분야 3</label>
+                </li>
+                <li class="list-group-item">
+                    <input type="checkbox" class="form-check-input" name="favorite" id="f4" value="f4">
+                    <label for="f4" class="form-check-label">관심 분야 4</label>
+                </li>
+            </ul>
+            <div class="invalid-feedback mt-3" id="alertmsg">
+                관심 분야를 1~3개 선택해주세요.
             </div>
             <button type="submit" class="btn btn-primary my-4">제출</button>
         </form>
+        <div id="resultArea" class="alert alert-success d-none"></div>
     </div>
-
-
     <script>
         const form = document.getElementById('validationForm')
+        const resultArea = document.getElementById('resultArea')
         document.getElementById('userid').addEventListener('blur', validateUserId)
         document.getElementById('userpw').addEventListener('blur', validateUserPw)
         document.getElementById('name').addEventListener('blur', validateUserName)
-        document.getElementById('birth').addEventListener('blur', validateBirth)
+        document.getElementById('birth').addEventListener('blur', validateBirth)       
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+            validateEntireForm()
+        })       
 
         function validateUserId() {
             const userId = document.getElementById('userid')
@@ -92,9 +102,20 @@
             }
         }
         
+        //정규식 test함수가 뭔지 알아둬야 함...
+        function validateCombination() {
+            const new_pw = document.getElementById('userpw').value
+            const hasUpper = /[A-Z]/.test(new_pw);
+            const hasLower = /[a-z]/.test(new_pw);
+            const hasDigit = /[0-9]/.test(new_pw);
+            const hasSpecial = /[^A-Za-z0-9]/.test(new_pw);
+            const combination = [hasUpper, hasLower, hasDigit, hasSpecial].filter(Boolean).length; //true(비번에 포함됨)인 게 몇종인지 확인
+            return combination >= 3
+        }
+
         function validateUserPw() {
             const userPw = document.getElementById('userpw')
-            if (userPw.value.length < 8) {
+            if (userPw.value.length < 8 || !validateCombination()) {
                 userPw.classList.remove('is-valid')
                 userPw.classList.add('is-invalid')
             } else {
@@ -123,6 +144,55 @@
                 birth.classList.remove('is-invalid')
                 birth.classList.add('is-valid')
             }
+        }
+
+        function validateEntireForm() {
+            const userId = document.getElementById('userid');
+            const userPw = document.getElementById('userpw');
+            const userName = document.getElementById('name');
+            const birth = document.getElementById('birth');
+            const checkbox_list = document.getElementsByName('favorite');
+            const bodyData = new FormData(form);
+
+            if (!userId.classList.contains('is-valid')) {
+                userId.classList.add('is-invalid')
+                return;
+            }
+            if (!userPw.classList.contains('is-valid')) {
+                userPw.classList.add('is-invalid')
+                return;
+            }
+            if (!userName.classList.contains('is-valid')) {
+                userName.classList.add('is-invalid')
+                return;
+            }
+            if (!birth.classList.contains('is-valid')) {
+                birth.classList.add('is-invalid')
+                return;
+            }           
+
+            if (bodyData.getAll('favorite').length < 1 || bodyData.getAll('favorite').length > 3) {
+                for (check of checkbox_list) {
+                    check.classList.remove('is-valid')
+                    check.classList.add('is-invalid')
+                }
+                document.getElementById('alertmsg').classList.add('d-block')
+                resultArea.classList.add('d-none')
+                return;
+            }
+
+            for (check of checkbox_list) {
+                check.classList.remove('is-invalid')
+            }
+            document.getElementById('alertmsg').classList.remove('d-block')
+
+            resultArea.innerHTML = `<ul>
+                                        <li>사용자명: ${bodyData.get('userid')}</li>
+                                        <li>이름: ${bodyData.get('name')}</li>
+                                        <li>생일: ${bodyData.get('birth')}</li>
+                                        <li>관심분야: ${bodyData.getAll('favorite')}</li>
+                                    </ul>`
+            resultArea.classList.remove('d-none')
         }
 
     </script>
