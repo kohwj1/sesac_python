@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-4">
+        <button id="loadBtn1" class="btn btn-primary me-2" type="button">
+            <span class="spinner-border text-danger spinner-border-sm d-none" aria-hidden="true" role="status"></span>
+            <span class="button-text">데이터 로딩</span>
+        </button>
+        <button id="loadBtn2" class="btn btn-secondary me-2" type="button">
+            <span class="spinner-border text-white spinner-border-sm invisible" aria-hidden="true" role="status"></span>
+            <span class="button-text">데이터 로딩</span>
+        </button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const loadBtn1 = document.getElementById('loadBtn1');
+        const spinner1 = loadBtn1.querySelector('.spinner-border');
+
+        loadBtn1.addEventListener('click', () => {
+            loadBtn1.disabled = true;
+            loadBtn1.querySelector('.button-text').textContent = '로딩중...';
+            spinner1.classList.toggle('d-none'); //classList에 사용할 수 있는 함수: add, remove, toggle
+        })
+
+        const loadBtn2 = document.getElementById('loadBtn2');
+        const spinner2 = loadBtn2.querySelector('.spinner-border');
+
+        loadBtn2.addEventListener('click', () => {
+            loadBtn2.disabled = true;
+            loadBtn2.querySelector('.button-text').textContent = '로딩중...';
+            spinner2.classList.remove('invisible');
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- https://getbootstrap.com/docs/5.3/utilities/spacing/ 여백 클래스 참고 페이지 -->
+    <h2 class="my-5">h2</h2>
+    <h2 class="mx-5">h2</h2>
+
+    <section class="mb-5">
+        <h3>d-* 클래스</h3>
+        <!-- display class: https://getbootstrap.com/docs/5.3/utilities/display/ -->
+        <!-- backgroud class: https://getbootstrap.com/docs/5.3/utilities/background/ -->
+        <div class="d-block bg-primary bg-gradient p-2 border">블록</div>
+        <div class="d-inline bg-success p-2 border">인라인</div>
+        <div class="d-inline bg-warning p-2 border">인라인</div>
+        <div class="d-block bg-warning p-2 mt-2 border">블록</div>
+    </section>
+
+    <section class="mb-5">
+        <h3>visible/invisible 클래스</h3>
+        <!-- display class: https://getbootstrap.com/docs/5.3/utilities/display/ -->
+        <!-- backgroud class: https://getbootstrap.com/docs/5.3/utilities/background/ -->
+        <div class="bg-success text-white p-2 mb-2">항상 보이는 요소</div>
+        <div class="bg-secandary text-white p-2 mb-2 invisible">안 보이는 요소 (공간은 차지함)</div>
+        <div class="bg-success text-white p-2 mb-2 visible">항상 보이는 요소</div>
+    </section>
+
+    <section class="mb-5">
+        <h3>추가적인 d-none 및 d-* 클래스</h3>
+        <div class="d-none">이건 none이라서 안보임</div>
+        <div class="d-sm-block d-md-none bg-primary text-white p-2">이건 작은 화면에서만 보임</div>
+        <div class="d-none d-md-block bg-success text-white p-2">이건 중간 화면에서만 보임</div>
+    </section>
+
+    <section class="mb-5">
+        <h3>그리드 레이아웃</h3>
+        <!-- grid: https://getbootstrap.com/docs/5.3/layout/grid/ -->
+        <div class="d-grid gap-2" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="bg-success text-white p-2">Grid 1</div>
+            <div class="bg-danger text-white p-2">Grid 2</div>
+            <div class="bg-info text-white p-2">Grid 3</div>
+        </div>
+    </section>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

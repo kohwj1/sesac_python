@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <h2>버튼들</h2>
+    <button type="button" class="btn btn-primary">Primary</button>
+    <button type="button" class="btn btn-secondary">Secondary</button>
+    <button type="button" class="btn btn-success">Success</button>
+    <button type="button" class="btn btn-danger">Danger</button>
+    <button type="button" class="btn btn-warning">Warning</button>
+    <button type="button" class="btn btn-info">Info</button>
+    <button type="button" class="btn btn-light">Light</button>
+    <button type="button" class="btn btn-dark">Dark</button>
+    <button type="button" class="btn btn-link">Link</button>
+
+
+    <h2>아웃라인 버튼</h2>
+    <button type="button" class="btn btn-outline-primary">Primary</button>
+    <button type="button" class="btn btn-outline-secondary">Secondary</button>
+    <button type="button" class="btn btn-outline-success">Success</button>
+    <button type="button" class="btn btn-outline-danger">Danger</button>
+    <button type="button" class="btn btn-outline-warning">Warning</button>
+    <button type="button" class="btn btn-outline-info">Info</button>
+    <button type="button" class="btn btn-outline-light">Light</button>
+    <button type="button" class="btn btn-outline-dark">Dark</button>
+
+    <div class="container my-4">
+        <h2>버튼 크기 조정</h2>
+        <button type="button" class="btn btn-primary btn-lg">Large</button>
+        <button type="button" class="btn btn-primary">Medium</button>
+        <button type="button" class="btn btn-primary btn-sm">Small</button>
+    </div>
+
+    <div class="container my-4">
+        <h2>토글 버튼</h2>
+        <button type="button" class="btn btn-outline-info" data-bs-toggle="button" aria-pressed="false" autocomplete="off">toggle</button>
+    </div>
+
+    <div class="container my-4">
+        <h2>버튼 그룹</h2>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-danger">왼쪽</button>
+            <button type="button" class="btn btn-primary">중앙</button>
+            <button type="button" class="btn btn-success">오른쪽</button>
+        </div>
+    </div>
+
+    <div class="container my-4">
+        <h2>스피너</h2>
+        <button class="btn btn-primary" type="button" disabled>
+            <!-- 아래 span 부분이 빙글빙글 로딩 애니메이션을 담당 -->
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+        </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

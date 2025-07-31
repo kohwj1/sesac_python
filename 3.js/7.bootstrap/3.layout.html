@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="text-center my-4">부트스트랩 그리드 레이아웃 예제</h2>
+        <div class="row">
+            <div class="col">1번 열</div>
+            <div class="col">2번 열</div>
+            <div class="col">3번 열</div>
+            <div class="col">4번 열</div>
+            <div class="col">5번 열</div>
+            <div class="col">6번 열</div>
+            <div class="col">7번 열</div>
+            <div class="col">8번 열</div>
+            <div class="col">9번 열</div>
+            <div class="col">10번 열</div>
+            <div class="col">11번 열</div>
+            <div class="col">12번 열</div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <!-- 열 순서 지정하면 order 순서대로 렌더링 / 반응형 구현 등에 응용 가능 -->
+            <!-- 공간이 부족해서 아랫줄로 밀린다 -->
+            <div class="col-md-4 order-md-3 p-2 border">4칸짜리</div>
+            <div class="col-md-6 order-md-1 p-2 border">6칸짜리</div>
+            <div class="col-md-8 order-md-2 p-2 border">8칸짜리</div> 
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <!-- block되는 단위보다 큰 값에서 다시 none을 해줘야 숨겨짐 -->
+            <div class="text-center p-2 d-block d-sm-none bg-danger text-white">XS 사이즈</div>
+            <div class="text-center p-2 d-none d-sm-block d-md-none bg-warning text-white">스몰 사이즈</div>
+            <div class="text-center p-2 d-none d-md-block d-lg-none bg-info text-white">미디움 사이즈</div>
+            <div class="text-center p-2 d-none d-lg-block d-xl-none bg-primary text-white">빅 사이즈</div>
+            <div class="text-center p-2 d-none d-xl-block bg-success text-white">XL 사이즈</div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

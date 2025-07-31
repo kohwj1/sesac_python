@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="container my-4">
+        <div class="alert alert-warning align-items-center" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <span>경고 알림 메시지입니다.</span>
+        </div>
+
+        <div class="alert alert-info align-items-center" role="alert">
+            <i class="bi bi-info-circle-fill me-2"></i>
+            <span>참고 사항</span>
+        </div>
+
+        <div class="alert alert-danger align-items-center" role="alert">
+            <i class="bi bi-x-circle-fill me-2"></i>
+            <span>경고: 정의되지 않은 오류</span>
+        </div>
+
+        <div class="alert alert-primary align-items-center" role="alert">
+            추가 정보를 보려면 <a href="#">여기</a>를 클릭해주세요
+        </div>
+    </div>
+
+    <div class="container my-4">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            수동으로 닫히는 얼럿입니다.
+            <button class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert" id="autoClose">
+            5초 후 자동으로 닫히는 얼럿입니다.
+            <button class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+    <script>
+        setTimeout(() => {
+            const alert = document.getElementById('autoClose');
+            if (alert) { //얼럿이 나와있다면
+                alert.classList.remove('show')
+            }
+        }, 3000);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
