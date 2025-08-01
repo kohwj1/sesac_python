@@ -24,7 +24,7 @@
                 <label for="userid" class="form-label">사용자명</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                    <input id="userid" name="userid" class="form-control" placeholder="3~10글자" required>
+                    <input id="userid" name="userid" class="form-control" placeholder="3~10글자" minlength="3" maxlength="10" required>
                     <div class="invalid-feedback">사용자명은 3글자 이상 10글자 이하로 입력해야 합니다.</div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <label for="userpw" class="form-label">비밀번호</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                    <input id="userpw" name="userpw" type="password" class="form-control" placeholder="3~10글자" required>
+                    <input id="userpw" name="userpw" type="password" class="form-control" placeholder="대소문자, 숫자/특수문자 포함 8자 이상" required>
                     <div class="invalid-feedback">비밀번호는 대소문자, 숫자 또는 특수문자 중 3가지 이상 조합하여 8자 이상 입력해야 합니다. </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                 <label for="name" class="form-label">이름</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-card-text"></i></span>
-                    <input id="name" name="name" class="form-control" placeholder="1~10글자" required>
+                    <input id="name" name="name" class="form-control" placeholder="1~10글자" maxlength="10" required>
                     <div class="invalid-feedback">이름은 1글자 이상 10글자 이하로 입력해야 합니다.</div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                     <div class="invalid-feedback">생년월일을 입력해 주세요.</div>
                 </div>
             </div>
-            <div class="form-label">관심 분야 (최소 1개, 최대 3개)</div>
+            <label class="form-label">관심 분야 (최소 1개, 최대 3개)</label>
             <ul class="list-group">
                 <li class="list-group-item">
                     <input type="checkbox" class="form-check-input" name="favorite" id="f1" value="f1">
@@ -81,6 +81,11 @@
     <script>
         const form = document.getElementById('validationForm')
         const resultArea = document.getElementById('resultArea')
+        
+        document.getElementsByName('favorite').forEach(checkbox => {
+            checkbox.addEventListener('change', validateCheck)
+        })
+
         document.getElementById('userid').addEventListener('blur', validateUserId)
         document.getElementById('userpw').addEventListener('blur', validateUserPw)
         document.getElementById('name').addEventListener('blur', validateUserName)
@@ -146,12 +151,31 @@
             }
         }
 
+        function validateCheck() {
+            const target_check = Array.from(document.getElementsByName('favorite')).filter(checkbox => {
+                checkbox.checked
+            })
+            if (target_check.length < 1 || target_check.length > 3) {
+                for (check of target_check) {
+                    check.classList.remove('is-valid')
+                    check.classList.add('is-invalid')
+                }
+                    document.getElementById('alertmsg').classList.add('d-block')
+                    resultArea.classList.add('d-none')
+            } else {
+                for (check of target_check) {
+                    check.classList.remove('is-invalid')
+                }
+                document.getElementById('alertmsg').classList.remove('d-block')
+            }
+        }
+
         function validateEntireForm() {
             const userId = document.getElementById('userid');
             const userPw = document.getElementById('userpw');
             const userName = document.getElementById('name');
             const birth = document.getElementById('birth');
-            const checkbox_list = document.getElementsByName('favorite');
+            // const checkbox_list = document.getElementsByName('favorite');
             const bodyData = new FormData(form);
 
             if (!userId.classList.contains('is-valid')) {
@@ -171,20 +195,20 @@
                 return;
             }           
 
-            if (bodyData.getAll('favorite').length < 1 || bodyData.getAll('favorite').length > 3) {
-                for (check of checkbox_list) {
-                    check.classList.remove('is-valid')
-                    check.classList.add('is-invalid')
-                }
-                document.getElementById('alertmsg').classList.add('d-block')
-                resultArea.classList.add('d-none')
-                return;
-            }
+            // if (bodyData.getAll('favorite').length < 1 || bodyData.getAll('favorite').length > 3) {
+            //     for (check of checkbox_list) {
+            //         check.classList.remove('is-valid')
+            //         check.classList.add('is-invalid')
+            //     }
+            //     document.getElementById('alertmsg').classList.add('d-block')
+            //     resultArea.classList.add('d-none')
+            //     return;
+            // }
 
-            for (check of checkbox_list) {
-                check.classList.remove('is-invalid')
-            }
-            document.getElementById('alertmsg').classList.remove('d-block')
+            // for (check of checkbox_list) {
+            //     check.classList.remove('is-invalid')
+            // }
+            // document.getElementById('alertmsg').classList.remove('d-block')
 
             resultArea.innerHTML = `<ul>
                                         <li>사용자명: ${bodyData.get('userid')}</li>

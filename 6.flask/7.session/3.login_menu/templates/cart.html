@@ -1,29 +1,45 @@
 {% extends 'base.html' %}
 {% block title %}장바구니{% endblock %}
 {% block content %}
-<h2>Cart</h2>
-{% if isSigned %}
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for msg in messages %}
-                <p>{{msg}}</p>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    {% if mycart %}
+<div>
+    <h2>Cart</h2>
+    {% if isSigned %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, msg in messages %}
+                    <div class="alert alert-{{category}} alert-dismissible fade show my-3" role="alert">{{msg}}
+                        <button class="btn btn-close" data-bs-dismiss="alert" aria-lebel="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <a class="btn btn-danger" href="/clear-all">장바구니 모두 비우기</a>
         <form method="POST">
-            <ul>
-            {% for i in mycart %}
-                <li>{{i.name}} <input type=number name="{{i.id}}" value="{{i.q}}" min="1"><a href="/delete?pid={{i.id}}">삭제</a></li>
-            {% endfor %}
-            </ul>
-        <button type="sumbit">변경한 수량 적용하기</button>
+            <table class="table table-hover my-4">
+                <thead class="table-dark">
+                    <tr>
+                        <th style="width:60%;">상품명</th>
+                        <th style="width:30%;">수량</th>
+                        <th style="width:10%;">&nbsp;</th>
+                    </tr>
+                </thead>
+            <tbody>
+            {% if mycart %}
+                {% for i in mycart %}
+                    <tr>
+                        <td>{{i.name}}</td>
+                        <td><input class="form-control" type=number name="{{i.id}}" value="{{i.q}}" min="1"></td>
+                        <td><a class="btn btn-danger" href="/delete?pid={{i.id}}"><i class="bi bi-trash"></i></a></td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td colspan="3" class="text-center">장바구니에 상품이 없습니다.</td></tr>
+            {% endif %}
+            </table>
+            <button class="btn btn-primary" type="sumbit">변경한 수량 적용하기</button>
         </form>
-        <a href="/clear-all">장바구니 모두 비우기</a>
     {% else %}
-        <p>장바구니에 상품이 없습니다.</p>
+    로그인 후 이용 가능합니다
     {% endif %}
-{% else %}
-로그인 후 이용 가능합니다
-{% endif %}
+</div>
 {% endblock %}
