@@ -18,3 +18,4 @@ todo.csv
 4.python/real_examples/cat1.jpg
 4.python/real_examples/data.csv
 .vscode
+.env
