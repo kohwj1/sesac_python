@@ -2,26 +2,34 @@
 {% block title %}상품{% endblock %}
 {% block content %}
 
-<h1>Product</h1>
+<h1 class="mb-4">Product</h1>
 {% if error %}<p style="color:red">{{error}}</p>{% endif %}
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {% for category, msg in messages %}
-            <div class="alert alert-{{category}} alert-dismissible fade show my-3" role="alert">{{msg}}
+            <div class="alert alert-{{category}} alert-dismissible fade show my-3" role="alert">
+                <span>장바구니에 {{msg}}을(를) 담았습니다.</span>
+                <a href="/cart">장바구니 바로가기</a>
                 <button class="btn btn-close" data-bs-dismiss="alert" aria-lebel="Close"></button>
             </div>
         {% endfor %}
     {% endif %}
 {% endwith %}
-<ul>
     {% for i in items %}
-    <li>
-        <form method="POST" action="{{url_for('add_cart')}}">
-            <span>{{i.name}}</span>
-            <input type="hidden" name="pid" value="{{i.id}}">
-            <input type="submit" value="담기">
-        </form>
-    </li>
+    <div class="my-3">
+        <div class="card" style="width: 10rem;">
+            <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <div class="card-body justify-content-md-end align-items-center">
+                <h5 class="card-title">{{i.name}}</h5>
+                <form method="POST" action="{{url_for('add_cart')}}">
+                    <input type="hidden" name="pid" value="{{i.id}}">
+                    <button type="submit" class="btn btn-success justify-content-md-end"><i class="bi bi-cart4 me-2"></i>담기</button>
+                </form>
+            </div>
+        </div>
+    </div>    
     {% endfor %}
-</ul>
 {% endblock %}
+
+
+

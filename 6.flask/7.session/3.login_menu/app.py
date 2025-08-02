@@ -89,7 +89,7 @@ def add_cart():
         else:
             mycart[pid] = 1
         
-        flash(f'장바구니에 {pid}을(를) 담았습니다', 'info')
+        flash(pid, 'info')
         session['cart'] = mycart #변경된 카트정보로 세션 업데이트
 
         # print(session['cart'])

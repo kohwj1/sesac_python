@@ -2,7 +2,7 @@
 {% block title %}장바구니{% endblock %}
 {% block content %}
 <div>
-    <h2>Cart</h2>
+    <h2><i class="bi bi-cart4 me-2"></i>Cart</h2>
     {% if isSigned %}
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -13,7 +13,9 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        <a class="btn btn-danger" href="/clear-all">장바구니 모두 비우기</a>
+        <div class="text-right">
+            <a class="btn btn-danger" href="/clear-all">장바구니 모두 비우기</a>
+        </div>
         <form method="POST">
             <table class="table table-hover my-4">
                 <thead class="table-dark">
