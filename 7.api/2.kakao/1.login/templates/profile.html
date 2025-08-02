@@ -19,12 +19,6 @@
     {% if user %}
     <h3 class="text-center m-5">안녕하세요, {{user.properties.nickname}}님</h3>
     <div class="text-center m-5">최근 로그인 시각: {{user.connected_at}}</div>
-    <!-- <ul>
-        <li>a_token: {{user.access_token}}</li>
-        <li>id: {{user.id}}</li>
-        <li>kakao_account: {{user.kakao_account}}</li>
-        <li>properties: {{user.properties}}</li>
-    </ul> -->
     {% endif %}
     <div class="d-flex justify-content-center">
         <a href="{{url_for('kakao_logout')}}" class="btn btn-dark">

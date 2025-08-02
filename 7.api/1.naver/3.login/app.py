@@ -1,6 +1,7 @@
-from flask import Flask, render_template, redirect, request, session, url_for
+from flask import Flask, render_template, redirect, request, session, url_for, flash
 from dotenv import load_dotenv
 import os, requests
+import model.query as db
 
 load_dotenv()
 
@@ -22,8 +23,8 @@ def index():
     user = session.get('user', None)
 
     if user:
-        return render_template('index.html', user=user)
-    return redirect(url_for('login_naver'))
+        return redirect(url_for('profile'))
+    return render_template('index.html')
 
 @app.route('/login/naver')
 def login_naver():
@@ -51,7 +52,7 @@ def naver_callback():
             )
 
     token_res = requests.get(token_url).json()
-    print(token_res)
+    # print(token_res)
 
     #사용자가 제대로 인증하고 온거 확인 완료. 이 정보가 서버에서 정식으로 받아온 게 맞는지 검증 진행
     access_token = token_res.get('access_token')
@@ -59,9 +60,83 @@ def naver_callback():
         "Authorization": f"Bearer {access_token}"
     }
     profile = requests.get('https://openapi.naver.com/v1/nid/me', headers=headers).json()
-    print(profile)
+    # print(profile)
+    profile_data = profile.get('response')
 
-    session['user'] = profile['response']
+    #서버에서 유저 식별자용 키를 만들고, 이 값으로 기존 회원인지 여부를 체크
+    user_from_db = db.get_user("naver@" + profile_data.get('id'))
+    # print(user_from_db)
+    session['user'] = profile_data
+
+    #기존 회원이면 프로필 보내고, 아니면 회원가입 페이지로 보낸다
+    if user_from_db:
+        return redirect(url_for('profile'))
+    else:
+        return redirect(url_for('join'))
+
+@app.route('/join', methods=['GET', 'POST'])
+def join():
+    user = session.get('user', None)
+
+    #세션 없이 접근한 경우
+    if not user:
+        flash('비정상 접근입니다.', 'warning')
+        return redirect(url_for('index'))
+    
+    #이미 가입한 사람이 강제로 회원가입 페이지 접근하는 경우
+    tpacode = 'naver@' + user.get('id')
+
+    if db.get_user(tpacode):
+        flash('이미 가입한 회원입니다.', 'warning')
+        return redirect(url_for('profile'))
+    
+    if request.method == 'POST':
+        tpacode = f"naver@{user.get('id')}"
+        grade = request.form.get('grade')
+        address = request.form.get('address')
+
+        db.join_user(tpacode, grade, address)
+
+        flash('회원 가입을 환영합니다.', 'success')
+        return redirect(url_for('profile'))
+    else:
+        return render_template('join.html')
+
+@app.route('/profile')
+def profile():
+    user = session.get('user', None)
+
+    if user:
+        tpacode = 'naver@' + user.get('id')
+        user_from_db = db.get_user(tpacode)
+
+        user['data'] = user_from_db
+        session['user'] = user   
+        return render_template('profile.html', user=user)
+    
+    flash('로그인 후 이용 가능합니다.', 'warning')
+    return redirect(url_for('index'))
+
+@app.route('/profile/change', methods=['GET', 'POST'])
+def change_info():
+    user = session.get('user', None)
+
+    if user:
+        tpacode = 'naver@' + user.get('id')
+        user_from_db = db.get_user(tpacode)
+
+        user['data'] = user_from_db
+        session['user'] = user
+
+        if request.method == 'POST':
+            grade = request.form.get('grade')
+            address = request.form.get('address')
+            db.update_user(tpacode, grade, address)
+            return redirect(url_for('profile'))
+
+        return render_template('change.html', user=user)
+    
+    flash('로그인 후 이용 가능합니다.', 'warning')
     return redirect(url_for('index'))
 
 @app.route('/logout')
