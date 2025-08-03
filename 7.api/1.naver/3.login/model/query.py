@@ -1,5 +1,5 @@
 import sqlite3
-from model.init_db import create_connector
+from model.init import create_connector
 import datetime
 
 def get_user(tpacode):

@@ -83,9 +83,9 @@ def join():
         flash('비정상 접근입니다.', 'warning')
         return redirect(url_for('index'))
     
-    #이미 가입한 사람이 강제로 회원가입 페이지 접근하는 경우
     tpacode = 'naver@' + user.get('id')
 
+    #이미 가입한 사람이 강제로 회원가입 페이지 접근하는지 체크
     if db.get_user(tpacode):
         flash('이미 가입한 회원입니다.', 'warning')
         return redirect(url_for('profile'))
