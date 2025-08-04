@@ -18,7 +18,7 @@
     {% endwith %}
     {% if user %}
     <h3 class="text-center m-5">안녕하세요, {{user.properties.nickname}}님</h3>
-    <div class="text-center m-5">최근 로그인 시각: {{user.connected_at}}</div>
+    <div class="text-center m-5">Signed up on<br>{{user.connected_at}}</div>
     {% endif %}
     <div class="d-flex justify-content-center">
         <a href="{{url_for('kakao_logout')}}" class="btn btn-dark">

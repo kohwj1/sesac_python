@@ -44,16 +44,17 @@ def callback():
 
     token_res = requests.post(token_url, data=token_payload, headers=token_headers)
     token_data = json.loads(token_res.text)
+    access_token = token_data.get('access_token')
 
     user_info_url = 'https://kapi.kakao.com/v2/user/me?secure_resource=true'
     user_info_header = {
-        "Authorization": f"bearer {token_data.get('access_token')}",
+        "Authorization": f"Bearer {access_token}",
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
     }
 
     user_info = requests.get(user_info_url, headers=user_info_header)
     user_info_data = json.loads(user_info.text)
-    user_info_data['access_token'] = token_data.get('access_token')
+    user_info_data['access_token'] = access_token
     
     session['user'] = user_info_data
     return redirect(url_for('profile'))
@@ -83,8 +84,12 @@ def kakao_logout():
     }
 
     result = requests.post('https://kapi.kakao.com/v1/user/logout', headers=logout_headers)
-    
-    return redirect(url_for('session_logout'))
+
+    if result.status_code == 200:
+        return redirect(url_for('session_logout'))
+    else:
+        flash('로그아웃 중 문제가 발생하였습니다. 관리자에게 문의해주세요', 'warning')
+        return redirect(url_for('profile'))
 
 @app.route('/auth/logout')
 def session_logout():
