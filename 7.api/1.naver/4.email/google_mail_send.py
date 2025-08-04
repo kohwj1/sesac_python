@@ -10,6 +10,7 @@ SMTP_PORT = os.getenv('SMTP_PORT')
 GOOGLE_EMAIL = os.getenv('GOOGLE_EMAIL')
 NAVER_EMAIL = os.getenv('NAVER_EMAIL')
 GOOGLE_PASSWORD = os.getenv('GOOGLE_PASSWORD')
+# https://support.google.com/accounts/answer/185833 여기 도움말 통해서 설정 가능
 
 RECIPIENT = os.getenv('RECIPIENT')
 

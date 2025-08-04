@@ -21,10 +21,14 @@ def create_code():
     code = str(random.randint(1, 999999)).zfill(6)
     return code
 
+def create_temp_pw():
+    code = str(random.randint(1, 999999)).zfill(6)
+    return code
+
 def send_email(recipient, task, code):
     if task == 'join':
         form_text = '회원가입'
-    elif task == 'resetpw':
+    elif task == 'reset':
         form_text = '비밀번호 초기화'
     
     try:
@@ -54,10 +58,11 @@ def index():
 @app.route('/send-code', methods=['POST'])
 def send_code():
     email = request.form.get('email')
+    task = request.form.get('task')
     code = create_code()
-    print(code)
+    # print(email, code)
 
-    send_result = send_email(email, 'join', code)
+    send_result = send_email(email, task, code)
 
     if send_result:
         session['email'] = email
@@ -69,8 +74,8 @@ def send_code():
 @app.route('/verify-code', methods=['POST'])
 def vefiry_code():
     verified_email = session.get('email')
-    input_email = request.form.get('email')
     session_code = session.get('code')
+    input_email = request.form.get('email')
     input_code = request.form.get('code')
 
     if not input_email:
@@ -83,10 +88,54 @@ def vefiry_code():
         return jsonify({'msg':'인증한 메일주소와 현재 메일주소가 일치하지 않습니다. 다시 입력해주세요.'}), 403
     if session_code != input_code:
         return jsonify({'msg':'인증번호가 일치하지 않습니다. 다시 입력해주세요.'}), 403
+    session['is_verified'] = True
     return jsonify({'msg':'인증코드와 일치'}), 200
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    verified_email = session.get('email')
+    session_code = session.get('code')
+    input_id = request.form.get('userid')
+    input_email = request.form.get('email')
+    input_code = request.form.get('code')
+
+    if not input_id:
+        return jsonify({'msg':'아이디를 입력해주세요'}), 400
+    if not input_email:
+        return jsonify({'msg':'이메일을 입력해주세요'}), 400
+    if not input_code:
+        return jsonify({'msg':'인증번호를 입력해주세요'}), 401
+    if not session_code:
+        return jsonify({'msg':'인증코드가 만료되었습니다. 페이지 새로고침 후 다시 진행해 주세요.'}), 403
+    if verified_email != input_email:
+        return jsonify({'msg':'인증한 메일주소와 현재 메일주소가 일치하지 않습니다. 다시 입력해주세요.'}), 403
+    if session_code != input_code:
+        return jsonify({'msg':'인증번호가 일치하지 않습니다. 다시 입력해주세요.'}), 403
+    if not session['is_verified']:
+        return jsonify({'msg':'인증을 완료해주세요.'}), 403
+    return jsonify({'msg':f'회원 가입 성공! {input_id} 회원님, 환영합니다.'}), 200
 
 @app.route('/reset-pw', methods=['GET', 'POST'])
 def reset_pw():
+    if request.method == 'POST':
+        verified_email = session.get('email')
+        session_code = session.get('code')
+        input_email = request.form.get('email')
+        input_code = request.form.get('code')
+        input_pw = request.form.get('password')
+        if not input_email:
+            return jsonify({'msg':'이메일을 입력해주세요'}), 400
+        if not input_code:
+            return jsonify({'msg':'인증번호를 입력해주세요'}), 401
+        if not session_code:
+            return jsonify({'msg':'인증코드가 만료되었습니다. 페이지 새로고침 후 다시 진행해 주세요.'}), 403
+        if verified_email != input_email:
+            return jsonify({'msg':'인증한 메일주소와 현재 메일주소가 일치하지 않습니다. 다시 입력해주세요.'}), 403
+        if session_code != input_code:
+            return jsonify({'msg':'인증번호가 일치하지 않습니다. 다시 입력해주세요.'}), 403
+        if not session['is_verified']:
+            return jsonify({'msg':'인증을 완료해주세요.'}), 403
+        return jsonify({'msg':f'개인정보가 수정되었습니다. 변경된 비밀번호: {input_pw}'}), 200
     return render_template('resetpw.html')
 
 if __name__ == '__main__':

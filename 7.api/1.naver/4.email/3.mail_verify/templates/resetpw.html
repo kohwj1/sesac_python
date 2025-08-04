@@ -3,73 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>비밀번호 변경</title>
+    <title>비밀번호 초기화</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" defer></script>
 </head>
-<body>
+<body class="bg-light">
     <div class="d-flex align-items-center justify-content-center">
-        <div class="card my-5 p-3" style="width:700px;">
-            <h2>비밀번호 변경</h2>
-            <div>
-                <label class="form-label my-3" for="email">이메일</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-envelope-at "></i></span>
-                    <input class="form-control" id="email" name="email" placeholder="이메일 주소 입력" type="email">
-                    <button class="btn btn-primary" type="submit" id="sendEmail">인증코드 전송</button>
+        <div class="card my-5 p-3 shadow" style="width:700px;">
+            <h2>비밀번호 초기화</h2>
+            <form id="resetForm" method="POST" novalidate>
+                <div>
+                    <label class="form-label my-3" for="email">이메일</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope-at "></i></span>
+                        <input class="form-control" id="email" name="email" placeholder="이메일 주소 입력" type="email" required>
+                        <button class="btn btn-dark" type="button" id="sendEmail">인증코드 전송</button>
+                        <div class="invalid-feedback">인증번호를 받을 이메일을 입력해주세요.</div>
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <label class="form-label my-3" for="code">인증코드</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                    <input class="form-control" id="code" name="code" placeholder="인증코드 입력" maxlength="6" disabled>
-                    <button class="btn btn-primary" type="submit" id="verifyEmail" disabled>인증코드 확인</button>
+                <div>
+                    <label class="form-label my-3" for="code">인증코드</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                        <input class="form-control" id="code" name="code" placeholder="인증코드 입력" maxlength="6" disabled required>
+                        <button class="btn btn-dark" type="button" id="verifyEmail" disabled>인증코드 확인</button>
+                        <div class="invalid-feedback">인증을 완료해 주세요.</div>
+                    </div>
                 </div>
-            </div>
+                <div>
+                    <label class="form-label my-3" for="password">새 비밀번호</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person-vcard"></i></span>
+                        <input class="form-control" id="password" name="password" type="password" placeholder="비밀번호 입력" required>
+                        <div class="invalid-feedback">비밀번호는 영문 대문자/소문자/숫자/특수문자 중 3종류를 사용하여 8자 이상 입력해주세요.</div>
+                    </div>
+                </div>
+                <div>
+                    <label class="form-label my-3" for="pwconfirm">새 비밀번호 확인</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person-vcard"></i></span>
+                        <input class="form-control" id="pwconfirm" name="pwconfirm" type="password" placeholder="비밀번호 확인" required>
+                        <div class="invalid-feedback">입력한 비밀번호와 같은 비밀번호를 입력해주세요.</div>
+                    </div>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary my-3">비밀번호 초기화</button>
+                </div>
+            </form>
         </div>
     </div>
 
     <p class="alert text-center" id="result"><!-- 여기에 결과 입력 --></p>
 
     <script>
-        btnSend = document.getElementById('sendEmail');
-        btnVerify = document.getElementById('verifyEmail');
-        resultArea = document.getElementById('result');
+        const btnSend = document.getElementById('sendEmail');
+        const btnVerify = document.getElementById('verifyEmail');
+        const resultArea = document.getElementById('result');
         
         btnSend.addEventListener('click', async () => {
-            inputSend = document.getElementById('email');
-            if (inputSend.value == '') {
+            email = document.getElementById('email');
+            if (email.value == '') {
                 alert('이메일을 입력해주세요');
             } else {
                 document.getElementById('code').disabled = false;
                 btnVerify.disabled = false;
 
                 const bodyData = new FormData();
-                bodyData.append('email', inputSend.value)
+                bodyData.append('email', email.value)
+                bodyData.append('task', 'reset')
                 const res = await fetch('/send-code', {
                     method: 'POST',
                     body: bodyData
                 })
                 const result_text = await res.json()
                 resultArea.classList.remove('d-none')
+
+                email.classList.remove('is-invalid')
+                email.classList.add('is-valid')
                 resultArea.textContent = result_text.msg
             }
         })
 
         btnVerify.addEventListener('click', async () => {
-            inputVerify = document.getElementById('code');
-            if (inputVerify.value == '') {
+            code = document.getElementById('code');
+            email = document.getElementById('email');
+            if (code.value == '') {
                 alert('인증코드를 입력해주세요');
             } else {
                 document.getElementById('code').disabled = false;
                 btnVerify.disabled = false;
 
                 const bodyData = new FormData();
-                bodyData.append('email', document.getElementById('email').value)
-                bodyData.append('code', inputVerify.value)
+                bodyData.append('email', email.value)
+                bodyData.append('code', code.value)
                 const res = await fetch('/verify-code', {
                     method: 'POST',
                     body: bodyData
@@ -77,9 +105,9 @@
                 const result_status = await res.ok
                 if (result_status) {
                     btnSend.disabled = true;
-                    inputSend.readonly = true;
+                    email.readOnly = true;
                     btnVerify.disabled = true;
-                    inputVerify.readonly = true;
+                    code.readOnly = true;
                 }
 
                 const result_text = await res.json()
@@ -87,8 +115,95 @@
             }
         })
 
-        // 1. 이메일 주소 서버에 보내기 (/send-code) > 전송 성공/실패 여부 result에 출력하기
-        // 2. 이메일 주소 서버에 보내기 (/vefiry-code) > 검증 성공/실패 여부 result에 출력하기
+        const form = document.getElementById('resetForm')
+
+        document.getElementById('password').addEventListener('blur', validateUserPw)
+        document.getElementById('pwconfirm').addEventListener('blur', validatePwConfirm)
+        document.getElementById('email').addEventListener('blur', validateEmail)       
+        document.getElementById('code').addEventListener('blur', validateCode)       
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+            validateEntireForm()
+        })       
+        
+        function validateCombination() {
+            const new_pw = document.getElementById('password').value
+            const hasUpper = /[A-Z]/.test(new_pw);
+            const hasLower = /[a-z]/.test(new_pw);
+            const hasDigit = /[0-9]/.test(new_pw);
+            const hasSpecial = /[^A-Za-z0-9]/.test(new_pw);
+            const combination = [hasUpper, hasLower, hasDigit, hasSpecial].filter(Boolean).length; //true(비번에 포함됨)인 게 몇종인지 확인
+            return combination >= 3
+        }
+
+        function validateUserPw() {
+            const userPw = document.getElementById('password')
+            if (userPw.value.length < 8 || !validateCombination()) {
+                userPw.classList.remove('is-valid')
+                userPw.classList.add('is-invalid')
+            } else {
+                userPw.classList.remove('is-invalid')
+                userPw.classList.add('is-valid')
+            }
+        }
+
+        function validatePwConfirm() {
+            const userPw = document.getElementById('password')
+            const pwConfirm = document.getElementById('pwconfirm')
+            if (pwConfirm.value != userPw.value) {
+                pwConfirm.classList.remove('is-valid')
+                pwConfirm.classList.add('is-invalid')
+            } else {
+                pwConfirm.classList.remove('is-invalid')
+                pwConfirm.classList.add('is-valid')
+            }
+        }
+        
+        function validateEmail() {
+            const email = document.getElementById('email')
+            if (email.value == '') {
+                email.classList.remove('is-valid')
+                email.classList.add('is-invalid')
+            } else {
+                email.classList.remove('is-invalid')
+                email.classList.add('is-valid')
+            }
+        }
+
+        function validateCode() {
+            const code = document.getElementById('code')
+            if (code.value == '') {
+                code.classList.remove('is-valid')
+                code.classList.add('is-invalid')
+            } else {
+                code.classList.remove('is-invalid')
+                code.classList.add('is-valid')
+            }
+        }
+
+        function validateEntireForm() {
+            const userPw = document.getElementById('password');
+            const email = document.getElementById('email');
+            const bodyData = new FormData(form);
+
+            for (const pair of bodyData.entries()) {
+                if (pair[1] == '' || pair[1] == undefined) {
+                    // alert(pair[0], pair[1])
+                    return;
+                }
+            }
+
+            fetch('/reset-pw', {
+                method:"POST",
+                body: bodyData
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                resultArea.textContent = data.msg
+            })         
+        }
+
     </script>
 </body>
 </html>
