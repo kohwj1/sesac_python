@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" defer></script>
+</head>
+<body>
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="card my-5 p-3" style="width:700px;">
+            <h2>회원가입</h2>
+            <div>
+                <label class="form-label my-3" for="email">이메일</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope-at "></i></span>
+                    <input class="form-control" id="email" name="email" placeholder="이메일 주소 입력" type="email">
+                    <button class="btn btn-primary" type="submit" id="sendEmail">인증코드 전송</button>
+                </div>
+            </div>
+
+            <div>
+                <label class="form-label my-3" for="code">인증코드</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    <input class="form-control" id="code" name="code" placeholder="인증코드 입력" maxlength="6" disabled>
+                    <button class="btn btn-primary" type="submit" id="verifyEmail" disabled>인증코드 확인</button>
+                </div>
+            </div>
+
+            <div class="text-center my-3">
+                <a href="{{url_for('reset_pw')}}">비밀번호 찾기</a>
+            </div>
+        </div>
+    </div>
+
+    <p class="alert text-center" id="result"><!-- 여기에 결과 입력 --></p>
+
+    <script>
+        btnSend = document.getElementById('sendEmail');
+        btnVerify = document.getElementById('verifyEmail');
+        resultArea = document.getElementById('result');
+        
+        btnSend.addEventListener('click', async () => {
+            inputSend = document.getElementById('email');
+            if (inputSend.value == '') {
+                alert('이메일을 입력해주세요');
+            } else {
+                document.getElementById('code').disabled = false;
+                btnVerify.disabled = false;
+
+                const bodyData = new FormData();
+                bodyData.append('email', inputSend.value)
+                const res = await fetch('/send-code', {
+                    method: 'POST',
+                    body: bodyData
+                })
+                const result_text = await res.json()
+                resultArea.classList.remove('d-none')
+                resultArea.textContent = result_text.msg
+            }
+        })
+
+        btnVerify.addEventListener('click', async () => {
+            inputVerify = document.getElementById('code');
+            if (inputVerify.value == '') {
+                alert('인증코드를 입력해주세요');
+            } else {
+                document.getElementById('code').disabled = false;
+                btnVerify.disabled = false;
+
+                const bodyData = new FormData();
+                bodyData.append('email', document.getElementById('email').value)
+                bodyData.append('code', inputVerify.value)
+                const res = await fetch('/verify-code', {
+                    method: 'POST',
+                    body: bodyData
+                })
+                const result_status = await res.ok
+                if (result_status) {
+                    btnSend.disabled = true;
+                    inputSend.readonly = true;
+                    btnVerify.disabled = true;
+                    inputVerify.readonly = true;
+                }
+
+                const result_text = await res.json()
+                resultArea.textContent = result_text.msg
+            }
+        })
+
+        // 1. 이메일 주소 서버에 보내기 (/send-code) > 전송 성공/실패 여부 result에 출력하기
+        // 2. 이메일 주소 서버에 보내기 (/vefiry-code) > 검증 성공/실패 여부 result에 출력하기
+    </script>
+</body>
+</html>
