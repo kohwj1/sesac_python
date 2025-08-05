@@ -1,0 +1,51 @@
+.message {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    overflow-y: auto;
+    border-radius: 15px;
+}
+
+.user {
+    background-color: aliceblue;
+    text-align: right;
+}
+
+.chatgpt {
+    background-color: pink;
+    text-align: left;
+}
+#user-input-form {
+    display:flex;
+    margin-bottom: 20px;
+}
+
+#user-input {
+    flex:1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.loading-dots {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #aaa;
+    animation: dots 5s infinite;
+    margin-right: 5px;
+}
+
+@keyframes dots {
+    0%, 10% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
