@@ -6,7 +6,7 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-API_KEY = os.getenv('SESAC_API_KEY')
+API_KEY = os.getenv('API_KEY')
 openai.api_key = API_KEY
 
 client = openai.OpenAI(api_key=API_KEY)

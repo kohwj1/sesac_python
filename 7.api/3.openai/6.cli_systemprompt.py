@@ -14,11 +14,18 @@ client = openai.OpenAI(api_key=API_KEY)
 
 #답변 파싱
 def ask_chatgpt(user_input):
+    #페르소나: 가상의 인물을 만들어서 그 역할을 시킴
+    gpt_system_prompt = {'role':'system', 'content':'당신은 동네 분식집의 주방장입니다.'}
+    
+    #시스템 프롬프트가 히스토리에 중복 추가되는 걸 방지
+    if not history:
+        history.append(gpt_system_prompt)
+    
+    #유저 입력 처리
     gpt_question = {"role":"user", "content": user_input}
     history.append(gpt_question)
     
-    print('실제 전송되는 대화:', history)
-
+    # print('실제 전송되는 대화:', history)
 
     response = client.chat.completions.create(
         model='gpt-4o',
