@@ -24,7 +24,7 @@
 
         #chatArea {
             background-color: #fff;
-            height: 700px;
+            height: 30rem;
             width: 100%;
             overflow-y: scroll;
         }
@@ -99,8 +99,9 @@
     </div>
 </body>
 <script>
-    chatHistory = document.getElementById('chatHistory');
+    
     chatForm.addEventListener('submit', (e) => {
+        const chatHistory = document.getElementById('chatHistory');
         const userInput = document.getElementById('userInput')
         
         e.preventDefault()
@@ -114,10 +115,8 @@
         mybubble.appendChild(userchat)
         chatHistory.appendChild(mybubble)
 
-        // document.getElementById('chatHistory').innerHTML += `<div class="mybubble"><div class="userchat">${document.getElementById('userInput').value}</div></div>`;
         chatgpt(userInput.value);
         userInput.value = ''
-        document.getElementById('chatHistory').scrollTop = document.getElementById('chatHistory').scrollHeight;
     });
 
     async function chatgpt(user_input) {
@@ -129,16 +128,21 @@
             body: bodydata
         });
 
-        if (res.ok) {
-            let data = await res.json();
-            let gpt_answer = await data.content;
-            console.log(gpt_answer);
 
-            const aichat = document.createElement('div')
-            aichat.classList.add('aichat')
-            aichat.textContent = gpt_answer
-            document.getElementById('chatHistory').appendChild(aichat)
-        }
+        let data = await res.json();
+        let gpt_answer = await data.content;
+
+        const aichat = document.createElement('div')
+        aichat.classList.add('aichat')
+        aichat.textContent = gpt_answer
+        document.getElementById('chatHistory').appendChild(aichat)
+        updateScroll()
+
+    }
+
+    function updateScroll() {
+        const chatArea = document.getElementById('chatArea');
+        chatArea.scrollTop = chatArea.scrollHeight;
     }
 </script>
 </html>
