@@ -8,9 +8,13 @@
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" defer></script> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #eee;
+            font-family: "Gowun Dodum";
         }
 
         #container {
@@ -44,12 +48,17 @@
             margin: 10px 0px;
         }
 
+        #inputArea::placeholder{
+            font-family: "Gowun Dodum";
+        }
+
         #userInput {
             border: none;
             border-radius: 5px;
             width: 70%;
             height: 20px;
             padding: 10px;
+            font-family: "Gowun Dodum";
         }
 
         button {
@@ -59,27 +68,29 @@
             border: none;
             border-radius: 5px;
             background: linear-gradient(to left, #f59c9c, #9198e5);
-            color: #fff
+            color: #fff;
+            font-family: "Gowun Dodum";
         }
 
-        .userchat, .aichat {
+        .userchat,
+        .aichat {
             padding: 15px;
             max-width: 80%;
             border-radius: 10px;
             margin: 10px 0px;
         }
-        
+
         .mybubble {
             display: flex;
             justify-content: end;
         }
-        
+
         .userchat {
-            background-color: #b6ddff;
+            background-color: #f39c9d40;
         }
 
         .aichat {
-            background-color: #ffe7d1;
+            background-color: #9398e340;
             white-space: pre-line;
         }
     </style>
@@ -99,15 +110,15 @@
     </div>
 </body>
 <script>
-    
+
     chatForm.addEventListener('submit', (e) => {
         const chatHistory = document.getElementById('chatHistory');
         const userInput = document.getElementById('userInput')
-        
+
         e.preventDefault()
         const mybubble = document.createElement('div');
         mybubble.classList.add('mybubble');
-        
+
         const userchat = document.createElement('div');
         userchat.classList.add('userchat');
         userchat.textContent = userInput.value
@@ -122,12 +133,14 @@
     async function chatgpt(user_input) {
         let bodydata = new FormData()
         bodydata.append('userInput', user_input)
+        updateScroll()
+
+
         let chatForm = document.getElementById('chatForm');
         let res = await fetch('/question', {
             method: 'POST',
             body: bodydata
         });
-
 
         let data = await res.json();
         let gpt_answer = await data.content;
@@ -145,4 +158,5 @@
         chatArea.scrollTop = chatArea.scrollHeight;
     }
 </script>
+
 </html>
