@@ -4,7 +4,7 @@ import requests
 
 load_dotenv()
 
-OPENAI_API_KEY = os.getenv('SESAC_API_KEY')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 json = {
     "model":"gpt-4o",

@@ -5,8 +5,7 @@ from langchain_openai import OpenAI
 from langchain.schema import HumanMessage, SystemMessage, AIMessage
 
 load_dotenv()
-api_key = os.getenv('API_KEY')
-llm = OpenAI(api_key=api_key)
+llm = OpenAI()
 
 my_template = "You are a naming consultant. Suggest a name for a company that makes {product}"
 
