@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
-import os
 
-from langchain_core.prompts import PromptTemplate, ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.messages import SystemMessage, HumanMessage
 
 from langchain_openai import ChatOpenAI
@@ -17,6 +16,7 @@ prompt = ChatPromptTemplate(
 )
 
 #현업버전 축약형 프롬프트 템플릿 13~18줄과 같은 내용
+# https://python.langchain.com/docs/concepts/prompt_templates/ 참고
 # prompt_short = ChatPromptTemplate.from_messages(
 #     [
 #         ('system','You are a naming consultant for new companies'),

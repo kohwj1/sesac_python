@@ -7,10 +7,10 @@ from langchain.schema import HumanMessage, SystemMessage, AIMessage
 load_dotenv()
 api_key = os.getenv('API_KEY')
 
-# llm = OpenAI(api_key=api_key, max_tokens=1000) #사용 모델: 3.5 터보 인스트럭터
-# prompt = '인공지능이란'
-# result = llm.invoke(prompt)
-# print(result)
+llm = OpenAI(api_key=api_key, max_tokens=1000) #사용 모델: 3.5 터보 인스트럭터
+prompt = '인공지능이란'
+result = llm.invoke(prompt)
+print(result)
 
 llm2 = ChatOpenAI(api_key=api_key) #사용 모댈: 3.5 터보
 new_prompt = [
