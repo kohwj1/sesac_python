@@ -5,10 +5,6 @@ import requests
 
 load_dotenv()
 
-API_KEY = os.getenv('API_KEY')
-openai.api_key = API_KEY
-
-
 client = openai.OpenAI()
 response = client.chat.completions.create(
     model='gpt-4o',

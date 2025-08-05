@@ -5,12 +5,10 @@ import requests
 
 load_dotenv()
 
-API_KEY = os.getenv('API_KEY')
-openai.api_key = API_KEY
 history = []
 
 #클라이언트 초기화
-client = openai.OpenAI(api_key=API_KEY)
+client = openai.OpenAI()
 
 #답변 파싱
 def ask_chatgpt(user_input):

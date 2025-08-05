@@ -6,10 +6,8 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-API_KEY = os.getenv('API_KEY')
-openai.api_key = API_KEY
 
-client = openai.OpenAI(api_key=API_KEY)
+client = openai.OpenAI()
 
 def ask_chatgpt(user_input:str, history:list):
     gpt_question = {"role":"user", "content": user_input}
