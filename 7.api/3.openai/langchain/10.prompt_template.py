@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
 from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
+from langchain_openai import OpenAI
 from langchain.schema import HumanMessage, SystemMessage, AIMessage
 
 load_dotenv()
@@ -14,7 +14,7 @@ prompt = PromptTemplate(
     template=my_template
 )
 
-llm = ChatOpenAI(api_key=api_key)
+llm = OpenAI(api_key=api_key)
 
 # filled_prompt = prompt.format(product='icecream')
 # print(filled_prompt)
@@ -40,6 +40,6 @@ for item in test_product:
         HumanMessage(content=result)
     ]
     res = llm.invoke(send_message)
-    print(res.content.strip('"'))
+    print('추천 이름:', res.strip())
 
     # print(f'[{item}]: {result}')
