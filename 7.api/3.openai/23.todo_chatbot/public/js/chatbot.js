@@ -1,4 +1,4 @@
-const ECHO_MODE = true;
+const ECHO_MODE = false;
 
 document.addEventListener('DOMContentLoaded', initChatbot);
 
@@ -82,13 +82,13 @@ function addMessage(message, sender) {
 
 async function sendMessageToServer(userInput) {
     if (ECHO_MODE) {
-        return `[BOT] ${userInput}`
+        return `[Echo] ${userInput}`
     }
 
     const res = await fetch('/api/chat', {
         method:'POST',
         headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(userInput)
+        body: JSON.stringify({'user_input': userInput})
     })
     const data = await res.json()
     return data.chatbot

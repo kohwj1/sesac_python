@@ -29,12 +29,10 @@ async function deleteTodo(idx) {
     const res = await fetch(`api/todo/${idx}`, {
         method: 'DELETE'
     })
-    const result = await res.json()
     if (res.ok) {
         getTodoList()
     }
 }
-
 
 document.addEventListener('DOMContentLoaded', getTodoList)
 todoForm.addEventListener('submit', async(e) => {
