@@ -18,7 +18,7 @@ function createChatbotUI() {
                 <span>Chatbot</span>
                 <button id="closeChatbot">X</button>
             </div>
-            <div id="chatbot-body">
+            <div class="chatbot-body">
                 <div class="chatbot-messages" id="chatbotMessage"></div>
                 <div class="chatbot-input-container">
                     <input id="chatbotInput" placeholder="내용 입력">

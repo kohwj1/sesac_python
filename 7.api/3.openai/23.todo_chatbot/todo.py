@@ -1,32 +1,43 @@
 from dotenv import load_dotenv
-from flask import Flask, request, jsonify, blueprints
+from flask import request, jsonify, Blueprint
 
 load_dotenv()
 
-app = Flask(__name__, static_folder='public', static_url_path="")
+todo_bp = Blueprint('todo', __name__)
 
 todos = []
+idx = 0
 
-@app.route('/')
-def index():
-    return app.send_static_file('index.html')
-
-@app.route('/api/todo', methods=['GET'])
+@todo_bp.route('/api/todo', methods=['GET'])
 def get_list():
-    return jsonify({'msg':'error'})
+    return jsonify({'status':'success', 'data': todos}), 200
 
-@app.route('/api/todo', methods=['POST'])
+@todo_bp.route('/api/todo', methods=['POST'])
 def add_todo():
-    return jsonify({'msg':'error'})
+    new_todo = request.form.get('todo')
 
-@app.route('/api/todo/<id>', methods=['PUT'])
+    if new_todo:
+        global idx
+        idx += 1
+        todos.append({'idx':idx, 'item':new_todo})
+        return jsonify({'status':'success', 'idx': idx}), 201
+    return jsonify({'status':'error', 'msg': '할일을 입력해주세요.'}), 400
+
+@todo_bp.route('/api/todo', methods=['PUT'])
 def update_todo():
-    return jsonify({'msg':'error'})
+    try: 
+        data = request.get_json()
+        todo_id = data.get('todo_id')
+        new_todo = data.get('new_todo')
+        todos[todo_id] = new_todo
+    except IndexError:
+        return jsonify({'status':'error','msg':'이미 삭제되었습니다.'}), 404
+    return jsonify({'msg':'success'})
 
-@app.route('/api/todo/<id>', methods=['DELETE'])
-def delete_todo():
-    return jsonify({'msg':'error'})
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+@todo_bp.route('/api/todo/<int:idx>', methods=['DELETE'])
+def delete_todo(idx):
+    for i, item in enumerate(todos):
+        if item['idx'] == idx:
+            todos.pop(i)
+            break;
+    return jsonify({'status':'success'}), 200
