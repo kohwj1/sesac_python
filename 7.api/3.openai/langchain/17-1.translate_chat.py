@@ -8,6 +8,7 @@ load_dotenv()
 
 prompt = ChatPromptTemplate(
     messages= [
+        ('system', '당신은 IT관련 언론 매체의 전문 번역가입니다.'),
         ('human', '아래 기사를 영어로 번역해주세요.  \n\n{article}'),
     ],
     input_values=['article']

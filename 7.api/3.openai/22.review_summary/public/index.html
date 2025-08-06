@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 페이지</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <h1>상품 페이지</h1>
+    <div class="language-selector">
+        <label for="langSelect">Language：</label>
+        <select id="langSelect" name="langSelect">
+            <option value="ko">ko</option>
+            <option value="en">en</option>
+            <option value="ja">ja</option>
+            <option value="zh">zh</option>
+            <option value="it">it</option>
+        </select>
+    </div>
+    <div class="product-image">
+        <img src="https://picsum.photos/600/400" alt="상품명">
+    </div>
+    <div class="review-form">
+        <h2>상품 후기를 작성해주세요</h2>
+        <label><input type="radio" name="rating" value="1">1</label>
+        <label><input type="radio" name="rating" value="2">2</label>
+        <label><input type="radio" name="rating" value="3">3</label>
+        <label><input type="radio" name="rating" value="4">4</label>
+        <label><input type="radio" name="rating" value="5">5</label>
+        <textarea id="opinion" placeholder="의견을 작성해주세요" rows="5" cols="40"></textarea>
+        <button onclick="submitReview()">제출</button>
+    </div>
+    <div>
+        <h2>후기</h2>
+        <div id="review-container">
+            <div class="ai-summary">
+                <p><strong>AI 요약 | </strong><span>아직 리뷰가 없습니다.</span></p>
+                <p><strong>별점 평균 | </strong><span>N/A</span></p>
+            </div>
+            <div id="user-review">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
