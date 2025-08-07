@@ -1,5 +1,5 @@
 body {
-    background-color: #f8f9fa;
+    background-color: #ffecec;
     font-family: "Gowun Dodum" !important;
 }
 
@@ -44,7 +44,9 @@ li {
 
 .done {
     text-decoration-line: line-through;
-    color: #888
+    color: #888;
+    background: #e1e1e1;
+    border: 1px solid #7e7e7e;
 }
 
 .btn-delete {
