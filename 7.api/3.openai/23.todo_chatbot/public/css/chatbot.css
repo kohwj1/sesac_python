@@ -132,11 +132,13 @@
 
 .chatbot-messages .user {
     justify-content: flex-end; /* 오른쪽 정렬 */
+    white-space: pre-line;
 }
 
 /* 챗봇 메시지 (왼쪽 정렬) */
 .chatbot-messages .bot {
     justify-content: flex-start; /* 왼쪽 정렬 */
+    white-space: pre-line;
 }
 
 /* 말풍선 추가 */

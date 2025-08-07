@@ -30,6 +30,7 @@ async function updateTodo(idx) {
         method:'PUT',
     })
     if (res.ok) {
+        console.log(await res.json())
         getTodoList()
     }
 }   
@@ -52,7 +53,7 @@ function drawList(item) {
     })
 
     const todoItem = document.createElement('li')
-    todoItem.classList.add(item.status ? 'done' : 'ready')
+    todoItem.classList.add(item.is_done ? 'done' : 'ready')
     todoItem.addEventListener('click', () => {
         updateTodo(item.idx)
     })
