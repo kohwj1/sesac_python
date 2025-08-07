@@ -74,6 +74,7 @@
     border-radius: 4px; /* 메시지 창의 모서리를 둥글게 설정 */
     padding: 5px; /* 메시지 창의 내부 여백을 5px로 설정 */
     max-height: 280px;
+    font-size:0.8em;
 }
 
 .chatbot-input-container {
