@@ -44,13 +44,22 @@ async function deleteTodo(idx) {
 }
 
 function drawList(item) {
-    const todoItem = `
-        <li class="${item.status ? 'done' : ''}" onclick="updateTodo(${item.idx})">${item.task} 
-            <button class="btn-delete" onclick="deleteTodo(${item.idx})">
-                <i class="bi bi-trash"></i>
-            </button>
-        </li>`
-        todoList.innerHTML += todoItem
+    const delBtn = document.createElement('button')
+    delBtn.classList.add('btn-delete')
+    delBtn.innerHTML = '<i class="bi bi-trash"></i>'
+    delBtn.addEventListener('click', () => {
+        deleteTodo(item.idx)
+    })
+
+    const todoItem = document.createElement('li')
+    todoItem.classList.add(item.status ? 'done' : 'ready')
+    todoItem.addEventListener('click', () => {
+        updateTodo(item.idx)
+    })
+    todoItem.textContent = item.task
+
+    todoItem.appendChild(delBtn)
+    todoList.appendChild(todoItem)
 }
 
 document.addEventListener('DOMContentLoaded', getTodoList)
