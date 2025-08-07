@@ -66,6 +66,7 @@ async function handlerUserMessage() {
     input.value= ''
 
     addMessage(botResponse, 'bot');
+    getTodoList();
 }
 
 function addMessage(message, sender) {
