@@ -9,8 +9,9 @@ h1 {
 li {
     display:flex;
     justify-content: space-between;
+    align-items:center;
     list-style-type: none;
-    padding: 0.6rem;
+    padding: 0.6rem 1rem;
     margin: 0.5rem 0rem;
     background-color: #e7e7e7;
     border-radius: 0.3rem;
