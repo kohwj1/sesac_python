@@ -1,12 +1,12 @@
-body {
-    font-family: Arial, sans-serif; /* 웹 페이지 전체에 Arial 또는 기본 sans-serif 글꼴을 사용 */
-}
+/* body {
+    font-family: Arial, sans-serif; 웹 페이지 전체에 Arial 또는 기본 sans-serif 글꼴을 사용
+} */
 
 .chatbot-icon {
     position: fixed; /* 화면의 고정된 위치에 아이콘 배치 */
     bottom: 20px; /* 화면 아래에서 20px 위로 위치 */
     right: 20px; /* 화면 오른쪽에서 20px 왼쪽으로 위치 */
-    background-color: #007bff; /* 아이콘의 배경색을 파란색으로 설정 */
+    background: linear-gradient(to right, #ac00ff, #fdbdbd); /* 아이콘의 배경색을 파란색으로 설정 */
     color: white; /* 아이콘의 글자 색상을 흰색으로 설정 */
     border-radius: 50%; /* 아이콘을 원형으로 만들기 위해 모서리를 둥글게 설정 */
     width: 50px; /* 아이콘의 너비를 50px로 설정 */
@@ -48,7 +48,7 @@ body {
 }
 
 .chatbot-header {
-    background-color: #007bff; /* 챗봇 헤더의 배경색을 파란색으로 설정 */
+    background: linear-gradient(to right, #ac00ff, #fdbdbd); /* 챗봇 헤더의 배경색을 파란색으로 설정 */
     color: white; /* 챗봇 헤더의 글자 색상을 흰색으로 설정 */
     padding: 10px; /* 챗봇 헤더의 내부 여백을 10px로 설정 */
     border-top-left-radius: 8px; /* 챗봇 헤더의 왼쪽 위 모서리를 둥글게 설정 */
@@ -79,6 +79,7 @@ body {
 .chatbot-input-container {
     display: flex; /* 입력창과 버튼을 같은 줄에 배치 */
     align-items: center; /* 입력창과 버튼을 수직 중앙 정렬 */
+    justify-content: space-between;
 
     /* 고정 높이 추가 */
     padding-top: 8px;
@@ -99,16 +100,24 @@ body {
     border: 1px solid #c1c1c1;
     border-radius: 0.3rem;
     margin-right: 0.3rem;
+    font-family: "Gowun Dodum";
+    height: 25px;
+    box-sizing: border-box;
+}
+
+#chatbotInput::placeholder {
+    font-family: "Gowun Dodum";
 }
 
 #sendMessage {
     width: 50px; /* 보내기 버튼의 너비를 50px로 설정 */
     padding: 5px; /* 보내기 버튼의 내부 여백을 5px로 설정 */
-    background-color: #007bff;
+    background: linear-gradient(to right, #ac00ff, #fdbdbd);
     border-radius: 0.375rem;
     color: #fff;
     border: none;
     height: 25px;
+    font-family: "Gowun Dodum";
 }
 
 /* 메세지 좌우 align */

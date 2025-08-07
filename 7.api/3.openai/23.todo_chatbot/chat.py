@@ -3,7 +3,7 @@ from flask import request, jsonify, Blueprint
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnableLambda
+# from langchain_core.runnables import RunnableLambda
 
 
 load_dotenv()
@@ -27,4 +27,4 @@ def chat_to_bot():
     chain = prompt | llm | parser
     res = chain.invoke(data)
 
-    return jsonify({'chatbot': res}), 200
+    return jsonify({'chatbot':res}), 200
