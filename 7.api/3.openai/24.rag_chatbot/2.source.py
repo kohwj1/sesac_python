@@ -17,11 +17,16 @@ from langchain_core.output_parsers import StrOutputParser
 load_dotenv()
 
 #문서 불러오기
-loader = TextLoader('nvme.txt', encoding='utf-8')
-documents = loader.load()
+doc1 = TextLoader('nvme.txt', encoding='utf-8').load()
+doc2 = TextLoader('ssd.txt', encoding='utf-8').load()
+documents = doc1 + doc2
 
 #필요 시 추가적인 메타데이터를 추가 --> 출처 등의 명시에 사용
-documents = [Document(page_content=doc.page_content, metadata={"source":"nvme.txt"}) for doc in documents]
+# documents = [Document(page_content=doc.page_content, metadata={"source":"nvme.txt"}) for doc in documents]
+for i, doc in enumerate(doc1, start=1):
+    doc.metadata.update({"chunk_id":i, "created":"2025-08-01"})
+for i, doc in enumerate(doc2, start=1):
+    doc.metadata.update({"chunk_id":i, "created":"2025-08-07"})
 
 #문서 청크 처리
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200) #또는 사이즈 2000, 오버랩 500 정도가 무난
@@ -34,29 +39,47 @@ embeddings = OpenAIEmbeddings()
 store = Chroma.from_documents(texts, embeddings, collection_name='nvme')
 
 #벡터 DB 조회
-retriever = store.as_retriever(search_keyword=3)
+retriever = store.as_retriever(search_kwargs={'k':5})
 
 #채팅 인터페이스 설정
 llm = ChatOpenAI(temperature=0.1)
 template = """
-다음 내용을 바탕으로 질문에 답변해주세요.
+다음 내용을 바탕으로 질문에 답변해주세요. 참고문서에 내용이 없는 경우 모른다고 답변해주세요.
 참고문서: {context}
 
 질문: {question}
 
-답변을 작성하고, 마지막에 참고한 문서의 "출처: "를 명시해주세요.
+답변을 작성하고, 마지막에 참고한 문서의 "출처: [파일명:청크아이디]"를 명시해주세요.
+출처 내에 답변이 없는 경우 출처를 "없음"이라고 명시해주세요.
+예) 출처: nvme.txt:1, ssd.txt:3
 """
 
 prompt = ChatPromptTemplate.from_template(template=template)
-chain = {"context":retriever, "question":RunnablePassthrough()} | prompt | llm | StrOutputParser()
 
-#사용자 입력과 응답
-question = "NVME와 SATA의 차이점을 100자로 요약해주세요"
-res = chain.invoke(question)
-print(res)
+def answer_question(q):
+    print('-' * 50)
+    chain = {"context":retriever, "question":RunnablePassthrough()} | prompt | llm | StrOutputParser()
 
-#답변 출처(청크) 확인
-# context_docs = retriever.invoke(question)
+    #사용자 입력과 응답
+    res = chain.invoke(q)
+    print(res)
+    print('-' * 50)
+    return res
 
-# for i, doc in enumerate(context_docs):
-#     print(f'[---{i+1}---]\n{doc.page_content}')
+def debug_retrieval(q):
+    retrieved_docs = retriever.invoke(q)
+
+    for i, doc in enumerate(retrieved_docs, start=1):
+        print('-' * 50)
+        print(f'출처: {doc.metadata}')
+        print(f'미리보기: {doc.page_content[:100]}...(중략)')
+        if hasattr(doc, 'score'):
+            print(f'유사도 점수: {doc.score}')
+        print('-' * 50)
+
+    return True
+
+answer_question("NVME와 SATA의 차이점을 100글자로 요약해주세요.")
+answer_question("PCIe란?")
+answer_question("우주의 크기는 얼마나 되나요?")
+# debug_retrieval("PCIe란?")

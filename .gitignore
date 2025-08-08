@@ -21,3 +21,6 @@ todo.csv
 .vscode
 .env
 7.api/3.openai/24.rag_chatbot/nvme.txt
+chroma_db/
+DATA/
+7.api/3.openai/24.rag_chatbot/ssd.txt
