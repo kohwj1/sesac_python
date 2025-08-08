@@ -19,18 +19,21 @@ load_dotenv()
 #문서 불러오기
 doc1 = TextLoader('nvme.txt', encoding='utf-8').load()
 doc2 = TextLoader('ssd.txt', encoding='utf-8').load()
-documents = doc1 + doc2
 
 #필요 시 추가적인 메타데이터를 추가 --> 출처 등의 명시에 사용
 # documents = [Document(page_content=doc.page_content, metadata={"source":"nvme.txt"}) for doc in documents]
-for i, doc in enumerate(doc1, start=1):
-    doc.metadata.update({"chunk_id":i, "created":"2025-08-01"})
-for i, doc in enumerate(doc2, start=1):
-    doc.metadata.update({"chunk_id":i, "created":"2025-08-07"})
 
 #문서 청크 처리
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200) #또는 사이즈 2000, 오버랩 500 정도가 무난
-texts = text_splitter.split_documents(documents)
+text1 = text_splitter.split_documents(doc1)
+text2 = text_splitter.split_documents(doc2)
+
+for i, doc in enumerate(text1, start=1):
+    doc.metadata.update({"chunk_id":i, "created":"2025-08-01"})
+for i, doc in enumerate(text2, start=1):
+    doc.metadata.update({"chunk_id":i, "created":"2025-08-08"})
+
+texts = text1 + text2
 
 # #임베딩(청크 벡터화)
 embeddings = OpenAIEmbeddings()
