@@ -7,16 +7,19 @@
 </head>
 <body>
     <h1>문서 업로드 및 Q&A</h1>
-    <input type="file" id="fileInput" name="file">
+    <input type="file" id="fileInput">
     <button onclick="uploadFile()">업로드</button>
-    
-    <h2>질의응답</h2>
-    <input id="qInput", name="q">
+
+    <h2>업로드된 파일</h2>
+    <ul id="file-list"><!-- 파일 목록이 출력될 곳 --></ul>
+
+    <h2>질의 응답</h2>
+    <input type="search" id="questionInput">
     <button onclick="askQuestion()">질문하기</button>
-
-
+    
     <h3>답변</h3>
-    <div id="answer"></div>
+    <div id="answer" style="white-space:pre-line;"></div>
+
     <script src="script.js"></script>
 </body>
 </html>
