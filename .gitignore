@@ -24,3 +24,4 @@ todo.csv
 chroma_db/
 DATA/
 7.api/3.openai/24.rag_chatbot/ssd.txt
+node_modules/
