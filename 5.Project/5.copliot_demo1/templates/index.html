@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add your custom CSS styles here */
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Todo App</h1>
+        <input type="text" id="todoInput" placeholder="Enter a new todo">
+        <button onclick="addTodo()">Add Todo</button>
+        <ul id="todoList"></ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function addTodo() {
+            const todo = $('#todoInput').val();
+            $.ajax({
+                url: '/todo',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ "todo": todo }),
+                success: function (response) {
+                    $('#todoList').append(`<li>${todo} <button onclick="completeTodo('${todo}')">Complete</button></li>`);
+                    $('#todoInput').val('');
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function completeTodo(todo) {
+            $.ajax({
+                url: `/todo/${todo}`,
+                type: 'PUT',
+                success: function (response) {
+                    // Update UI to mark todo as completed
+                    // You can remove the todo from the list or add a mark indicating completion
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        // You can add similar functions for deleting todos
+    </script>
+</body>
+
+</html>

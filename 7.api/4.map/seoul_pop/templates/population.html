@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Leaflet Map</h1>
+    <div id="map" style="height: 500px;"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var mapdata = [{{seoul_pops | tojson | safe}}];
+        // console.log(data)
+
+        var map = L.map('map').setView([37.5735, 126.9790], 13);
+
+        for (d of mapdata) {
+            console.log(d)
+            var radius = Math.sqrt(d.population) * 0.5;
+            var circle = L.circle([d.latitude, d.longitude], {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: radius
+            }).addTo(map);
+        }
+    </script>
+
+</body>
+
+</html>
